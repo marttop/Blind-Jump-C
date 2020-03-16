@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2020
 ** MUL_my_rpg_2019
 ** File description:
-** file_to_str
+** write_file
 */
 
 #include "utils.h"
