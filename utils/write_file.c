@@ -12,7 +12,7 @@ void write_file(char *filepath)
     int fd = open(filepath, O_RDONLY);
     if (fd < 0)
         return;
-    
+
     char *str = get_next_line(fd);
 
     while (str != NULL) {
