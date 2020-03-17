@@ -18,6 +18,10 @@ void player_clocks(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_player.hero_clock);
     s_all->s_player.hero_seconds =
         s_all->s_player.hero_time.microseconds / 1000000.0;
+    s_all->s_player.rect_time =
+        sfClock_getElapsedTime(s_all->s_player.rect_clock);
+    s_all->s_player.rect_seconds =
+        s_all->s_player.rect_time.microseconds / 1000000.0;
 }
 
 void game_clocks(all_t *s_all)

@@ -19,8 +19,15 @@ SRC	=	src/main.c \
 		src/create_entities.c \
 		src/player_movement.c \
 		src/player_up_down_left_right.c \
-		src/init_hero.c \
+		src/init_player.c \
+		src/hitbox_debug.c \
+		src/hitbox_spawn.c \
 		src/init_movement.c \
+		src/spawn_scene.c \
+		src/aim_direction.c \
+		src/camera.c \
+		src/rect_hero.c \
+		src/rect_hero2.c \
 		utils/get_next_line.c \
 		utils/my_atoi.c \
 		utils/my_putstr.c \

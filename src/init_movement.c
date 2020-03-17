@@ -14,3 +14,11 @@ void init_movement(all_t *s_all)
     s_all->s_movement.left = 0;
     s_all->s_movement.right = 0;
 }
+
+void init_direction(all_t *s_all)
+{
+    s_all->s_direction.up = 0;
+    s_all->s_direction.down = 0;
+    s_all->s_direction.left = 0;
+    s_all->s_direction.right = 0;
+}

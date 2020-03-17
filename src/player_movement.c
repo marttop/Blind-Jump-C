@@ -32,7 +32,8 @@ void get_movement(all_t *s_all)
 
 void player_movement(all_t *s_all)
 {
-    if (s_all->s_game.scene != 0)
+    if (s_all->s_game.scene == 0 || check_borders(s_all) == 1
+    || check_middle_wall(s_all) == 1)
         return;
 
     if ((s_all->s_movement.left == 0 && s_all->s_movement.right == 0)
@@ -45,4 +46,6 @@ void player_movement(all_t *s_all)
 
     movement_diagonal_left(s_all);
     movement_diagonal_right(s_all);
+
+    set_position_debug(s_all->s_player.debug, s_all->s_player.hero_pos);
 }
