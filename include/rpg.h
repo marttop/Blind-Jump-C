@@ -24,7 +24,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <math.h>
-#include "time.h"
+#include <time.h>
+
+#include "utils.h"
 
 #ifndef MY_PI
 #define MY_PI (3.14159265358979323846)
@@ -39,8 +41,27 @@ typedef struct game {
     int scene;
 } game_t;
 
+typedef struct movement {
+    int up;
+    int down;
+    int left;
+    int right;
+} movement_t;
+
+typedef struct player {
+    sfSprite *hero;
+    sfTexture *hero_tx;
+    sfVector2f hero_pos;
+    int hero_speed;
+    sfClock *hero_clock;
+    sfTime hero_time;
+    float hero_seconds;
+} player_t;
+
 typedef struct all {
     game_t s_game;
+    movement_t s_movement;
+    player_t s_player;
 } all_t;
 
 void init_all(all_t *s_all);
@@ -49,5 +70,17 @@ void game_clocks(all_t *s_all);
 void display(all_t *s_all);
 int game_loop(all_t *s_all);
 void events_control(all_t *s_all);
+void create_sprite(sfSprite **sprite, sfTexture **texture,
+    sfVector2f pos, const char *path);
+void display_hero(all_t *s_all);
+void init_hero(all_t *s_all);
+sfVector2f render_pos_center(all_t *s_all);
+void player_movement(all_t *s_all);
+void init_movement(all_t *s_all);
+void get_movement(all_t *s_all);
+void movement_up_down(all_t *s_all);
+void movement_left_right(all_t *s_all);
+void movement_diagonal_left(all_t *s_all);
+void movement_diagonal_right(all_t *s_all);
 
 #endif /* !RPG_H_ */

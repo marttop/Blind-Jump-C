@@ -19,8 +19,6 @@
 #include <dirent.h>
 #include <stdlib.h>
 
-#include "rpg.h"
-
 char *get_next_line(int fd);
 
 #ifndef READ_SIZE

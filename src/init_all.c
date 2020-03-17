@@ -15,10 +15,13 @@ void setup(all_t *s_all)
     sfRenderWindow_setFramerateLimit(s_all->s_game.window, 60);
     sfRenderWindow_setPosition(s_all->s_game.window, (sfVector2i){0, 0});
     s_all->s_game.scene = 0;
+    randomize();
 }
 
 void init_all(all_t *s_all)
 {
     setup(s_all);
     init_clocks(s_all);
+    init_movement(s_all);
+    init_hero(s_all);
 }

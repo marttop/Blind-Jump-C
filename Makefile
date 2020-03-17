@@ -15,6 +15,12 @@ SRC	=	src/main.c \
 		src/display.c \
 		src/game_loop.c \
 		src/event_control.c \
+		src/display_player.c \
+		src/create_entities.c \
+		src/player_movement.c \
+		src/player_up_down_left_right.c \
+		src/init_hero.c \
+		src/init_movement.c \
 		utils/get_next_line.c \
 		utils/my_atoi.c \
 		utils/my_putstr.c \
@@ -26,6 +32,7 @@ SRC	=	src/main.c \
 		utils/my_strnbr.c \
 		utils/randomize.c \
 		utils/write_file.c \
+		utils/render_pos_center.c \
 
 OBJ	=	$(SRC:.c=.o)
 
