@@ -29,5 +29,12 @@ void display_hero(all_t *s_all)
     s_all->s_player.hero_pos.y + 25});
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_player.shadow, NULL);
+<<<<<<< HEAD
     display_debug_hero(s_all);
+=======
+    if (s_all->s_game.debug_mode == 1) {
+        display_hitbox_debug(s_all, s_all->s_player.debug,
+            s_all->s_player.hero);
+    }
+>>>>>>> 83927688da73de05c1b7eb0836361ae1b85e2de1
 }

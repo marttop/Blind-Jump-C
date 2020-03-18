@@ -55,5 +55,4 @@ void display_spawn_over(all_t *s_all)
         s_all->s_spawn.door, NULL);
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_spawn.mask, NULL);
-    //printf("%f %f\n", s_all->s_player.hero_pos.x, s_all->s_player.hero_pos.y);
 }
