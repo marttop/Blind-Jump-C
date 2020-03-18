@@ -63,6 +63,7 @@ typedef struct movement {
 
 typedef struct player {
     sfRectangleShape *debug;
+    sfRectangleShape *debug_shadow;
     sfSprite *hero;
     sfTexture *hero_tx;
     sfVector2f hero_pos;
@@ -76,6 +77,7 @@ typedef struct player {
     sfIntRect hero_rect;
     sfSprite *shadow;
     sfTexture *shadow_tx;
+    sfVector2f shadow_pos;
 } player_t;
 
 typedef struct spawn {

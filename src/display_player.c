@@ -7,6 +7,18 @@
 
 #include "rpg.h"
 
+void display_debug_hero(all_t *s_all)
+{
+    if (s_all->s_game.debug_mode == 1) {
+        display_hitbox_debug(s_all, s_all->s_player.debug,
+            s_all->s_player.hero);
+        set_position_debug(s_all->s_player.debug_shadow,
+            sfSprite_getPosition(s_all->s_player.shadow));
+        display_hitbox_debug(s_all, s_all->s_player.debug_shadow,
+            s_all->s_player.shadow);
+    }
+}
+
 void display_hero(all_t *s_all)
 {
     rect_hero(s_all);
@@ -17,9 +29,5 @@ void display_hero(all_t *s_all)
     s_all->s_player.hero_pos.y + 25});
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_player.shadow, NULL);
-
-    if (s_all->s_game.debug_mode == 1) {
-        display_hitbox_debug(s_all, s_all->s_player.debug,
-            s_all->s_player.hero);
-    }
+    display_debug_hero(s_all);
 }

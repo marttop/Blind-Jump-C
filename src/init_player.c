@@ -12,11 +12,14 @@ void init_hero2(all_t *s_all)
     s_all->s_player.shadow = sfSprite_create();
     sfSprite_setTexture(s_all->s_player.shadow,
         s_all->s_player.hero_tx, sfTrue);
-    sfSprite_setPosition(s_all->s_player.shadow,
-    (sfVector2f){s_all->s_player.hero_pos.x + 1,
-    s_all->s_player.hero_pos.y + 25});
+    s_all->s_player.shadow_pos = (sfVector2f){s_all->s_player.hero_pos.x + 1,
+        s_all->s_player.hero_pos.y + 25};
+    sfSprite_setPosition(s_all->s_player.shadow, s_all->s_player.shadow_pos);
     sfSprite_setTextureRect(s_all->s_player.shadow,
         (sfIntRect){0, 102, 18, 14});
+    s_all->s_player.debug_shadow =
+        init_hitbox_debug(s_all->s_player.debug_shadow,
+        s_all->s_player.shadow_pos, s_all->s_player.shadow);
 }
 
 void init_hero(all_t *s_all)
