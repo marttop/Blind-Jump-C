@@ -40,10 +40,16 @@ SRC	=	src/main.c \
 		utils/randomize.c \
 		utils/write_file.c \
 		utils/render_pos_center.c \
+		src/inventory/inventory.c \
+		src/inventory/slot_callbacks.c \
+		src/inventory/inventory_input.c \
+		src/inventory/list_helpers.c \
+		src/items/items_database.c \
+		src/items/weapon.c \
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra
+CFLAGS	=	-Wall -Wextra -Wno-unused-parameter
 CFLAGS	+=	-I./include -g3
 FFLAGS	+=	-l csfml-system
 FFLAGS	+=	-l csfml-graphics

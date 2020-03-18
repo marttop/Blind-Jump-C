@@ -36,12 +36,88 @@
 #define SPAWN (1)
 #endif
 
+/////////////////////////////////////////
+// Inventory & Equipment & Items
+
+typedef enum weapon_type {
+    SINGLE_SHOT,
+    MULTI_SHOT,
+} e_weapon_type;
+
+typedef enum consumable_type {
+    HP_BUFF,
+    DMG_BUFF,
+} e_consumable_type;
+typedef enum rarity {
+    COMMON,
+    UNCOMMON,
+    HIGH,
+    LEGEND,
+} e_rarity;
+
+typedef struct weapon {
+    char *name;
+    int id;
+    int dmg;
+    float range;
+    e_weapon_type type;
+    sfSprite *sprite;
+
+} t_weapon;
+
+typedef struct consumable{
+    char *name;
+    int id;
+    int hp;
+    int dmg;
+    e_consumable_type type;
+    sfSprite *sprite;
+} t_consumable;
+
+typedef struct item_database{
+    t_weapon weapons[12];
+    t_consumable consumables[12];
+} t_item_database;
+
+
+typedef struct slot
+{
+    int id;
+    int is_hover;
+    int has_item;
+    sfRectangleShape *shape_hover;
+    sfTexture *texture_bg;
+    sfTexture *texture_clck;
+    sfTexture *texture_slect;
+    sfSprite *sprite_bg;
+    sfSprite *sprite_select;
+    sfVector2f pos;
+    sfIntRect rect;
+    t_weapon *weapon;
+    void (*on_hover)(void *d, struct slot *s, sfRenderWindow *w);
+    void (*on_click)(void *d, struct slot *s, sfRenderWindow *w);
+    void (*on_drag)(void *d, struct slot *s, sfRenderWindow *w);
+} t_slot;
+
+typedef struct node {
+    int id;
+    void *data;
+    struct node *next;
+    void (*dealloc)(struct node *, void *);
+} t_node;
+
+////////////////////////////////////////
+
 typedef struct game {
     sfRenderWindow *window;
     sfEvent event;
     sfView *camera;
     sfClock *clock;
     sfTime time;
+    t_node *inv;
+    sfRenderTexture *inv_tex;
+    sfSprite *inv_sprite;
+    sfVector2f inv_pos;
     float seconds;
     int scene;
     int debug_mode;
@@ -96,6 +172,7 @@ typedef struct all {
     player_t s_player;
     direction_t s_direction;
     spawn_t s_spawn;
+    t_item_database item_db;
 } all_t;
 
 void init_all(all_t *s_all);
@@ -139,5 +216,13 @@ void display_spawn_over(all_t *s_all);
 void move_camera(all_t *s_all);
 int check_borders(all_t *s_all);
 int check_middle_wall(all_t *s_all);
-
+sfBool is_button_released(sfEvent *e, sfMouseButton button);
+sfBool is_button_pressed(sfEvent *e, sfMouseButton button);
+sfBool is_key_released(sfEvent *e, sfKeyCode key);
+sfBool is_key_presssed(sfEvent *e, sfKeyCode key);
+void init_inventory(all_t *data);
+void update_inventory(all_t *d);
+void draw_inventory(all_t *d);
+void add_pistol(t_node *inv);
+void iterate_dealloc(t_node *n);
 #endif /* !RPG_H_ */
