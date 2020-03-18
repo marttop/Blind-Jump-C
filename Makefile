@@ -49,7 +49,7 @@ SRC	=	src/main.c \
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Wno-unused-parameter
+CFLAGS	=	-Wall -Wextra
 CFLAGS	+=	-I./include -g3
 FFLAGS	+=	-l csfml-system
 FFLAGS	+=	-l csfml-graphics
