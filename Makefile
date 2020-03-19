@@ -27,6 +27,7 @@ SRC	=	src/main.c \
 		src/camera.c \
 		src/rect_hero.c \
 		src/rect_hero2.c \
+		src/rect_hero3.c \
 		src/inventory/inventory.c \
 		src/inventory/slot_callbacks.c \
 		src/inventory/inventory_input.c \
