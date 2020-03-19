@@ -32,5 +32,9 @@ void game_clocks(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_spawn.door_clock);
     s_all->s_spawn.door_seconds =
         s_all->s_spawn.door_time.microseconds / 1000000.0;
+    s_all->s_tp.tp_time =
+        sfClock_getElapsedTime(s_all->s_tp.tp_clock);
+    s_all->s_tp.tp_seconds =
+        s_all->s_tp.tp_time.microseconds / 1000000.0;
     player_clocks(s_all);
 }

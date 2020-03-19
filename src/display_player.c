@@ -47,7 +47,6 @@ void display_weapon_left_right(all_t *s_all)
 
 void display_hero(all_t *s_all)
 {
-    tp_animation(s_all);
     rect_hero(s_all);
     sfSprite_setPosition(s_all->s_player.shadow,
     (sfVector2f){s_all->s_player.hero_pos.x + 3,
@@ -58,4 +57,5 @@ void display_hero(all_t *s_all)
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_player.hero, NULL);
     display_weapon_down(s_all);
+    tp_animation(s_all);
 }

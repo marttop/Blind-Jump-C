@@ -199,6 +199,14 @@ typedef struct teleporter {
     sfVector2f tp_pos;
     sfSprite *tp_shadow;
     sfRectangleShape *debug;
+    sfRectangleShape *beam;
+    sfClock *tp_clock;
+    sfTime tp_time;
+    float tp_seconds;
+    int alpha;
+    int height;
+    int anim;
+    int width;
 } tp_t;
 
 typedef struct all {
