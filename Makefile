@@ -11,7 +11,6 @@ CC	=	gcc
 
 SRC	=	src/main.c \
 		src/clock.c \
-		src/init_all.c \
 		src/display.c \
 		src/game_loop.c \
 		src/event_control.c \
@@ -19,15 +18,25 @@ SRC	=	src/main.c \
 		src/create_entities.c \
 		src/player_movement.c \
 		src/player_up_down_left_right.c \
-		src/init_player.c \
 		src/hitbox_debug.c \
 		src/hitbox_spawn.c \
-		src/init_movement.c \
 		src/spawn_scene.c \
+		src/display_effect.c \
 		src/aim_direction.c \
 		src/camera.c \
 		src/rect_hero.c \
 		src/rect_hero2.c \
+		src/inventory/inventory.c \
+		src/inventory/slot_callbacks.c \
+		src/inventory/inventory_input.c \
+		src/inventory/list_helpers.c \
+		src/items/items_database.c \
+		src/items/weapon.c \
+		src/init/init_player.c \
+		src/init/init_movement.c \
+		src/init/init_all.c \
+		src/init/init_effect.c \
+		src/teleporter.c \
 		utils/get_next_line.c \
 		utils/my_atoi.c \
 		utils/my_putstr.c \
@@ -40,12 +49,6 @@ SRC	=	src/main.c \
 		utils/randomize.c \
 		utils/write_file.c \
 		utils/render_pos_center.c \
-		src/inventory/inventory.c \
-		src/inventory/slot_callbacks.c \
-		src/inventory/inventory_input.c \
-		src/inventory/list_helpers.c \
-		src/items/items_database.c \
-		src/items/weapon.c \
 
 OBJ	=	$(SRC:.c=.o)
 

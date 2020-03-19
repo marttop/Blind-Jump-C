@@ -16,7 +16,7 @@ sfRectangleShape *init_hitbox_debug(sfRectangleShape *rectangle, sfVector2f pos,
     sfRectangleShape_setSize(rectangle,
         (sfVector2f){sfSprite_getGlobalBounds(sprite).width,
         sfSprite_getGlobalBounds(sprite).height});
-    sfRectangleShape_setOutlineThickness(rectangle, 0.5);
+    sfRectangleShape_setOutlineThickness(rectangle, 0.4);
     sfRectangleShape_setOutlineColor(rectangle,
         (sfColor){255, 0, 0, 255});
     sfRectangleShape_setFillColor(rectangle,
@@ -44,4 +44,19 @@ void activate_debug_mode(all_t *s_all)
     if (s_all->s_game.event.type == sfEvtKeyPressed
     && sfKeyboard_isKeyPressed(sfKeySpace) == 1)
         s_all->s_game.debug_mode = !s_all->s_game.debug_mode;
+}
+
+void display_debug(all_t *s_all)
+{
+    if (s_all->s_game.debug_mode == 1) {
+        set_position_debug(s_all->s_player.debug_shadow,
+            sfSprite_getPosition(s_all->s_player.shadow));
+        display_hitbox_debug(s_all, s_all->s_player.debug,
+            s_all->s_player.hero);
+        display_hitbox_debug(s_all, s_all->s_player.debug_shadow,
+            s_all->s_player.shadow);
+        set_position_debug(s_all->s_tp.debug,
+            sfSprite_getPosition(s_all->s_tp.tp));
+        display_hitbox_debug(s_all, s_all->s_tp.debug, s_all->s_tp.tp);
+    }
 }

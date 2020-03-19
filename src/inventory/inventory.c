@@ -76,9 +76,11 @@ void generate_slots(all_t *d)
 
 void draw_inventory(all_t *d)
 {
-    sfRenderTexture_clear(d->s_game.inv_tex , (sfColor){70, 105, 104, 133});
-    sfRenderTexture_display(d->s_game.inv_tex);
-    draw_slots(d->s_game.inv, d->s_game.inv_tex, d);
-    iterate_slots(d->s_game.inv, d);
-    sfRenderWindow_drawSprite(d->s_game.window, d->s_game.inv_sprite, NULL);
+    if (d->s_game.display_inv == 1) {
+        sfRenderTexture_clear(d->s_game.inv_tex , (sfColor){70, 105, 104, 133});
+        sfRenderTexture_display(d->s_game.inv_tex);
+        draw_slots(d->s_game.inv, d->s_game.inv_tex, d);
+        iterate_slots(d->s_game.inv, d);
+        sfRenderWindow_drawSprite(d->s_game.window, d->s_game.inv_sprite, NULL);
+    }
 }

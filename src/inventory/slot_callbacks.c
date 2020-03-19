@@ -49,10 +49,12 @@ void on_hover(void *data, struct slot *s, sfRenderWindow *w)
         if (is_button_pressed(&d->s_game.event, sfMouseLeft)) {
             on_click(d, s, w);
         }
-        else sfSprite_setColor(s->sprite_bg, (sfColor){255, 255, 255, 255});
         if (is_button_released(&d->s_game.event, sfMouseLeft))
         if (is_button_pressed(&d->s_game.event, sfMouseLeft))
             on_drag(d, s, w);
     }
-    s->is_hover = 0;
+    if (!is_button_pressed(&d->s_game.event, sfMouseLeft)) {
+        s->is_hover = 0;
+        sfSprite_setColor(s->sprite_bg, (sfColor){255, 255, 255, 255});
+    }
 }

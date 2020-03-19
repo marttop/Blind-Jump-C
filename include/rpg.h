@@ -48,6 +48,7 @@ typedef enum consumable_type {
     HP_BUFF,
     DMG_BUFF,
 } e_consumable_type;
+
 typedef enum rarity {
     COMMON,
     UNCOMMON,
@@ -121,6 +122,7 @@ typedef struct game {
     float seconds;
     int scene;
     int debug_mode;
+    int display_inv;
 } game_t;
 
 typedef struct direction {
@@ -154,6 +156,7 @@ typedef struct player {
     sfSprite *shadow;
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
+    int tp;
 } player_t;
 
 typedef struct spawn {
@@ -166,10 +169,37 @@ typedef struct spawn {
     sfSprite *door;
     sfTexture *door_tx;
     sfVector2f door_pos;
+    sfSprite *ship;
+    sfVector2f ship_pos;
+    sfRectangleShape *background;
 } spawn_t;
+
+typedef struct effect {
+    sfRenderStates *light_state;
+    sfSprite *light;
+    sfTexture *light_tx;
+    sfVector2f light_pos;
+    sfRenderStates *vignette_state;
+    sfSprite *vignette1;
+    sfTexture *vignette1_tx;
+    sfSprite *vignette2;
+    sfTexture *vignette2_tx;
+    sfVector2f vignette_pos;
+    sfSprite *tp_glow;
+    sfTexture *tp_glow_tx;
+} effect_t;
+
+typedef struct teleporter {
+    sfSprite *tp;
+    sfVector2f tp_pos;
+    sfSprite *tp_shadow;
+    sfRectangleShape *debug;
+} tp_t;
 
 typedef struct all {
     game_t s_game;
+    tp_t s_tp;
+    effect_t s_effect;
     movement_t s_movement;
     player_t s_player;
     direction_t s_direction;
@@ -227,4 +257,12 @@ void update_inventory(all_t *d);
 void draw_inventory(all_t *d);
 void add_pistol(t_node *inv);
 void iterate_dealloc(t_node *n);
+void display_debug(all_t *s_all);
+int check_ship(all_t *s_all);
+void init_effect(all_t *s_all);
+void display_light_spawn(all_t *s_all);
+void init_view(all_t *s_all);
+void init_tp(all_t *s_all);
+void tp_animation(all_t *s_all);
+
 #endif /* !RPG_H_ */
