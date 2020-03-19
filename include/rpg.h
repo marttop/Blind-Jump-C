@@ -172,6 +172,10 @@ typedef struct spawn {
     sfSprite *ship;
     sfVector2f ship_pos;
     sfRectangleShape *background;
+    int open;
+    sfClock *door_clock;
+    sfTime door_time;
+    float door_seconds;
 } spawn_t;
 
 typedef struct effect {
@@ -264,5 +268,6 @@ void display_light_spawn(all_t *s_all);
 void init_view(all_t *s_all);
 void init_tp(all_t *s_all);
 void tp_animation(all_t *s_all);
+void door_animation(all_t *s_all);
 
 #endif /* !RPG_H_ */

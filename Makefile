@@ -23,6 +23,7 @@ SRC	=	src/main.c \
 		src/spawn_scene.c \
 		src/display_effect.c \
 		src/aim_direction.c \
+		src/door_animation.c \
 		src/camera.c \
 		src/rect_hero.c \
 		src/rect_hero2.c \
