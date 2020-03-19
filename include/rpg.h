@@ -279,5 +279,6 @@ void init_tp(all_t *s_all);
 void tp_animation(all_t *s_all);
 void door_animation(all_t *s_all);
 void set_iddle_rect(all_t *s_all);
+int hitbox_tp(all_t *s_all);
 
 #endif /* !RPG_H_ */
