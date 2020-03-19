@@ -156,6 +156,7 @@ typedef struct player {
     sfSprite *shadow;
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
+    sfSprite *gun;
     int tp;
 } player_t;
 
