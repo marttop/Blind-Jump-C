@@ -15,18 +15,38 @@ void display_spawn(all_t *s_all)
         display_spawn_under(s_all);
         display_hero(s_all);
         display_spawn_over(s_all);
-        display_debug(s_all);
-        move_camera(s_all);
-        sfRenderWindow_drawRectangleShape(s_all->s_game.window,
-            s_all->s_tp.beam, NULL);
-        sfRenderWindow_setView(s_all->s_game.window,
-        sfRenderWindow_getDefaultView(s_all->s_game.window));
-        draw_inventory(s_all);
     }
+}
+
+void display_map(all_t *s_all)
+{
+    if (s_all->s_game.scene == MAP) {
+        sfRenderWindow_clear(s_all->s_game.window, sfBlack);
+        sfRenderWindow_setView(s_all->s_game.window, s_all->s_game.camera);
+        sfSprite_setPosition(s_all->s_map.background,
+            s_all->s_effect.vignette_pos);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_map.background, NULL);
+        display_tiles(s_all);
+        display_hero(s_all);
+    }
+}
+
+void display_hud_anim(all_t *s_all)
+{
+    display_debug(s_all);
+    move_camera(s_all);
+    sfRenderWindow_drawRectangleShape(s_all->s_game.window,
+        s_all->s_tp.beam, NULL);
+    sfRenderWindow_setView(s_all->s_game.window,
+    sfRenderWindow_getDefaultView(s_all->s_game.window));
+    draw_inventory(s_all);
 }
 
 void display(all_t *s_all)
 {
     display_spawn(s_all);
+    display_map(s_all);
+    display_hud_anim(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }

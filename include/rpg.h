@@ -25,6 +25,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 #include "utils.h"
 
@@ -34,6 +35,10 @@
 
 #ifndef SPAWN
 #define SPAWN (1)
+#endif
+
+#ifndef MAP
+#define MAP (2)
 #endif
 
 /////////////////////////////////////////
@@ -137,6 +142,10 @@ typedef struct movement {
     int down;
     int left;
     int right;
+    int wall_up;
+    int wall_down;
+    int wall_right;
+    int wall_left;
 } movement_t;
 
 typedef struct player {
@@ -179,6 +188,23 @@ typedef struct spawn {
     float door_seconds;
 } spawn_t;
 
+typedef struct tileset {
+    sfRectangleShape *debug;
+    sfSprite *tile;
+} tileset_t;
+
+typedef struct map {
+    sfSprite *background;
+    sfTexture *background_tx;
+    sfVector2f background_pos;
+    sfVector2f tileset_pos;
+    sfTexture *tileset_tx;
+    tileset_t **tileset;
+    char **map;
+    int x;
+    int y;
+} map_t;
+
 typedef struct effect {
     sfRenderStates *light_state;
     sfSprite *light;
@@ -212,6 +238,7 @@ typedef struct teleporter {
 typedef struct all {
     game_t s_game;
     tp_t s_tp;
+    map_t s_map;
     effect_t s_effect;
     movement_t s_movement;
     player_t s_player;
@@ -236,8 +263,10 @@ void init_movement(all_t *s_all);
 void get_movement(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void movement_left_right(all_t *s_all);
-void movement_diagonal_left(all_t *s_all);
-void movement_diagonal_right(all_t *s_all);
+void movement_diagonal_left_up(all_t *s_all);
+void movement_diagonal_left_down(all_t *s_all);
+void movement_diagonal_right_down(all_t *s_all);
+void movement_diagonal_right_up(all_t *s_all);
 void rect_hero(all_t *s_all);
 sfRectangleShape *init_hitbox_debug(sfRectangleShape *rectangle, sfVector2f pos,
     sfSprite *sprite);
@@ -280,5 +309,18 @@ void tp_animation(all_t *s_all);
 void door_animation(all_t *s_all);
 void set_iddle_rect(all_t *s_all);
 int hitbox_tp(all_t *s_all);
+void init_map(all_t *s_all);
+void reset_wall(all_t *s_all);
+void display_map(all_t *s_all);
+int loop_map_hitbox(all_t *s_all);
+char **init_new_random_map(all_t *s_all);
+void free_map(char **map);
+char **create_map(void);
+void display_tiles(all_t *s_all);
+void generate_random_map(all_t *s_all);
+char **init_new_random_map(all_t *s_all);
+void fill_random_map(char **map);
+char **copy_map(char **old_map);
+void simulation_step(char **old_map, char **new_map);
 
 #endif /* !RPG_H_ */

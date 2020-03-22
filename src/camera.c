@@ -38,8 +38,9 @@ void move_camera(all_t *s_all)
         s_all->s_effect.vignette_pos);
     sfSprite_setPosition(s_all->s_effect.vignette2,
         s_all->s_effect.vignette_pos);
-    sfRenderWindow_drawSprite(s_all->s_game.window,
-        s_all->s_effect.vignette1, NULL);
+    if (s_all->s_game.scene == SPAWN)
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_effect.vignette1, NULL);
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_effect.vignette2, s_all->s_effect.vignette_state);
 }

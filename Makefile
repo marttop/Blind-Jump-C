@@ -18,6 +18,7 @@ SRC	=	src/main.c \
 		src/create_entities.c \
 		src/player_movement.c \
 		src/player_up_down_left_right.c \
+		src/player_diagonal.c \
 		src/hitbox_debug.c \
 		src/hitbox_spawn.c \
 		src/spawn_scene.c \
@@ -28,6 +29,9 @@ SRC	=	src/main.c \
 		src/rect_hero.c \
 		src/rect_hero2.c \
 		src/rect_hero3.c \
+		src/map.c \
+		src/map_generator.c \
+		src/map_generator2.c \
 		src/tp_anim.c \
 		src/inventory/inventory.c \
 		src/inventory/slot_callbacks.c \

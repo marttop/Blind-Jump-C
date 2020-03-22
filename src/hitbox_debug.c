@@ -51,6 +51,10 @@ void display_debug(all_t *s_all)
     if (s_all->s_game.debug_mode == 1) {
         set_position_debug(s_all->s_player.debug_shadow,
             sfSprite_getPosition(s_all->s_player.shadow));
+        for (int i = 0; s_all->s_game.scene == MAP 
+        && s_all->s_map.tileset[i] != NULL; i++)
+            sfRenderWindow_drawRectangleShape(s_all->s_game.window,
+            s_all->s_map.tileset[i]->debug, NULL);
         display_hitbox_debug(s_all, s_all->s_player.debug,
             s_all->s_player.hero);
         display_hitbox_debug(s_all, s_all->s_player.debug_shadow,
