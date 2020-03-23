@@ -7,27 +7,10 @@
 
 #include "rpg.h"
 
-char **create_map(void)
-{
-    int lines = 20;
-    int cols = 30;
-    char **map = malloc(sizeof(char *) * (lines + 1));
-    int i = 0;
-    
-    for (; i != lines; i++) {
-        map[i] = malloc(sizeof(char) * (cols + 1));
-        memset(map[i], '0', cols);
-        map[i][cols] = '\0';
-    }
-    map[i] = NULL;
-
-    return (map);
-}
-
 char **copy_map(char **old_map)
 {
     int lines = 0;
-    int cols = strlen(old_map[0]);
+    int cols = my_strlen(old_map[0]);
 
     for (; old_map[lines] != NULL; lines++);
     char **new_map = malloc(sizeof(char *) * (lines + 1));
@@ -79,6 +62,22 @@ int count_alive_neighbours(char **old_map, int x, int y)
     return (count);
 }
 
+void simulation_print(char *new_map, char *old_map, int alive)
+{
+    if (*old_map == '1') {
+        if (alive < 3)
+            *new_map = '0';
+        else
+            *new_map = '1';
+    }
+    else {
+        if (alive > 4)
+            *new_map = '1';
+        else
+            *new_map = '0';
+    }
+}
+
 void simulation_step(char **old_map, char **new_map)
 {
     int alive = 0;
@@ -86,18 +85,7 @@ void simulation_step(char **old_map, char **new_map)
     for (int i = 0; old_map[i] != NULL; i++) {
         for (int j = 0; old_map[i][j] != '\0'; j++) {
             alive = count_alive_neighbours(old_map, j, i);
-            if (old_map[i][j] == '1') {
-                if (alive < 3)
-                    new_map[i][j] = '0';
-                else
-                    new_map[i][j] = '1';
-            }
-            else {
-                if (alive > 4)
-                    new_map[i][j] = '1';
-                else
-                    new_map[i][j] = '0';
-            }
+            simulation_print(&new_map[i][j], &old_map[i][j], alive);
         }
     }
 }

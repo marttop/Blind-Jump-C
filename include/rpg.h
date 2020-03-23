@@ -191,6 +191,9 @@ typedef struct spawn {
 typedef struct tileset {
     sfRectangleShape *debug;
     sfSprite *tile;
+    sfSprite *top;
+    sfSprite *bottom;
+    sfSprite *grass;
 } tileset_t;
 
 typedef struct map {
@@ -322,5 +325,6 @@ char **init_new_random_map(all_t *s_all);
 void fill_random_map(char **map);
 char **copy_map(char **old_map);
 void simulation_step(char **old_map, char **new_map);
+void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
 
 #endif /* !RPG_H_ */

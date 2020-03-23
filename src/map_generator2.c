@@ -7,6 +7,24 @@
 
 #include "rpg.h"
 
+char **create_map(void)
+{
+    int lines = 20;
+    int cols = 30;
+    char **map = malloc(sizeof(char *) * (lines + 1));
+    int i = 0;
+    
+    for (; i != lines; i++) {
+        map[i] = malloc(sizeof(char) * (cols + 1));
+        for (int j = 0; j != cols; j++)
+            map[i][j] = '0';
+        map[i][cols] = '\0';
+    }
+    map[i] = NULL;
+
+    return (map);
+}
+
 void free_map(char **map)
 {
     for (int i = 0; map[i] != NULL; i++)
@@ -38,14 +56,12 @@ void generate_random_map2(all_t *s_all, int i, int j, int *x)
         s_all->s_map.tileset_pos.x = 0;
         s_all->s_map.tileset_pos.y += 26;
     }
-
     if (s_all->s_map.map[i][j] == '0') {
         s_all->s_map.tileset[*x] = malloc(sizeof(tileset_t));
         s_all->s_map.tileset[*x]->tile = sfSprite_create();
         sfSprite_setTexture(s_all->s_map.tileset[*x]->tile,
             s_all->s_map.tileset_tx, sfTrue);
-        sfSprite_setTextureRect(s_all->s_map.tileset[*x]->tile,
-            (sfIntRect){0, 0, 32, 26});
+        set_rect_tile(s_all->s_map.tileset[*x], s_all, i, j);
         sfSprite_setPosition(s_all->s_map.tileset[*x]->tile,
             s_all->s_map.tileset_pos);
         s_all->s_map.tileset[*x]->debug =

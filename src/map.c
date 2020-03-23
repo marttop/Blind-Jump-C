@@ -84,5 +84,11 @@ void display_tiles(all_t *s_all)
     for (int i = 0; s_all->s_map.tileset[i] != NULL; i++) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_map.tileset[i]->tile, NULL);
+        if (s_all->s_map.tileset[i]->top != NULL)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                s_all->s_map.tileset[i]->top, NULL);
+        if (s_all->s_map.tileset[i]->bottom != NULL)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                s_all->s_map.tileset[i]->bottom, NULL);
     }
 }
