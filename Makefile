@@ -45,6 +45,10 @@ SRC	=	src/main.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
 		src/teleporter.c \
+		pathfinding/breadth_first_search.c \
+		pathfinding/dequeue.c \
+		pathfinding/format_map.c \
+		pathfinding/queue.c \
 		utils/get_next_line.c \
 		utils/my_atoi.c \
 		utils/my_putstr.c \

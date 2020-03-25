@@ -28,6 +28,8 @@ void display_map(all_t *s_all)
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_map.background, NULL);
         display_tiles(s_all);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_tp.tp, NULL);
         display_hero(s_all);
     }
 }

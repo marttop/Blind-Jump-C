@@ -5,6 +5,7 @@
         "rpg.h": "c",
         "audio.h": "c",
         "items.h": "c",
-        "random": "c"
+        "random": "c",
+        "string_view": "c"
     }
 }

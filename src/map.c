@@ -13,14 +13,13 @@ void init_map(all_t *s_all)
     create_sprite(&s_all->s_map.background, &s_all->s_map.background_tx,
         s_all->s_map.background_pos, "sprites/background.png");
     sfSprite_setScale(s_all->s_map.background, (sfVector2f){1.71, 0.93});
-    s_all->s_map.x = 30;
-    s_all->s_map.y = 20;
+    s_all->s_map.x = 100;
+    s_all->s_map.y = 40;
     int size = s_all->s_map.x * s_all->s_map.y + 1;
     s_all->s_map.tileset = malloc(sizeof(tileset_t *) * size);
     s_all->s_map.tileset_tx =
         sfTexture_createFromFile("sprites/tile_set.png", NULL);
     s_all->s_map.tileset_pos = (sfVector2f){0, 0};
-    generate_random_map(s_all);
 }
 
 void map_hitbox2(all_t *s_all, int *direction, int *check)

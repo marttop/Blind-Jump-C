@@ -9,18 +9,25 @@
 
 sfVector2f find_tp_spawn(all_t *s_all)
 {
-    int check = 0;
-    sfVector2f pos = {6, 62};
-
-    for (int i = 3; s_all->s_map.map[i] != NULL; i++, pos.y += 26)
-        for (int j = 0; s_all->s_map.map[i][j] != '\0'; j++) {
+    int count = 0;
+    for (int i = 0; s_all->s_map.map[i] != NULL; i++)
+        for (int j = 0; s_all->s_map.map[i][j] != '\0'; j++)
             if (s_all->s_map.map[i][j] == '0')
-                check++;
-            if (check == 3)
-                return (pos);
-            pos.x += 32;
-        }
+                count++;
+    int random = 1 + rand() % (count - 1);
 
+    count = 0;
+    sfVector2f pos = {0, 0};
+
+    for (int i = 0; s_all->s_map.map[i] != NULL; i++, pos.y += 26, pos.x = 0)
+        for (int j = 0; s_all->s_map.map[i][j] != '\0'; j++, pos.x += 32) {
+            if (s_all->s_map.map[i][j] == '0')
+                count++;
+            if (count == random) {
+                s_all->s_map.map[i][j] = 'P';
+                return ((sfVector2f) {pos.x + 6, pos.y - 15});
+            }
+        }
     return (pos);
 }
 
@@ -35,10 +42,10 @@ void tp_animation3(all_t *s_all)
     }
     if (s_all->s_tp.anim == 2 && s_all->s_player.tp == 1
     && s_all->s_tp.width <= 0) {
+        generate_random_map(s_all);
         s_all->s_tp.anim = 0;
         s_all->s_player.tp = 0;
         s_all->s_game.scene = MAP;
-        s_all->s_player.hero_pos = find_tp_spawn(s_all);
         sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
     }
     sfRectangleShape_setSize(s_all->s_tp.beam,
@@ -72,7 +79,7 @@ void tp_animation2(all_t *s_all)
 void tp_animation(all_t *s_all)
 {
     if (hitbox_tp(s_all) == 1 && s_all->s_player.tp == 0
-    && s_all->s_game.scene == SPAWN) {
+    && (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP)) {
         s_all->s_player.tp = 1;
         s_all->s_player.hero_rect.left = 406;
         s_all->s_player.hero_rect.top = 109;

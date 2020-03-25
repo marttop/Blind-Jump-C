@@ -17,7 +17,8 @@ void set_top_tile(tileset_t *tile, all_t *s_all, int i, int j)
         tileset_pos.x, s_all->s_map.tileset_pos.y - 26});
         sfSprite_setTextureRect(tile->top, (sfIntRect){128, 0, 32, 26});
     }
-    else tile->top = NULL;
+    else
+        tile->top = NULL;
 }
 
 void set_bottom_tile(tileset_t *tile, all_t *s_all, int i, int j)
@@ -36,7 +37,8 @@ void set_bottom_tile(tileset_t *tile, all_t *s_all, int i, int j)
         else
             sfSprite_setTextureRect(tile->bottom, (sfIntRect){96, 0, 32, 26});
     }
-    else tile->bottom = NULL;
+    else
+        tile->bottom = NULL;
 }
 
 void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j)
@@ -55,5 +57,6 @@ void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j)
     }
     if (random >= 90)
         sfSprite_setTextureRect(tile->tile, (sfIntRect){64, 0, 32, 26});
-    else sfSprite_setTextureRect(tile->tile, (sfIntRect){33, 0, 32, 26});
+    else
+        sfSprite_setTextureRect(tile->tile, (sfIntRect){33, 0, 32, 26});
 }

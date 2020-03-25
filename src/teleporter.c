@@ -40,7 +40,17 @@ void init_tp(all_t *s_all)
     s_all->s_tp.debug = init_hitbox_debug(s_all->s_tp.debug,
         s_all->s_tp.tp_pos, s_all->s_tp.tp);
     init_tp2(s_all);
+}
 
+void set_tp_position(all_t *s_all)
+{
+    s_all->s_tp.tp_pos = (sfVector2f){s_all->s_map.tileset_pos.x,
+        s_all->s_map.tileset_pos.y - 5};
+    sfSprite_setPosition(s_all->s_tp.tp, s_all->s_tp.tp_pos);
+    sfSprite_setPosition(s_all->s_tp.tp_shadow,
+        (sfVector2f){s_all->s_tp.tp_pos.x, s_all->s_tp.tp_pos.y + 7});
+    sfRectangleShape_setPosition(s_all->s_tp.beam,
+        (sfVector2f){s_all->s_tp.tp_pos.x + 16, s_all->s_tp.tp_pos.y + 19});
 }
 
 int hitbox_tp(all_t *s_all)
@@ -50,4 +60,27 @@ int hitbox_tp(all_t *s_all)
     if (sfFloatRect_intersects(&shadow, &tp, NULL))
         return (1);
     return (0);
+}
+
+void put_tp(char **map)
+{
+    int count = 0;
+
+    for (int i = 0; map[i] != NULL; i++)
+        for (int j = 0; map[i][j] != '\0'; j++)
+            if (map[i][j] == '0')
+                count++;
+    
+    int random = rand() % count;
+    count = 0;
+       
+    for (int i = 0; map[i] != NULL; i++)
+        for (int j = 0; map[i][j] != '\0'; j++) {
+            if (count == random && map[i][j] == '0') {
+                map[i][j] = 'T';
+                return;
+            }
+            if (map[i][j] == '0')
+                count++;
+        }
 }

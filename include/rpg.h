@@ -26,6 +26,8 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
+#include <stddef.h>
+#include <limits.h>
 
 #include "utils.h"
 
@@ -318,7 +320,7 @@ void display_map(all_t *s_all);
 int loop_map_hitbox(all_t *s_all);
 char **init_new_random_map(all_t *s_all);
 void free_map(char **map);
-char **create_map(void);
+char **create_map(all_t *s_all);
 void display_tiles(all_t *s_all);
 void generate_random_map(all_t *s_all);
 char **init_new_random_map(all_t *s_all);
@@ -326,5 +328,39 @@ void fill_random_map(char **map);
 char **copy_map(char **old_map);
 void simulation_step(char **old_map, char **new_map);
 void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
+void put_tp(char **map);
+void set_tp_position(all_t *s_all);
+sfVector2f find_tp_spawn(all_t *s_all);
+
+/* ------------ !QUEUE ------------ */
+
+typedef struct node_queue
+{
+    int x;
+    int y;
+    struct node_queue *parent;
+    struct node_queue *next;
+    struct node_queue *back;
+} queue_node_t;
+
+typedef struct queue
+{
+    int length;
+    queue_node_t *last;
+    queue_node_t *first;
+} queue_t;
+
+queue_t *new_queue(void);
+int is_empty_queue(queue_t *li);
+queue_node_t *new_queue_node(queue_node_t *parent, int x, int y);
+queue_t *push_back_queue(queue_t *li, queue_node_t *parent, int x, int y);
+queue_t *pop_front_queue(queue_t *li);
+queue_t *clear_queue(queue_t *li);
+queue_t *dequeue_front(queue_t *li, queue_t **dequeue);
+
+/* ------------ !BREADTH_FIRST_SEARCH ------------ */
+
+int breadth_first_search(char **map, all_t *s_all);
+void format_map(char **map);
 
 #endif /* !RPG_H_ */

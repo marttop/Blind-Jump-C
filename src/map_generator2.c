@@ -7,10 +7,10 @@
 
 #include "rpg.h"
 
-char **create_map(void)
+char **create_map(all_t *s_all)
 {
-    int lines = 20;
-    int cols = 30;
+    int lines = s_all->s_map.y;
+    int cols = s_all->s_map.x;
     char **map = malloc(sizeof(char *) * (lines + 1));
     int i = 0;
     
@@ -36,7 +36,11 @@ char **init_new_random_map(all_t *s_all)
 {
     static int i = 0;
     if (i == 0)
-        s_all->s_map.map = create_map();
+        s_all->s_map.map = create_map(s_all);
+    else {
+        free(s_all->s_map.map);
+        s_all->s_map.map = create_map(s_all);
+    }  
     char **new_map = copy_map(s_all->s_map.map);
     i = 1;
 
@@ -44,6 +48,7 @@ char **init_new_random_map(all_t *s_all)
 
     for (int i = 0; i != 10; i++)
         simulation_step(s_all->s_map.map, new_map);
+    put_tp(new_map);
 
     free_map(s_all->s_map.map);
 
@@ -56,7 +61,7 @@ void generate_random_map2(all_t *s_all, int i, int j, int *x)
         s_all->s_map.tileset_pos.x = 0;
         s_all->s_map.tileset_pos.y += 26;
     }
-    if (s_all->s_map.map[i][j] == '0') {
+    if (s_all->s_map.map[i][j] == '0' || s_all->s_map.map[i][j] == 'T') {
         s_all->s_map.tileset[*x] = malloc(sizeof(tileset_t));
         s_all->s_map.tileset[*x]->tile = sfSprite_create();
         sfSprite_setTexture(s_all->s_map.tileset[*x]->tile,
@@ -67,14 +72,25 @@ void generate_random_map2(all_t *s_all, int i, int j, int *x)
         s_all->s_map.tileset[*x]->debug =
             init_hitbox_debug(s_all->s_map.tileset[*x]->debug,
             s_all->s_map.tileset_pos, s_all->s_map.tileset[*x]->tile);
+        if (s_all->s_map.map[i][j] == 'T')
+            set_tp_position(s_all);
         *x += 1;
     }
 }
 
 void generate_random_map(all_t *s_all)
 {
-    s_all->s_map.map = init_new_random_map(s_all);
-
+    static int i = 0;
+    for (int j = 0; i != 0 && s_all->s_map.tileset[j] != NULL; j++)
+        free(s_all->s_map.tileset[j]);
+    s_all->s_map.tileset_pos.x = 0;
+    s_all->s_map.tileset_pos.y = 0;
+    while (1) {
+        s_all->s_map.map = init_new_random_map(s_all);
+        s_all->s_player.hero_pos = find_tp_spawn(s_all);
+        if (breadth_first_search(s_all->s_map.map, s_all) == 0)
+            break;
+    }
     int x = 0;
     for (int i = 0; s_all->s_map.map[i] != NULL; i++)
         for (int j = 0; s_all->s_map.map[i][j] != '\0'; j++) {
@@ -82,4 +98,5 @@ void generate_random_map(all_t *s_all)
             s_all->s_map.tileset_pos.x += 32;
         }
     s_all->s_map.tileset[x] = NULL;
+    i = 1;
 }
