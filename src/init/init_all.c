@@ -17,6 +17,7 @@ void setup(all_t *s_all)
     s_all->s_game.scene = SPAWN;
     s_all->s_game.debug_mode = 0;
     s_all->s_game.display_inv = 0;
+    s_all->s_mob = NULL;
     init_view(s_all);
     randomize();
 }
@@ -31,5 +32,4 @@ void init_all(all_t *s_all)
     init_tp(s_all);
     init_effect(s_all);
     init_map(s_all);
-    init_mobs(s_all);
 }
