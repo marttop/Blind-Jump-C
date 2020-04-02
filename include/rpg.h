@@ -150,6 +150,26 @@ typedef struct movement {
     int wall_left;
 } movement_t;
 
+typedef struct mob {
+    sfSprite *mob;
+    sfTexture *mob_txt;
+    sfVector2f mob_pos;
+    int mob_speed;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    sfClock *rect_clock;
+    sfTime rect_time;
+    float rect_seconds;
+    sfIntRect rect;
+    sfSprite *shadow;
+    sfTexture *shadow_tx;
+    sfVector2f shadow_pos;
+    int move;
+    char type;
+    struct mob *next;
+} mob_t;
+
 typedef struct player {
     sfRectangleShape *debug;
     sfRectangleShape *debug_shadow;
@@ -250,6 +270,7 @@ typedef struct all {
     direction_t s_direction;
     spawn_t s_spawn;
     t_item_database item_db;
+    struct mob *s_mob;
 } all_t;
 
 void init_all(all_t *s_all);
@@ -257,6 +278,8 @@ void init_clocks(all_t *s_all);
 void game_clocks(all_t *s_all);
 void display(all_t *s_all);
 int game_loop(all_t *s_all);
+void init_mobs(all_t *s_all);
+void display_mobs(all_t *s_all);
 void events_control(all_t *s_all);
 void create_sprite(sfSprite **sprite, sfTexture **texture,
     sfVector2f pos, const char *path);
