@@ -49,6 +49,7 @@ SRC	=	src/main.c \
 		src/init/init_effect.c \
 		src/teleporter.c \
 		src/pathfinding/breadth_first_search.c \
+		src/pathfinding/breadth_first_search_entity.c \
 		src/pathfinding/dequeue.c \
 		src/pathfinding/format_map.c \
 		src/pathfinding/queue.c \
