@@ -360,7 +360,7 @@ queue_t *dequeue_front(queue_t *li, queue_t **dequeue);
 
 /* ------------ !BREADTH_FIRST_SEARCH ------------ */
 
-int breadth_first_search(char **map, all_t *s_all);
+int breadth_first_search(char **maze, all_t *s_all, char start, char end);
 void format_map(char **map);
 
 #endif /* !RPG_H_ */

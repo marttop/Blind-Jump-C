@@ -88,7 +88,7 @@ void generate_random_map(all_t *s_all)
     while (1) {
         s_all->s_map.map = init_new_random_map(s_all);
         s_all->s_player.hero_pos = find_tp_spawn(s_all);
-        if (breadth_first_search(s_all->s_map.map, s_all) == 0)
+        if (breadth_first_search(s_all->s_map.map, s_all, 'P', 'T') == 0)
             break;
     }
     int x = 0;

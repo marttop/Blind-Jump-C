@@ -45,22 +45,22 @@ SRC	=	src/main.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
 		src/teleporter.c \
-		pathfinding/breadth_first_search.c \
-		pathfinding/dequeue.c \
-		pathfinding/format_map.c \
-		pathfinding/queue.c \
-		utils/get_next_line.c \
-		utils/my_atoi.c \
-		utils/my_putstr.c \
-		utils/my_revstr.c \
-		utils/my_strcat.c \
-		utils/my_strcpy.c \
-		utils/my_strdup.c \
-		utils/my_strlen.c \
-		utils/my_strnbr.c \
-		utils/randomize.c \
-		utils/write_file.c \
-		utils/render_pos_center.c \
+		src/pathfinding/breadth_first_search.c \
+		src/pathfinding/dequeue.c \
+		src/pathfinding/format_map.c \
+		src/pathfinding/queue.c \
+		src/utils/get_next_line.c \
+		src/utils/my_atoi.c \
+		src/utils/my_putstr.c \
+		src/utils/my_revstr.c \
+		src/utils/my_strcat.c \
+		src/utils/my_strcpy.c \
+		src/utils/my_strdup.c \
+		src/utils/my_strlen.c \
+		src/utils/my_strnbr.c \
+		src/utils/randomize.c \
+		src/utils/write_file.c \
+		src/utils/render_pos_center.c \
 
 OBJ	=	$(SRC:.c=.o)
 

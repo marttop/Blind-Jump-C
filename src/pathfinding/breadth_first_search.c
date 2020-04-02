@@ -14,19 +14,20 @@ queue_t *check_direction(char **maze, queue_t *s_queue, int x, int y)
         if (maze[y][x + 1] == '0')
             maze[y][x + 1] = 'W';
     } if (maze[y + 1] != NULL
-    && (maze[y + 1][x] == '0' || maze[y][x + 1] == 'T')) {
+    && (maze[y + 1][x] == '0' || maze[y + 1][x] == 'T')) {
         s_queue = push_back_queue(s_queue, s_queue->first, x, y + 1);
         if (maze[y + 1][x] == '0')
             maze[y + 1][x] = 'W';
-    } if (y - 1 != -1 && (maze[y - 1][x] == '0' || maze[y][x + 1] == 'T')) {
+    } if (y - 1 != -1 && (maze[y - 1][x] == '0' || maze[y - 1][x] == 'T')) {
         s_queue = push_back_queue(s_queue, s_queue->first, x, y - 1);
         if (maze[y - 1][x] == '0')
             maze[y - 1][x] = 'W';
-    } if (x - 1 != -1 && (maze[y][x - 1] == '0' || maze[y][x + 1] == 'T')) {
+    } if (x - 1 != -1 && (maze[y][x - 1] == '0' || maze[y][x - 1] == 'T')) {
         s_queue = push_back_queue(s_queue, s_queue->first, x - 1, y);
         if (maze[y][x - 1] == '0')
             maze[y][x - 1] = 'W';
-    } return (s_queue);
+    }
+    return (s_queue);
 }
 
 queue_t *push_new_generation(char **maze, queue_t *s_queue,
@@ -63,25 +64,18 @@ int check_if_found(queue_t *s_queue, sfVector2i pos_end)
     return (0);
 }
 
-int breadth_first_search(char **maze, all_t *s_all)
+int breadth_first_search(char **maze, all_t *s_all, char start, char end)
 {
-    static int i = 0;
     queue_t *s_queue = new_queue();
     queue_t *s_dequeue = new_queue();
 
-    sfVector2i pos_start = find_pos(s_all, 'P');
-    sfVector2i pos_end = find_pos(s_all, 'T');
+    sfVector2i pos_start = find_pos(s_all, start);
+    sfVector2i pos_end = find_pos(s_all, end);
     s_queue = push_back_queue(s_queue, NULL, pos_start.x, pos_start.y);
     maze[pos_start.y][pos_start.x] = 'W';
 
     while (s_queue != NULL && check_if_found(s_queue, pos_end) == 0)
         s_queue = push_new_generation(maze, s_queue, &s_dequeue);
-
-    i++;
-    printf("\n\n%d\n", i);
-
-    for (int i = 0; s_all->s_map.map[i] != NULL; i++)
-        puts(s_all->s_map.map[i]);
 
     if (s_queue == NULL) {
         s_dequeue = clear_queue(s_dequeue);

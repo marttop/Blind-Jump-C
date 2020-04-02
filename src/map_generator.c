@@ -30,7 +30,7 @@ char **copy_map(char **old_map)
 void fill_random_map(char **map)
 {
     int random = 0;
-    int chance = 40;
+    int chance = 38;
     
     for (int i = 0; map[i] != NULL; i++) {
         for (int j = 0; map[i][j] != '\0'; j++) {
