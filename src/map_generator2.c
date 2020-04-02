@@ -61,7 +61,8 @@ void generate_random_map2(all_t *s_all, int i, int j, int *x)
         s_all->s_map.tileset_pos.x = 0;
         s_all->s_map.tileset_pos.y += 26;
     }
-    if (s_all->s_map.map[i][j] == '0' || s_all->s_map.map[i][j] == 'T') {
+    if (s_all->s_map.map[i][j] == '0' || s_all->s_map.map[i][j] == 'T'
+    || s_all->s_map.map[i][j] == 'P') {
         s_all->s_map.tileset[*x] = malloc(sizeof(tileset_t));
         s_all->s_map.tileset[*x]->tile = sfSprite_create();
         sfSprite_setTexture(s_all->s_map.tileset[*x]->tile,
