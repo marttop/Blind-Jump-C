@@ -41,12 +41,51 @@ void set_bottom_tile(tileset_t *tile, all_t *s_all, int i, int j)
         tile->bottom = NULL;
 }
 
+char **init_new_gass_map(all_t *s_all)
+{
+    static int i = 0;
+    if (i == 0)
+        s_all->s_map.grass = create_map(s_all->s_map.x, s_all->s_map.y);
+    else {
+        free(s_all->s_map.grass);
+        s_all->s_map.grass = create_map(s_all->s_map.x, s_all->s_map.y);
+    }  
+    char **new_map = copy_map(s_all->s_map.grass);
+    i = 1;
+
+    fill_random_map(s_all->s_map.grass);
+
+    for (int i = 0; i != 10; i++)
+        simulation_step(s_all->s_map.grass, new_map);
+
+    free_map(s_all->s_map.grass);
+
+    return (new_map);
+}
+
+void set_grass(tileset_t *tile, all_t *s_all, int i, int j)
+{
+    char **map = s_all->s_map.map;
+    char **grass = s_all->s_map.grass;
+   
+    if (map[i][j] == '0' && grass[i][j] == '0') {
+        tile->grass= sfSprite_create();
+        sfSprite_setTexture(tile->grass, s_all->s_map.tileset_tx, sfTrue);
+        sfSprite_setPosition(tile->grass, (sfVector2f){s_all->s_map.
+        tileset_pos.x, s_all->s_map.tileset_pos.y + 26});
+        sfSprite_setTextureRect(tile->grass, (sfIntRect){0, 0, 32, 26});
+    }
+    else
+        tile->grass = NULL;
+}
+
 void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j)
 {
     int random = rand() % 100;
     char **map = s_all->s_map.map;
     set_bottom_tile(tile, s_all, i, j);
-    set_top_tile(tile, s_all, i, j );
+    set_top_tile(tile, s_all, i, j);
+    set_grass(tile, s_all, i, j);
     if (i == 0 || j == 0 || map[i + 1] == NULL || map[i][j + 1] == '\0' ||
     map[i - 1][j] == '1' || map[i + 1][j] == '1' || map[i][j + 1] == '1'
     || map[i][j - 1] == '1') {
@@ -55,7 +94,7 @@ void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j)
         else sfSprite_setTextureRect(tile->tile, (sfIntRect){0, 0, 32, 26});
         return;
     }
-    if (random >= 90)
+    if (random >= 70)
         sfSprite_setTextureRect(tile->tile, (sfIntRect){64, 0, 32, 26});
     else
         sfSprite_setTextureRect(tile->tile, (sfIntRect){33, 0, 32, 26});

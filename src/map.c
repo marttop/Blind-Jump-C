@@ -19,6 +19,8 @@ void init_map(all_t *s_all)
     s_all->s_map.tileset = malloc(sizeof(tileset_t *) * size);
     s_all->s_map.tileset_tx =
         sfTexture_createFromFile("sprites/tile_set.png", NULL);
+    s_all->s_map.grass_tx =
+        sfTexture_createFromFile("sprites/grass_set.png", NULL);
     s_all->s_map.tileset_pos = (sfVector2f){0, 0};
 }
 

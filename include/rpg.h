@@ -87,7 +87,6 @@ typedef struct item_database{
     t_consumable consumables[12];
 } t_item_database;
 
-
 typedef struct slot
 {
     int id;
@@ -204,8 +203,10 @@ typedef struct map {
     sfVector2f background_pos;
     sfVector2f tileset_pos;
     sfTexture *tileset_tx;
+    sfTexture *grass_tx;
     tileset_t **tileset;
     char **map;
+    char **grass;
     int x;
     int y;
 } map_t;
@@ -320,7 +321,7 @@ void display_map(all_t *s_all);
 int loop_map_hitbox(all_t *s_all);
 char **init_new_random_map(all_t *s_all);
 void free_map(char **map);
-char **create_map(all_t *s_all);
+char **create_map(int x, int y);
 void display_tiles(all_t *s_all);
 void generate_random_map(all_t *s_all);
 char **init_new_random_map(all_t *s_all);
@@ -331,6 +332,7 @@ void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
 void put_tp(char **map);
 void set_tp_position(all_t *s_all);
 sfVector2f find_tp_spawn(all_t *s_all);
+char **init_new_gass_map(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 
