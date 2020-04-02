@@ -21,6 +21,8 @@ void init_map(all_t *s_all)
         sfTexture_createFromFile("sprites/tile_set.png", NULL);
     s_all->s_map.grass_tx =
         sfTexture_createFromFile("sprites/grass_set.png", NULL);
+    s_all->s_map.grass2_tx =
+        sfTexture_createFromFile("sprites/grass_set_edge.png", NULL);
     s_all->s_map.tileset_pos = (sfVector2f){0, 0};
 }
 

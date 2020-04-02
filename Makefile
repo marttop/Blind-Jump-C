@@ -35,6 +35,7 @@ SRC	=	src/main.c \
 		src/map_generator.c \
 		src/map_generator2.c \
 		src/map_design.c \
+		src/map_grass.c \
 		src/tp_anim.c \
 		src/inventory/inventory.c \
 		src/inventory/slot_callbacks.c \
