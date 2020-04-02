@@ -31,6 +31,7 @@ SRC	=	src/main.c \
 		src/rect_hero3.c \
 		src/init/init_mobs.c \
 		src/map.c \
+		src/mob_generator.c \
 		src/map_generator.c \
 		src/map_generator2.c \
 		src/map_design.c \
