@@ -280,6 +280,7 @@ void display(all_t *s_all);
 int game_loop(all_t *s_all);
 void init_mobs(all_t *s_all);
 void display_mobs(all_t *s_all);
+int my_ptrlen(char **str);
 void events_control(all_t *s_all);
 void create_sprite(sfSprite **sprite, sfTexture **texture,
     sfVector2f pos, const char *path);
@@ -288,6 +289,8 @@ void init_hero(all_t *s_all);
 sfVector2f render_pos_center(all_t *s_all);
 void player_movement(all_t *s_all);
 void init_movement(all_t *s_all);
+void generate_random_mobs(all_t *s_all);
+mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void movement_left_right(all_t *s_all);
