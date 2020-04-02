@@ -30,6 +30,7 @@ void display_map(all_t *s_all)
         display_tiles(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);
+        display_mobs(s_all);
         display_hero(s_all);
     }
 }
@@ -50,6 +51,5 @@ void display(all_t *s_all)
     display_spawn(s_all);
     display_map(s_all);
     display_hud_anim(s_all);
-    display_mobs(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }

@@ -11,12 +11,15 @@ mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
 {
     mob_t *new = malloc(sizeof(mob_t));
     new->mob = sfSprite_create();
+    new->clock = sfClock_create();
+    new->rect_clock = sfClock_create();
     new->mob_pos = pos;
     new->mob_txt = s_all->s_player.hero_tx;
     sfSprite_setTexture(new->mob, new->mob_txt, sfTrue);
     new->rect = (sfIntRect){0, 60, 18, 20};
     sfSprite_setTextureRect(new->mob, new->rect);
-    sfSprite_setPosition(new->mob, s_all->s_player.hero_pos);
+    sfSprite_setPosition(new->mob, new->mob_pos);
+    new->type = type;
     new->next = old;
     return (new);
 }
