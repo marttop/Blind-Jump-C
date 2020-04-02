@@ -224,6 +224,7 @@ typedef struct map {
     sfVector2f tileset_pos;
     sfTexture *tileset_tx;
     sfTexture *grass_tx;
+    sfTexture *grass2_tx;
     tileset_t **tileset;
     char **map;
     char **grass;
@@ -359,6 +360,7 @@ void put_tp(char **map);
 void set_tp_position(all_t *s_all);
 sfVector2f find_tp_spawn(all_t *s_all);
 char **init_new_gass_map(all_t *s_all);
+void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
 
 /* ------------ !QUEUE ------------ */
 
