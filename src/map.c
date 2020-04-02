@@ -91,5 +91,8 @@ void display_tiles(all_t *s_all)
         if (s_all->s_map.tileset[i]->bottom != NULL)
             sfRenderWindow_drawSprite(s_all->s_game.window,
                 s_all->s_map.tileset[i]->bottom, NULL);
+        if (s_all->s_map.tileset[i]->grass != NULL)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                s_all->s_map.tileset[i]->grass, NULL);
     }
 }
