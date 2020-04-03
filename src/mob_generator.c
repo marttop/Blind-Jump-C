@@ -38,6 +38,6 @@ void generate_random_mobs(all_t *s_all)
             s_all->s_mob = fill_mob(s_all->s_mob, 'B',
             (sfVector2f){randx * 32 + 8, randy * 26 + 5}, s_all);
             i--;
-        } else continue;
+        }
     }
 }
