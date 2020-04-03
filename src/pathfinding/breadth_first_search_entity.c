@@ -34,14 +34,14 @@ char **breadth_first_search_entity(char **map, all_t *s_all, int x, int y)
 
     s_queue = push_back_queue(s_queue, NULL, pos_start.x, pos_start.y);
     maze[pos_start.y][pos_start.x] = 'W';
-    while (s_queue != NULL && check_if_found(s_queue, pos_end) == 0) {
+    while (s_queue != NULL && check_if_found(s_queue, pos_end) == 0)
         s_queue = push_new_generation(maze, s_queue, &s_dequeue);
-    }
+    maze[pos_end.y][pos_end.x] = 'P';
+
     if (s_queue == NULL) {
         s_dequeue = clear_queue(s_dequeue);
         return (NULL);
     }
-
     maze = process_result(maze, s_dequeue, s_queue);
 
     return (maze);
