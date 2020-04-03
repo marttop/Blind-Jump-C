@@ -31,8 +31,28 @@ sfVector2f find_tp_spawn(all_t *s_all)
     return (pos);
 }
 
+void tp_animation4(all_t *s_all, int *alpha)
+{
+    if (s_all->s_tp.anim == 3 && s_all->s_player.tp == 1) {
+        generate_random_map(s_all);
+        s_all->s_tp.anim = 4;
+        s_all->s_game.scene = MAP;
+        sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
+    }
+    if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
+        *alpha -= 5;
+        sfRectangleShape_setFillColor(s_all->s_tp.black,
+            (sfColor){0, 0, 0, *alpha});
+        if (*alpha <= 40) {
+            s_all->s_tp.anim = 0;
+            s_all->s_player.tp = 0;
+        }
+    }
+}
+
 void tp_animation3(all_t *s_all)
 {
+    static int alpha = 0;
     if (s_all->s_tp.width >= 20 && s_all->s_tp.anim == 1)
         s_all->s_tp.anim = 2;
     if (s_all->s_tp.anim == 2 && s_all->s_tp.width > 0) {
@@ -40,15 +60,14 @@ void tp_animation3(all_t *s_all)
         sfRectangleShape_setOrigin(s_all->s_tp.beam,
             (sfVector2f){s_all->s_tp.width / 2, s_all->s_tp.height});
     }
-    if (s_all->s_tp.anim == 2 && s_all->s_player.tp == 1
-    && s_all->s_tp.width <= 0) {
-        generate_random_map(s_all);
-        s_all->s_tp.anim = 0;
-        s_all->s_player.tp = 0;
-        s_all->s_game.scene = MAP;
-        sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
-       // breadth_first_search_entity(s_all->s_map.map, s_all, 0, 0);
+    if (s_all->s_tp.width <= 0 && s_all->s_tp.anim == 2) {
+        alpha += 5;
+        sfRectangleShape_setFillColor(s_all->s_tp.black,
+            (sfColor){0, 0, 0, alpha});
+        if (alpha >= 255)
+            s_all->s_tp.anim = 3;
     }
+    tp_animation4(s_all, &alpha);
     sfRectangleShape_setSize(s_all->s_tp.beam,
         (sfVector2f){s_all->s_tp.width, s_all->s_tp.height});
 }

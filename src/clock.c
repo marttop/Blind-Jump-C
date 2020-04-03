@@ -37,4 +37,5 @@ void game_clocks(all_t *s_all)
     s_all->s_tp.tp_seconds =
         s_all->s_tp.tp_time.microseconds / 1000000.0;
     player_clocks(s_all);
+    sfClock_restart(s_all->s_game.clock);
 }

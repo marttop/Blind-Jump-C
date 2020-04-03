@@ -16,10 +16,14 @@ void init_tp2(all_t *s_all)
     sfRectangleShape_setOrigin(s_all->s_tp.beam, (sfVector2f){1, 50});
     sfRectangleShape_setPosition(s_all->s_tp.beam,
         (sfVector2f){s_all->s_tp.tp_pos.x + 16, s_all->s_tp.tp_pos.y + 19});
-    s_all->s_tp.alpha = 0;
-    s_all->s_tp.height = 0;
-    s_all->s_tp.anim = 0;
-    s_all->s_tp.width = 2;
+    s_all->s_tp.alpha = 0, s_all->s_tp.height = 0;
+    s_all->s_tp.anim = 0, s_all->s_tp.width = 2;
+    s_all->s_tp.black = sfRectangleShape_create();
+    sfRectangleShape_setFillColor(s_all->s_tp.black,
+        (sfColor){0, 0, 0, 0});
+    sfRectangleShape_setSize(s_all->s_tp.black,
+        (sfVector2f){sfView_getSize(s_all->s_game.camera).x,
+        sfView_getSize(s_all->s_game.camera).y + 1});
 }
 
 void init_tp(all_t *s_all)
