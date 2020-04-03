@@ -167,6 +167,7 @@ typedef struct mob {
     sfVector2f shadow_pos;
     int move;
     char type;
+    int x, y;
     struct mob *next;
 } mob_t;
 
@@ -230,6 +231,13 @@ typedef struct map {
     int y;
 } map_t;
 
+typedef struct mob_pos {
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int x, y;
+} mob_pos_t;
+
 typedef struct effect {
     sfRenderStates *light_state;
     sfSprite *light;
@@ -270,6 +278,7 @@ typedef struct all {
     direction_t s_direction;
     spawn_t s_spawn;
     t_item_database item_db;
+    mob_pos_t s_mob_pos;
     struct mob *s_mob;
 } all_t;
 
