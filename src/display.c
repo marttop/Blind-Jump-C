@@ -42,7 +42,7 @@ void display_hud_anim(all_t *s_all)
     sfRenderWindow_drawRectangleShape(s_all->s_game.window,
         s_all->s_tp.beam, NULL);
     sfRenderWindow_setView(s_all->s_game.window,
-    sfRenderWindow_getDefaultView(s_all->s_game.window));
+        sfRenderWindow_getDefaultView(s_all->s_game.window));
     draw_inventory(s_all);
 }
 

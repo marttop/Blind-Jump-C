@@ -255,6 +255,7 @@ typedef struct teleporter {
     sfRectangleShape *beam;
     sfClock *tp_clock;
     sfTime tp_time;
+    sfRectangleShape *black;
     float tp_seconds;
     int alpha;
     int height;
