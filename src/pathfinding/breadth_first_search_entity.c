@@ -30,14 +30,13 @@ char **breadth_first_search_entity(char **map, all_t *s_all, int x, int y)
     queue_t *s_dequeue = new_queue();
     char **maze = copy_map(map);
     sfVector2i pos_start = (sfVector2i){x, y};
-    sfVector2i pos_end = find_pos(s_all, 'T');
+    sfVector2i pos_end = find_pos(s_all, 'P');
 
     s_queue = push_back_queue(s_queue, NULL, pos_start.x, pos_start.y);
     maze[pos_start.y][pos_start.x] = 'W';
     while (s_queue != NULL && check_if_found(s_queue, pos_end) == 0) {
         s_queue = push_new_generation(maze, s_queue, &s_dequeue);
     }
-
     if (s_queue == NULL) {
         s_dequeue = clear_queue(s_dequeue);
         return (NULL);
