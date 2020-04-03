@@ -64,24 +64,25 @@ int check_if_found(queue_t *s_queue, sfVector2i pos_end)
     return (0);
 }
 
-int breadth_first_search(char **maze, all_t *s_all, char start, char end)
+int breadth_first_search(char **map, all_t *s_all, char start, char end)
 {
     queue_t *s_queue = new_queue();
     queue_t *s_dequeue = new_queue();
-
+    char **maze = copy_map(map);
     sfVector2i pos_start = find_pos(s_all, start);
     sfVector2i pos_end = find_pos(s_all, end);
+
     s_queue = push_back_queue(s_queue, NULL, pos_start.x, pos_start.y);
     maze[pos_start.y][pos_start.x] = 'W';
-
     while (s_queue != NULL && check_if_found(s_queue, pos_end) == 0)
         s_queue = push_new_generation(maze, s_queue, &s_dequeue);
-
     if (s_queue == NULL) {
         s_dequeue = clear_queue(s_dequeue);
         return (1);
     }
-    format_map(maze);
+    for (int i = 0; maze[i] != NULL; i++)
+        free(maze[i]);
+    free(maze);
     s_queue = clear_queue(s_queue);
     s_dequeue = clear_queue(s_dequeue);
     return (0);

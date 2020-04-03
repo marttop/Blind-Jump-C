@@ -47,6 +47,7 @@ void tp_animation3(all_t *s_all)
         s_all->s_player.tp = 0;
         s_all->s_game.scene = MAP;
         sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
+       // breadth_first_search_entity(s_all->s_map.map, s_all, 0, 0);
     }
     sfRectangleShape_setSize(s_all->s_tp.beam,
         (sfVector2f){s_all->s_tp.width, s_all->s_tp.height});

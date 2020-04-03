@@ -46,7 +46,8 @@ void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j)
     int random = rand() % 100;
     char **map = s_all->s_map.map;
     set_bottom_tile(tile, s_all, i, j);
-    set_top_tile(tile, s_all, i, j );
+    set_top_tile(tile, s_all, i, j);
+    set_grass(tile, s_all, i, j);
     if (i == 0 || j == 0 || map[i + 1] == NULL || map[i][j + 1] == '\0' ||
     map[i - 1][j] == '1' || map[i + 1][j] == '1' || map[i][j + 1] == '1'
     || map[i][j - 1] == '1') {
@@ -55,7 +56,7 @@ void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j)
         else sfSprite_setTextureRect(tile->tile, (sfIntRect){0, 0, 32, 26});
         return;
     }
-    if (random >= 90)
+    if (random >= 70)
         sfSprite_setTextureRect(tile->tile, (sfIntRect){64, 0, 32, 26});
     else
         sfSprite_setTextureRect(tile->tile, (sfIntRect){33, 0, 32, 26});

@@ -7,10 +7,10 @@
 
 #include "rpg.h"
 
-char **create_map(all_t *s_all)
+char **create_map(int x, int y)
 {
-    int lines = s_all->s_map.y;
-    int cols = s_all->s_map.x;
+    int lines = y;
+    int cols = x;
     char **map = malloc(sizeof(char *) * (lines + 1));
     int i = 0;
     
@@ -36,10 +36,10 @@ char **init_new_random_map(all_t *s_all)
 {
     static int i = 0;
     if (i == 0)
-        s_all->s_map.map = create_map(s_all);
+        s_all->s_map.map = create_map(s_all->s_map.x, s_all->s_map.y);
     else {
         free(s_all->s_map.map);
-        s_all->s_map.map = create_map(s_all);
+        s_all->s_map.map = create_map(s_all->s_map.x, s_all->s_map.y);
     }  
     char **new_map = copy_map(s_all->s_map.map);
     i = 1;
@@ -61,7 +61,8 @@ void generate_random_map2(all_t *s_all, int i, int j, int *x)
         s_all->s_map.tileset_pos.x = 0;
         s_all->s_map.tileset_pos.y += 26;
     }
-    if (s_all->s_map.map[i][j] == '0' || s_all->s_map.map[i][j] == 'T') {
+    if (s_all->s_map.map[i][j] == '0' || s_all->s_map.map[i][j] == 'T'
+    || s_all->s_map.map[i][j] == 'P') {
         s_all->s_map.tileset[*x] = malloc(sizeof(tileset_t));
         s_all->s_map.tileset[*x]->tile = sfSprite_create();
         sfSprite_setTexture(s_all->s_map.tileset[*x]->tile,
@@ -90,7 +91,7 @@ void generate_random_map(all_t *s_all)
         s_all->s_player.hero_pos = find_tp_spawn(s_all);
         if (breadth_first_search(s_all->s_map.map, s_all, 'P', 'T') == 0)
             break;
-    }
+    } s_all->s_map.grass = init_new_gass_map(s_all);
     int x = 0;
     for (int i = 0; s_all->s_map.map[i] != NULL; i++)
         for (int j = 0; s_all->s_map.map[i][j] != '\0'; j++) {

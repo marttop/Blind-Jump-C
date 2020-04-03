@@ -87,7 +87,6 @@ typedef struct item_database{
     t_consumable consumables[12];
 } t_item_database;
 
-
 typedef struct slot
 {
     int id;
@@ -225,8 +224,11 @@ typedef struct map {
     sfVector2f background_pos;
     sfVector2f tileset_pos;
     sfTexture *tileset_tx;
+    sfTexture *grass_tx;
+    sfTexture *grass2_tx;
     tileset_t **tileset;
     char **map;
+    char **grass;
     int x;
     int y;
 } map_t;
@@ -355,7 +357,7 @@ void display_map(all_t *s_all);
 int loop_map_hitbox(all_t *s_all);
 char **init_new_random_map(all_t *s_all);
 void free_map(char **map);
-char **create_map(all_t *s_all);
+char **create_map(int x, int y);
 void display_tiles(all_t *s_all);
 void generate_random_map(all_t *s_all);
 char **init_new_random_map(all_t *s_all);
@@ -366,6 +368,9 @@ void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
 void put_tp(char **map);
 void set_tp_position(all_t *s_all);
 sfVector2f find_tp_spawn(all_t *s_all);
+char **init_new_gass_map(all_t *s_all);
+void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
+sfVector2i find_pos(all_t *s_all, char entity);
 
 /* ------------ !QUEUE ------------ */
 
@@ -392,10 +397,14 @@ queue_t *push_back_queue(queue_t *li, queue_node_t *parent, int x, int y);
 queue_t *pop_front_queue(queue_t *li);
 queue_t *clear_queue(queue_t *li);
 queue_t *dequeue_front(queue_t *li, queue_t **dequeue);
+queue_t *push_new_generation(char **maze, queue_t *s_queue,
+    queue_t **s_dequeue);
+int check_if_found(queue_t *s_queue, sfVector2i pos_end);
 
 /* ------------ !BREADTH_FIRST_SEARCH ------------ */
 
 int breadth_first_search(char **maze, all_t *s_all, char start, char end);
+char **breadth_first_search_entity(char **maze, all_t *s_all, int x, int y);
 void format_map(char **map);
 
 #endif /* !RPG_H_ */

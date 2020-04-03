@@ -35,6 +35,7 @@ SRC	=	src/main.c \
 		src/map_generator.c \
 		src/map_generator2.c \
 		src/map_design.c \
+		src/map_grass.c \
 		src/tp_anim.c \
 		src/inventory/inventory.c \
 		src/inventory/slot_callbacks.c \
@@ -48,6 +49,7 @@ SRC	=	src/main.c \
 		src/init/init_effect.c \
 		src/teleporter.c \
 		src/pathfinding/breadth_first_search.c \
+		src/pathfinding/breadth_first_search_entity.c \
 		src/pathfinding/dequeue.c \
 		src/pathfinding/format_map.c \
 		src/pathfinding/queue.c \
