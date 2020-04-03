@@ -9,25 +9,23 @@
 
 queue_t *check_direction(char **maze, queue_t *s_queue, int x, int y)
 {
-    if (maze[y][x + 1] == '0' || maze[y][x + 1] == 'T') {
+    if (maze[y][x + 1] == '0' || maze[y][x + 1] == 'T' 
+    || maze[y][x + 1] == 'P') {
         s_queue = push_back_queue(s_queue, s_queue->first, x + 1, y);
-        if (maze[y][x + 1] == '0')
-            maze[y][x + 1] = 'W';
-    } if (maze[y + 1] != NULL
-    && (maze[y + 1][x] == '0' || maze[y + 1][x] == 'T')) {
+        if (maze[y][x + 1] == '0') maze[y][x + 1] = 'W';
+    } if (maze[y + 1] != NULL && (maze[y + 1][x] == '0'
+    || maze[y + 1][x] == 'T' || maze[y + 1][x] == 'P')) {
         s_queue = push_back_queue(s_queue, s_queue->first, x, y + 1);
-        if (maze[y + 1][x] == '0')
-            maze[y + 1][x] = 'W';
-    } if (y - 1 != -1 && (maze[y - 1][x] == '0' || maze[y - 1][x] == 'T')) {
+        if (maze[y + 1][x] == '0') maze[y + 1][x] = 'W';
+    } if (y - 1 != -1 && (maze[y - 1][x] == '0' || maze[y - 1][x] == 'T'
+    || maze[y - 1][x] == 'P')) {
         s_queue = push_back_queue(s_queue, s_queue->first, x, y - 1);
-        if (maze[y - 1][x] == '0')
-            maze[y - 1][x] = 'W';
-    } if (x - 1 != -1 && (maze[y][x - 1] == '0' || maze[y][x - 1] == 'T')) {
+        if (maze[y - 1][x] == '0') maze[y - 1][x] = 'W';
+    } if (x - 1 != -1 && (maze[y][x - 1] == '0' || maze[y][x - 1] == 'T'
+    || maze[y][x - 1] == 'P')) {
         s_queue = push_back_queue(s_queue, s_queue->first, x - 1, y);
-        if (maze[y][x - 1] == '0')
-            maze[y][x - 1] = 'W';
-    }
-    return (s_queue);
+        if (maze[y][x - 1] == '0') maze[y][x - 1] = 'W';
+    } return (s_queue);
 }
 
 queue_t *push_new_generation(char **maze, queue_t *s_queue,
