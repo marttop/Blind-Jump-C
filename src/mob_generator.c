@@ -33,6 +33,7 @@ void generate_random_mobs(all_t *s_all)
     while (i != 0) {
         randx = (rand() % x);
         randy = (rand() % y);
+        s_all->s_mob_pos.x = randy, s_all->s_mob_pos.y = randx;
         if (s_all->s_map.map[randy][randx] == '0') {
             s_all->s_mob = fill_mob(s_all->s_mob, 'B',
             (sfVector2f){randx * 32 + 8, randy * 26 + 5}, s_all);

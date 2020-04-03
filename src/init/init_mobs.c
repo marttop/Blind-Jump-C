@@ -19,6 +19,8 @@ mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
     new->rect = (sfIntRect){0, 60, 18, 20};
     sfSprite_setTextureRect(new->mob, new->rect);
     sfSprite_setPosition(new->mob, new->mob_pos);
+    new->x = s_all->s_mob_pos.x;
+    new->y = s_all->s_mob_pos.y;
     new->type = type;
     new->next = old;
     return (new);
