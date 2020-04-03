@@ -53,6 +53,8 @@ SRC	=	src/main.c \
 		src/pathfinding/dequeue.c \
 		src/pathfinding/format_map.c \
 		src/pathfinding/queue.c \
+		src/pathfinding/mob_path.c \
+		src/pathfinding/mob_movements.c \
 		src/utils/get_next_line.c \
 		src/utils/my_atoi.c \
 		src/utils/my_putstr.c \

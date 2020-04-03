@@ -24,16 +24,16 @@ void free_all_mobs(all_t *s_all)
 
 void generate_random_mobs(all_t *s_all)
 {
-    int x = my_strlen(s_all->s_map.map[1]);
-    int y = my_ptrlen(s_all->s_map.map);
+    int x = s_all->s_map.x;
+    int y = s_all->s_map.y - 1;
     int randx = 0;
     int randy = 0;
-    int i = 40;
+    int i = 70;
     free_all_mobs(s_all);
     while (i != 0) {
         randx = (rand() % x);
         randy = (rand() % y);
-        s_all->s_mob_pos.x = randy, s_all->s_mob_pos.y = randx;
+        s_all->s_mob_pos.x = randx, s_all->s_mob_pos.y = randy;
         if (s_all->s_map.map[randy][randx] == '0') {
             s_all->s_mob = fill_mob(s_all->s_mob, 'B',
             (sfVector2f){randx * 32 + 8, randy * 26 + 5}, s_all);
