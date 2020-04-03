@@ -19,6 +19,10 @@ void init_map(all_t *s_all)
     s_all->s_map.tileset = malloc(sizeof(tileset_t *) * size);
     s_all->s_map.tileset_tx =
         sfTexture_createFromFile("sprites/tile_set.png", NULL);
+    s_all->s_map.grass_tx =
+        sfTexture_createFromFile("sprites/grass_set.png", NULL);
+    s_all->s_map.grass2_tx =
+        sfTexture_createFromFile("sprites/grass_set_edge.png", NULL);
     s_all->s_map.tileset_pos = (sfVector2f){0, 0};
 }
 
@@ -89,5 +93,8 @@ void display_tiles(all_t *s_all)
         if (s_all->s_map.tileset[i]->bottom != NULL)
             sfRenderWindow_drawSprite(s_all->s_game.window,
                 s_all->s_map.tileset[i]->bottom, NULL);
+        if (s_all->s_map.tileset[i]->grass != NULL)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                s_all->s_map.tileset[i]->grass, NULL);
     }
 }
