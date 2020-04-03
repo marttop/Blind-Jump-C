@@ -153,7 +153,7 @@ typedef struct mob {
     sfSprite *mob;
     sfTexture *mob_txt;
     sfVector2f mob_pos;
-    int mob_speed;
+    int speed;
     sfClock *clock;
     sfTime time;
     float seconds;
@@ -165,8 +165,9 @@ typedef struct mob {
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
     int move;
-    char type;
-    int x, y;
+    char type, prev;
+    int x, y, hor, ver;
+    char **path;
     struct mob *next;
 } mob_t;
 
@@ -407,5 +408,15 @@ int check_if_found(queue_t *s_queue, sfVector2i pos_end);
 int breadth_first_search(char **maze, all_t *s_all, char start, char end);
 char **breadth_first_search_entity(char **maze, all_t *s_all, int x, int y);
 void format_map(char **map);
+
+/* ------------ !MOBS PATHFINDING ------------ */
+
+void move_mob_up(mob_t *node, all_t *s_all);
+void move_mob_right(mob_t *node, all_t *s_all);
+void move_mob_down(mob_t *node, all_t *s_all);
+void move_mob_left(mob_t *node, all_t *s_all);
+void search_mob_path(mob_t *node, all_t *s_all);
+void refresh_path_to_player(all_t *s_all);
+
 
 #endif /* !RPG_H_ */

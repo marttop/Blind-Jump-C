@@ -24,6 +24,16 @@ void player_clocks(all_t *s_all)
         s_all->s_player.rect_time.microseconds / 1000000.0;
 }
 
+void mob_clocks(all_t *s_all)
+{
+    mob_t *temp = s_all->s_mob;
+    while (temp != NULL) {
+        temp->time = sfClock_getElapsedTime(temp->clock);
+        temp->seconds = temp->time.microseconds / 1000000.0;
+        temp = temp->next;
+    }
+}
+
 void game_clocks(all_t *s_all)
 {
     s_all->s_game.time = sfClock_getElapsedTime(s_all->s_game.clock);
@@ -37,5 +47,6 @@ void game_clocks(all_t *s_all)
     s_all->s_tp.tp_seconds =
         s_all->s_tp.tp_time.microseconds / 1000000.0;
     player_clocks(s_all);
+    mob_clocks(s_all);
     sfClock_restart(s_all->s_game.clock);
 }
