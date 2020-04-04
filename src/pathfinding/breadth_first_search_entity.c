@@ -9,17 +9,19 @@
 
 char **process_result(char **maze, queue_t *s_dequeue, queue_t *s_queue)
 {
-    queue_node_t *tmp = s_dequeue->last;
+    if (s_dequeue != NULL) {
+        queue_node_t *tmp = s_dequeue->last;
 
-    maze[s_queue->last->y][s_queue->last->x] = ' ';
+        maze[s_queue->last->y][s_queue->last->x] = ' ';
 
-    for (; tmp != NULL; tmp = tmp->parent)
-        maze[tmp->y][tmp->x] = ' ';
+        for (; tmp != NULL; tmp = tmp->parent)
+            maze[tmp->y][tmp->x] = ' ';
 
-    format_map(maze);
+        format_map(maze);
+        s_dequeue = clear_queue(s_dequeue);
+    }
 
     s_queue = clear_queue(s_queue);
-    s_dequeue = clear_queue(s_dequeue);
 
     return (maze);
 }
@@ -36,13 +38,11 @@ char **breadth_first_search_entity(char **map, all_t *s_all, int x, int y)
     maze[pos_start.y][pos_start.x] = 'W';
     while (s_queue != NULL && check_if_found(s_queue, pos_end) == 0)
         s_queue = push_new_generation(maze, s_queue, &s_dequeue);
-    maze[pos_end.y][pos_end.x] = 'P';
 
     if (s_queue == NULL) {
         s_dequeue = clear_queue(s_dequeue);
         return (NULL);
     }
     maze = process_result(maze, s_dequeue, s_queue);
-
     return (maze);
 }
