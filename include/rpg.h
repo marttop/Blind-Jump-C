@@ -412,10 +412,10 @@ void format_map(char **map);
 /* ------------ !MOBS PATHFINDING ------------ */
 
 void refresh_path(all_t *s_all);
-void move_mob_up(mob_t *node);
-void move_mob_right(mob_t *node);
-void move_mob_down(mob_t *node);
-void move_mob_left(mob_t *node);
+void move_mob_up(mob_t *node, all_t *s_a_ll);
+void move_mob_right(mob_t *node, all_t *s_all);
+void move_mob_down(mob_t *node, all_t *s_all);
+void move_mob_left(mob_t *node, all_t *s_all);
 void search_mob_path(mob_t *node, all_t *s_all);
 void refresh_path_to_player(all_t *s_all);
 
