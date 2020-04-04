@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-void move_mob_up(mob_t *node, all_t *s_all)
+void move_mob_up(mob_t *node)
 {
     if (node->ver > 0) {
         node->mob_pos.y -= node->speed;
@@ -20,7 +20,7 @@ void move_mob_up(mob_t *node, all_t *s_all)
     } sfClock_restart(node->clock);
 }
 
-void move_mob_right(mob_t *node, all_t *s_all)
+void move_mob_right(mob_t *node)
 {
     if (node->hor > 0) {
         node->mob_pos.x += node->speed;
@@ -33,7 +33,7 @@ void move_mob_right(mob_t *node, all_t *s_all)
     } sfClock_restart(node->clock);
 }
 
-void move_mob_down(mob_t *node, all_t *s_all)
+void move_mob_down(mob_t *node)
 {
     if (node->ver > 0) {
         node->mob_pos.y += node->speed;
@@ -46,7 +46,7 @@ void move_mob_down(mob_t *node, all_t *s_all)
     } sfClock_restart(node->clock);
 }
 
-void move_mob_left(mob_t *node, all_t *s_all)
+void move_mob_left(mob_t *node)
 {
     if (node->hor > 0) {
         node->mob_pos.x -= node->speed;

@@ -48,6 +48,8 @@ void display_weapon_left_right(all_t *s_all)
 void display_hero(all_t *s_all)
 {
     rect_hero(s_all);
+    if (s_all->s_player.refresh_sec > 1 && s_all->s_mob != NULL)
+        refresh_path(s_all);
     sfSprite_setPosition(s_all->s_player.shadow,
     (sfVector2f){s_all->s_player.hero_pos.x + 3,
     s_all->s_player.hero_pos.y + 26});

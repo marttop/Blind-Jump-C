@@ -14,8 +14,11 @@ void free_all_mobs(all_t *s_all)
     while (head != NULL) {
         temp = head->next;
         sfSprite_destroy(head->mob);
+        sfSprite_destroy(head->shadow);
         sfClock_destroy(head->rect_clock);
         sfClock_destroy(head->clock);
+        sfClock_destroy(head->refresh_clk);
+        free_map(head->path);
         free(head);
         head = temp;
     }
@@ -28,7 +31,7 @@ void generate_random_mobs(all_t *s_all)
     int y = s_all->s_map.y - 1;
     int randx = 0;
     int randy = 0;
-    int i = 70;
+    int i = 40;
     free_all_mobs(s_all);
     while (i != 0) {
         randx = (rand() % x);
