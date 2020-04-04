@@ -62,4 +62,7 @@ void display_hero(all_t *s_all)
         display_weapon_down(s_all);
     }
     tp_animation(s_all);
+    for (int i = 0; s_all->s_map.map[i] != NULL; i++)
+        puts(s_all->s_map.map[i]);
+    printf("\n");
 }

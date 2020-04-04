@@ -10,7 +10,7 @@
 void refresh_player_position(all_t *s_all)
 {
     int i = 0, j = 0;
-    for (; s_all->s_map.map[i] != NULL; i++) {
+    for (; s_all->s_map.map[i] != NULL; i++, j = 0) {
         for (; s_all->s_map.map[i][j] != '\0'; j++) {
             if (s_all->s_map.map[i][j] == 'P') {
                 s_all->s_map.map[i][j] = '0';
