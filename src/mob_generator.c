@@ -18,7 +18,8 @@ void free_all_mobs(all_t *s_all)
         sfClock_destroy(head->rect_clock);
         sfClock_destroy(head->clock);
         sfClock_destroy(head->refresh_clk);
-        free_map(head->path);
+        if (head->path != NULL)
+            free_map(head->path);
         free(head);
         head = temp;
     }
