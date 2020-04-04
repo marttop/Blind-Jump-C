@@ -10,8 +10,8 @@
 void refresh_player_position(all_t *s_all)
 {
     int i = 0, j = 0;
-    for (; s_all->s_map.map[i] != NULL; i++, j = 0) {
-        for (; s_all->s_map.map[i][j] != '\0'; j++) {
+    for (; s_all->s_map.map[i] != NULL; i++) {
+        for (j = 0; s_all->s_map.map[i][j] != '\0'; j++) {
             if (s_all->s_map.map[i][j] == 'P') {
                 s_all->s_map.map[i][j] = '0';
                 return;
@@ -22,12 +22,13 @@ void refresh_player_position(all_t *s_all)
 
 void refresh_path(all_t *s_all)
 {
-    int y = s_all->s_player.hero_pos.y / 26;
-    int x = s_all->s_player.hero_pos.x / 32;
+    sfVector2f pos = sfSprite_getPosition(s_all->s_player.shadow);
+    int y = (pos.y + 4) / 26;
+    int x = (pos.x + 7) / 32;
     refresh_player_position(s_all);
-    s_all->s_map.map[y + 1][x] = 'P';
+    s_all->s_map.map[y][x] = 'P';
     s_all->s_player.x = x;
-    s_all->s_player.y = y + 1;
+    s_all->s_player.y = y;
     mob_t *node = s_all->s_mob;
     while (node != NULL) {
         if (node->path != NULL) {
