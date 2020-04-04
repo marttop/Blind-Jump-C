@@ -13,7 +13,7 @@ void move_mob_up(mob_t *node, all_t *s_all)
         node->mob_pos.y -= node->speed;
         node->shadow_pos.y -= node->speed;
         node->ver -= node->speed;
-    } else {
+    } else if (node->ver <= 0 || node->path == NULL) {
         node->path[node->y][node->x] = '1';
         node->y -= 1;
         node->ver = 26;
@@ -29,7 +29,7 @@ void move_mob_right(mob_t *node, all_t *s_all)
         node->mob_pos.x += node->speed;
         node->shadow_pos.x += node->speed;
         node->hor -= node->speed;
-    } else {
+    } else if (node->hor <= 0 || node->path == NULL) {
         node->path[node->y][node->x] = '1';
         node->x += 1;
         node->hor = 32;
@@ -45,7 +45,7 @@ void move_mob_down(mob_t *node, all_t *s_all)
         node->mob_pos.y += node->speed;
         node->shadow_pos.y += node->speed;
         node->ver -= node->speed;
-    } else {
+    } else if (node->ver <= 0 || node->path == NULL) {
         node->path[node->y][node->x] = '1';
         node->y += 1;
         node->ver = 26;
@@ -61,7 +61,7 @@ void move_mob_left(mob_t *node, all_t *s_all)
         node->mob_pos.x -= node->speed;
         node->shadow_pos.x -= node->speed;
         node->hor -= node->speed;
-    } else {
+    } else if (node->hor <= 0 || node->path == NULL) {
         node->path[node->y][node->x] = '1';
         node->x -= 1;
         node->hor = 32;
