@@ -32,7 +32,6 @@ void refresh_path(all_t *s_all)
     while (node != NULL) {
         if (node->path != NULL) {
             free_map(node->path);
-            node->prev = '@';
             node->path = breadth_first_search_entity(s_all->s_map.map,
             s_all, node->x, node->y);
         }
