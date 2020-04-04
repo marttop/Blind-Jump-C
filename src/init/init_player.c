@@ -11,6 +11,7 @@ void init_hero3(all_t *s_all)
 {
     sfSprite_setColor(s_all->s_player.gun, (sfColor){170, 170, 170, 255});
     sfSprite_setScale(s_all->s_player.gun, (sfVector2f){0.79, 0.79});
+    s_all->s_player.refresh_clk = sfClock_create();
 }
 
 void init_hero2(all_t *s_all)

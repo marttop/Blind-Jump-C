@@ -22,6 +22,10 @@ void player_clocks(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_player.rect_clock);
     s_all->s_player.rect_seconds =
         s_all->s_player.rect_time.microseconds / 1000000.0;
+    s_all->s_player.refresh_tm =
+        sfClock_getElapsedTime(s_all->s_player.refresh_clk);
+    s_all->s_player.refresh_sec =
+        s_all->s_player.refresh_tm.microseconds / 1000000.0;
 }
 
 void mob_clocks(all_t *s_all)
@@ -30,6 +34,8 @@ void mob_clocks(all_t *s_all)
     while (temp != NULL) {
         temp->time = sfClock_getElapsedTime(temp->clock);
         temp->seconds = temp->time.microseconds / 1000000.0;
+        temp->refresh_tm = sfClock_getElapsedTime(temp->refresh_clk);
+        temp->refresh_sec = temp->refresh_tm.microseconds / 1000000.0;
         temp = temp->next;
     }
 }

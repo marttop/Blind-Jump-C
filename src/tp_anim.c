@@ -15,16 +15,16 @@ sfVector2f find_tp_spawn(all_t *s_all)
             if (s_all->s_map.map[i][j] == '0')
                 count++;
     int random = 1 + rand() % (count - 1);
-
     count = 0;
     sfVector2f pos = {0, 0};
-
     for (int i = 0; s_all->s_map.map[i] != NULL; i++, pos.y += 26, pos.x = 0)
         for (int j = 0; s_all->s_map.map[i][j] != '\0'; j++, pos.x += 32) {
             if (s_all->s_map.map[i][j] == '0')
                 count++;
             if (count == random) {
                 s_all->s_map.map[i][j] = 'P';
+                s_all->s_player.y = i;
+                s_all->s_player.x = j;
                 return ((sfVector2f) {pos.x + 6, pos.y - 15});
             }
         }

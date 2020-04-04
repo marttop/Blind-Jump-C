@@ -154,9 +154,9 @@ typedef struct mob {
     sfTexture *mob_txt;
     sfVector2f mob_pos;
     int speed;
-    sfClock *clock;
-    sfTime time;
-    float seconds;
+    sfClock *clock, *refresh_clk;
+    sfTime time, refresh_tm;
+    float seconds, refresh_sec;
     sfClock *rect_clock;
     sfTime rect_time;
     float rect_seconds;
@@ -180,16 +180,16 @@ typedef struct player {
     int hero_speed;
     sfClock *hero_clock;
     sfTime hero_time;
-    float hero_seconds;
-    sfClock *rect_clock;
-    sfTime rect_time;
+    float hero_seconds, refresh_sec;
+    sfClock *rect_clock, *refresh_clk;
+    sfTime rect_time, refresh_tm;
     float rect_seconds;
     sfIntRect hero_rect;
     sfSprite *shadow;
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
     sfSprite *gun;
-    int tp;
+    int tp, x, y;
 } player_t;
 
 typedef struct spawn {
@@ -411,10 +411,11 @@ void format_map(char **map);
 
 /* ------------ !MOBS PATHFINDING ------------ */
 
-void move_mob_up(mob_t *node, all_t *s_all);
-void move_mob_right(mob_t *node, all_t *s_all);
-void move_mob_down(mob_t *node, all_t *s_all);
-void move_mob_left(mob_t *node, all_t *s_all);
+void refresh_path(all_t *s_all);
+void move_mob_up(mob_t *node);
+void move_mob_right(mob_t *node);
+void move_mob_down(mob_t *node);
+void move_mob_left(mob_t *node);
 void search_mob_path(mob_t *node, all_t *s_all);
 void refresh_path_to_player(all_t *s_all);
 
