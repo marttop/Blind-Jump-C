@@ -39,16 +39,18 @@ void search_mob_path(mob_t *node, all_t *s_all)
     if (node->y != 0 && node->path[y - 1][x] == ' ' && node->prev != 'D') {
         move_mob_up(node, s_all);
         return;
-    }
-    if (node->path[y][x + 1] == ' ' && node->prev != 'L') {
+    } if (node->path[y][x + 1] == ' ' && node->prev != 'L') {
         move_mob_right(node, s_all);
         return;
-    }
-    if (node->y != s_all->s_map.y - 1 && node->path[y + 1][x] == ' ' &&
+    } if (node->y != s_all->s_map.y - 1 && node->path[y + 1][x] == ' ' &&
     node->prev != 'U') {
         move_mob_down(node, s_all);
         return;
-    }
-    if (node->x != 0 && node->path[y][x - 1] == ' ' && node->prev != 'R')
+    } if (node->x != 0 && node->path[y][x - 1] == ' ' && node->prev != 'R') {
         move_mob_left(node, s_all);
+        return;
+    }
+    free_map(node->path);
+    node->path = breadth_first_search_entity(s_all->s_map.map,
+    s_all, node->x, node->y);
 }
