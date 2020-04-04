@@ -32,7 +32,7 @@ void generate_random_mobs(all_t *s_all)
     int y = s_all->s_map.y - 1;
     int randx = 0;
     int randy = 0;
-    int i = 40;
+    int i = 1;
     free_all_mobs(s_all);
     while (i != 0) {
         randx = (rand() % x);
