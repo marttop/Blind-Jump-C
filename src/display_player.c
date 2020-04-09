@@ -55,11 +55,16 @@ void display_hero(all_t *s_all)
     s_all->s_player.hero_pos.y + 26});
     if (s_all->s_tp.anim != 2) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_player.hor_shoot, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_player.ver_shoot, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_player.shadow, NULL);
         display_weapon_left_right(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_player.hero, NULL);
         display_weapon_down(s_all);
     }
+    shooting_control(s_all);
     tp_animation(s_all);
 }
