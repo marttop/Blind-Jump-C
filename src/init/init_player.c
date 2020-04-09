@@ -12,6 +12,12 @@ void init_hero3(all_t *s_all)
     sfSprite_setColor(s_all->s_player.gun, (sfColor){170, 170, 170, 255});
     sfSprite_setScale(s_all->s_player.gun, (sfVector2f){0.79, 0.79});
     s_all->s_player.refresh_clk = sfClock_create();
+    s_all->s_player.shoot_pos = (sfVector2f){s_all->s_player.hero_pos.x + 11,
+    s_all->s_player.hero_pos.y + 20};
+    s_all->s_player.ver_pos = s_all->s_player.shoot_pos;
+    s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
+    s_all->s_player.range = 120;
+    s_all->s_player.shooting = 0;
 }
 
 void init_hero2(all_t *s_all)
@@ -38,6 +44,30 @@ void init_hero2(all_t *s_all)
         (sfIntRect){687, 107, 23, 10});
 }
 
+void init_shooting(all_t *s_all)
+{
+    s_all->s_player.hor_shoot = sfSprite_create();
+    s_all->s_player.ver_shoot = sfSprite_create();
+    s_all->s_player.shoot_clk = sfClock_create();
+    s_all->s_player.ver = 0, s_all->s_player.hor = 0;
+    s_all->s_player.ver_shoot_txt = s_all->s_player.hero_tx;
+    s_all->s_player.hor_shoot_txt = s_all->s_player.hero_tx;
+    sfSprite_setTexture(s_all->s_player.hor_shoot,
+    s_all->s_player.hor_shoot_txt, sfTrue);
+    sfSprite_setTexture(s_all->s_player.ver_shoot,
+    s_all->s_player.ver_shoot_txt, sfTrue);
+    sfSprite_setTextureRect(s_all->s_player.hor_shoot,
+    (sfIntRect){45, 82, 16, 5});
+    sfSprite_setOrigin(s_all->s_player.hor_shoot, (sfVector2f){8, 2.5});
+    sfSprite_setScale(s_all->s_player.hor_shoot, (sfVector2f){0.70, 0.70});
+    sfSprite_setPosition(s_all->s_player.hor_shoot, s_all->s_player.shoot_pos);
+    sfSprite_setTextureRect(s_all->s_player.ver_shoot,
+    (sfIntRect){67, 76, 5, 16});
+    sfSprite_setOrigin(s_all->s_player.ver_shoot, (sfVector2f){2.5, 8});
+    sfSprite_setScale(s_all->s_player.ver_shoot, (sfVector2f){0.70, 0.70});
+    sfSprite_setPosition(s_all->s_player.ver_shoot, s_all->s_player.shoot_pos);
+}
+
 void init_hero(all_t *s_all)
 {
     s_all->s_player.hero_pos = (sfVector2f){render_pos_center(s_all).x - 24,
@@ -56,4 +86,5 @@ void init_hero(all_t *s_all)
     init_direction(s_all);
     init_hero2(s_all);
     init_hero3(s_all);
+    init_shooting(s_all);
 }

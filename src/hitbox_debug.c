@@ -42,7 +42,7 @@ void set_position_debug(sfRectangleShape *rectangle, sfVector2f pos)
 void activate_debug_mode(all_t *s_all)
 {
     if (s_all->s_game.event.type == sfEvtKeyPressed
-    && sfKeyboard_isKeyPressed(sfKeySpace) == 1)
+    && sfKeyboard_isKeyPressed(sfKeyNum0) == 1)
         s_all->s_game.debug_mode = !s_all->s_game.debug_mode;
 }
 
