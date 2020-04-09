@@ -26,13 +26,26 @@ void free_all_mobs(all_t *s_all)
     s_all->s_mob = NULL;
 }
 
+void generate_random_mobs2(all_t *s_all)
+{
+    int x = s_all->s_map.x;
+    int y = s_all->s_map.y - 1, randx = 0, randy = 0, i = 20;
+    while (i != 0) {
+        randx = (rand() % x);
+        randy = (rand() % y);
+        s_all->s_mob_pos.x = randx, s_all->s_mob_pos.y = randy;
+        if (s_all->s_map.map[randy][randx] == '0') {
+            s_all->s_mob = fill_mob(s_all->s_mob, 'A',
+            (sfVector2f){randx * 32 + 8, randy * 26 + 5}, s_all);
+            i--;
+        }
+    }
+}
+
 void generate_random_mobs(all_t *s_all)
 {
     int x = s_all->s_map.x;
-    int y = s_all->s_map.y - 1;
-    int randx = 0;
-    int randy = 0;
-    int i = 40;
+    int y = s_all->s_map.y - 1, randx = 0, randy = 0, i = 20;
     free_all_mobs(s_all);
     while (i != 0) {
         randx = (rand() % x);
@@ -43,5 +56,5 @@ void generate_random_mobs(all_t *s_all)
             (sfVector2f){randx * 32 + 8, randy * 26 + 5}, s_all);
             i--;
         }
-    }
+    } generate_random_mobs2(s_all);
 }
