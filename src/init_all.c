@@ -6,6 +6,7 @@
 */
 
 #include "rpg.h"
+#include "equipment.h"
 
 void init_view(all_t *s_all)
 {
@@ -32,6 +33,7 @@ void init_all(all_t *s_all)
 {
     setup(s_all);
     init_inventory(s_all);
+    init_equipment(s_all);
     init_clocks(s_all);
     init_hero(s_all);
     init_spawn(s_all);

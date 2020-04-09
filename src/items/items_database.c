@@ -12,8 +12,7 @@ void init_item_db(all_t *s_all)
 
 }
 
-void add_pistol(t_node *inv)
+void add_weapon(t_node *inv, u_item *item)
 {
-    t_weapon *tmp = create_pistol();
-    get_empty_slot(inv, tmp);
+    get_empty_slot(inv, item);
 }

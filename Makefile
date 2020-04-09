@@ -44,8 +44,12 @@ SRC	=	src/main.c \
 		src/inventory/slot_callbacks.c \
 		src/inventory/inventory_input.c \
 		src/inventory/list_helpers.c \
+		src/inventory/tooltip.c \
+		src/inventory/slot_utils.c \
 		src/items/items_database.c \
 		src/items/weapon.c \
+		src/equipment/weapon_slot.c \
+		src/equipment/equipment.c \
 
 OBJ	=	$(SRC:.c=.o)
 

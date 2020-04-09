@@ -17,5 +17,7 @@ void events_control(all_t *s_all)
     get_aim_direction(s_all);
     activate_debug_mode(s_all);
     if (is_key_released(&s_all->s_game.event, sfKeyP))
-        add_pistol(s_all->s_game.inv);
+        add_weapon(s_all->s_game.inventory.inv, create_pistol());
+    if (is_key_released(&s_all->s_game.event, sfKeyO))
+        add_weapon(s_all->s_game.inventory.inv, create_scorpion());
 }

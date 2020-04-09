@@ -19,6 +19,9 @@ void display(all_t *s_all)
         sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
         draw_inventory(s_all);
+        if (s_all->s_game.inventory.drag_info.slot &&
+            s_all->s_game.inventory.drag_info.slot->is_dragging)
+        draw_tooltip(s_all);
     }
     sfRenderWindow_display(s_all->s_game.window);
 }

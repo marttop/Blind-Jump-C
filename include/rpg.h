@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <SFML/Network.h>
 #include <SFML/Graphics.h>
 #include <SFML/Audio.h>
 #include <SFML/System.h>
@@ -60,6 +61,7 @@ typedef struct weapon {
     int id;
     int dmg;
     float range;
+    e_rarity rarity;
     e_weapon_type type;
     sfSprite *sprite;
 
@@ -70,6 +72,7 @@ typedef struct consumable{
     int id;
     int hp;
     int dmg;
+    e_rarity rarity;
     e_consumable_type type;
     sfSprite *sprite;
 } t_consumable;
@@ -79,13 +82,18 @@ typedef struct item_database{
     t_consumable consumables[12];
 } t_item_database;
 
+typedef union item
+{
+    t_weapon weapon;
+    t_consumable consum;
+} u_item;
 
 typedef struct slot
 {
     int id;
     int is_hover;
     int has_item;
-    sfRectangleShape *shape_hover;
+    sfBool is_dragging;
     sfTexture *texture_bg;
     sfTexture *texture_clck;
     sfTexture *texture_slect;
@@ -93,7 +101,7 @@ typedef struct slot
     sfSprite *sprite_select;
     sfVector2f pos;
     sfIntRect rect;
-    t_weapon *weapon;
+    u_item *item;
     void (*on_hover)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_click)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_drag)(void *d, struct slot *s, sfRenderWindow *w);
@@ -106,6 +114,35 @@ typedef struct node {
     void (*dealloc)(struct node *, void *);
 } t_node;
 
+typedef struct drag_info
+{
+    void *item;
+    t_slot *slot;
+}t_drag_info;
+
+typedef struct dragtip
+{
+    sfRenderTexture *render_tex;
+    sfSprite        *render_sprite;
+    sfSprite        *item_sprite;
+} t_dragtip;
+
+
+typedef struct inventory
+{
+    t_node *inv;
+    sfRenderTexture *inv_tex;
+    sfSprite        *inv_sprite;
+    t_dragtip        dragtip;
+    sfVector2f       inv_pos;
+    t_drag_info      drag_info;
+}t_inventory;
+
+typedef struct equipment
+{
+    t_slot *slot_w;
+} t_equipment;
+
 ////////////////////////////////////////
 
 typedef struct game {
@@ -114,10 +151,8 @@ typedef struct game {
     sfView *camera;
     sfClock *clock;
     sfTime time;
-    t_node *inv;
-    sfRenderTexture *inv_tex;
-    sfSprite *inv_sprite;
-    sfVector2f inv_pos;
+    t_inventory inventory;
+    t_equipment equipment;
     float seconds;
     int scene;
     int debug_mode;
@@ -223,6 +258,9 @@ sfBool is_key_presssed(sfEvent *e, sfKeyCode key);
 void init_inventory(all_t *data);
 void update_inventory(all_t *d);
 void draw_inventory(all_t *d);
-void add_pistol(t_node *inv);
+void draw_tooltip(all_t *s_all);
+void add_weapon(t_node *inv, u_item *item);
 void iterate_dealloc(t_node *n);
+u_item *create_pistol(void);
+u_item *create_scorpion(void);
 #endif /* !RPG_H_ */
