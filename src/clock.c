@@ -50,6 +50,16 @@ void mob_clocks(all_t *s_all)
     }
 }
 
+void chest_clocks(all_t *s_all)
+{
+    chest_t *temp = s_all->s_chest;
+    while (temp != NULL) {
+        temp->time = sfClock_getElapsedTime(temp->clock);
+        temp->seconds = temp->time.microseconds / 1000000.0;
+        temp = temp->next;
+    }
+}
+
 void game_clocks(all_t *s_all)
 {
     s_all->s_game.time = sfClock_getElapsedTime(s_all->s_game.clock);
@@ -68,5 +78,6 @@ void game_clocks(all_t *s_all)
         s_all->s_explode.time.microseconds / 1000000.0;
     player_clocks(s_all);
     mob_clocks(s_all);
+    chest_clocks(s_all);
     sfClock_restart(s_all->s_game.clock);
 }
