@@ -32,4 +32,5 @@ void init_all(all_t *s_all)
     init_tp(s_all);
     init_effect(s_all);
     init_map(s_all);
+    init_explosions(s_all);
 }
