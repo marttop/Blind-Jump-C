@@ -18,3 +18,10 @@ int my_strlen(char *str)
 
     return (i);
 }
+
+int my_ptrlen(char **str)
+{
+    int i = 0;
+    for (; str[i] != NULL; i++);
+    return (i);
+}

@@ -17,9 +17,9 @@ void init_inventory(all_t *s_all)
     inv->drag_info.slot = NULL;
     inv->drag_info.item = NULL;
     sfSprite_setPosition(inv->inv_sprite,
-        inv->inv_pos);
+                         inv->inv_pos);
     sfSprite_setTexture(inv->inv_sprite,
-        sfRenderTexture_getTexture(inv->inv_tex), 1);
+                        sfRenderTexture_getTexture(inv->inv_tex), 1);
     generate_slots(s_all);
 }
 
@@ -55,19 +55,25 @@ void generate_slots(all_t *d)
     sfTexture *tex_selector = sfTexture_createFromFile(
         "sprites/inv/selector.png", NULL);
     inv->next = NULL;
-    for (int i = 0; i < slot_amount; i++) {
+    for (int i = 0; i < slot_amount; i++)
+    {
         t_slot *slot = malloc(sizeof(t_slot));
         slot = test(slot, tex_slot, tex_selector, i);
         sfIntRect r = slot->rect;
-        if (i > 0 && (i % x_shift) == 0) {
+        if (i > 0 && (i % x_shift) == 0)
+        {
             old_pos.y += r.height;
             old_pos.x = start_pos.x;
             new_pos = (sfVector2f){old_pos.x, old_pos.y};
             sfSprite_setPosition(slot->sprite_bg, new_pos);
             sfSprite_setPosition(slot->sprite_select, new_pos);
-        } else {
-            if (i > 0) new_pos = (sfVector2f){old_pos.x += r.width, old_pos.y};
-            else if (i == 0) new_pos = (sfVector2f){old_pos.x, old_pos.y};
+        }
+        else
+        {
+            if (i > 0)
+                new_pos = (sfVector2f){old_pos.x += r.width, old_pos.y};
+            else if (i == 0)
+                new_pos = (sfVector2f){old_pos.x, old_pos.y};
             sfSprite_setPosition(slot->sprite_bg, new_pos);
             sfSprite_setPosition(slot->sprite_select, new_pos);
         }
@@ -79,11 +85,14 @@ void generate_slots(all_t *d)
 
 void draw_inventory(all_t *d)
 {
-    sfRenderTexture_clear(d->s_game.inventory.inv_tex,
-        (sfColor){70, 105, 104, 133});
-    sfRenderTexture_display(d->s_game.inventory.inv_tex);
-    draw_slots(d->s_game.inventory.inv, d->s_game.inventory.inv_tex, d);
-    iterate_slots(d->s_game.inventory.inv, d);
-    sfRenderWindow_drawSprite(d->s_game.window,
-        d->s_game.inventory.inv_sprite, NULL);
+    if (d->s_game.display_inv == 1)
+    {
+        sfRenderTexture_clear(d->s_game.inventory.inv_tex,
+                              (sfColor){70, 105, 104, 133});
+        sfRenderTexture_display(d->s_game.inventory.inv_tex);
+        draw_slots(d->s_game.inventory.inv, d->s_game.inventory.inv_tex, d);
+        iterate_slots(d->s_game.inventory.inv, d);
+        sfRenderWindow_drawSprite(d->s_game.window,
+                                  d->s_game.inventory.inv_sprite, NULL);
+    }
 }

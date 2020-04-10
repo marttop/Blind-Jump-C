@@ -26,6 +26,9 @@
 #include <fcntl.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
+#include <stddef.h>
+#include <limits.h>
 
 #include "utils.h"
 
@@ -35,6 +38,10 @@
 
 #ifndef SPAWN
 #define SPAWN (1)
+#endif
+
+#ifndef MAP
+#define MAP (2)
 #endif
 
 /////////////////////////////////////////
@@ -49,6 +56,7 @@ typedef enum consumable_type {
     HP_BUFF,
     DMG_BUFF,
 } e_consumable_type;
+
 typedef enum rarity {
     COMMON,
     UNCOMMON,
@@ -156,6 +164,7 @@ typedef struct game {
     float seconds;
     int scene;
     int debug_mode;
+    int display_inv;
 } game_t;
 
 typedef struct direction {
@@ -170,23 +179,59 @@ typedef struct movement {
     int down;
     int left;
     int right;
+    int wall_up;
+    int wall_down;
+    int wall_right;
+    int wall_left;
 } movement_t;
 
-typedef struct player {
-    sfRectangleShape *debug;
-    sfSprite *hero;
-    sfTexture *hero_tx;
-    sfVector2f hero_pos;
-    int hero_speed;
-    sfClock *hero_clock;
-    sfTime hero_time;
-    float hero_seconds;
+typedef struct mob {
+    sfSprite *mob;
+    sfTexture *mob_txt;
+    sfVector2f mob_pos;
+    int speed;
+    sfClock *clock, *refresh_clk;
+    sfTime time, refresh_tm;
+    float seconds, refresh_sec;
     sfClock *rect_clock;
     sfTime rect_time;
     float rect_seconds;
-    sfIntRect hero_rect;
+    sfIntRect rect;
     sfSprite *shadow;
     sfTexture *shadow_tx;
+    sfVector2f shadow_pos;
+    int move, status;
+    char type, prev;
+    int x, y, hor, ver;
+    char **path;
+    struct mob *next;
+} mob_t;
+
+typedef struct player {
+    sfRectangleShape *debug;
+    sfRectangleShape *debug_shadow;
+    sfSprite *hero, *hit_sprite;
+    int up, down, left, right, range, hit;
+    sfSprite *ver_shoot;
+    sfSprite *hor_shoot;
+    sfTexture *hit_txt;
+    sfTexture *ver_shoot_txt;
+    sfTexture *hor_shoot_txt;
+    sfTexture *hero_tx;
+    sfVector2f hero_pos, shoot_pos, hor_pos, ver_pos, hit_pos;
+    int hero_speed, ver, hor, shooting;
+    sfClock *hero_clock, *hit_clk;
+    sfTime hero_time, hit_tm;
+    float hero_seconds, refresh_sec, shoot_sec, hit_sec;
+    sfClock *rect_clock, *refresh_clk, *shoot_clk;
+    sfTime rect_time, refresh_tm, shoot_tm;
+    float rect_seconds;
+    sfIntRect hero_rect, hit_rect;
+    sfSprite *shadow;
+    sfTexture *shadow_tx;
+    sfVector2f shadow_pos;
+    sfSprite *gun;
+    int tp, x, y;
 } player_t;
 
 typedef struct spawn {
@@ -199,15 +244,100 @@ typedef struct spawn {
     sfSprite *door;
     sfTexture *door_tx;
     sfVector2f door_pos;
+    sfSprite *ship;
+    sfVector2f ship_pos;
+    sfRectangleShape *background;
+    int open;
+    sfClock *door_clock;
+    sfTime door_time;
+    float door_seconds;
 } spawn_t;
+
+typedef struct explode {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfClock *clock;
+    sfTime time;
+    sfIntRect rect;
+    sfVector2f pos;
+    int show;
+    float seconds;
+} explode_t;
+
+typedef struct tileset {
+    sfRectangleShape *debug;
+    sfSprite *tile;
+    sfSprite *top;
+    sfSprite *bottom;
+    sfSprite *grass;
+} tileset_t;
+
+typedef struct map {
+    sfSprite *background;
+    sfTexture *background_tx;
+    sfVector2f background_pos;
+    sfVector2f tileset_pos;
+    sfTexture *tileset_tx;
+    sfTexture *grass_tx;
+    sfTexture *grass2_tx;
+    tileset_t **tileset;
+    char **map;
+    char **grass;
+    int x;
+    int y;
+} map_t;
+
+typedef struct mob_pos {
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int x, y;
+} mob_pos_t;
+
+typedef struct effect {
+    sfRenderStates *light_state;
+    sfSprite *light;
+    sfTexture *light_tx;
+    sfVector2f light_pos;
+    sfRenderStates *vignette_state;
+    sfSprite *vignette1;
+    sfTexture *vignette1_tx;
+    sfSprite *vignette2;
+    sfTexture *vignette2_tx;
+    sfVector2f vignette_pos;
+    sfSprite *tp_glow;
+    sfTexture *tp_glow_tx;
+} effect_t;
+
+typedef struct teleporter {
+    sfSprite *tp;
+    sfVector2f tp_pos;
+    sfSprite *tp_shadow;
+    sfRectangleShape *debug;
+    sfRectangleShape *beam;
+    sfClock *tp_clock;
+    sfTime tp_time;
+    sfRectangleShape *black;
+    float tp_seconds;
+    int alpha;
+    int height;
+    int anim;
+    int width;
+} tp_t;
 
 typedef struct all {
     game_t s_game;
+    tp_t s_tp;
+    explode_t s_explode;
+    map_t s_map;
+    effect_t s_effect;
     movement_t s_movement;
     player_t s_player;
     direction_t s_direction;
     spawn_t s_spawn;
     t_item_database item_db;
+    mob_pos_t s_mob_pos;
+    struct mob *s_mob;
 } all_t;
 
 void init_all(all_t *s_all);
@@ -215,20 +345,31 @@ void init_clocks(all_t *s_all);
 void game_clocks(all_t *s_all);
 void display(all_t *s_all);
 int game_loop(all_t *s_all);
+void init_mobs(all_t *s_all);
+void display_mobs(all_t *s_all);
+int my_ptrlen(char **str);
 void events_control(all_t *s_all);
 void create_sprite(sfSprite **sprite, sfTexture **texture,
     sfVector2f pos, const char *path);
 void display_hero(all_t *s_all);
 void init_hero(all_t *s_all);
 sfVector2f render_pos_center(all_t *s_all);
+void init_explosions(all_t *s_all);
 void player_movement(all_t *s_all);
 void init_movement(all_t *s_all);
+void generate_random_mobs(all_t *s_all);
+mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
+void display_explosions(all_t *s_all);
+void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void movement_left_right(all_t *s_all);
-void movement_diagonal_left(all_t *s_all);
-void movement_diagonal_right(all_t *s_all);
+void movement_diagonal_left_up(all_t *s_all);
+void movement_diagonal_left_down(all_t *s_all);
+void movement_diagonal_right_down(all_t *s_all);
+void movement_diagonal_right_up(all_t *s_all);
 void rect_hero(all_t *s_all);
+void display_hit(all_t *s_all);
 sfRectangleShape *init_hitbox_debug(sfRectangleShape *rectangle, sfVector2f pos,
     sfSprite *sprite);
 void display_hitbox_debug(all_t *s_all, sfRectangleShape *rectangle,
@@ -246,6 +387,9 @@ int rect_up_condition(all_t *s_all, int *check, int *i);
 int rect_left_condition(all_t *s_all, int *check, int *i);
 int rect_right_condition(all_t *s_all, int *check, int *i);
 void init_spawn(all_t *s_all);
+void check_mob_hitboxes(all_t *s_all);
+void move_hit(all_t *s_all);
+void destroy_mobs(all_t *s_all);
 void display_spawn_under(all_t *s_all);
 void display_spawn_over(all_t *s_all);
 void move_camera(all_t *s_all);
@@ -263,4 +407,83 @@ void add_weapon(t_node *inv, u_item *item);
 void iterate_dealloc(t_node *n);
 u_item *create_pistol(void);
 u_item *create_scorpion(void);
+void display_debug(all_t *s_all);
+int check_ship(all_t *s_all);
+void init_effect(all_t *s_all);
+void display_light_spawn(all_t *s_all);
+void init_view(all_t *s_all);
+void init_tp(all_t *s_all);
+void tp_animation(all_t *s_all);
+void door_animation(all_t *s_all);
+void set_iddle_rect(all_t *s_all);
+int hitbox_tp(all_t *s_all);
+void init_map(all_t *s_all);
+void reset_wall(all_t *s_all);
+void shoot(all_t *s_all);
+void shooting_control(all_t *s_all);
+void display_map(all_t *s_all);
+int loop_map_hitbox(all_t *s_all);
+char **init_new_random_map(all_t *s_all);
+void free_map(char **map);
+char **create_map(int x, int y);
+void display_tiles(all_t *s_all);
+void generate_random_map(all_t *s_all);
+char **init_new_random_map(all_t *s_all);
+void fill_random_map(char **map);
+char **copy_map(char **old_map);
+void simulation_step(char **old_map, char **new_map);
+void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
+void put_tp(char **map);
+void set_tp_position(all_t *s_all);
+sfVector2f find_tp_spawn(all_t *s_all);
+char **init_new_gass_map(all_t *s_all);
+void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
+sfVector2i find_pos(all_t *s_all, char entity);
+
+/* ------------ !QUEUE ------------ */
+
+typedef struct node_queue
+{
+    int x;
+    int y;
+    struct node_queue *parent;
+    struct node_queue *next;
+    struct node_queue *back;
+} queue_node_t;
+
+typedef struct queue
+{
+    int length;
+    queue_node_t *last;
+    queue_node_t *first;
+} queue_t;
+
+queue_t *new_queue(void);
+int is_empty_queue(queue_t *li);
+queue_node_t *new_queue_node(queue_node_t *parent, int x, int y);
+queue_t *push_back_queue(queue_t *li, queue_node_t *parent, int x, int y);
+queue_t *pop_front_queue(queue_t *li);
+queue_t *clear_queue(queue_t *li);
+queue_t *dequeue_front(queue_t *li, queue_t **dequeue);
+queue_t *push_new_generation(char **maze, queue_t *s_queue,
+    queue_t **s_dequeue);
+int check_if_found(queue_t *s_queue, sfVector2i pos_end);
+
+/* ------------ !BREADTH_FIRST_SEARCH ------------ */
+
+int breadth_first_search(char **maze, all_t *s_all, char start, char end);
+char **breadth_first_search_entity(char **maze, all_t *s_all, int x, int y);
+void format_map(char **map);
+
+/* ------------ !MOBS PATHFINDING ------------ */
+
+void refresh_path(all_t *s_all);
+void move_mob_up(mob_t *node, all_t *s_a_ll);
+void move_mob_right(mob_t *node, all_t *s_all);
+void move_mob_down(mob_t *node, all_t *s_all);
+void move_mob_left(mob_t *node, all_t *s_all);
+void search_mob_path(mob_t *node, all_t *s_all);
+void refresh_path_to_player(all_t *s_all);
+
+
 #endif /* !RPG_H_ */
