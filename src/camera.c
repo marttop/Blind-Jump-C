@@ -11,7 +11,7 @@ void init_view(all_t *s_all)
 {
     s_all->s_game.camera =
         sfView_copy(sfRenderWindow_getView(s_all->s_game.window));
-    sfView_zoom(s_all->s_game.camera, 1);
+    sfView_zoom(s_all->s_game.camera, 0.4);
     sfView_setCenter(s_all->s_game.camera,
         (sfVector2f){s_all->s_player.hero_pos.x - 10,
         s_all->s_player.hero_pos.y - 15});
