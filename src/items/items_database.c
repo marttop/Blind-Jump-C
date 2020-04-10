@@ -7,11 +7,6 @@
 
 #include <items.h>
 
-void init_item_db(all_t *s_all)
-{
-
-}
-
 void add_weapon(t_node *inv, u_item *item)
 {
     get_empty_slot(inv, item);
