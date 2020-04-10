@@ -6,6 +6,7 @@
 */
 
 #include "rpg.h"
+#include "equipment.h"
 
 void setup(all_t *s_all)
 {
@@ -18,6 +19,7 @@ void setup(all_t *s_all)
     s_all->s_game.debug_mode = 0;
     s_all->s_game.display_inv = 0;
     s_all->s_mob = NULL;
+    s_all->s_chest = NULL;
     init_view(s_all);
     randomize();
 }
@@ -26,6 +28,7 @@ void init_all(all_t *s_all)
 {
     setup(s_all);
     init_inventory(s_all);
+    init_equipment(s_all);
     init_clocks(s_all);
     init_hero(s_all);
     init_spawn(s_all);
