@@ -174,22 +174,23 @@ typedef struct mob {
 typedef struct player {
     sfRectangleShape *debug;
     sfRectangleShape *debug_shadow;
-    sfSprite *hero;
-    int up, down, left, right, range;
+    sfSprite *hero, *hit_sprite;
+    int up, down, left, right, range, hit;
     sfSprite *ver_shoot;
     sfSprite *hor_shoot;
+    sfTexture *hit_txt;
     sfTexture *ver_shoot_txt;
     sfTexture *hor_shoot_txt;
     sfTexture *hero_tx;
-    sfVector2f hero_pos, shoot_pos, hor_pos, ver_pos;
+    sfVector2f hero_pos, shoot_pos, hor_pos, ver_pos, hit_pos;
     int hero_speed, ver, hor, shooting;
-    sfClock *hero_clock;
-    sfTime hero_time;
-    float hero_seconds, refresh_sec, shoot_sec;
+    sfClock *hero_clock, *hit_clk;
+    sfTime hero_time, hit_tm;
+    float hero_seconds, refresh_sec, shoot_sec, hit_sec;
     sfClock *rect_clock, *refresh_clk, *shoot_clk;
     sfTime rect_time, refresh_tm, shoot_tm;
     float rect_seconds;
-    sfIntRect hero_rect;
+    sfIntRect hero_rect, hit_rect;
     sfSprite *shadow;
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
@@ -317,6 +318,7 @@ void movement_diagonal_left_down(all_t *s_all);
 void movement_diagonal_right_down(all_t *s_all);
 void movement_diagonal_right_up(all_t *s_all);
 void rect_hero(all_t *s_all);
+void display_hit(all_t *s_all);
 sfRectangleShape *init_hitbox_debug(sfRectangleShape *rectangle, sfVector2f pos,
     sfSprite *sprite);
 void display_hitbox_debug(all_t *s_all, sfRectangleShape *rectangle,
