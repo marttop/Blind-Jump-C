@@ -19,6 +19,7 @@ void check_mob_hitboxes(all_t *s_all)
         if (sfFloatRect_intersects(&mob_rect, &ver_rect, NULL) ||
         sfFloatRect_intersects(&mob_rect, &hor_rect, NULL)) {
             move_hit(s_all);
+            move_explosion(s_all);
             temp->status = -1;
         }
         temp = temp->next;

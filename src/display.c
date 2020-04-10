@@ -32,6 +32,7 @@ void display_map(all_t *s_all)
             s_all->s_tp.tp, NULL);
         display_mobs(s_all);
         display_hero(s_all);
+        display_explosions(s_all);
     }
 }
 

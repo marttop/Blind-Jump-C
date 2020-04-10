@@ -62,6 +62,10 @@ void game_clocks(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_tp.tp_clock);
     s_all->s_tp.tp_seconds =
         s_all->s_tp.tp_time.microseconds / 1000000.0;
+    s_all->s_explode.time =
+        sfClock_getElapsedTime(s_all->s_explode.clock);
+    s_all->s_explode.seconds =
+        s_all->s_explode.time.microseconds / 1000000.0;
     player_clocks(s_all);
     mob_clocks(s_all);
     sfClock_restart(s_all->s_game.clock);
