@@ -298,6 +298,7 @@ typedef struct chest {
     sfClock *clock;
     sfTime time;
     float seconds;
+    int status;
     struct chest *next;
 } chest_t;
 

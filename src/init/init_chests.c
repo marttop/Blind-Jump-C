@@ -13,8 +13,9 @@ chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos)
     new->sprite = sfSprite_create();
     new->texture = s_all->s_player.hero_tx;
     new->clock = sfClock_create();
-    new->rect = (sfIntRect){657, 77, 15, 31};
+    new->rect = (sfIntRect){656, 77, 16, 29};
     new->pos = pos, new->seconds = 0;
+    new->status = 0;
     sfSprite_setTexture(new->sprite, new->texture, sfTrue);
     sfSprite_setTextureRect(new->sprite, new->rect);
     sfSprite_setPosition(new->sprite, new->pos);
@@ -22,10 +23,26 @@ chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos)
     return (new);
 }
 
+void open_chest(chest_t *temp)
+{
+    if (temp->seconds > 0.1) {
+        if (temp->rect.left < 736) {
+            temp->rect.left += 16;
+            sfSprite_setTextureRect(temp->sprite, temp->rect);
+        }
+        else {
+            temp->status = -1;
+        }
+        sfClock_restart(temp->clock);
+    }
+}
+
 void display_chests(all_t *s_all)
 {
     chest_t *temp = s_all->s_chest;
     while (temp != NULL) {
+        if (temp->status == 1)
+            open_chest(temp);
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->sprite, NULL);
         temp = temp->next;
     }
