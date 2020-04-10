@@ -37,6 +37,7 @@ void display_map(all_t *s_all)
         display_tiles(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);
+        display_chests(s_all);
         display_mobs(s_all);
         display_hero(s_all);
         display_explosions(s_all);
