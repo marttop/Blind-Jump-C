@@ -11,13 +11,22 @@ void init_hero3(all_t *s_all)
 {
     sfSprite_setColor(s_all->s_player.gun, (sfColor){170, 170, 170, 255});
     sfSprite_setScale(s_all->s_player.gun, (sfVector2f){0.79, 0.79});
+    s_all->s_player.hit_sprite = sfSprite_create();
+    sfSprite_setTexture(s_all->s_player.hit_sprite,
+        s_all->s_player.hero_tx, sfTrue);
+    s_all->s_player.hit_rect = (sfIntRect){88, 145, 16, 16};
+    sfSprite_setTextureRect(s_all->s_player.hit_sprite,
+    s_all->s_player.hit_rect);
+    sfSprite_setOrigin(s_all->s_player.hit_sprite, (sfVector2f){8, 8});
+    s_all->s_player.hit_clk = sfClock_create();
     s_all->s_player.refresh_clk = sfClock_create();
     s_all->s_player.shoot_pos = (sfVector2f){s_all->s_player.hero_pos.x + 11,
     s_all->s_player.hero_pos.y + 20};
     s_all->s_player.ver_pos = s_all->s_player.shoot_pos;
     s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
-    s_all->s_player.range = 120;
-    s_all->s_player.shooting = 0;
+    s_all->s_player.hit = 0, s_all->s_player.right = 0;
+    s_all->s_player.down = 0, s_all->s_player.up = 0, s_all->s_player.left = 0;
+    s_all->s_player.range = 120, s_all->s_player.shooting = 0;
 }
 
 void init_hero2(all_t *s_all)

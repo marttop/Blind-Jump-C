@@ -63,8 +63,8 @@ void display_hero(all_t *s_all)
         display_weapon_left_right(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_player.hero, NULL);
+        if (s_all->s_player.hit == 1)
+            display_hit(s_all);
         display_weapon_down(s_all);
-    }
-    shooting_control(s_all);
-    tp_animation(s_all);
+    } shooting_control(s_all), tp_animation(s_all);
 }
