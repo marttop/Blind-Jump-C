@@ -45,6 +45,7 @@ mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
     new->shadow_tx = s_all->s_player.hero_tx, new->prev = '@';
     new->path = breadth_first_search_entity(s_all->s_map.map,
     s_all, new->x, new->y), new->hor = 32, new->ver = 26;
+    new->status = 0, new->rect_seconds = 0;
     sfSprite_setTexture(new->mob, new->mob_txt, sfTrue);
     sfSprite_setTexture(new->shadow, new->shadow_tx, sfTrue);
     mob_selector(new, type, pos);
@@ -71,11 +72,12 @@ void display_mobs(all_t *s_all)
         if (temp->rect_seconds > 0.1 && temp->type == 'B')
             move_mobs_rect(temp, 36, 18, 0);
         if (temp->rect_seconds > 0.1 && temp->type == 'A')
-            move_mobs_rect(temp, 100, 12, 88);
+        move_mobs_rect(temp, 100, 12, 88);
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
         sfSprite_setPosition(temp->mob, temp->mob_pos);
         sfSprite_setPosition(temp->shadow, temp->shadow_pos);
         temp = temp->next;
-    }
+    } check_mob_hitboxes(s_all);
+    destroy_mobs(s_all);
 }

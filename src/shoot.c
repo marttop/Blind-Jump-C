@@ -55,8 +55,17 @@ void move_hit(all_t *s_all)
         s_all->s_player.hit_pos = s_all->s_player.hor_pos;
     if (s_all->s_player.up == 1 || s_all->s_player.down == 1)
         s_all->s_player.hit_pos = s_all->s_player.ver_pos;
-    s_all->s_player.hit = 1;
     sfSprite_setPosition(s_all->s_player.hit_sprite, s_all->s_player.hit_pos);
+    s_all->s_player.hit = 1;
+    s_all->s_player.shooting = 0, s_all->s_player.range = 120;
+    s_all->s_player.left = 0, s_all->s_player.right = 0;
+    s_all->s_player.up = 0, s_all->s_player.down = 0;
+    s_all->s_player.ver_pos = s_all->s_player.shoot_pos;
+    s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
+    sfSprite_setPosition(s_all->s_player.hor_shoot,
+    s_all->s_player.hor_pos);
+    sfSprite_setPosition(s_all->s_player.ver_shoot,
+    s_all->s_player.ver_pos);
     sfClock_restart(s_all->s_player.hit_clk);
 }
 
@@ -88,15 +97,6 @@ void shooting_control(all_t *s_all)
         }
         if (s_all->s_player.range <= 0) {
             move_hit(s_all);
-            s_all->s_player.shooting = 0, s_all->s_player.range = 120;
-            s_all->s_player.left = 0, s_all->s_player.right = 0;
-            s_all->s_player.up = 0, s_all->s_player.down = 0;
-            s_all->s_player.ver_pos = s_all->s_player.shoot_pos;
-            s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
-            sfSprite_setPosition(s_all->s_player.hor_shoot,
-            s_all->s_player.hor_pos);
-            sfSprite_setPosition(s_all->s_player.ver_shoot,
-            s_all->s_player.ver_pos);
         } sfClock_restart(s_all->s_player.shoot_clk);
     }
 }

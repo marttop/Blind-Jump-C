@@ -33,11 +33,13 @@ SRC	=	src/main.c \
 		src/map.c \
 		src/mob_generator.c \
 		src/shoot.c \
+		src/mob_hitbox.c \
 		src/map_generator.c \
 		src/map_generator2.c \
 		src/map_design.c \
 		src/map_grass.c \
 		src/tp_anim.c \
+		src/destroy_mobs.c \
 		src/inventory/inventory.c \
 		src/inventory/slot_callbacks.c \
 		src/inventory/inventory_input.c \
@@ -48,6 +50,7 @@ SRC	=	src/main.c \
 		src/init/init_movement.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
+		src/init/init_explosions.c \
 		src/teleporter.c \
 		src/pathfinding/breadth_first_search.c \
 		src/pathfinding/breadth_first_search_entity.c \
