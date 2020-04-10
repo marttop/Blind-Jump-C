@@ -43,7 +43,7 @@ void free_all_chests(all_t *s_all)
 void generate_random_chests(all_t *s_all)
 {
     int x = s_all->s_map.x;
-    int y = s_all->s_map.y - 1, randx = 0, randy = 0, i = 2;
+    int y = s_all->s_map.y - 1, randx = 0, randy = 0, i = 40;
     free_all_chests(s_all);
     while (i != 0) {
         randx = (rand() % x);
