@@ -164,7 +164,7 @@ typedef struct mob {
     sfSprite *shadow;
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
-    int move;
+    int move, status;
     char type, prev;
     int x, y, hor, ver;
     char **path;
@@ -216,6 +216,17 @@ typedef struct spawn {
     sfTime door_time;
     float door_seconds;
 } spawn_t;
+
+typedef struct explode {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfClock *clock;
+    sfTime time;
+    sfIntRect rect;
+    sfVector2f pos;
+    int show;
+    float seconds;
+} explode_t;
 
 typedef struct tileset {
     sfRectangleShape *debug;
@@ -281,6 +292,7 @@ typedef struct teleporter {
 typedef struct all {
     game_t s_game;
     tp_t s_tp;
+    explode_t s_explode;
     map_t s_map;
     effect_t s_effect;
     movement_t s_movement;
@@ -306,11 +318,13 @@ void create_sprite(sfSprite **sprite, sfTexture **texture,
 void display_hero(all_t *s_all);
 void init_hero(all_t *s_all);
 sfVector2f render_pos_center(all_t *s_all);
+void init_explosions(all_t *s_all);
 void player_movement(all_t *s_all);
 void init_movement(all_t *s_all);
 void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
+void display_explosions(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
@@ -336,6 +350,9 @@ int rect_up_condition(all_t *s_all, int *check, int *i);
 int rect_left_condition(all_t *s_all, int *check, int *i);
 int rect_right_condition(all_t *s_all, int *check, int *i);
 void init_spawn(all_t *s_all);
+void check_mob_hitboxes(all_t *s_all);
+void move_hit(all_t *s_all);
+void destroy_mobs(all_t *s_all);
 void display_spawn_under(all_t *s_all);
 void display_spawn_over(all_t *s_all);
 void move_camera(all_t *s_all);
