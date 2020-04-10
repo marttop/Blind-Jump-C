@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <SFML/Network.h>
 #include <SFML/Graphics.h>
 #include <SFML/Audio.h>
 #include <SFML/System.h>
@@ -68,6 +69,7 @@ typedef struct weapon {
     int id;
     int dmg;
     float range;
+    e_rarity rarity;
     e_weapon_type type;
     sfSprite *sprite;
 
@@ -78,6 +80,7 @@ typedef struct consumable{
     int id;
     int hp;
     int dmg;
+    e_rarity rarity;
     e_consumable_type type;
     sfSprite *sprite;
 } t_consumable;
@@ -87,12 +90,18 @@ typedef struct item_database{
     t_consumable consumables[12];
 } t_item_database;
 
+typedef union item
+{
+    t_weapon weapon;
+    t_consumable consum;
+} u_item;
+
 typedef struct slot
 {
     int id;
     int is_hover;
     int has_item;
-    sfRectangleShape *shape_hover;
+    sfBool is_dragging;
     sfTexture *texture_bg;
     sfTexture *texture_clck;
     sfTexture *texture_slect;
@@ -100,7 +109,7 @@ typedef struct slot
     sfSprite *sprite_select;
     sfVector2f pos;
     sfIntRect rect;
-    t_weapon *weapon;
+    u_item *item;
     void (*on_hover)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_click)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_drag)(void *d, struct slot *s, sfRenderWindow *w);
@@ -113,6 +122,35 @@ typedef struct node {
     void (*dealloc)(struct node *, void *);
 } t_node;
 
+typedef struct drag_info
+{
+    void *item;
+    t_slot *slot;
+}t_drag_info;
+
+typedef struct dragtip
+{
+    sfRenderTexture *render_tex;
+    sfSprite        *render_sprite;
+    sfSprite        *item_sprite;
+} t_dragtip;
+
+
+typedef struct inventory
+{
+    t_node *inv;
+    sfRenderTexture *inv_tex;
+    sfSprite        *inv_sprite;
+    t_dragtip        dragtip;
+    sfVector2f       inv_pos;
+    t_drag_info      drag_info;
+}t_inventory;
+
+typedef struct equipment
+{
+    t_slot *slot_w;
+} t_equipment;
+
 ////////////////////////////////////////
 
 typedef struct game {
@@ -121,10 +159,8 @@ typedef struct game {
     sfView *camera;
     sfClock *clock;
     sfTime time;
-    t_node *inv;
-    sfRenderTexture *inv_tex;
-    sfSprite *inv_sprite;
-    sfVector2f inv_pos;
+    t_inventory inventory;
+    t_equipment equipment;
     float seconds;
     int scene;
     int debug_mode;
@@ -254,6 +290,17 @@ typedef struct map {
     int y;
 } map_t;
 
+typedef struct chest {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfVector2f pos;
+    sfIntRect rect;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    struct chest *next;
+} chest_t;
+
 typedef struct mob_pos {
     sfClock *clock;
     sfTime time;
@@ -305,6 +352,7 @@ typedef struct all {
     t_item_database item_db;
     mob_pos_t s_mob_pos;
     struct mob *s_mob;
+    struct chest *s_chest;
 } all_t;
 
 void init_all(all_t *s_all);
@@ -328,7 +376,9 @@ void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
 void display_explosions(all_t *s_all);
+void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
+void display_chests(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
 void movement_diagonal_left_down(all_t *s_all);
@@ -368,8 +418,11 @@ sfBool is_key_presssed(sfEvent *e, sfKeyCode key);
 void init_inventory(all_t *data);
 void update_inventory(all_t *d);
 void draw_inventory(all_t *d);
-void add_pistol(t_node *inv);
+void draw_tooltip(all_t *s_all);
+void add_weapon(t_node *inv, u_item *item);
 void iterate_dealloc(t_node *n);
+u_item *create_pistol(void);
+u_item *create_scorpion(void);
 void display_debug(all_t *s_all);
 int check_ship(all_t *s_all);
 void init_effect(all_t *s_all);
@@ -398,6 +451,7 @@ void simulation_step(char **old_map, char **new_map);
 void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
 void put_tp(char **map);
 void set_tp_position(all_t *s_all);
+chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos);
 sfVector2f find_tp_spawn(all_t *s_all);
 char **init_new_gass_map(all_t *s_all);
 void set_grass(tileset_t *tile, all_t *s_all, int i, int j);

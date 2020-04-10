@@ -5,7 +5,10 @@
 ** items.h
 */
 
+#if !defined(ITEMS_H_)
+#define ITEMS_H_
+
 #include <rpg.h>
 #include <inventory.h>
 
-t_weapon *create_pistol();
+#endif // ITEMS_H_
