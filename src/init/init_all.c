@@ -19,6 +19,7 @@ void setup(all_t *s_all)
     s_all->s_game.debug_mode = 0;
     s_all->s_game.display_inv = 0;
     s_all->s_mob = NULL;
+    s_all->s_chest = NULL;
     init_view(s_all);
     randomize();
 }

@@ -287,6 +287,17 @@ typedef struct map {
     int y;
 } map_t;
 
+typedef struct chest {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfVector2f pos;
+    sfIntRect rect;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    struct chest *next;
+} chest_t;
+
 typedef struct mob_pos {
     sfClock *clock;
     sfTime time;
@@ -338,6 +349,7 @@ typedef struct all {
     t_item_database item_db;
     mob_pos_t s_mob_pos;
     struct mob *s_mob;
+    struct chest *s_chest;
 } all_t;
 
 void init_all(all_t *s_all);
@@ -363,6 +375,7 @@ void get_movement(all_t *s_all);
 void display_explosions(all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
+void display_chests(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
 void movement_diagonal_left_down(all_t *s_all);
@@ -435,6 +448,7 @@ void simulation_step(char **old_map, char **new_map);
 void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
 void put_tp(char **map);
 void set_tp_position(all_t *s_all);
+chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos);
 sfVector2f find_tp_spawn(all_t *s_all);
 char **init_new_gass_map(all_t *s_all);
 void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
