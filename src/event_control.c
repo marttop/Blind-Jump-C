@@ -24,6 +24,7 @@ void events_control(all_t *s_all)
     }
     get_movement(s_all);
     get_aim_direction(s_all);
+    shoot(s_all);
     activate_debug_mode(s_all);
     events_inventory(s_all);
     set_iddle_rect(s_all);

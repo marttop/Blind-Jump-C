@@ -38,6 +38,12 @@ void tp_animation4(all_t *s_all, int *alpha)
         s_all->s_tp.anim = 4;
         s_all->s_game.scene = MAP;
         sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
+        s_all->s_player.shoot_pos = (sfVector2f)
+        {s_all->s_player.hero_pos.x + 11, s_all->s_player.hero_pos.y + 20};
+        sfSprite_setPosition(s_all->s_player.ver_shoot,
+        s_all->s_player.shoot_pos);
+        sfSprite_setPosition(s_all->s_player.hor_shoot,
+        s_all->s_player.shoot_pos);
     }
     if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
         *alpha -= 5;
