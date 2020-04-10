@@ -325,6 +325,7 @@ void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
 void display_explosions(all_t *s_all);
+void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
