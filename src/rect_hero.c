@@ -16,13 +16,13 @@ int rect_down(all_t *s_all, int *check, int *i)
         if (*check != 0) {
             *check = 0;
             s_all->s_player.hero_rect.left = 406;
-            s_all->s_player.hero_rect.top = 109;
             s_all->s_player.hero_rect.height = 31;
         } if (*i == 5) {
-            s_all->s_player.hero_rect.left = 406;
-            *i = 0;
+            s_all->s_player.hero_rect.left = 406, *i = 0;
         } else
             s_all->s_player.hero_rect.left += 32;
+        if (*i == 2 || *i == 4) s_all->s_player.hero_rect.top = 108;
+        else s_all->s_player.hero_rect.top = 109;
         *i += 1;
         sfSprite_setTextureRect(s_all->s_player.hero,
             s_all->s_player.hero_rect);
@@ -40,13 +40,13 @@ int rect_up(all_t *s_all, int *check, int *i)
         if (*check != 1) {
             *check = 1;
             s_all->s_player.hero_rect.left = 214;
-            s_all->s_player.hero_rect.top = 109;
             s_all->s_player.hero_rect.height = 31;
         } if (*i == 5) {
-            s_all->s_player.hero_rect.left = 214;
-            *i = 0;
+            s_all->s_player.hero_rect.left = 214, *i = 0;
         } else
             s_all->s_player.hero_rect.left += 32;
+        if (*i == 2 || *i == 4) s_all->s_player.hero_rect.top = 108;
+        else s_all->s_player.hero_rect.top = 109;
         *i += 1;
         sfSprite_setTextureRect(s_all->s_player.hero,
             s_all->s_player.hero_rect);
@@ -108,8 +108,9 @@ void rect_hero(all_t *s_all)
     static int i = 1;
     static int check = 0;
 
-    if (s_all->s_movement.left == 1 && s_all->s_movement.right == 1
+    if ((s_all->s_movement.left == 1 && s_all->s_movement.right == 1
     && s_all->s_movement.up == 1 && s_all->s_movement.down == 1)
+    || s_all->s_player.tp == 1)
         return;
 
     if (rect_down_condition(s_all, &check, &i) == 1)
