@@ -22,8 +22,8 @@ void init_tp2(all_t *s_all)
     sfRectangleShape_setFillColor(s_all->s_tp.black,
         (sfColor){0, 0, 0, 0});
     sfRectangleShape_setSize(s_all->s_tp.black,
-        (sfVector2f){sfView_getSize(s_all->s_game.camera).x,
-        sfView_getSize(s_all->s_game.camera).y + 1});
+        (sfVector2f){sfSprite_getGlobalBounds(s_all->s_effect.vignette1).width,
+        sfSprite_getGlobalBounds(s_all->s_effect.vignette1).height});
 }
 
 void init_tp(all_t *s_all)

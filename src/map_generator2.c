@@ -100,4 +100,5 @@ void generate_random_map(all_t *s_all)
         }
     s_all->s_map.tileset[x] = NULL;
     i = 1, generate_random_mobs(s_all);
+    create_map_sprite(s_all);
 }

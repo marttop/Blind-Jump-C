@@ -24,6 +24,7 @@ void init_map(all_t *s_all)
     s_all->s_map.grass2_tx =
         sfTexture_createFromFile("sprites/grass_set_edge.png", NULL);
     s_all->s_map.tileset_pos = (sfVector2f){0, 0};
+    s_all->s_map.map_sprite = NULL;
 }
 
 void map_hitbox2(all_t *s_all, int *direction, int *check)
@@ -84,17 +85,7 @@ int loop_map_hitbox(all_t *s_all)
 
 void display_tiles(all_t *s_all)
 {
-    for (int i = 0; s_all->s_map.tileset[i] != NULL; i++) {
+    if (s_all->s_map.map_sprite != NULL)
         sfRenderWindow_drawSprite(s_all->s_game.window,
-            s_all->s_map.tileset[i]->tile, NULL);
-        if (s_all->s_map.tileset[i]->top != NULL)
-            sfRenderWindow_drawSprite(s_all->s_game.window,
-                s_all->s_map.tileset[i]->top, NULL);
-        if (s_all->s_map.tileset[i]->bottom != NULL)
-            sfRenderWindow_drawSprite(s_all->s_game.window,
-                s_all->s_map.tileset[i]->bottom, NULL);
-        if (s_all->s_map.tileset[i]->grass != NULL)
-            sfRenderWindow_drawSprite(s_all->s_game.window,
-                s_all->s_map.tileset[i]->grass, NULL);
-    }
+            s_all->s_map.map_sprite, NULL);
 }
