@@ -46,65 +46,19 @@ sfBool on_drop(void *data, t_slot *s, sfBool is_pressed)
     all_t *d = (all_t *)data;
     t_slot *tmp = d->s_game.inventory.drag_info.slot;
     sfBool is_released = is_button_released(&d->s_game.event, sfMouseLeft);
-    if (tmp != s && !tmp->is_dragging && is_released)
-    {
-        if (s->item == NULL)
-        {
+    if (tmp != s && !tmp->is_dragging && is_released) {
+        if (s->item == NULL) {
             s->item = tmp->item;
             s->has_item = 1;
             tmp->item = NULL;
             tmp->has_item = 0;
             return sfFalse;
         }
-        else
-        {
+        else {
             u_item *tmp1 = s->item;
             s->item = tmp->item;
             tmp->item = tmp1;
         }
     }
     return sfFalse;
-}
-
-void on_hover(void *data, struct slot *s, sfRenderWindow *w)
-{
-    static sfBool is_pressed = 0;
-    all_t *d = (all_t *)data;
-    s->is_hover = 1;
-    is_pressed = 0;
-    sfRenderTexture_drawSprite(d->s_game.inventory.inv_tex,
-                               s->sprite_select, NULL);
-    if (is_button_pressed(&d->s_game.event, sfMouseLeft))
-    {
-        d->s_game.inventory.drag_info.slot = s;
-        is_pressed = sfTrue;
-        on_click(d, s, w);
-    }
-    else
-        sfSprite_setColor(s->sprite_bg, (sfColor){255, 255, 255, 255});
-
-    t_slot *tmp = d->s_game.inventory.drag_info.slot;
-
-    if (tmp && tmp->has_item)
-        on_drop(data, s, is_pressed);
-
-    if (is_pressed && d->s_game.event.mouseMove.type == sfEvtMouseMoved)
-    {
-        if (d->s_game.inventory.drag_info.slot->has_item)
-        {
-            on_drag(d, d->s_game.inventory.drag_info.slot, w);
-        }
-    }
-    else
-        s->is_dragging = sfFalse;
-    s->is_hover = 0;
-    if (is_button_released(&d->s_game.event, sfMouseLeft))
-        if (is_button_pressed(&d->s_game.event, sfMouseLeft))
-            on_drag(d, s, w);
-
-    if (!is_button_pressed(&d->s_game.event, sfMouseLeft))
-    {
-        s->is_hover = 0;
-        sfSprite_setColor(s->sprite_bg, (sfColor){255, 255, 255, 255});
-    }
 }

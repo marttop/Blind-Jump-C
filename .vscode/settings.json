@@ -37,5 +37,7 @@
         "inventory.h": "c",
         "random": "c",
         "string_view": "c"
-    }
+    },
+    "editor.fontFamily": "'liberation-mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontWeight": "bold"
 }
