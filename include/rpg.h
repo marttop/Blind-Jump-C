@@ -216,8 +216,9 @@ typedef struct p_infos {
     char *str_current_xp;
     char *str_max_xp;
     int current_xp, max_xp, level;
-    char *level;
+    char *str_level;
     sfText *xp_txt;
+    sfText *lvl_txt;
     sfText *p_name_txt;
 } p_infos_t;
 
@@ -357,6 +358,7 @@ typedef struct teleporter {
 typedef struct all {
     game_t s_game;
     tp_t s_tp;
+    p_infos_t s_infos;
     explode_t s_explode;
     map_t s_map;
     effect_t s_effect;
@@ -387,6 +389,7 @@ sfVector2f render_pos_center(all_t *s_all);
 void init_explosions(all_t *s_all);
 void player_movement(all_t *s_all);
 void init_movement(all_t *s_all);
+void display_infos(all_t *s_all);
 void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
@@ -400,6 +403,7 @@ void movement_diagonal_left_down(all_t *s_all);
 void movement_diagonal_right_down(all_t *s_all);
 void movement_diagonal_right_up(all_t *s_all);
 void rect_hero(all_t *s_all);
+void init_infos(all_t *s_all);
 void display_hit(all_t *s_all);
 sfRectangleShape *init_hitbox_debug(sfRectangleShape *rectangle, sfVector2f pos,
     sfSprite *sprite);
