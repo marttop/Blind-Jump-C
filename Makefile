@@ -33,6 +33,7 @@ SRC	=	src/main.c \
 		src/map.c \
 		src/map2.c \
 		src/mob_generator.c \
+		src/vectors.c \
 		src/shoot.c \
 		src/mob_hitbox.c \
 		src/map_generator.c \
