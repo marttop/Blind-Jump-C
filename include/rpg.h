@@ -155,6 +155,7 @@ typedef struct equipment
 
 typedef struct game {
     sfRenderWindow *window;
+    sfFont *font;
     sfEvent event;
     sfView *camera;
     sfClock *clock;
@@ -165,6 +166,7 @@ typedef struct game {
     int scene;
     int debug_mode;
     int display_inv;
+    char key_press;
 } game_t;
 
 typedef struct direction {
@@ -202,10 +204,25 @@ typedef struct mob {
     sfVector2f shadow_pos;
     int move, status;
     char type, prev;
-    int x, y, hor, ver;
+    int x, y, hor, ver, xp;
     char **path;
     struct mob *next;
+    int aggro;
 } mob_t;
+
+typedef struct p_infos {
+    sfRectangleShape *xp;
+    sfRectangleShape *xp_base;
+    char *p_name;
+    char *str_xp;
+    char *str_current_xp;
+    char *str_max_xp;
+    int current_xp, max_xp, level;
+    char *str_level;
+    sfText *xp_txt;
+    sfText *lvl_txt;
+    sfText *p_name_txt;
+} p_infos_t;
 
 typedef struct player {
     sfRectangleShape *debug;
@@ -281,11 +298,28 @@ typedef struct map {
     sfTexture *grass_tx;
     sfTexture *grass2_tx;
     tileset_t **tileset;
+    sfRenderTexture *render;
+    const sfTexture *map_texture;
+    sfSprite *map_sprite;
     char **map;
     char **grass;
     int x;
     int y;
 } map_t;
+
+typedef struct chest {
+    sfSprite *sprite;
+    sfSprite *shadow;
+    sfTexture *texture;
+    sfVector2f pos;
+    sfIntRect rect;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int status;
+    sfText *open_txt;
+    struct chest *next;
+} chest_t;
 
 typedef struct mob_pos {
     sfClock *clock;
@@ -328,6 +362,7 @@ typedef struct teleporter {
 typedef struct all {
     game_t s_game;
     tp_t s_tp;
+    p_infos_t s_infos;
     explode_t s_explode;
     map_t s_map;
     effect_t s_effect;
@@ -338,6 +373,7 @@ typedef struct all {
     t_item_database item_db;
     mob_pos_t s_mob_pos;
     struct mob *s_mob;
+    struct chest *s_chest;
 } all_t;
 
 void init_all(all_t *s_all);
@@ -357,18 +393,23 @@ sfVector2f render_pos_center(all_t *s_all);
 void init_explosions(all_t *s_all);
 void player_movement(all_t *s_all);
 void init_movement(all_t *s_all);
+void display_infos(all_t *s_all);
 void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
 void display_explosions(all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
+void display_chests_over(all_t *s_all, int y);
+int display_chests_under(all_t *s_all);
 void movement_left_right(all_t *s_all);
+void update_xp(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
 void movement_diagonal_left_down(all_t *s_all);
 void movement_diagonal_right_down(all_t *s_all);
 void movement_diagonal_right_up(all_t *s_all);
 void rect_hero(all_t *s_all);
+void init_infos(all_t *s_all);
 void display_hit(all_t *s_all);
 sfRectangleShape *init_hitbox_debug(sfRectangleShape *rectangle, sfVector2f pos,
     sfSprite *sprite);
@@ -435,10 +476,16 @@ void simulation_step(char **old_map, char **new_map);
 void set_rect_tile(tileset_t *tile, all_t *s_all, int i, int j);
 void put_tp(char **map);
 void set_tp_position(all_t *s_all);
+chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos);
 sfVector2f find_tp_spawn(all_t *s_all);
 char **init_new_gass_map(all_t *s_all);
 void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
 sfVector2i find_pos(all_t *s_all, char entity);
+void create_map_sprite(all_t *s_all);
+float calcul_mob_magnitude(mob_t *temp, sfSprite *sprite);
+float calcul_chest_magnitude(chest_t *temp, sfSprite *sprite);
+int loop_chest_hitbox(all_t *s_all);
+void chest_message(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 

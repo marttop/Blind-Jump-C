@@ -40,6 +40,7 @@ void up_down_left_right(all_t *s_all)
     check += check_borders(s_all);
     check += check_middle_wall(s_all);
     check += check_ship(s_all);
+    check += loop_chest_hitbox(s_all);
 
     if (check != 0)
         return;

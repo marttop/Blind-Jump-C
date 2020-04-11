@@ -11,15 +11,19 @@ void check_mob_hitboxes(all_t *s_all)
 {
     mob_t *temp = s_all->s_mob;
     sfFloatRect mob_rect, ver_rect, hor_rect;
+    if (s_all->s_player.shooting == 0) return;
     while (temp != NULL) {
-        if (s_all->s_player.shooting == 0) break;
         mob_rect = sfSprite_getGlobalBounds(temp->mob);
         ver_rect = sfSprite_getGlobalBounds(s_all->s_player.ver_shoot);
         hor_rect = sfSprite_getGlobalBounds(s_all->s_player.hor_shoot);
-        if (sfFloatRect_intersects(&mob_rect, &ver_rect, NULL) ||
-        sfFloatRect_intersects(&mob_rect, &hor_rect, NULL)) {
+        if ((sfFloatRect_intersects(&mob_rect, &ver_rect, NULL)
+        && s_all->s_player.ver == 1) ||
+        (sfFloatRect_intersects(&mob_rect, &hor_rect, NULL)
+        && s_all->s_player.hor == 1)) {
             move_hit(s_all);
             move_explosion(s_all);
+            s_all->s_infos.current_xp += temp->xp;
+            update_xp(s_all);
             temp->status = -1;
         }
         temp = temp->next;

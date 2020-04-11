@@ -22,8 +22,8 @@ void init_tp2(all_t *s_all)
     sfRectangleShape_setFillColor(s_all->s_tp.black,
         (sfColor){0, 0, 0, 0});
     sfRectangleShape_setSize(s_all->s_tp.black,
-        (sfVector2f){sfView_getSize(s_all->s_game.camera).x,
-        sfView_getSize(s_all->s_game.camera).y + 1});
+        (sfVector2f){sfSprite_getGlobalBounds(s_all->s_effect.vignette1).width,
+        sfSprite_getGlobalBounds(s_all->s_effect.vignette1).height});
 }
 
 void init_tp(all_t *s_all)
@@ -55,6 +55,8 @@ void set_tp_position(all_t *s_all)
         (sfVector2f){s_all->s_tp.tp_pos.x, s_all->s_tp.tp_pos.y + 7});
     sfRectangleShape_setPosition(s_all->s_tp.beam,
         (sfVector2f){s_all->s_tp.tp_pos.x + 16, s_all->s_tp.tp_pos.y + 19});
+    sfSprite_setPosition(s_all->s_effect.tp_glow,
+        (sfVector2f){s_all->s_tp.tp_pos.x - 185, s_all->s_tp.tp_pos.y - 190});
 }
 
 int hitbox_tp(all_t *s_all)

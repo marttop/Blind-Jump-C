@@ -19,6 +19,8 @@ void setup(all_t *s_all)
     s_all->s_game.debug_mode = 0;
     s_all->s_game.display_inv = 0;
     s_all->s_mob = NULL;
+    s_all->s_chest = NULL;
+    s_all->s_game.font = sfFont_createFromFile("font/Cornerstone.ttf");
     init_view(s_all);
     randomize();
 }
@@ -35,4 +37,5 @@ void init_all(all_t *s_all)
     init_effect(s_all);
     init_map(s_all);
     init_explosions(s_all);
+    init_infos(s_all);
 }
