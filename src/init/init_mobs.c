@@ -24,6 +24,7 @@ void mob_selector(mob_t *new, char type, sfVector2f pos)
         new->shadow_pos = (sfVector2f){pos.x + 10, pos.y + 17};
         new->rect = (sfIntRect){0, 57, 18, 17};
         sfSprite_setOrigin(new->mob, (sfVector2f){9, 9});
+        new->xp = 10;
     }
     if (type == 'A') {
         sfSprite_setScale(new->shadow, (sfVector2f){0.80, 0.80});
@@ -31,6 +32,7 @@ void mob_selector(mob_t *new, char type, sfVector2f pos)
         new->shadow_pos = (sfVector2f){pos.x + 6, pos.y + 14};
         new->rect = (sfIntRect){88, 161, 12, 12};
         sfSprite_setOrigin(new->mob, (sfVector2f){6, 6});
+        new->xp = 7;
     }
 }
 
