@@ -28,7 +28,6 @@ void draw_slots(t_node *inv, sfRenderTexture *inv_tex, all_t *d)
 
 void on_click(void *data, struct slot *s, sfRenderWindow *w)
 {
-    data;
     sfSprite_setColor(s->sprite_bg, (sfColor){100, 100, 100, 255});
     return;
 }
