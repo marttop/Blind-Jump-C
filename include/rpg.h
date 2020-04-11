@@ -380,7 +380,8 @@ void get_movement(all_t *s_all);
 void display_explosions(all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
-void display_chests(all_t *s_all);
+void display_chests_over(all_t *s_all, int y);
+int display_chests_under(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
 void movement_diagonal_left_down(all_t *s_all);
@@ -460,6 +461,8 @@ void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
 sfVector2i find_pos(all_t *s_all, char entity);
 void create_map_sprite(all_t *s_all);
 float calcul_mob_magnitude(mob_t *temp, sfSprite *sprite);
+float calcul_chest_magnitude(mob_t *temp, sfSprite *sprite);
+int loop_chest_hitbox(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 

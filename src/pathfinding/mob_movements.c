@@ -29,9 +29,9 @@ void move_mob_right(mob_t *node, all_t *s_all)
         node->mob_pos.x += node->speed;
         node->shadow_pos.x += node->speed;
         node->hor -= node->speed;
+        sfSprite_setScale(node->mob, (sfVector2f){-1, 1});
     } else if (node->hor <= 0 || node->path == NULL) {
         node->path[node->y][node->x] = '1';
-        sfSprite_setScale(node->mob, (sfVector2f){-1, 1});
         node->x += 1;
         node->hor = 32;
         free_map(node->path);
@@ -62,9 +62,9 @@ void move_mob_left(mob_t *node, all_t *s_all)
         node->mob_pos.x -= node->speed;
         node->shadow_pos.x -= node->speed;
         node->hor -= node->speed;
+        sfSprite_setScale(node->mob, (sfVector2f){1, 1});
     } else if (node->hor <= 0 || node->path == NULL) {
         node->path[node->y][node->x] = '1';
-        sfSprite_setScale(node->mob, (sfVector2f){1, 1});
         node->x -= 1;
         node->hor = 32;
         free_map(node->path);

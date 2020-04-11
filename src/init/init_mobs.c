@@ -69,7 +69,7 @@ void display_mobs(all_t *s_all)
     mob_t *temp = s_all->s_mob;
     while (temp != NULL) {
         float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
-        if (magnitude <= 150) temp->aggro = 1;
+        if (magnitude <= 150 && s_all->s_player.tp == 0) temp->aggro = 1;
         if (temp->seconds > 0.01 && temp->aggro == 1
         && s_all->s_player.tp == 0)
             search_mob_path(temp, s_all);
