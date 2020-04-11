@@ -35,8 +35,7 @@ void tp_animation4(all_t *s_all, int *alpha)
 {
     if (s_all->s_tp.anim == 3 && s_all->s_player.tp == 1) {
         generate_random_map(s_all);
-        s_all->s_tp.anim = 4;
-        s_all->s_game.scene = MAP;
+        s_all->s_tp.anim = 4, s_all->s_game.scene = MAP;
         sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
         s_all->s_player.shoot_pos = (sfVector2f)
         {s_all->s_player.hero_pos.x + 11, s_all->s_player.hero_pos.y + 20};
@@ -44,15 +43,13 @@ void tp_animation4(all_t *s_all, int *alpha)
         s_all->s_player.shoot_pos);
         sfSprite_setPosition(s_all->s_player.hor_shoot,
         s_all->s_player.shoot_pos);
-    }
-    if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
+        generate_random_mobs(s_all);
+    } if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
         *alpha -= 5;
         sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){0, 0, 0, *alpha});
-        if (*alpha <= 40) {
-            s_all->s_tp.anim = 0;
-            s_all->s_player.tp = 0;
-        }
+        if (*alpha <= 40)
+            s_all->s_tp.anim = 0, s_all->s_player.tp = 0;
     }
 }
 
