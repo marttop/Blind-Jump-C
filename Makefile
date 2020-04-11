@@ -46,6 +46,7 @@ SRC	=	src/main.c \
 		src/inventory/list_helpers.c \
 		src/inventory/tooltip.c \
 		src/inventory/slot_utils.c \
+		src/inventory/hovering.c \
 		src/items/items_database.c \
 		src/items/weapon.c \
 		src/equipment/weapon_slot.c \
