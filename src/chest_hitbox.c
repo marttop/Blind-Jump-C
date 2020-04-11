@@ -43,6 +43,7 @@ int chest_hitbox(all_t *s_all, sfFloatRect shadow_bounds)
         chest_bounds = sfSprite_getGlobalBounds(tmp->sprite);
         chest_bounds.top += chest_bounds.height / 2;
         chest_bounds.height /= 2;
+        chest_bounds.left -= 3, chest_bounds.width += 6;
         direction[0] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left +
         shadow_bounds.width / 2, shadow_bounds.top);
         direction[1] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left +
@@ -52,8 +53,7 @@ int chest_hitbox(all_t *s_all, sfFloatRect shadow_bounds)
         direction[3] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left,
         shadow_bounds.top + shadow_bounds.height / 2);
     } chest_hitbox2(s_all, direction, &check);
-    if (check != 0)
-        return (1);
+    if (check != 0) return (1);
     return (0);
 }
 
