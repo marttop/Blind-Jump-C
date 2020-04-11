@@ -12,7 +12,7 @@ void events_inventory(all_t *s_all)
     if (is_key_released(&s_all->s_game.event, sfKeyI))
         s_all->s_game.display_inv = !s_all->s_game.display_inv;
     s_all->s_game.key_press = 0;
-    if (is_key_released(&s_all->s_game.event, sfKeyE))
+    if (sfKeyboard_isKeyPressed(sfKeyE) == 1)
         s_all->s_game.key_press = 'E';
 }
 
