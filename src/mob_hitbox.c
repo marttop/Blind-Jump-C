@@ -20,6 +20,8 @@ void check_mob_hitboxes(all_t *s_all)
         sfFloatRect_intersects(&mob_rect, &hor_rect, NULL)) {
             move_hit(s_all);
             move_explosion(s_all);
+            s_all->s_infos.current_xp += temp->xp;
+            update_xp(s_all);
             temp->status = -1;
         }
         temp = temp->next;

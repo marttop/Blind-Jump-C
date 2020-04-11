@@ -203,7 +203,7 @@ typedef struct mob {
     sfVector2f shadow_pos;
     int move, status;
     char type, prev;
-    int x, y, hor, ver;
+    int x, y, hor, ver, xp;
     char **path;
     struct mob *next;
     int aggro;
@@ -400,6 +400,7 @@ void movement_up_down(all_t *s_all);
 void display_chests_over(all_t *s_all, int y);
 int display_chests_under(all_t *s_all);
 void movement_left_right(all_t *s_all);
+void update_xp(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
 void movement_diagonal_left_down(all_t *s_all);
 void movement_diagonal_right_down(all_t *s_all);
