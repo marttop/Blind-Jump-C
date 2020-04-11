@@ -54,6 +54,7 @@ SRC	=	src/main.c \
 		src/equipment/weapon_slot.c \
 		src/equipment/equipment.c \
 		src/init/init_player.c \
+		src/init/init_infos.c \
 		src/init/init_chests.c \
 		src/init/init_movement.c \
 		src/init/init_all.c \
