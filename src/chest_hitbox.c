@@ -42,14 +42,13 @@ int chest_hitbox(all_t *s_all, sfFloatRect shadow_bounds)
     for (; tmp != NULL; tmp = tmp->next) {
         chest_bounds = sfSprite_getGlobalBounds(tmp->sprite);
         chest_bounds.top += chest_bounds.height / 2;
-        chest_bounds.height /= 2;
-        chest_bounds.left -= 3, chest_bounds.width += 6;
-        direction[0] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left +
-        shadow_bounds.width / 2, shadow_bounds.top);
-        direction[1] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left +
-        shadow_bounds.width, shadow_bounds.top + shadow_bounds.height / 2);
-        direction[2] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left +
-        shadow_bounds.width / 2, shadow_bounds.top + shadow_bounds.height);
+        chest_bounds.height = chest_bounds.height / 2 + 2;
+        direction[0] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left
+        + shadow_bounds.width / 2, shadow_bounds.top);
+        direction[1] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left
+        + shadow_bounds.width, shadow_bounds.top + shadow_bounds.height / 2);
+        direction[2] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left
+        + shadow_bounds.width / 2, shadow_bounds.top + shadow_bounds.height);
         direction[3] += sfFloatRect_contains(&chest_bounds, shadow_bounds.left,
         shadow_bounds.top + shadow_bounds.height / 2);
     } chest_hitbox2(s_all, direction, &check);
@@ -68,4 +67,19 @@ int loop_chest_hitbox(all_t *s_all)
     if (chest_hitbox(s_all, shadow_bounds) == 1)
         return (1);
     return (0);
+}
+
+void chest_message(all_t *s_all)
+{
+    chest_t *temp = s_all->s_chest;
+    while (temp != NULL) {
+        if (s_all->s_game.key_press != 'E' && temp->status == 0
+        && calcul_chest_magnitude(temp, s_all->s_player.shadow) <= 20)
+            sfRenderWindow_drawText(s_all->s_game.window,
+            temp->open_txt, NULL);
+        else if (s_all->s_game.key_press == 'E' && temp->status == 0
+        && calcul_chest_magnitude(temp, s_all->s_player.shadow) <= 20)
+            temp->status = 1;
+        temp = temp->next;
+    }
 }

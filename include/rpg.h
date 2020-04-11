@@ -166,6 +166,7 @@ typedef struct game {
     int scene;
     int debug_mode;
     int display_inv;
+    char key_press;
 } game_t;
 
 typedef struct direction {
@@ -308,6 +309,7 @@ typedef struct map {
 
 typedef struct chest {
     sfSprite *sprite;
+    sfSprite *shadow;
     sfTexture *texture;
     sfVector2f pos;
     sfIntRect rect;
@@ -315,6 +317,7 @@ typedef struct chest {
     sfTime time;
     float seconds;
     int status;
+    sfText *open_txt;
     struct chest *next;
 } chest_t;
 
@@ -480,8 +483,9 @@ void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
 sfVector2i find_pos(all_t *s_all, char entity);
 void create_map_sprite(all_t *s_all);
 float calcul_mob_magnitude(mob_t *temp, sfSprite *sprite);
-float calcul_chest_magnitude(mob_t *temp, sfSprite *sprite);
+float calcul_chest_magnitude(chest_t *temp, sfSprite *sprite);
 int loop_chest_hitbox(all_t *s_all);
+void chest_message(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 

@@ -15,3 +15,12 @@ float calcul_mob_magnitude(mob_t *temp, sfSprite *sprite)
     float magnitude = sqrt(pow(vx, 2) + pow(vy, 2));
     return (magnitude);
 }
+
+float calcul_chest_magnitude(chest_t *temp, sfSprite *sprite)
+{
+    sfVector2f pos_sprite = sfSprite_getPosition(sprite);
+    float vx = temp->pos.x - 6 - pos_sprite.x + 7;
+    float vy = temp->pos.y + 15 - pos_sprite.y + 4;
+    float magnitude = sqrt(pow(vx, 2) + pow(vy, 2));
+    return (magnitude);
+}
