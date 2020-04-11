@@ -206,6 +206,7 @@ typedef struct mob {
     int x, y, hor, ver;
     char **path;
     struct mob *next;
+    int aggro;
 } mob_t;
 
 typedef struct p_infos {
@@ -476,6 +477,7 @@ char **init_new_gass_map(all_t *s_all);
 void set_grass(tileset_t *tile, all_t *s_all, int i, int j);
 sfVector2i find_pos(all_t *s_all, char entity);
 void create_map_sprite(all_t *s_all);
+float calcul_mob_magnitude(mob_t *temp, sfSprite *sprite);
 
 /* ------------ !QUEUE ------------ */
 
