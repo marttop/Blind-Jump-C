@@ -27,6 +27,7 @@ SRC	=	src/main.c \
 		src/door_animation.c \
 		src/camera.c \
 		src/rect_hero.c \
+		src/update_infos.c \
 		src/rect_hero2.c \
 		src/rect_hero3.c \
 		src/init/init_mobs.c \
