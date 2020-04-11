@@ -60,5 +60,6 @@ void display(all_t *s_all)
     display_spawn(s_all);
     display_map(s_all);
     display_hud_anim(s_all);
+    display_infos(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }
