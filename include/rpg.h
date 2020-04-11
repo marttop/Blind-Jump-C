@@ -155,6 +155,7 @@ typedef struct equipment
 
 typedef struct game {
     sfRenderWindow *window;
+    sfFont *font;
     sfEvent event;
     sfView *camera;
     sfClock *clock;
@@ -206,6 +207,19 @@ typedef struct mob {
     char **path;
     struct mob *next;
 } mob_t;
+
+typedef struct p_infos {
+    sfRectangleShape *xp;
+    sfRectangleShape *xp_base;
+    char *p_name;
+    char *str_xp;
+    char *str_current_xp;
+    char *str_max_xp;
+    int current_xp, max_xp, level;
+    char *level;
+    sfText *xp_txt;
+    sfText *p_name_txt;
+} p_infos_t;
 
 typedef struct player {
     sfRectangleShape *debug;
