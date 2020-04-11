@@ -55,6 +55,8 @@ void set_tp_position(all_t *s_all)
         (sfVector2f){s_all->s_tp.tp_pos.x, s_all->s_tp.tp_pos.y + 7});
     sfRectangleShape_setPosition(s_all->s_tp.beam,
         (sfVector2f){s_all->s_tp.tp_pos.x + 16, s_all->s_tp.tp_pos.y + 19});
+    sfSprite_setPosition(s_all->s_effect.tp_glow,
+        (sfVector2f){s_all->s_tp.tp_pos.x - 185, s_all->s_tp.tp_pos.y - 190});
 }
 
 int hitbox_tp(all_t *s_all)

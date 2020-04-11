@@ -7,18 +7,36 @@
 
 #include "rpg.h"
 
+void chest_text(chest_t *new, all_t *s_all)
+{
+    new->open_txt = sfText_create();
+    sfText_setFont(new->open_txt, s_all->s_game.font);
+    sfText_setString(new->open_txt, "PRESS \"E\" TO OPEN");
+    sfText_setPosition(new->open_txt,
+        (sfVector2f){new->pos.x - 29, new->pos.y - 5});
+    sfText_setCharacterSize(new->open_txt, 7);
+    sfText_setColor(new->open_txt, (sfColor){255, 255, 255, 255});
+}
+
 chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos)
 {
     chest_t *new = malloc(sizeof(chest_t));
     new->sprite = sfSprite_create();
+    new->shadow = sfSprite_create();
     new->texture = s_all->s_player.hero_tx;
     new->clock = sfClock_create();
     new->rect = (sfIntRect){656, 77, 16, 29};
-    new->pos = pos, new->seconds = 0;
-    new->status = 0;
+    new->pos.x = pos.x, new->pos.y = pos.y - 10;
+    new->seconds = 0, new->status = 0;
+    chest_text(new, s_all);
     sfSprite_setTexture(new->sprite, new->texture, sfTrue);
+    sfSprite_setTexture(new->shadow, new->texture, sfTrue);
     sfSprite_setTextureRect(new->sprite, new->rect);
+    sfSprite_setTextureRect(new->shadow, (sfIntRect){20, 109, 16, 7});
     sfSprite_setPosition(new->sprite, new->pos);
+    sfSprite_setPosition(new->shadow,
+        (sfVector2f){new->pos.x, new->pos.y + 28});
+    sfSprite_setScale(new->shadow, (sfVector2f){1.14, 1.14});
     new->next = old;
     return (new);
 }
@@ -29,6 +47,9 @@ void open_chest(chest_t *temp)
         if (temp->rect.left < 736) {
             temp->rect.left += 16;
             sfSprite_setTextureRect(temp->sprite, temp->rect);
+            sfVector2f scale = sfSprite_getScale(temp->shadow);
+            sfSprite_setScale(temp->shadow,
+                (sfVector2f){scale.x, scale.y += 0.2});
         }
         else {
             temp->status = -1;
@@ -43,8 +64,12 @@ void display_chests_over(all_t *s_all, int y)
     while (temp != NULL) {
         if (temp->status == 1)
             open_chest(temp);
-        if (temp->pos.y + 14 >= y)
-            sfRenderWindow_drawSprite(s_all->s_game.window, temp->sprite, NULL);
+        if (temp->pos.y + 14 >= y) {
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                temp->sprite, NULL);
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                temp->shadow, NULL);
+        }
         temp = temp->next;
     }
 }
@@ -56,8 +81,12 @@ int display_chests_under(all_t *s_all)
     while (temp != NULL) {
         if (temp->status == 1)
             open_chest(temp);
-        if (temp->pos.y + 14 < y)
-            sfRenderWindow_drawSprite(s_all->s_game.window, temp->sprite, NULL);
+        if (temp->pos.y + 14 < y) {
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                temp->sprite, NULL);
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+                temp->shadow, NULL);
+        }
         temp = temp->next;
     }
     return (y);
