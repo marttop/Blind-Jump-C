@@ -24,6 +24,7 @@ void mob_selector(mob_t *new, char type, sfVector2f pos)
         new->shadow_pos = (sfVector2f){pos.x + 10, pos.y + 17};
         new->rect = (sfIntRect){0, 57, 18, 17};
         sfSprite_setOrigin(new->mob, (sfVector2f){9, 9});
+        new->xp = 10;
     }
     if (type == 'A') {
         sfSprite_setScale(new->shadow, (sfVector2f){0.80, 0.80});
@@ -31,6 +32,7 @@ void mob_selector(mob_t *new, char type, sfVector2f pos)
         new->shadow_pos = (sfVector2f){pos.x + 6, pos.y + 14};
         new->rect = (sfIntRect){88, 161, 12, 12};
         sfSprite_setOrigin(new->mob, (sfVector2f){6, 6});
+        new->xp = 7;
     }
 }
 
@@ -38,6 +40,7 @@ mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
 {
     mob_t *new = malloc(sizeof(mob_t));
     new->mob_pos = pos;
+    new->aggro = 0;
     new->x = s_all->s_mob_pos.x, new->y = s_all->s_mob_pos.y;
     new->clock = sfClock_create(), new->rect_clock = sfClock_create();
     new->mob = sfSprite_create(), new->shadow = sfSprite_create();
@@ -67,12 +70,17 @@ void display_mobs(all_t *s_all)
 {
     mob_t *temp = s_all->s_mob;
     while (temp != NULL) {
-        if (temp->seconds > 0.01)
+        float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
+        if (magnitude <= 150 && s_all->s_player.tp == 0) temp->aggro = 1;
+        if (temp->seconds > 0.01 && temp->aggro == 1
+        && s_all->s_player.tp == 0)
             search_mob_path(temp, s_all);
-        if (temp->rect_seconds > 0.1 && temp->type == 'B')
+        if (temp->rect_seconds > 0.1 && temp->type == 'B' && temp->aggro == 1
+        && s_all->s_player.tp == 0)
             move_mobs_rect(temp, 36, 18, 0);
-        if (temp->rect_seconds > 0.1 && temp->type == 'A')
-        move_mobs_rect(temp, 100, 12, 88);
+        if (temp->rect_seconds > 0.1 && temp->type == 'A' && temp->aggro == 1
+        && s_all->s_player.tp == 0)
+            move_mobs_rect(temp, 100, 12, 88);
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
         sfSprite_setPosition(temp->mob, temp->mob_pos);

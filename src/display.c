@@ -37,8 +37,12 @@ void display_map(all_t *s_all)
         display_tiles(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);
-        display_mobs(s_all);
+        int y = display_chests_under(s_all);
         display_hero(s_all);
+        display_chests_over(s_all, y);
+        display_mobs(s_all);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_effect.tp_glow, s_all->s_effect.light_state);
         display_explosions(s_all);
     }
 }
@@ -49,9 +53,11 @@ void display_hud_anim(all_t *s_all)
     move_camera(s_all);
     sfRenderWindow_drawRectangleShape(s_all->s_game.window,
         s_all->s_tp.beam, NULL);
+    chest_message(s_all);
     sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     draw_inventory(s_all);
+    display_infos(s_all);
 }
 
 void display(all_t *s_all)

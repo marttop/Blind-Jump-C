@@ -99,5 +99,6 @@ void generate_random_map(all_t *s_all)
             s_all->s_map.tileset_pos.x += 32;
         }
     s_all->s_map.tileset[x] = NULL;
-    i = 1, generate_random_mobs(s_all);
+    i = 1;
+    create_map_sprite(s_all);
 }

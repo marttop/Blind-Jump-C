@@ -7,20 +7,20 @@
 
 #include "rpg.h"
 
-char **process_result(char **maze, queue_t *s_dequeue, queue_t *s_queue)
+char **process_result(char **maze, queue_t *s_dequeue, queue_t *s_queue,
+    sfVector2i pos_end)
 {
-    if (s_dequeue != NULL) {
-        queue_node_t *tmp = s_dequeue->last;
+    queue_node_t *tmp = s_queue->last;
+    for (int i = 0; tmp != NULL && i != 4; i++, tmp = tmp->back)
+        if (tmp->y == pos_end.y && tmp->x == pos_end.x)
+            break;
 
-        maze[s_queue->last->y][s_queue->last->x] = ' ';
+    for (; tmp != NULL; tmp = tmp->parent)
+        maze[tmp->y][tmp->x] = ' ';
 
-        for (; tmp != NULL; tmp = tmp->parent)
-            maze[tmp->y][tmp->x] = ' ';
+    format_map(maze);
 
-        format_map(maze);
-        s_dequeue = clear_queue(s_dequeue);
-    }
-
+    s_dequeue = clear_queue(s_dequeue);
     s_queue = clear_queue(s_queue);
 
     return (maze);
@@ -32,7 +32,7 @@ char **breadth_first_search_entity(char **map, all_t *s_all, int x, int y)
     queue_t *s_dequeue = new_queue();
     char **maze = copy_map(map);
     sfVector2i pos_start = (sfVector2i){x, y};
-    sfVector2i pos_end = find_pos(s_all, 'P');
+    sfVector2i pos_end = (sfVector2i){s_all->s_player.x, s_all->s_player.y};
 
     s_queue = push_back_queue(s_queue, NULL, pos_start.x, pos_start.y);
     maze[pos_start.y][pos_start.x] = 'W';
@@ -43,6 +43,6 @@ char **breadth_first_search_entity(char **map, all_t *s_all, int x, int y)
         s_dequeue = clear_queue(s_dequeue);
         return (NULL);
     }
-    maze = process_result(maze, s_dequeue, s_queue);
+    maze = process_result(maze, s_dequeue, s_queue, pos_end);
     return (maze);
 }

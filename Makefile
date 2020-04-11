@@ -27,11 +27,15 @@ SRC	=	src/main.c \
 		src/door_animation.c \
 		src/camera.c \
 		src/rect_hero.c \
+		src/update_infos.c \
 		src/rect_hero2.c \
 		src/rect_hero3.c \
 		src/init/init_mobs.c \
 		src/map.c \
+		src/map2.c \
 		src/mob_generator.c \
+		src/vectors.c \
+		src/chest_hitbox.c \
 		src/shoot.c \
 		src/mob_hitbox.c \
 		src/map_generator.c \
@@ -52,6 +56,8 @@ SRC	=	src/main.c \
 		src/equipment/weapon_slot.c \
 		src/equipment/equipment.c \
 		src/init/init_player.c \
+		src/init/init_infos.c \
+		src/init/init_chests.c \
 		src/init/init_movement.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
