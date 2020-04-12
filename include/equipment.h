@@ -11,6 +11,6 @@
 void init_equipment(all_t *s_all);
 void init_weapon_slot(all_t *s_all);
 void draw_weapon_slot(all_t *s_all);
-void equip_weapong(all_t *s_all);
+void equip_weapon(all_t *s_all, t_slot *slot);
 
 #endif // EQUIPMENT_H_

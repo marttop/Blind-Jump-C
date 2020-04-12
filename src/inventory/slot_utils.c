@@ -32,7 +32,7 @@ void iterate_slots(t_node *inv, all_t *d)
     }
 }
 
-void get_empty_slot(t_node *inv, u_item *item)
+void get_empty_slot(t_node *inv, u_item *item, e_item_type type)
 {
     t_node *tmp = inv;
     t_slot *slot;
@@ -41,6 +41,7 @@ void get_empty_slot(t_node *inv, u_item *item)
         if (!slot->has_item) {
             slot->item = item;
             slot->has_item = 1;
+            slot->type = type;
             break;
         }
         tmp = tmp->next;

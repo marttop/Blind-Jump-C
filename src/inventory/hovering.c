@@ -39,6 +39,8 @@ void on_hover(void *data, struct slot *s, sfRenderWindow *w)
     if (is_button_released(&d->s_game.event, sfMouseLeft))
         if (is_button_pressed(&d->s_game.event, sfMouseLeft))
             on_drag(d, s, w);
+    if (is_button_released(&d->s_game.event, sfMouseRight))
+        equip_weapon(d, s);
     if (!is_button_pressed(&d->s_game.event, sfMouseLeft)) {
         s->is_hover = 0;
         sfSprite_setColor(s->sprite_bg, (sfColor){255, 255, 255, 255});
