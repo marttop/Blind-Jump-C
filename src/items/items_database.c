@@ -9,5 +9,5 @@
 
 void add_weapon(t_node *inv, u_item *item)
 {
-    get_empty_slot(inv, item);
+    get_empty_slot(inv, item, WEAPON);
 }

@@ -9,14 +9,12 @@
 
 void draw_slots(t_node *inv, sfRenderTexture *inv_tex, all_t *d)
 {
-    d->item_db.weapons->id=0;
+    d->item_db.weapons->id = 0;
     t_node *tmp = inv;
-    while (tmp->next)
-    {
+    while (tmp->next) {
         t_slot *slot = (t_slot *)tmp->data;
         sfRenderTexture_drawSprite(inv_tex, slot->sprite_bg, NULL);
-        if (slot->item != NULL && !slot->is_dragging)
-        {
+        if (slot->item != NULL && !slot->is_dragging) {
             sfSprite_setPosition(slot->item->weapon.sprite,
                 sfSprite_getPosition(slot->sprite_bg));
             sfRenderTexture_drawSprite(inv_tex,

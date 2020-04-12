@@ -57,6 +57,11 @@ typedef enum consumable_type {
     DMG_BUFF,
 } e_consumable_type;
 
+typedef enum item_type {
+    WEAPON,
+    CONSUMABLE
+} e_item_type;
+
 typedef enum rarity {
     COMMON,
     UNCOMMON,
@@ -90,7 +95,7 @@ typedef struct item_database{
     t_consumable consumables[12];
 } t_item_database;
 
-typedef union item
+typedef struct item
 {
     t_weapon weapon;
     t_consumable consum;
@@ -110,6 +115,7 @@ typedef struct slot
     sfVector2f pos;
     sfIntRect rect;
     u_item *item;
+    e_item_type type;
     void (*on_hover)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_click)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_drag)(void *d, struct slot *s, sfRenderWindow *w);
@@ -149,6 +155,8 @@ typedef struct inventory
 typedef struct equipment
 {
     t_slot *slot_w;
+    sfRenderTexture *render_tex;
+    sfSprite        *render_sprite;
 } t_equipment;
 
 ////////////////////////////////////////
@@ -446,6 +454,8 @@ void draw_inventory(all_t *d);
 void draw_tooltip(all_t *s_all);
 void add_weapon(t_node *inv, u_item *item);
 void iterate_dealloc(t_node *n);
+void init_equipment(all_t *s_all);
+void draw_equipment(all_t *s_all);
 u_item *create_pistol(void);
 u_item *create_scorpion(void);
 void display_debug(all_t *s_all);
