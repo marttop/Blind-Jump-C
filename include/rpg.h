@@ -106,6 +106,7 @@ typedef struct slot
     int id;
     int is_hover;
     int has_item;
+    int is_pressed;
     sfBool is_dragging;
     sfTexture *texture_bg;
     sfTexture *texture_clck;
@@ -117,7 +118,7 @@ typedef struct slot
     u_item *item;
     e_item_type type;
     void (*on_hover)(void *d, struct slot *s, sfRenderWindow *w);
-    void (*on_click)(void *d, struct slot *s, sfRenderWindow *w);
+    void (*on_left_click)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_drag)(void *d, struct slot *s, sfRenderWindow *w);
 } t_slot;
 
@@ -448,8 +449,11 @@ sfBool is_button_released(sfEvent *e, sfMouseButton button);
 sfBool is_button_pressed(sfEvent *e, sfMouseButton button);
 sfBool is_key_released(sfEvent *e, sfKeyCode key);
 sfBool is_key_presssed(sfEvent *e, sfKeyCode key);
+sfVector2f get_mouse_inv_position(all_t *d);
+void weapon_slot_update(all_t *s_all);
 void init_inventory(all_t *data);
 void update_inventory(all_t *d);
+void on_drag(void *data, struct slot *s, sfRenderWindow *w);
 void draw_inventory(all_t *d);
 void draw_tooltip(all_t *s_all);
 void add_weapon(t_node *inv, u_item *item);

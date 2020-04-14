@@ -20,7 +20,15 @@ void init_tooltip(all_t *s_all)
 void draw_tooltip(all_t *s_all)
 {
     t_dragtip *tip = &s_all->s_game.inventory.dragtip;
-    sfRenderTexture_clear(tip->render_tex, (sfColor){100, 100, 100, 100});
-    sfRenderTexture_display(tip->render_tex);
-    sfRenderWindow_drawSprite(s_all->s_game.window, tip->render_sprite, NULL);
+    t_drag_info *info = &s_all->s_game.inventory.drag_info;
+    if (info->slot && info->slot->is_dragging) {
+        sfSprite_setPosition(info->slot->item->weapon.sprite,
+            (sfVector2f){0, 0});
+        sfRenderTexture_clear(tip->render_tex, (sfColor){100, 100, 100, 2});
+        sfRenderTexture_drawSprite(tip->render_tex,
+            info->slot->item->weapon.sprite, NULL);
+        sfRenderTexture_display(tip->render_tex);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            tip->render_sprite, NULL);
+    }
 }

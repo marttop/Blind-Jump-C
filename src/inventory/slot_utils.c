@@ -17,17 +17,47 @@ sfVector2f get_mouse_inv_position(all_t *d)
     return (sfVector2f){pos.x - p.x, pos.y - p.y};
 }
 
+void drag_update(all_t *d)
+{
+    static int holding = 0;
+    t_drag_info *drag_info = &d->s_game.inventory.drag_info;
+    if (d->s_game.inventory.drag_info.slot &&
+        d->s_game.inventory.drag_info.slot->is_dragging) {
+        on_drag(d, d->s_game.inventory.drag_info.slot, d->s_game.window);
+    }
+    if (drag_info->slot && is_button_pressed(&d->s_game.event, sfMouseLeft))
+        holding = 1;
+    if (drag_info->slot && drag_info->slot->item && holding == 1 &&
+        d->s_game.event.type == sfEvtMouseMoved) {
+        drag_info->slot->is_dragging = 1;
+    }
+    if (drag_info->slot && drag_info->slot->item &&
+        d->s_game.event.mouseButton.button == sfMouseLeft &&
+        d->s_game.event.mouseButton.type == sfEvtMouseButtonReleased) {
+        holding = 0;
+        drag_info->slot->is_dragging = 0;
+    }
+}
+
 void iterate_slots(t_node *inv, all_t *d)
 {
     t_node *tmp = inv;
     t_slot *slot = ((t_slot *)tmp->data);
     sfVector2f f_mp = get_mouse_inv_position(d);
+    drag_update(d);
+    weapon_slot_update(d);
     while (tmp->next)
     {
         slot = ((t_slot *)tmp->data);
-        if (sfIntRect_contains(&slot->rect, f_mp.x, f_mp.y))
+        if (sfIntRect_contains(&slot->rect, f_mp.x, f_mp.y)) {
             slot->on_hover(d, slot, d->s_game.window);
-
+            slot->is_hover = 1;
+        } else {
+            sfSprite_setColor(slot->sprite_bg, (sfColor){255, 255, 255, 255});
+            slot->is_hover = 0;
+            slot->is_pressed = 0;
+            slot->is_hover = 0;
+        }
         tmp = tmp->next;
     }
 }
