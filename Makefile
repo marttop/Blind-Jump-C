@@ -60,6 +60,7 @@ SRC	=	src/main.c \
 		src/init/init_movement.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
+		src/init/init_minimap.c \
 		src/init/init_explosions.c \
 		src/teleporter.c \
 		src/pathfinding/breadth_first_search.c \

@@ -343,6 +343,13 @@ typedef struct effect {
     sfTexture *tp_glow_tx;
 } effect_t;
 
+typedef struct minimap {
+    sfSprite *sprite;
+    sfSprite *black;
+    sfSprite *cross1;
+    sfSprite *cross2;
+} minimap_t;
+
 typedef struct teleporter {
     sfSprite *tp;
     sfVector2f tp_pos;
@@ -371,6 +378,7 @@ typedef struct all {
     direction_t s_direction;
     spawn_t s_spawn;
     t_item_database item_db;
+    minimap_t s_minimap;
     mob_pos_t s_mob_pos;
     struct mob *s_mob;
     struct chest *s_chest;
@@ -486,6 +494,7 @@ float calcul_mob_magnitude(mob_t *temp, sfSprite *sprite);
 float calcul_chest_magnitude(chest_t *temp, sfSprite *sprite);
 int loop_chest_hitbox(all_t *s_all);
 void chest_message(all_t *s_all);
+void init_minimap(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 

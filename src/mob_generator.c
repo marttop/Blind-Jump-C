@@ -70,7 +70,7 @@ void generate_random_mobs2(all_t *s_all)
         breadth_first_search_entity(s_all->s_map.map, s_all, randx, randy)
         != NULL) {
             s_all->s_mob = fill_mob(s_all->s_mob, 'A',
-            (sfVector2f){randx * 32 + 8, randy * 26 + 5}, s_all);
+            (sfVector2f){randx * 32 + 13, randy * 26}, s_all);
             i--;
         }
     } generate_random_chests(s_all);
@@ -89,7 +89,7 @@ void generate_random_mobs(all_t *s_all)
         breadth_first_search_entity(s_all->s_map.map, s_all, randx, randy)
         != NULL) {
             s_all->s_mob = fill_mob(s_all->s_mob, 'B',
-            (sfVector2f){randx * 32 + 8, randy * 26 + 5}, s_all);
+            (sfVector2f){randx * 32 + 8, randy * 26 - 4}, s_all);
             i--;
         }
     } generate_random_mobs2(s_all);
