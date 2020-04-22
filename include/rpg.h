@@ -208,6 +208,8 @@ typedef struct mob {
     sfTime rect_time;
     float rect_seconds;
     sfIntRect rect;
+    sfText *text;
+    char *name, *strlvl;
     sfSprite *shadow;
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
@@ -216,7 +218,7 @@ typedef struct mob {
     int x, y, hor, ver, xp;
     char **path;
     struct mob *next;
-    int aggro, hp;
+    int aggro, hp, lvl;
 } mob_t;
 
 typedef struct p_infos {
@@ -314,6 +316,7 @@ typedef struct map {
     char **grass;
     int x;
     int y;
+    int stage;
 } map_t;
 
 typedef struct chest {
@@ -407,9 +410,11 @@ void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
 void display_explosions(all_t *s_all);
+void init_mob_interface(mob_t *new, char type, all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void display_chests_over(all_t *s_all, int y);
+void display_mobs2(mob_t *temp, all_t *s_all);
 int display_chests_under(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void update_xp(all_t *s_all);
