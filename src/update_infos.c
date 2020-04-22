@@ -16,7 +16,7 @@ void level_up(all_t *s_all)
         free(s_all->s_infos.str_xp);
     if (s_all->s_infos.str_level != NULL)
         free(s_all->s_infos.str_level);
-    s_all->s_infos.level += 1;
+    s_all->s_infos.level += 1, s_all->s_infos.dmg += 50;
     s_all->s_infos.str_xp = malloc(25);
     s_all->s_infos.str_level = malloc(20);
     s_all->s_infos.str_xp[0] = '\0', s_all->s_infos.str_level[0] = '\0';

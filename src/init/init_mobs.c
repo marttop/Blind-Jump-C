@@ -24,7 +24,7 @@ void mob_selector(mob_t *new, char type, sfVector2f pos)
         new->shadow_pos = (sfVector2f){pos.x + 10, pos.y + 17};
         new->rect = (sfIntRect){0, 57, 18, 17};
         sfSprite_setOrigin(new->mob, (sfVector2f){9, 9});
-        new->xp = 10;
+        new->xp = 10, new->hp = 150;
     }
     if (type == 'A') {
         sfSprite_setScale(new->shadow, (sfVector2f){0.80, 0.80});
@@ -32,7 +32,7 @@ void mob_selector(mob_t *new, char type, sfVector2f pos)
         new->shadow_pos = (sfVector2f){pos.x + 6, pos.y + 14};
         new->rect = (sfIntRect){88, 161, 12, 12};
         sfSprite_setOrigin(new->mob, (sfVector2f){6, 6});
-        new->xp = 7;
+        new->xp = 7, new->hp = 100;
     }
 }
 
@@ -53,7 +53,7 @@ mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
     sfSprite_setTexture(new->shadow, new->shadow_tx, sfTrue);
     mob_selector(new, type, pos);
     new->type = type, new->next = old;
-    fill_mob2(new);
+    fill_mob2(new), init_mob_interface(new, type, s_all);
     return (new);
 }
 
@@ -71,7 +71,10 @@ void display_mobs(all_t *s_all)
     mob_t *temp = s_all->s_mob;
     while (temp != NULL) {
         float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
-        if (magnitude <= 150 && s_all->s_player.tp == 0) temp->aggro = 1;
+        if (magnitude <= 150 && s_all->s_player.tp == 0) {
+            temp->aggro = 1;
+            sfText_setColor(temp->text, (sfColor){255, 20, 20, 255});
+        }
         if (temp->seconds > 0.01 && temp->aggro == 1
         && s_all->s_player.tp == 0)
             search_mob_path(temp, s_all);
@@ -81,10 +84,7 @@ void display_mobs(all_t *s_all)
         if (temp->rect_seconds > 0.1 && temp->type == 'A' && temp->aggro == 1
         && s_all->s_player.tp == 0)
             move_mobs_rect(temp, 100, 12, 88);
-        sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
-        sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
-        sfSprite_setPosition(temp->mob, temp->mob_pos);
-        sfSprite_setPosition(temp->shadow, temp->shadow_pos);
+        display_mobs2(temp, s_all);
         temp = temp->next;
     } check_mob_hitboxes(s_all);
     destroy_mobs(s_all);

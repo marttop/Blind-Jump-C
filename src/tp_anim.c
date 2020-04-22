@@ -105,6 +105,7 @@ void tp_animation(all_t *s_all)
     if (hitbox_tp(s_all) == 1 && s_all->s_player.tp == 0
     && (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP)) {
         s_all->s_player.tp = 1;
+        s_all->s_map.stage += 1;
         s_all->s_player.hero_rect.left = 406;
         s_all->s_player.hero_rect.top = 109;
         s_all->s_player.hero_rect.height = 31;
