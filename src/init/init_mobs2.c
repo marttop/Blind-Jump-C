@@ -10,7 +10,7 @@
 
 void init_mob_interface(mob_t *new, char type, all_t *s_all)
 {
-    int lvl = s_all->s_map.stage;
+    int lvl = rand() % (s_all->s_map.stage + 1) + s_all->s_map.stage;
     new->text = sfText_create();
     sfText_setFont(new->text, s_all->s_game.font);
     sfText_setPosition(new->text, (sfVector2f)
