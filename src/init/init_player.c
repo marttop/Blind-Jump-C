@@ -21,7 +21,7 @@ void init_hero3(all_t *s_all)
     s_all->s_player.hit_clk = sfClock_create();
     s_all->s_player.refresh_clk = sfClock_create();
     s_all->s_player.shoot_pos = (sfVector2f){s_all->s_player.hero_pos.x + 11,
-    s_all->s_player.hero_pos.y + 20};
+    s_all->s_player.hero_pos.y + 20}, s_all->s_infos.dmg = 50;
     s_all->s_player.ver_pos = s_all->s_player.shoot_pos;
     s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
     s_all->s_player.hit = 0, s_all->s_player.right = 0;

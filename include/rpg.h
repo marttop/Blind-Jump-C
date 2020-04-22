@@ -216,7 +216,7 @@ typedef struct mob {
     int x, y, hor, ver, xp;
     char **path;
     struct mob *next;
-    int aggro;
+    int aggro, hp;
 } mob_t;
 
 typedef struct p_infos {
@@ -226,7 +226,7 @@ typedef struct p_infos {
     char *str_xp;
     char *str_current_xp;
     char *str_max_xp;
-    int current_xp, max_xp, level;
+    int current_xp, max_xp, level, dmg;
     char *str_level;
     sfText *xp_txt;
     sfText *lvl_txt;
