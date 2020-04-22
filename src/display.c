@@ -47,6 +47,16 @@ void display_map(all_t *s_all)
     }
 }
 
+void display_minimap(all_t *s_all)
+{
+    if (s_all->s_game.scene == MAP) {
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_minimap.black, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_minimap.sprite, NULL);
+    }
+}
+
 void display_hud_anim(all_t *s_all)
 {
     display_debug(s_all);
@@ -58,6 +68,7 @@ void display_hud_anim(all_t *s_all)
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     draw_inventory(s_all);
     display_infos(s_all);
+    display_minimap(s_all);
 }
 
 void display(all_t *s_all)
