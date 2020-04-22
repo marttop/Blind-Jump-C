@@ -6,7 +6,6 @@
 */
 
 #include "rpg.h"
-#include "equipment.h"
 
 void setup(all_t *s_all)
 {

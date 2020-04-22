@@ -10,5 +10,22 @@
 
 void init_equipment(all_t *s_all)
 {
+    t_equipment *e = &s_all->s_game.equipment;
+    e->render_tex = sfRenderTexture_create(64, 64, 0);
+    e->render_sprite = sfSprite_create();
+    sfSprite_setTexture(e->render_sprite,
+        sfRenderTexture_getTexture(e->render_tex), 0);
+    sfSprite_setPosition(e->render_sprite, (sfVector2f){600, 910});
     init_weapon_slot(s_all);
+}
+
+void draw_equipment(all_t *s_all)
+{
+    t_equipment *e = &s_all->s_game.equipment;
+    e->slot_w->rect.left = sfSprite_getPosition(e->render_sprite).x;
+    e->slot_w->rect.top = sfSprite_getPosition(e->render_sprite).y;
+    sfRenderTexture_clear(e->render_tex, sfRed);
+    sfRenderTexture_display(e->render_tex);
+    draw_weapon_slot(s_all);
+    sfRenderWindow_drawSprite(s_all->s_game.window, e->render_sprite, NULL);
 }

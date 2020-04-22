@@ -31,6 +31,7 @@ SRC	=	src/main.c \
 		src/rect_hero2.c \
 		src/rect_hero3.c \
 		src/init/init_mobs.c \
+		src/init/init_mobs2.c \
 		src/map.c \
 		src/map2.c \
 		src/mob_generator.c \
@@ -50,6 +51,7 @@ SRC	=	src/main.c \
 		src/inventory/list_helpers.c \
 		src/inventory/tooltip.c \
 		src/inventory/slot_utils.c \
+		src/inventory/hovering.c \
 		src/items/items_database.c \
 		src/items/weapon.c \
 		src/equipment/weapon_slot.c \

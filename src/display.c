@@ -67,6 +67,8 @@ void display_hud_anim(all_t *s_all)
     sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     draw_inventory(s_all);
+    draw_equipment(s_all);
+    draw_tooltip(s_all);
     display_infos(s_all);
     display_minimap(s_all);
 }

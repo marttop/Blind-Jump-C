@@ -57,6 +57,11 @@ typedef enum consumable_type {
     DMG_BUFF,
 } e_consumable_type;
 
+typedef enum item_type {
+    WEAPON,
+    CONSUMABLE
+} e_item_type;
+
 typedef enum rarity {
     COMMON,
     UNCOMMON,
@@ -90,7 +95,7 @@ typedef struct item_database{
     t_consumable consumables[12];
 } t_item_database;
 
-typedef union item
+typedef struct item
 {
     t_weapon weapon;
     t_consumable consum;
@@ -101,6 +106,7 @@ typedef struct slot
     int id;
     int is_hover;
     int has_item;
+    int is_pressed;
     sfBool is_dragging;
     sfTexture *texture_bg;
     sfTexture *texture_clck;
@@ -110,8 +116,9 @@ typedef struct slot
     sfVector2f pos;
     sfIntRect rect;
     u_item *item;
+    e_item_type type;
     void (*on_hover)(void *d, struct slot *s, sfRenderWindow *w);
-    void (*on_click)(void *d, struct slot *s, sfRenderWindow *w);
+    void (*on_left_click)(void *d, struct slot *s, sfRenderWindow *w);
     void (*on_drag)(void *d, struct slot *s, sfRenderWindow *w);
 } t_slot;
 
@@ -149,6 +156,8 @@ typedef struct inventory
 typedef struct equipment
 {
     t_slot *slot_w;
+    sfRenderTexture *render_tex;
+    sfSprite        *render_sprite;
 } t_equipment;
 
 ////////////////////////////////////////
@@ -199,6 +208,8 @@ typedef struct mob {
     sfTime rect_time;
     float rect_seconds;
     sfIntRect rect;
+    sfText *text;
+    char *name, *strlvl;
     sfSprite *shadow;
     sfTexture *shadow_tx;
     sfVector2f shadow_pos;
@@ -207,7 +218,7 @@ typedef struct mob {
     int x, y, hor, ver, xp;
     char **path;
     struct mob *next;
-    int aggro;
+    int aggro, hp, lvl;
 } mob_t;
 
 typedef struct p_infos {
@@ -217,7 +228,7 @@ typedef struct p_infos {
     char *str_xp;
     char *str_current_xp;
     char *str_max_xp;
-    int current_xp, max_xp, level;
+    int current_xp, max_xp, level, dmg;
     char *str_level;
     sfText *xp_txt;
     sfText *lvl_txt;
@@ -305,6 +316,7 @@ typedef struct map {
     char **grass;
     int x;
     int y;
+    int stage;
 } map_t;
 
 typedef struct chest {
@@ -406,9 +418,11 @@ void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
 void display_explosions(all_t *s_all);
+void init_mob_interface(mob_t *new, char type, all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void display_chests_over(all_t *s_all, int y);
+void display_mobs2(mob_t *temp, all_t *s_all);
 int display_chests_under(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void update_xp(all_t *s_all);
@@ -448,12 +462,17 @@ sfBool is_button_released(sfEvent *e, sfMouseButton button);
 sfBool is_button_pressed(sfEvent *e, sfMouseButton button);
 sfBool is_key_released(sfEvent *e, sfKeyCode key);
 sfBool is_key_presssed(sfEvent *e, sfKeyCode key);
+sfVector2f get_mouse_inv_position(all_t *d);
+void weapon_slot_update(all_t *s_all);
 void init_inventory(all_t *data);
 void update_inventory(all_t *d);
+void on_drag(void *data, struct slot *s, sfRenderWindow *w);
 void draw_inventory(all_t *d);
 void draw_tooltip(all_t *s_all);
 void add_weapon(t_node *inv, u_item *item);
 void iterate_dealloc(t_node *n);
+void init_equipment(all_t *s_all);
+void draw_equipment(all_t *s_all);
 u_item *create_pistol(void);
 u_item *create_scorpion(void);
 void display_debug(all_t *s_all);
