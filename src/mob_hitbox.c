@@ -7,24 +7,34 @@
 
 #include "rpg.h"
 
+int mob_is_hit(all_t *s_all, mob_t *temp)
+{
+    sfFloatRect mob_rect, ver_rect, hor_rect;
+    mob_rect = sfSprite_getGlobalBounds(temp->mob);
+    ver_rect = sfSprite_getGlobalBounds(s_all->s_player.ver_shoot);
+    hor_rect = sfSprite_getGlobalBounds(s_all->s_player.hor_shoot);
+    if ((sfFloatRect_intersects(&mob_rect, &ver_rect, NULL)
+        && s_all->s_player.ver == 1) ||
+        (sfFloatRect_intersects(&mob_rect, &hor_rect, NULL)
+        && s_all->s_player.hor == 1))
+        return (1);
+    return (0);
+}
+
 void check_mob_hitboxes(all_t *s_all)
 {
     mob_t *temp = s_all->s_mob;
-    sfFloatRect mob_rect, ver_rect, hor_rect;
     if (s_all->s_player.shooting == 0) return;
     while (temp != NULL) {
-        mob_rect = sfSprite_getGlobalBounds(temp->mob);
-        ver_rect = sfSprite_getGlobalBounds(s_all->s_player.ver_shoot);
-        hor_rect = sfSprite_getGlobalBounds(s_all->s_player.hor_shoot);
-        if ((sfFloatRect_intersects(&mob_rect, &ver_rect, NULL)
-        && s_all->s_player.ver == 1) ||
-        (sfFloatRect_intersects(&mob_rect, &hor_rect, NULL)
-        && s_all->s_player.hor == 1)) {
+        if (mob_is_hit(s_all, temp)) {
             move_hit(s_all);
             move_explosion(s_all);
+            temp->hp -= s_all->s_infos.dmg;
+        }
+        if (temp->hp <= 0) {
             s_all->s_infos.current_xp += temp->xp;
-            update_xp(s_all);
             temp->status = -1;
+            update_xp(s_all);
         }
         temp = temp->next;
     }
