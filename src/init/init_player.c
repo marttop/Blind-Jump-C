@@ -16,7 +16,7 @@ void init_hero3(all_t *s_all)
         s_all->s_player.hero_tx, sfTrue);
     s_all->s_player.hit_rect = (sfIntRect){88, 145, 16, 16};
     sfSprite_setTextureRect(s_all->s_player.hit_sprite,
-    s_all->s_player.hit_rect);
+    s_all->s_player.hit_rect), s_all->s_infos.is_color = 0;
     sfSprite_setOrigin(s_all->s_player.hit_sprite, (sfVector2f){8, 8});
     s_all->s_player.hit_clk = sfClock_create();
     s_all->s_player.refresh_clk = sfClock_create();

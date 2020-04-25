@@ -66,10 +66,12 @@ void display_hud_anim(all_t *s_all)
     chest_message(s_all);
     sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
-    draw_inventory(s_all);
-    draw_equipment(s_all);
-    draw_tooltip(s_all);
-    display_infos(s_all);
+    if (s_all->s_game.scene != GAME_OVER) {
+        draw_inventory(s_all);
+        draw_equipment(s_all);
+        draw_tooltip(s_all);
+        display_infos(s_all);
+    }
     display_minimap(s_all);
 }
 
@@ -77,6 +79,7 @@ void display(all_t *s_all)
 {
     display_spawn(s_all);
     display_map(s_all);
+    display_game_over(s_all);
     display_hud_anim(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }

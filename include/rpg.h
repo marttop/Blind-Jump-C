@@ -44,6 +44,10 @@
 #define MAP (2)
 #endif
 
+#ifndef GAME_OVER
+#define GAME_OVER (3)
+#endif
+
 /////////////////////////////////////////
 // Inventory & Equipment & Items
 
@@ -224,14 +228,25 @@ typedef struct mob {
 typedef struct p_infos {
     sfRectangleShape *xp;
     sfRectangleShape *xp_base;
+    sfRectangleShape *hp;
+    sfRectangleShape *hp_base;
+    sfClock *clock;
+    sfClock *hit_clk;
+    sfTime time, hit_tm;
+    int is_hit, is_color;
+    float seconds, hit_sec;
     char *p_name;
     char *str_xp;
     char *str_current_xp;
     char *str_max_xp;
-    int current_xp, max_xp, level, dmg;
+    char *str_hp;
+    int current_xp, max_xp, level, dmg, max_hp, current_hp;
     char *str_level;
     sfText *xp_txt;
+    sfText *hp_txt;
+    sfText *heath;
     sfText *lvl_txt;
+    sfText *game_over;
     sfText *p_name_txt;
 } p_infos_t;
 
@@ -417,12 +432,14 @@ void display_infos(all_t *s_all);
 void generate_random_mobs(all_t *s_all);
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all);
 void get_movement(all_t *s_all);
+void info_clocks(all_t *s_all);
 void display_explosions(all_t *s_all);
 void init_mob_interface(mob_t *new, char type, all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
 void display_chests_over(all_t *s_all, int y);
 void display_mobs2(mob_t *temp, all_t *s_all);
+void loosing_hp(all_t *s_all);
 int display_chests_under(all_t *s_all);
 void movement_left_right(all_t *s_all);
 void update_xp(all_t *s_all);
@@ -432,6 +449,7 @@ void movement_diagonal_right_down(all_t *s_all);
 void movement_diagonal_right_up(all_t *s_all);
 void rect_hero(all_t *s_all);
 void init_infos(all_t *s_all);
+void player_immunity(all_t *s_all);
 void display_hit(all_t *s_all);
 sfRectangleShape *init_hitbox_debug(sfRectangleShape *rectangle, sfVector2f pos,
     sfSprite *sprite);
@@ -458,6 +476,7 @@ void display_spawn_over(all_t *s_all);
 void move_camera(all_t *s_all);
 int check_borders(all_t *s_all);
 int check_middle_wall(all_t *s_all);
+void game_over_check(all_t *s_all);
 sfBool is_button_released(sfEvent *e, sfMouseButton button);
 sfBool is_button_pressed(sfEvent *e, sfMouseButton button);
 sfBool is_key_released(sfEvent *e, sfKeyCode key);
@@ -496,6 +515,7 @@ void free_map(char **map);
 char **create_map(int x, int y);
 void display_tiles(all_t *s_all);
 void generate_random_map(all_t *s_all);
+void display_game_over(all_t *s_all);
 char **init_new_random_map(all_t *s_all);
 void fill_random_map(char **map);
 char **copy_map(char **old_map);
