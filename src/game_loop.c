@@ -21,6 +21,7 @@ int game_loop(all_t *s_all)
         game_clocks(s_all);
         player_movement(s_all);
         display(s_all);
+        game_over_check(s_all);
     }
 
     return (EXIT_SUCCESS);

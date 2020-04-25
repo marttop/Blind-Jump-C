@@ -24,12 +24,51 @@ void init_xp_bar(all_t *s_all)
     sfRectangleShape_setSize(s_all->s_infos.xp_base, (sfVector2f){450, 20});
 }
 
+void init_hp_texts(all_t *s_all)
+{
+    s_all->s_infos.hp_txt = sfText_create();
+    s_all->s_infos.heath = sfText_create();
+    s_all->s_infos.hit_clk = sfClock_create();
+    s_all->s_infos.hit_sec = 0;
+    sfText_setFont(s_all->s_infos.heath, s_all->s_game.font);
+    sfText_setPosition(s_all->s_infos.heath, (sfVector2f){1625, 35});
+    sfText_setString(s_all->s_infos.heath, "Health");
+    s_all->s_infos.game_over = sfText_create();
+    sfText_setFont(s_all->s_infos.game_over, s_all->s_game.font);
+    sfText_setPosition(s_all->s_infos.game_over, (sfVector2f){850, 450});
+    sfText_setString(s_all->s_infos.game_over, " GAME OVER\nYOU ARE DEAD");
+    sfText_setFont(s_all->s_infos.hp_txt, s_all->s_game.font);
+    sfText_setPosition(s_all->s_infos.hp_txt, (sfVector2f){1635, 77});
+    sfText_setString(s_all->s_infos.hp_txt, "100/100");
+    s_all->s_infos.current_hp = 100, s_all->s_infos.max_hp = 100;
+    s_all->s_infos.str_hp = NULL;
+    sfText_setCharacterSize(s_all->s_infos.game_over, 40);
+    sfText_setCharacterSize(s_all->s_infos.hp_txt, 20);
+}
+
+void init_hp_bar(all_t *s_all)
+{
+    s_all->s_infos.clock = sfClock_create();
+    s_all->s_infos.hp = sfRectangleShape_create();
+    s_all->s_infos.hp_base = sfRectangleShape_create();
+    sfRectangleShape_setFillColor(s_all->s_infos.hp,
+        (sfColor){0, 190, 0, 255});
+    sfRectangleShape_setFillColor(s_all->s_infos.hp_base,
+        (sfColor){35, 35, 35, 255});
+    sfRectangleShape_setPosition(s_all->s_infos.hp,
+        (sfVector2f){1550, 80});
+    sfRectangleShape_setPosition(s_all->s_infos.hp_base,
+        (sfVector2f){1550, 79});
+    sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){250, 20});
+    sfRectangleShape_setSize(s_all->s_infos.hp_base, (sfVector2f){250, 22});
+}
+
 void init_infos(all_t *s_all)
 {
-    init_xp_bar(s_all);
+    init_xp_bar(s_all), init_hp_bar(s_all), init_hp_texts(s_all);
     s_all->s_infos.p_name_txt = sfText_create();
-    s_all->s_infos.lvl_txt = sfText_create();
-    s_all->s_infos.xp_txt = sfText_create();
+    s_all->s_infos.lvl_txt = sfText_create(), s_all->s_infos.seconds = 0;
+    s_all->s_infos.xp_txt = sfText_create(), s_all->s_infos.is_hit = 0;
     sfText_setFont(s_all->s_infos.p_name_txt, s_all->s_game.font);
     sfText_setPosition(s_all->s_infos.p_name_txt, (sfVector2f){725, 905});
     sfText_setString(s_all->s_infos.p_name_txt, "Verge");
@@ -54,10 +93,18 @@ void display_infos(all_t *s_all)
         s_all->s_infos.xp_base, NULL);
     sfRenderWindow_drawRectangleShape(s_all->s_game.window,
         s_all->s_infos.xp, NULL);
+    sfRenderWindow_drawRectangleShape(s_all->s_game.window,
+        s_all->s_infos.hp_base, NULL);
+    sfRenderWindow_drawRectangleShape(s_all->s_game.window,
+        s_all->s_infos.hp, NULL);
     sfRenderWindow_drawText(s_all->s_game.window,
         s_all->s_infos.p_name_txt, NULL);
     sfRenderWindow_drawText(s_all->s_game.window,
         s_all->s_infos.lvl_txt, NULL);
     sfRenderWindow_drawText(s_all->s_game.window,
         s_all->s_infos.xp_txt, NULL);
+    sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_infos.heath, NULL);
+    sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_infos.hp_txt, NULL);
 }

@@ -11,6 +11,7 @@ CC	=	gcc
 
 SRC	=	src/main.c \
 		src/clock.c \
+		src/clocks2.c \
 		src/display.c \
 		src/game_loop.c \
 		src/event_control.c \
@@ -21,6 +22,7 @@ SRC	=	src/main.c \
 		src/player_diagonal.c \
 		src/hitbox_debug.c \
 		src/hitbox_spawn.c \
+		src/game_over.c \
 		src/spawn_scene.c \
 		src/display_effect.c \
 		src/aim_direction.c \
@@ -33,6 +35,7 @@ SRC	=	src/main.c \
 		src/init/init_mobs.c \
 		src/init/init_mobs2.c \
 		src/map.c \
+		src/player_hp.c \
 		src/map2.c \
 		src/mob_generator.c \
 		src/vectors.c \

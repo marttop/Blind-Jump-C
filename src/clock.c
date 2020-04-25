@@ -77,6 +77,7 @@ void game_clocks(all_t *s_all)
     s_all->s_explode.seconds =
         s_all->s_explode.time.microseconds / 1000000.0;
     player_clocks(s_all);
+    info_clocks(s_all);
     mob_clocks(s_all);
     chest_clocks(s_all);
     sfClock_restart(s_all->s_game.clock);
