@@ -38,6 +38,13 @@ void init_buttons(all_t *s_all)
     free(tab);
 }
 
+void click_buttons(all_t *s_all, m_buttons_t *tmp)
+{
+    if (s_all->s_game.event.mouseButton.type == sfEvtMouseButtonPressed) {
+        sfSprite_setTexture(tmp->sprite, tmp->button2, sfTrue);
+    } 
+}
+
 void dispay_buttons(all_t *s_all)
 {
     m_buttons_t *tmp = s_all->s_buttons;
