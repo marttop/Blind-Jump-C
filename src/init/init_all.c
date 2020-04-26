@@ -27,7 +27,7 @@ void setup(all_t *s_all)
     s_all->s_mob = NULL;
     s_all->s_chest = NULL;
     s_all->s_game.font = sfFont_createFromFile("font/Cornerstone.ttf");
-    s_all->s_game.font = sfFont_createFromFile("font/AUDIMSCB.TTF");
+    s_all->s_game.monospaced = sfFont_createFromFile("font/AUDIMSCB.TTF");
     init_view(s_all);
     randomize();
 }
