@@ -17,9 +17,9 @@ void init_xp_bar(all_t *s_all)
     sfRectangleShape_setFillColor(s_all->s_infos.xp_base,
         (sfColor){35, 35, 35, 255});
     sfRectangleShape_setPosition(s_all->s_infos.xp,
-        (sfVector2f){725, 950});
+        (sfVector2f){725, 930});
     sfRectangleShape_setPosition(s_all->s_infos.xp_base,
-        (sfVector2f){725, 950});
+        (sfVector2f){725, 930});
     sfRectangleShape_setSize(s_all->s_infos.xp, (sfVector2f){3, 20});
     sfRectangleShape_setSize(s_all->s_infos.xp_base, (sfVector2f){450, 20});
 }
@@ -31,14 +31,14 @@ void init_hp_texts(all_t *s_all)
     s_all->s_infos.hit_clk = sfClock_create();
     s_all->s_infos.hit_sec = 0;
     sfText_setFont(s_all->s_infos.heath, s_all->s_game.font);
-    sfText_setPosition(s_all->s_infos.heath, (sfVector2f){1625, 35});
+    sfText_setPosition(s_all->s_infos.heath, (sfVector2f){1650, 35});
     sfText_setString(s_all->s_infos.heath, "Health");
     s_all->s_infos.game_over = sfText_create();
     sfText_setFont(s_all->s_infos.game_over, s_all->s_game.font);
     sfText_setPosition(s_all->s_infos.game_over, (sfVector2f){850, 450});
     sfText_setString(s_all->s_infos.game_over, " GAME OVER\nYOU ARE DEAD");
     sfText_setFont(s_all->s_infos.hp_txt, s_all->s_game.font);
-    sfText_setPosition(s_all->s_infos.hp_txt, (sfVector2f){1635, 77});
+    sfText_setPosition(s_all->s_infos.hp_txt, (sfVector2f){1662, 77});
     sfText_setString(s_all->s_infos.hp_txt, "100/100");
     s_all->s_infos.current_hp = 100, s_all->s_infos.max_hp = 100;
     s_all->s_infos.str_hp = NULL;
@@ -56,11 +56,11 @@ void init_hp_bar(all_t *s_all)
     sfRectangleShape_setFillColor(s_all->s_infos.hp_base,
         (sfColor){35, 35, 35, 255});
     sfRectangleShape_setPosition(s_all->s_infos.hp,
-        (sfVector2f){1550, 80});
+        (sfVector2f){1575, 80});
     sfRectangleShape_setPosition(s_all->s_infos.hp_base,
-        (sfVector2f){1550, 79});
+        (sfVector2f){1575, 80});
     sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){250, 20});
-    sfRectangleShape_setSize(s_all->s_infos.hp_base, (sfVector2f){250, 22});
+    sfRectangleShape_setSize(s_all->s_infos.hp_base, (sfVector2f){250, 20});
 }
 
 void init_infos(all_t *s_all)
@@ -70,10 +70,10 @@ void init_infos(all_t *s_all)
     s_all->s_infos.lvl_txt = sfText_create(), s_all->s_infos.seconds = 0;
     s_all->s_infos.xp_txt = sfText_create(), s_all->s_infos.is_hit = 0;
     sfText_setFont(s_all->s_infos.p_name_txt, s_all->s_game.font);
-    sfText_setPosition(s_all->s_infos.p_name_txt, (sfVector2f){725, 905});
+    sfText_setPosition(s_all->s_infos.p_name_txt, (sfVector2f){725, 885});
     sfText_setString(s_all->s_infos.p_name_txt, "Verge");
     sfText_setFont(s_all->s_infos.lvl_txt, s_all->s_game.font);
-    sfText_setPosition(s_all->s_infos.lvl_txt, (sfVector2f){1060, 905});
+    sfText_setPosition(s_all->s_infos.lvl_txt, (sfVector2f){1060, 885});
     sfText_setString(s_all->s_infos.lvl_txt, "Level 1");
     sfText_setFont(s_all->s_infos.xp_txt, s_all->s_game.font);
     s_all->s_infos.current_xp = 0, s_all->s_infos.max_xp = 100;
@@ -83,7 +83,7 @@ void init_infos(all_t *s_all)
     my_strcat(s_all->s_infos.str_xp, "/"), s_all->s_infos.p_name = malloc(15);
     my_strcat(s_all->s_infos.str_xp, strnbr(s_all->s_infos.max_xp));
     sfText_setString(s_all->s_infos.xp_txt, s_all->s_infos.str_xp);
-    sfText_setPosition(s_all->s_infos.xp_txt, (sfVector2f){1200, 948});
+    sfText_setPosition(s_all->s_infos.xp_txt, (sfVector2f){1200, 928});
     sfText_setCharacterSize(s_all->s_infos.xp_txt, 20);
 }
 

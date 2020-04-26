@@ -21,6 +21,7 @@ void init_effect2(all_t *s_all)
         s_all->s_effect.tp_glow_tx, sfTrue);
     sfSprite_setPosition(s_all->s_effect.tp_glow,
         (sfVector2f){s_all->s_tp.tp_pos.x - 190, s_all->s_tp.tp_pos.y - 195});
+    s_all->s_effect.anim = 0;
 }
 
 void init_effect(all_t *s_all)

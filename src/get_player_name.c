@@ -29,7 +29,7 @@ void my_popchar(all_t *s_all)
 
 void get_text_entered(all_t *s_all)
 {
-    if (s_all->s_game.scene == CUSTOM) {
+    if (s_all->s_game.scene == CUSTOM && s_all->s_effect.anim > 45) {
         if (s_all->s_game.event.type == sfEvtTextEntered &&
         my_strlen(s_all->s_infos.p_name) < 20) {
             my_getchar(s_all->s_game.event.text.unicode, s_all);
@@ -41,8 +41,10 @@ void get_text_entered(all_t *s_all)
         }
         else if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
             sfText_setPosition(s_all->s_infos.p_name_txt,
-                (sfVector2f){725, 905});
+                (sfVector2f){725, 885});
             s_all->s_game.scene = SPAWN;
+            sfRectangleShape_setFillColor(s_all->s_tp.black,
+                (sfColor){0, 0, 0, 0});
         }
     }
 }

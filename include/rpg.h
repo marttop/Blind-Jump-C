@@ -282,6 +282,10 @@ typedef struct effect {
     sfVector2f vignette_pos;
     sfSprite *tp_glow;
     sfTexture *tp_glow_tx;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int anim;
 } effect_t;
 
 typedef struct minimap {
