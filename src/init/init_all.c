@@ -19,7 +19,7 @@ void setup(all_t *s_all)
     sfVideoMode mode = {1920, 1080, 32};
     s_all->s_game.window = sfRenderWindow_create(mode, "MY_RPG",
         sfDefaultStyle, NULL);
-    sfRenderWindow_setFramerateLimit(s_all->s_game.window, 200);
+    sfRenderWindow_setFramerateLimit(s_all->s_game.window, 60);
     sfRenderWindow_setPosition(s_all->s_game.window, (sfVector2i){0, 0});
     s_all->s_game.scene = MENU;
     s_all->s_game.debug_mode = 0;
@@ -27,7 +27,7 @@ void setup(all_t *s_all)
     s_all->s_mob = NULL;
     s_all->s_chest = NULL;
     s_all->s_game.font = sfFont_createFromFile("font/Cornerstone.ttf");
-    s_all->s_game.font = sfFont_createFromFile("font/AUDIMSCB.TTF");
+    s_all->s_game.monospaced = sfFont_createFromFile("font/joystix.ttf");
     init_view(s_all);
     randomize();
 }
