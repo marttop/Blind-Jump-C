@@ -21,4 +21,8 @@ void info_clocks(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_custom.clock);
     s_all->s_custom.seconds =
         s_all->s_custom.time.microseconds / 1000000.0;
+    s_all->s_game.time_button =
+        sfClock_getElapsedTime(s_all->s_game.clock_button);
+    s_all->s_game.seconds_button =
+        s_all->s_game.time_button.microseconds / 1000000.0;
 }
