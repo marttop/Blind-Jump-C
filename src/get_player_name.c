@@ -11,7 +11,7 @@
 void moove_cursor_right(all_t *s_all)
 {
     sfVector2f pos = s_all->s_custom.pos;
-    pos.x += 17;
+    pos.x += 25;
     s_all->s_custom.pos = pos;
     sfSprite_setPosition(s_all->s_custom.sprite, pos);
 }
@@ -19,7 +19,7 @@ void moove_cursor_right(all_t *s_all)
 void moove_cursor_left(all_t *s_all)
 {
     sfVector2f pos = s_all->s_custom.pos;
-    pos.x -= 17;
+    pos.x -= 25;
     s_all->s_custom.pos = pos;
     sfSprite_setPosition(s_all->s_custom.sprite, pos);
 }
@@ -50,7 +50,7 @@ void get_text_entered(all_t *s_all)
 {
     if (s_all->s_game.scene == CUSTOM) {
         if (s_all->s_game.event.type == sfEvtTextEntered &&
-        my_strlen(s_all->s_infos.p_name) < 20) {
+        my_strlen(s_all->s_infos.p_name) < 13) {
             my_getchar(s_all->s_game.event.text.unicode, s_all);
         }
         else if ((sfKeyboard_isKeyPressed(sfKeyBack) ||
