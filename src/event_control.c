@@ -32,7 +32,7 @@ void events_control(all_t *s_all)
         && s_all->s_game.scene == MENU)
             s_all->s_game.scene = CUSTOM;
         if (s_all->s_game.scene == CUSTOM)
-        get_text_entered(s_all);
+            get_text_entered(s_all);
         return;
     }
     get_movement(s_all);

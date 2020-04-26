@@ -27,8 +27,22 @@ void init_view(all_t *s_all)
 
 void move_camera2(all_t *s_all)
 {
-    sfRenderWindow_drawRectangleShape(s_all->s_game.window,
-        s_all->s_tp.black, NULL);
+    if (s_all->s_game.scene == CUSTOM && s_all->s_effect.seconds > 0.01
+    && s_all->s_effect.anim < 50) {
+        sfRectangleShape_setFillColor(s_all->s_tp.black,
+            (sfColor){0, 0, 0, 16});
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_effect.vignette2, s_all->s_effect.vignette_state);
+        sfRenderWindow_drawRectangleShape(s_all->s_game.window,
+            s_all->s_tp.black, NULL);
+        s_all->s_effect.anim++;
+        sfClock_restart(s_all->s_effect.clock);
+    } else if (s_all->s_game.scene != CUSTOM) {
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_effect.vignette2, s_all->s_effect.vignette_state);
+        sfRenderWindow_drawRectangleShape(s_all->s_game.window,
+            s_all->s_tp.black, NULL);
+    }
 }
 
 void move_camera(all_t *s_all)
@@ -50,7 +64,5 @@ void move_camera(all_t *s_all)
     if (s_all->s_game.scene == SPAWN)
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_effect.vignette1, NULL);
-    sfRenderWindow_drawSprite(s_all->s_game.window,
-        s_all->s_effect.vignette2, s_all->s_effect.vignette_state);
     move_camera2(s_all);
 }

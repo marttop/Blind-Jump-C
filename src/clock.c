@@ -11,6 +11,7 @@ void init_clocks(all_t *s_all)
 {
     s_all->s_game.clock = sfClock_create();
     s_all->s_game.clock_button = sfClock_create();
+    s_all->s_effect.clock = sfClock_create();
 }
 
 void player_clocks(all_t *s_all)
@@ -57,6 +58,8 @@ void chest_clocks(all_t *s_all)
         temp->seconds = temp->time.microseconds / 1000000.0;
         temp = temp->next;
     }
+    s_all->s_effect.time = sfClock_getElapsedTime(s_all->s_effect.clock);
+    s_all->s_effect.seconds = s_all->s_effect.time.microseconds / 1000000.0;
 }
 
 void game_clocks(all_t *s_all)
