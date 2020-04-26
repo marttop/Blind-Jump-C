@@ -52,6 +52,10 @@
 #define GAME_OVER (3)
 #endif
 
+#ifndef CUSTOM
+#define CUSTOM (4)
+#endif
+
 typedef struct game {
     sfRenderWindow *window;
     sfFont *font;
@@ -67,6 +71,17 @@ typedef struct game {
     sfSprite *menu;
     sfTexture *menu_tx;
 } game_t;
+
+typedef struct custom {
+    sfText *select_name;
+    sfRectangleShape *input;
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfVector2f pos;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+} custom_t;
 
 typedef struct direction {
     int up;
@@ -312,6 +327,7 @@ typedef struct all {
     effect_t s_effect;
     movement_t s_movement;
     player_t s_player;
+    custom_t s_custom;
     direction_t s_direction;
     spawn_t s_spawn;
     minimap_t s_minimap;
@@ -370,6 +386,7 @@ void display_hitbox_debug(all_t *s_all, sfRectangleShape *rectangle,
 void set_position_debug(sfRectangleShape *rectangle, sfVector2f pos);
 void activate_debug_mode(all_t *s_all);
 void init_direction(all_t *s_all);
+void get_text_entered(all_t *s_all);
 void get_aim_direction(all_t *s_all);
 int rect_down(all_t *s_all, int *check, int *i);
 int rect_up(all_t *s_all, int *check, int *i);
@@ -396,6 +413,8 @@ void display_light_spawn(all_t *s_all);
 void init_view(all_t *s_all);
 void init_tp(all_t *s_all);
 void tp_animation(all_t *s_all);
+void init_custom(all_t *s_all);
+void display_custom(all_t *s_all);
 void door_animation(all_t *s_all);
 void set_iddle_rect(all_t *s_all);
 int hitbox_tp(all_t *s_all);
