@@ -80,7 +80,7 @@ void init_infos(all_t *s_all)
     s_all->s_infos.str_xp = malloc(25), s_all->s_infos.str_level = NULL;
     s_all->s_infos.str_xp[0] = '\0', s_all->s_infos.level = 1;
     my_strcat(s_all->s_infos.str_xp, strnbr(s_all->s_infos.current_xp));
-    my_strcat(s_all->s_infos.str_xp, "/");
+    my_strcat(s_all->s_infos.str_xp, "/"), s_all->s_infos.p_name = malloc(15);
     my_strcat(s_all->s_infos.str_xp, strnbr(s_all->s_infos.max_xp));
     sfText_setString(s_all->s_infos.xp_txt, s_all->s_infos.str_xp);
     sfText_setPosition(s_all->s_infos.xp_txt, (sfVector2f){1200, 948});
