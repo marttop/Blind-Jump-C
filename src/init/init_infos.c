@@ -69,7 +69,7 @@ void init_infos(all_t *s_all)
     s_all->s_infos.p_name_txt = sfText_create();
     s_all->s_infos.lvl_txt = sfText_create(), s_all->s_infos.seconds = 0;
     s_all->s_infos.xp_txt = sfText_create(), s_all->s_infos.is_hit = 0;
-    sfText_setFont(s_all->s_infos.p_name_txt, s_all->s_game.font);
+    sfText_setFont(s_all->s_infos.p_name_txt, s_all->s_game.monospaced);
     sfText_setPosition(s_all->s_infos.p_name_txt, (sfVector2f){725, 885});
     sfText_setString(s_all->s_infos.p_name_txt, "Verge");
     sfText_setFont(s_all->s_infos.lvl_txt, s_all->s_game.font);
