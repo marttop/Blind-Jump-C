@@ -7,6 +7,15 @@
 
 #include "rpg.h"
 
+sfBool is_key_released(sfEvent *e, sfKeyCode key)
+{
+    if (e->key.code == key && e->key.type == sfEvtKeyReleased) {
+        e->mouseButton.type = -1;
+        return sfTrue;
+        }
+    return sfFalse;
+}
+
 void set_iddle_rect2(all_t *s_all)
 {
     if (is_key_released(&s_all->s_game.event, sfKeyLeft)

@@ -38,6 +38,8 @@ SRC	=	src/main.c \
 		src/player_hp.c \
 		src/map2.c \
 		src/mob_generator.c \
+		src/inventory_items.c \
+		src/display_inventory.c \
 		src/vectors.c \
 		src/chest_hitbox.c \
 		src/shoot.c \
@@ -48,23 +50,13 @@ SRC	=	src/main.c \
 		src/map_grass.c \
 		src/tp_anim.c \
 		src/destroy_mobs.c \
-		src/inventory/inventory.c \
-		src/inventory/slot_callbacks.c \
-		src/inventory/inventory_input.c \
-		src/inventory/list_helpers.c \
-		src/inventory/tooltip.c \
-		src/inventory/slot_utils.c \
-		src/inventory/hovering.c \
-		src/items/items_database.c \
-		src/items/weapon.c \
-		src/equipment/weapon_slot.c \
-		src/equipment/equipment.c \
 		src/init/init_player.c \
 		src/init/init_infos.c \
 		src/init/init_chests.c \
 		src/init/init_movement.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
+		src/init/init_inventory.c \
 		src/init/init_minimap.c \
 		src/init/init_explosions.c \
 		src/teleporter.c \
