@@ -65,6 +65,9 @@ typedef struct game {
     sfClock *clock;
     sfTime time;
     float seconds;
+    sfClock *clock_button;
+    sfTime time_button;
+    float seconds_button;
     int scene;
     int debug_mode;
     int display_inv;
@@ -77,6 +80,7 @@ typedef struct menu_buttons {
     sfSprite *sprite;
     sfTexture *button1;
     sfTexture *button2;
+    sfVector2f position;
     int id;
     struct menu_buttons *next;
 } m_buttons_t;

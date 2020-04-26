@@ -19,7 +19,7 @@ void setup(all_t *s_all)
     sfVideoMode mode = {1920, 1080, 32};
     s_all->s_game.window = sfRenderWindow_create(mode, "MY_RPG",
         sfDefaultStyle, NULL);
-    sfRenderWindow_setFramerateLimit(s_all->s_game.window, 60);
+    sfRenderWindow_setFramerateLimit(s_all->s_game.window, 200);
     sfRenderWindow_setPosition(s_all->s_game.window, (sfVector2i){0, 0});
     s_all->s_game.scene = MENU;
     s_all->s_game.debug_mode = 0;
