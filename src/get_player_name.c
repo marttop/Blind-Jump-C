@@ -11,7 +11,7 @@
 void moove_cursor_right(all_t *s_all)
 {
     sfVector2f pos = s_all->s_custom.pos;
-    pos.x += 18;
+    pos.x += 17;
     s_all->s_custom.pos = pos;
     sfSprite_setPosition(s_all->s_custom.sprite, pos);
 }
@@ -19,7 +19,7 @@ void moove_cursor_right(all_t *s_all)
 void moove_cursor_left(all_t *s_all)
 {
     sfVector2f pos = s_all->s_custom.pos;
-    pos.x -= 18;
+    pos.x -= 17;
     s_all->s_custom.pos = pos;
     sfSprite_setPosition(s_all->s_custom.sprite, pos);
 }
@@ -27,7 +27,7 @@ void moove_cursor_left(all_t *s_all)
 void my_getchar(sfUint32 c, all_t *s_all)
 {
     int i = my_strlen(s_all->s_infos.p_name);
-    if (c < 97 || c > 122) return;
+    if ((c < 97 || c > 122) && c != ' ') return;
     c = (char){c};
     s_all->s_infos.p_name[i] = c;
     i++;
@@ -61,6 +61,8 @@ void get_text_entered(all_t *s_all)
         else if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
             sfText_setPosition(s_all->s_infos.p_name_txt,
                 (sfVector2f){725, 905});
+            sfText_setFont(s_all->s_infos.p_name_txt,
+                s_all->s_game.font);
             s_all->s_game.scene = SPAWN;
         }
     }
