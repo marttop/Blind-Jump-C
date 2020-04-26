@@ -18,10 +18,6 @@ void display_spawn(all_t *s_all)
         move_camera(s_all);
         sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
-        draw_inventory(s_all);
-        if (s_all->s_game.inventory.drag_info.slot &&
-            s_all->s_game.inventory.drag_info.slot->is_dragging)
-        draw_tooltip(s_all);
     }
 }
 
@@ -50,7 +46,7 @@ void display_map(all_t *s_all)
 void display_minimap(all_t *s_all)
 {
     if (s_all->s_game.scene == MAP) {
-        sfRenderWindow_drawSprite(s_all->s_game.window,
+        sfRenderWindow_drawRectangleShape(s_all->s_game.window,
         s_all->s_minimap.black, NULL);
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_minimap.sprite, NULL);
@@ -67,10 +63,9 @@ void display_hud_anim(all_t *s_all)
     sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM) {
-        draw_inventory(s_all);
-        draw_equipment(s_all);
-        draw_tooltip(s_all);
         display_infos(s_all);
+        if(s_all->s_game.display_inv == 1)
+            display_inventory(s_all);
     }
     display_minimap(s_all);
 }

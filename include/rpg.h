@@ -52,124 +52,6 @@
 #define CUSTOM (4)
 #endif
 
-/////////////////////////////////////////
-// Inventory & Equipment & Items
-
-typedef enum weapon_type {
-    SINGLE_SHOT,
-    MULTI_SHOT,
-} e_weapon_type;
-
-typedef enum consumable_type {
-    HP_BUFF,
-    DMG_BUFF,
-} e_consumable_type;
-
-typedef enum item_type {
-    WEAPON,
-    CONSUMABLE
-} e_item_type;
-
-typedef enum rarity {
-    COMMON,
-    UNCOMMON,
-    HIGH,
-    LEGEND,
-} e_rarity;
-
-typedef struct weapon {
-    char *name;
-    int id;
-    int dmg;
-    float range;
-    e_rarity rarity;
-    e_weapon_type type;
-    sfSprite *sprite;
-
-} t_weapon;
-
-typedef struct consumable{
-    char *name;
-    int id;
-    int hp;
-    int dmg;
-    e_rarity rarity;
-    e_consumable_type type;
-    sfSprite *sprite;
-} t_consumable;
-
-typedef struct item_database{
-    t_weapon weapons[12];
-    t_consumable consumables[12];
-} t_item_database;
-
-typedef struct item
-{
-    t_weapon weapon;
-    t_consumable consum;
-} u_item;
-
-typedef struct slot
-{
-    int id;
-    int is_hover;
-    int has_item;
-    int is_pressed;
-    sfBool is_dragging;
-    sfTexture *texture_bg;
-    sfTexture *texture_clck;
-    sfTexture *texture_slect;
-    sfSprite *sprite_bg;
-    sfSprite *sprite_select;
-    sfVector2f pos;
-    sfIntRect rect;
-    u_item *item;
-    e_item_type type;
-    void (*on_hover)(void *d, struct slot *s, sfRenderWindow *w);
-    void (*on_left_click)(void *d, struct slot *s, sfRenderWindow *w);
-    void (*on_drag)(void *d, struct slot *s, sfRenderWindow *w);
-} t_slot;
-
-typedef struct node {
-    int id;
-    void *data;
-    struct node *next;
-    void (*dealloc)(struct node *, void *);
-} t_node;
-
-typedef struct drag_info
-{
-    void *item;
-    t_slot *slot;
-}t_drag_info;
-
-typedef struct dragtip
-{
-    sfRenderTexture *render_tex;
-    sfSprite        *render_sprite;
-    sfSprite        *item_sprite;
-} t_dragtip;
-
-
-typedef struct inventory
-{
-    t_node *inv;
-    sfRenderTexture *inv_tex;
-    sfSprite        *inv_sprite;
-    t_dragtip        dragtip;
-    sfVector2f       inv_pos;
-    t_drag_info      drag_info;
-}t_inventory;
-
-typedef struct equipment
-{
-    t_slot *slot_w;
-    sfRenderTexture *render_tex;
-    sfSprite        *render_sprite;
-} t_equipment;
-
-////////////////////////////////////////
-
 typedef struct game {
     sfRenderWindow *window;
     sfFont *font;
@@ -177,8 +59,6 @@ typedef struct game {
     sfView *camera;
     sfClock *clock;
     sfTime time;
-    t_inventory inventory;
-    t_equipment equipment;
     float seconds;
     int scene;
     int debug_mode;
@@ -387,7 +267,7 @@ typedef struct effect {
 
 typedef struct minimap {
     sfSprite *sprite;
-    sfSprite *black;
+    sfRectangleShape *black;
     sfSprite *cross1;
     sfSprite *cross2;
 } minimap_t;
@@ -408,6 +288,30 @@ typedef struct teleporter {
     int width;
 } tp_t;
 
+typedef struct slots {
+    sfSprite *slot;
+    int drag;
+    int is_item;
+    int id;
+    sfSprite *item;
+    struct slots *next;
+} slots_t;
+
+typedef struct inventory {
+    sfRectangleShape *inv_back;
+    sfTexture *selected_tx;
+    sfSprite *selected;
+    sfSprite *trash;
+    sfTexture *pistol;
+    sfTexture *scorpion;
+    sfTexture *trash_tx;
+    sfTexture *slot_tx;
+    slots_t *dragged;
+    slots_t *head;
+    int swap;
+    int drag;
+} inventory_t;
+
 typedef struct all {
     game_t s_game;
     tp_t s_tp;
@@ -417,16 +321,18 @@ typedef struct all {
     effect_t s_effect;
     movement_t s_movement;
     player_t s_player;
+    custom_t s_custom;
     direction_t s_direction;
     spawn_t s_spawn;
-    t_item_database item_db;
     minimap_t s_minimap;
     mob_pos_t s_mob_pos;
-    custom_t s_custom;
+    inventory_t s_inventory;
     struct mob *s_mob;
     struct chest *s_chest;
 } all_t;
 
+void init_inventory(all_t *s_all);
+void display_inventory(all_t *s_all);
 void init_all(all_t *s_all);
 void init_clocks(all_t *s_all);
 void game_clocks(all_t *s_all);
@@ -494,23 +400,6 @@ void move_camera(all_t *s_all);
 int check_borders(all_t *s_all);
 int check_middle_wall(all_t *s_all);
 void game_over_check(all_t *s_all);
-sfBool is_button_released(sfEvent *e, sfMouseButton button);
-sfBool is_button_pressed(sfEvent *e, sfMouseButton button);
-sfBool is_key_released(sfEvent *e, sfKeyCode key);
-sfBool is_key_presssed(sfEvent *e, sfKeyCode key);
-sfVector2f get_mouse_inv_position(all_t *d);
-void weapon_slot_update(all_t *s_all);
-void init_inventory(all_t *data);
-void update_inventory(all_t *d);
-void on_drag(void *data, struct slot *s, sfRenderWindow *w);
-void draw_inventory(all_t *d);
-void draw_tooltip(all_t *s_all);
-void add_weapon(t_node *inv, u_item *item);
-void iterate_dealloc(t_node *n);
-void init_equipment(all_t *s_all);
-void draw_equipment(all_t *s_all);
-u_item *create_pistol(void);
-u_item *create_scorpion(void);
 void display_debug(all_t *s_all);
 int check_ship(all_t *s_all);
 void init_effect(all_t *s_all);
@@ -553,6 +442,11 @@ float calcul_chest_magnitude(chest_t *temp, sfSprite *sprite);
 int loop_chest_hitbox(all_t *s_all);
 void chest_message(all_t *s_all);
 void init_minimap(all_t *s_all);
+sfBool is_key_released(sfEvent *e, sfKeyCode key);
+void put_item_in_slot(all_t *s_all, int id);
+void slot_click(all_t *s_all, slots_t *tmp);
+void drag_item(all_t *s_all);
+void set_texture_items(slots_t *tmp, int id, all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 
