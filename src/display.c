@@ -62,7 +62,7 @@ void display_hud_anim(all_t *s_all)
     chest_message(s_all);
     sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
-    if (s_all->s_game.scene != GAME_OVER) {
+    if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM) {
         display_infos(s_all);
         if(s_all->s_game.display_inv == 1)
             display_inventory(s_all);
@@ -79,5 +79,6 @@ void display(all_t *s_all)
     if (s_all->s_game.scene == MENU)
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_game.menu, NULL);
+    display_custom(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }

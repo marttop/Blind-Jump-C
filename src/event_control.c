@@ -26,9 +26,13 @@ void events_control(all_t *s_all)
         sfKeyboard_isKeyPressed(sfKeyEscape)) {
         sfRenderWindow_close(s_all->s_game.window);
     }
-    if (s_all->s_game.scene == MENU) {
-        if (is_key_released(&s_all->s_game.event, sfKeyZ))
-            s_all->s_game.scene = SPAWN;
+    if (s_all->s_game.scene == MENU || s_all->s_game.scene == GAME_OVER
+    || s_all->s_game.scene == CUSTOM) {
+        if (is_key_released(&s_all->s_game.event, sfKeyZ)
+        && s_all->s_game.scene == MENU)
+            s_all->s_game.scene = CUSTOM;
+        if (s_all->s_game.scene == CUSTOM)
+        get_text_entered(s_all);
         return;
     }
     get_movement(s_all);
