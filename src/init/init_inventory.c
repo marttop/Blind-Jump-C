@@ -43,6 +43,13 @@ void init_items_texture(all_t *s_all)
         sfTexture_createFromFile("sprites/weapons/pistol.png", NULL);
     s_all->s_inventory.scorpion =
         sfTexture_createFromFile("sprites/weapons/scorpion.png", NULL);
+    s_all->s_inventory.trash_tx =
+        sfTexture_createFromFile("sprites/inv/trash.png", NULL);
+}
+
+void init_inventory2(all_t *s_all)
+{
+    sfSprite_setPosition(s_all->s_inventory.trash, (sfVector2f){1440, 610});
 }
 
 void init_inventory(all_t *s_all)
@@ -62,6 +69,9 @@ void init_inventory(all_t *s_all)
     sfSprite_setTexture(s_all->s_inventory.selected,
         s_all->s_inventory.selected_tx, sfTrue);
     s_all->s_inventory.drag = 0, s_all->s_inventory.swap = 0;
-    init_slots(s_all, pos);
-    init_items_texture(s_all);
+    s_all->s_inventory.trash = sfSprite_create();
+    init_slots(s_all, pos), init_items_texture(s_all);
+    sfSprite_setTexture(s_all->s_inventory.trash,
+        s_all->s_inventory.trash_tx, sfTrue);
+    init_inventory2(s_all);
 }

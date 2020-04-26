@@ -286,8 +286,10 @@ typedef struct inventory {
     sfRectangleShape *inv_back;
     sfTexture *selected_tx;
     sfSprite *selected;
+    sfSprite *trash;
     sfTexture *pistol;
     sfTexture *scorpion;
+    sfTexture *trash_tx;
     sfTexture *slot_tx;
     slots_t *dragged;
     slots_t *head;
