@@ -45,5 +45,7 @@ void display_inventory(all_t *s_all)
                 s_all->s_inventory.selected, NULL);
         } if (tmp->item != NULL && tmp->drag != 1)
             sfRenderWindow_drawSprite(s_all->s_game.window, tmp->item, NULL);
-    } display_items_and_select(s_all);
+    } sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_inventory.trash, NULL);
+    display_items_and_select(s_all);
 }
