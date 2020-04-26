@@ -8,6 +8,22 @@
 #include "rpg.h"
 #include "utils.h"
 
+void moove_cursor_right(all_t *s_all)
+{
+    sfVector2f pos = s_all->s_custom.pos;
+    pos.x += 18;
+    s_all->s_custom.pos = pos;
+    sfSprite_setPosition(s_all->s_custom.sprite, pos);
+}
+
+void moove_cursor_left(all_t *s_all)
+{
+    sfVector2f pos = s_all->s_custom.pos;
+    pos.x -= 18;
+    s_all->s_custom.pos = pos;
+    sfSprite_setPosition(s_all->s_custom.sprite, pos);
+}
+
 void my_getchar(sfUint32 c, all_t *s_all)
 {
     int i = my_strlen(s_all->s_infos.p_name);
@@ -16,14 +32,17 @@ void my_getchar(sfUint32 c, all_t *s_all)
     s_all->s_infos.p_name[i] = c;
     i++;
     s_all->s_infos.p_name[i] = '\0';
+    moove_cursor_right(s_all);
     sfText_setString(s_all->s_infos.p_name_txt, s_all->s_infos.p_name);
 }
+
 
 void my_popchar(all_t *s_all)
 {
     int i = my_strlen(s_all->s_infos.p_name) - 1;
     if (i < 0) return;
     s_all->s_infos.p_name[i] = '\0';
+    moove_cursor_left(s_all);
     sfText_setString(s_all->s_infos.p_name_txt, s_all->s_infos.p_name);
 }
 

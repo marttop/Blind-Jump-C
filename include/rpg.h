@@ -81,6 +81,7 @@ typedef struct custom {
     sfClock *clock;
     sfTime time;
     float seconds;
+    int show;
 } custom_t;
 
 typedef struct direction {
