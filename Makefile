@@ -23,6 +23,7 @@ SRC	=	src/main.c \
 		src/hitbox_debug.c \
 		src/hitbox_spawn.c \
 		src/game_over.c \
+		src/get_player_name.c \
 		src/spawn_scene.c \
 		src/display_effect.c \
 		src/aim_direction.c \
@@ -63,6 +64,7 @@ SRC	=	src/main.c \
 		src/init/init_infos.c \
 		src/init/init_chests.c \
 		src/init/init_movement.c \
+		src/init/init_custom.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
 		src/init/init_minimap.c \

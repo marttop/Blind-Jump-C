@@ -14,7 +14,7 @@ void setup(all_t *s_all)
         sfDefaultStyle, NULL);
     sfRenderWindow_setFramerateLimit(s_all->s_game.window, 60);
     sfRenderWindow_setPosition(s_all->s_game.window, (sfVector2i){0, 0});
-    s_all->s_game.scene = SPAWN;
+    s_all->s_game.scene = CUSTOM;
     s_all->s_game.debug_mode = 0;
     s_all->s_game.display_inv = 0;
     s_all->s_mob = NULL;
@@ -37,4 +37,5 @@ void init_all(all_t *s_all)
     init_map(s_all);
     init_explosions(s_all);
     init_infos(s_all);
+    init_custom(s_all);
 }
