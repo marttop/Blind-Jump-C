@@ -59,6 +59,7 @@
 typedef struct game {
     sfRenderWindow *window;
     sfFont *font;
+    sfFont *monospaced;
     sfEvent event;
     sfView *camera;
     sfClock *clock;
@@ -71,6 +72,14 @@ typedef struct game {
     sfSprite *menu;
     sfTexture *menu_tx;
 } game_t;
+
+typedef struct menu_buttons {
+    sfSprite *sprite;
+    sfTexture *button1;
+    sfTexture *button2;
+    int id;
+    struct menu_buttons *next;
+} m_buttons_t;
 
 typedef struct custom {
     sfText *select_name;
@@ -320,6 +329,7 @@ typedef struct inventory {
 
 typedef struct all {
     game_t s_game;
+    m_buttons_t *s_buttons;
     tp_t s_tp;
     p_infos_t s_infos;
     explode_t s_explode;
@@ -337,6 +347,8 @@ typedef struct all {
     struct chest *s_chest;
 } all_t;
 
+void dispay_buttons(all_t *s_all);
+void init_buttons(all_t *s_all);
 void init_inventory(all_t *s_all);
 void display_inventory(all_t *s_all);
 void init_all(all_t *s_all);
