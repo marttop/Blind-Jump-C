@@ -23,14 +23,13 @@ int mob_is_hit(all_t *s_all, mob_t *temp)
 
 int player_is_hit(all_t *s_all, mob_t *temp)
 {
-    sfFloatRect mob_rect, player_rect, shadow_rect;
+    sfFloatRect mob_rect, shadow_rect;
     mob_rect = sfSprite_getGlobalBounds(temp->mob);
-    player_rect = sfSprite_getGlobalBounds(s_all->s_player.hero);
-    shadow_rect = sfSprite_getGlobalBounds(s_all->s_player.shadow);
-    if (sfFloatRect_intersects(&mob_rect, &player_rect, NULL) ||
-    sfFloatRect_intersects(&mob_rect, &shadow_rect, NULL))
+    shadow_rect =
+        sfSprite_getGlobalBounds(s_all->s_player.shadow);
+    if (sfFloatRect_intersects(&mob_rect, &shadow_rect, NULL))
         return (1);
-    return (0);  
+    return (0);
 }
 
 void check_mob_hitboxes(all_t *s_all)
