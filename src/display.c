@@ -76,5 +76,8 @@ void display(all_t *s_all)
     display_map(s_all);
     display_game_over(s_all);
     display_hud_anim(s_all);
+    if (s_all->s_game.scene == MENU)
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_game.menu, NULL);
     sfRenderWindow_display(s_all->s_game.window);
 }

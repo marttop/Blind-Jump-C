@@ -7,6 +7,12 @@
 
 #include "rpg.h"
 
+void init_menu(all_t *s_all)
+{
+    create_sprite(&s_all->s_game.menu, &s_all->s_game.menu_tx,
+        (sfVector2f){0, 0}, "sprites/menu.png");
+}
+
 void setup(all_t *s_all)
 {
     sfVideoMode mode = {1920, 1080, 32};
@@ -14,13 +20,14 @@ void setup(all_t *s_all)
         sfDefaultStyle, NULL);
     sfRenderWindow_setFramerateLimit(s_all->s_game.window, 60);
     sfRenderWindow_setPosition(s_all->s_game.window, (sfVector2i){0, 0});
-    s_all->s_game.scene = SPAWN;
+    s_all->s_game.scene = MENU;
     s_all->s_game.debug_mode = 0;
     s_all->s_game.display_inv = 0;
     s_all->s_mob = NULL;
     s_all->s_chest = NULL;
     s_all->s_game.font = sfFont_createFromFile("font/Cornerstone.ttf");
     init_view(s_all);
+    init_menu(s_all);
     randomize();
 }
 

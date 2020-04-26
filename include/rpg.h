@@ -36,6 +36,10 @@
 #define MY_PI (3.14159265358979323846)
 #endif /* !MY_PI */
 
+#ifndef MENU
+#define MENU (0)
+#endif
+
 #ifndef SPAWN
 #define SPAWN (1)
 #endif
@@ -60,6 +64,8 @@ typedef struct game {
     int debug_mode;
     int display_inv;
     char key_press;
+    sfSprite *menu;
+    sfTexture *menu_tx;
 } game_t;
 
 typedef struct direction {

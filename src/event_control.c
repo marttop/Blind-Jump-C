@@ -26,6 +26,11 @@ void events_control(all_t *s_all)
         sfKeyboard_isKeyPressed(sfKeyEscape)) {
         sfRenderWindow_close(s_all->s_game.window);
     }
+    if (s_all->s_game.scene == MENU) {
+        if (is_key_released(&s_all->s_game.event, sfKeyZ))
+            s_all->s_game.scene = SPAWN;
+        return;
+    }
     get_movement(s_all);
     get_aim_direction(s_all);
     shoot(s_all);
