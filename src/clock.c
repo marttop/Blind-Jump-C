@@ -10,6 +10,7 @@
 void init_clocks(all_t *s_all)
 {
     s_all->s_game.clock = sfClock_create();
+    s_all->s_game.clock_button = sfClock_create();
 }
 
 void player_clocks(all_t *s_all)
@@ -30,10 +31,8 @@ void player_clocks(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_player.shoot_clk);
     s_all->s_player.shoot_sec =
         s_all->s_player.shoot_tm.microseconds / 1000000.0;
-    s_all->s_player.hit_tm =
-        sfClock_getElapsedTime(s_all->s_player.hit_clk);
-    s_all->s_player.hit_sec =
-        s_all->s_player.hit_tm.microseconds / 1000000.0;
+    s_all->s_player.hit_tm = sfClock_getElapsedTime(s_all->s_player.hit_clk);
+    s_all->s_player.hit_sec = s_all->s_player.hit_tm.microseconds / 1000000.0;
 }
 
 void mob_clocks(all_t *s_all)

@@ -95,8 +95,8 @@ void tp_animation2(all_t *s_all)
             s_all->s_tp.width += 2;
             sfRectangleShape_setOrigin(s_all->s_tp.beam,
                 (sfVector2f){s_all->s_tp.width / 2, s_all->s_tp.height});
-        }
-        tp_animation3(s_all);
+        } tp_animation3(s_all);
+        sfClock_restart(s_all->s_tp.tp_clock);
     }
 }
 
