@@ -27,6 +27,8 @@ int player_is_hit(all_t *s_all, mob_t *temp)
     mob_rect = sfSprite_getGlobalBounds(temp->mob);
     shadow_rect =
         sfSprite_getGlobalBounds(s_all->s_player.shadow);
+    shadow_rect.top -= 12;
+    shadow_rect.height += 12;
     if (sfFloatRect_intersects(&mob_rect, &shadow_rect, NULL))
         return (1);
     return (0);
