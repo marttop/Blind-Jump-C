@@ -76,6 +76,7 @@ typedef struct game {
     int pause;
     char key_press;
     sfSprite *menu;
+    sfTexture *arrow;
     sfTexture *menu_tx;
 } game_t;
 
@@ -88,14 +89,32 @@ typedef struct menu_buttons {
     struct menu_buttons *next;
 } m_buttons_t;
 
+typedef struct rgb {
+    sfRectangleShape *rect;
+    int value;
+    char id;
+    sfSprite *right;
+    sfSprite *left;
+    sfSprite *cursor;
+    sfTexture *right_tx;
+    sfTexture *left_tx;
+    sfTexture *cursor_tx;
+    struct rgb *next;
+} rgb_t;
+
 typedef struct custom {
     sfText *select_name;
+    sfText *title_hero;
     sfRectangleShape *input;
     sfSprite *sprite;
     sfTexture *texture;
+    sfSprite *hero;
+    sfTexture *hero_tx;
     sfVector2f pos;
     sfClock *clock;
     sfTime time;
+    sfColor p_color;
+    int r, g, b;
     float seconds;
     int show;
 } custom_t;
@@ -367,6 +386,7 @@ typedef struct all {
     minimap_t s_minimap;
     mob_pos_t s_mob_pos;
     inventory_t s_inventory;
+    struct rgb *s_rgb;
     struct mob *s_mob;
     struct chest *s_chest;
 } all_t;
@@ -395,6 +415,8 @@ void init_hero(all_t *s_all);
 sfVector2f render_pos_center(all_t *s_all);
 void init_explosions(all_t *s_all);
 void player_movement(all_t *s_all);
+void init_rgb_selector(all_t *s_all);
+void display_rgb_selector(all_t *s_all);
 void init_movement(all_t *s_all);
 void display_infos(all_t *s_all);
 void generate_random_mobs(all_t *s_all);
