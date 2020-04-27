@@ -61,6 +61,7 @@ SRC	=	src/main.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
 		src/init/init_inventory.c \
+		src/init/init_mobs3.c \
 		src/init/init_minimap.c \
 		src/init/init_explosions.c \
 		src/teleporter.c \
