@@ -26,12 +26,12 @@ void init_custom(all_t *s_all)
     s_all->s_custom.select_name = sfText_create();
     s_all->s_custom.clock = sfClock_create();
     s_all->s_custom.input = sfRectangleShape_create();
-    sfText_setFont(s_all->s_custom.select_name, s_all->s_game.font);
+    sfText_setFont(s_all->s_custom.select_name, s_all->s_game.monospaced);
     sfText_setString(s_all->s_custom.select_name,
         "Select your character's name");
-    sfText_setPosition(s_all->s_custom.select_name, (sfVector2f){710, 210});
+    sfText_setPosition(s_all->s_custom.select_name, (sfVector2f){600, 210});
     sfRectangleShape_setFillColor(s_all->s_custom.input,
-        (sfColor){15, 15, 150, 150});
+        (sfColor){19, 59, 65, 150});
     sfRectangleShape_setPosition(s_all->s_custom.input,
         (sfVector2f){770, 260});
     sfRectangleShape_setSize(s_all->s_custom.input, (sfVector2f){350, 40});

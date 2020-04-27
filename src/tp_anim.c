@@ -43,14 +43,15 @@ void tp_animation4(all_t *s_all, int *alpha)
         s_all->s_player.shoot_pos);
         sfSprite_setPosition(s_all->s_player.hor_shoot,
         s_all->s_player.shoot_pos);
-        generate_random_mobs(s_all);
-        init_minimap(s_all);
+        generate_random_mobs(s_all), init_minimap(s_all);
     } if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
         *alpha -= 5;
         sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){0, 0, 0, *alpha});
-        if (*alpha <= 40)
+        if (*alpha <= 40) {
             s_all->s_tp.anim = 0, s_all->s_player.tp = 0;
+            s_all->s_minimap.dispay_tp = 0;
+        }
     }
 }
 
