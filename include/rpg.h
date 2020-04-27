@@ -76,6 +76,7 @@ typedef struct game {
     int pause;
     char key_press;
     sfSprite *menu;
+    sfTexture *arrow;
     sfTexture *menu_tx;
 } game_t;
 
@@ -412,6 +413,8 @@ void init_hero(all_t *s_all);
 sfVector2f render_pos_center(all_t *s_all);
 void init_explosions(all_t *s_all);
 void player_movement(all_t *s_all);
+void init_rgb_selector(all_t *s_all);
+void display_rgb_selector(all_t *s_all);
 void init_movement(all_t *s_all);
 void display_infos(all_t *s_all);
 void generate_random_mobs(all_t *s_all);

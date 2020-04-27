@@ -75,6 +75,6 @@ void display(all_t *s_all)
             sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_game.menu, NULL);
         } dispay_buttons(s_all);
-    } display_custom(s_all);
+    } display_custom(s_all), display_rgb_selector(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }
