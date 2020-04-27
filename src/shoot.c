@@ -9,6 +9,7 @@
 
 void shoot(all_t *s_all)
 {
+    if (s_all->s_game.pause == 1) return;
     if (s_all->s_game.event.type == sfEvtKeyPressed
     && sfKeyboard_isKeyPressed(sfKeySpace) == 1 &&
     s_all->s_player.shooting == 0 && s_all->s_player.range == 120) {
@@ -20,15 +21,8 @@ void shoot(all_t *s_all)
             s_all->s_player.shooting = 1, s_all->s_player.right = 1;
             s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
             s_all->s_player.hor = 1;
-        } if (s_all->s_direction.up == 1) {
-            s_all->s_player.shooting = 1, s_all->s_player.up = 1;
-            s_all->s_player.ver_pos = s_all->s_player.shoot_pos;
-            s_all->s_player.ver = 1;
-        } if (s_all->s_direction.down == 1) {
-            s_all->s_player.shooting = 1, s_all->s_player.down = 1;
-            s_all->s_player.ver_pos = s_all->s_player.shoot_pos;
-            s_all->s_player.ver = 1;
         }
+        shoot2(s_all);
     }
 }
 

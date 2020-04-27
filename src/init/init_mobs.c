@@ -79,10 +79,10 @@ void display_mobs(all_t *s_all)
         && s_all->s_player.tp == 0)
             search_mob_path(temp, s_all);
         if (temp->rect_seconds > 0.1 && temp->type == 'B' && temp->aggro == 1
-        && s_all->s_player.tp == 0)
+        && s_all->s_player.tp == 0 && s_all->s_game.pause != 1)
             move_mobs_rect(temp, 36, 18, 0);
         if (temp->rect_seconds > 0.1 && temp->type == 'A' && temp->aggro == 1
-        && s_all->s_player.tp == 0)
+        && s_all->s_player.tp == 0 && s_all->s_game.pause != 1)
             move_mobs_rect(temp, 100, 12, 88);
         display_mobs2(temp, s_all);
         temp = temp->next;

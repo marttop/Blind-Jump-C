@@ -64,6 +64,8 @@ typedef struct game {
     sfView *camera;
     sfClock *clock;
     sfTime time;
+    sfSprite *black;
+    sfTexture *black_tx;
     float seconds;
     sfClock *clock_button;
     sfTime time_button;
@@ -71,6 +73,7 @@ typedef struct game {
     int scene;
     int debug_mode;
     int display_inv;
+    int pause;
     char key_press;
     sfSprite *menu;
     sfTexture *menu_tx;
@@ -442,6 +445,7 @@ int hitbox_tp(all_t *s_all);
 void init_map(all_t *s_all);
 void reset_wall(all_t *s_all);
 void shoot(all_t *s_all);
+void shoot2(all_t *s_all);
 void shooting_control(all_t *s_all);
 void display_map(all_t *s_all);
 int loop_map_hitbox(all_t *s_all);

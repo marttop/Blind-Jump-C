@@ -9,6 +9,7 @@
 
 void events_keyboard(all_t *s_all)
 {
+    if (s_all->s_game.pause == 1) return;
     if (is_key_released(&s_all->s_game.event, sfKeyI))
         s_all->s_game.display_inv = !s_all->s_game.display_inv;
     s_all->s_game.key_press = 0;
@@ -20,8 +21,25 @@ void events_keyboard(all_t *s_all)
         put_item_in_slot(s_all, 2);
 }
 
+void pause_game(all_t *s_all)
+{
+    if (s_all->s_game.pause == 0 &&
+    (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP)) {
+        if (is_key_released(&s_all->s_game.event, sfKeyF)) {
+            s_all->s_game.pause = 1;
+        }
+    }
+    else if (s_all->s_game.pause == 1 &&
+    (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP)) {
+        if (is_key_released(&s_all->s_game.event, sfKeyF)) {
+            s_all->s_game.pause = 0;
+        }
+    }
+}
+
 void events_control(all_t *s_all)
 {
+    pause_game(s_all);
     if (s_all->s_game.event.type == sfEvtClosed ||
         sfKeyboard_isKeyPressed(sfKeyEscape)) {
         sfRenderWindow_close(s_all->s_game.window);
