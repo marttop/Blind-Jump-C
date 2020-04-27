@@ -98,6 +98,7 @@ typedef struct rgb {
     sfTexture *right_tx;
     sfTexture *left_tx;
     sfTexture *cursor_tx;
+    struct rgb *next;
 } rgb_t;
 
 typedef struct custom {
@@ -373,6 +374,7 @@ typedef struct all {
     minimap_t s_minimap;
     mob_pos_t s_mob_pos;
     inventory_t s_inventory;
+    struct rgb *s_rgb;
     struct mob *s_mob;
     struct chest *s_chest;
 } all_t;
