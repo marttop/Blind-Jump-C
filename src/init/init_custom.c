@@ -21,6 +21,22 @@ void init_cursor(all_t *s_all)
     sfSprite_setScale(s_all->s_custom.sprite, (sfVector2f){1, 2.5});
 }
 
+void init_custom_hero(all_t *s_all)
+{
+    s_all->s_custom.hero = sfSprite_create();
+    s_all->s_custom.title_hero = sfText_create();
+    sfText_setFont(s_all->s_custom.title_hero, s_all->s_game.font);
+    sfText_setString(s_all->s_custom.title_hero,
+        "Select your character's skin");
+    sfText_setPosition(s_all->s_custom.title_hero, (sfVector2f){710, 380});
+    s_all->s_custom.hero_tx = s_all->s_player.hero_tx;
+    sfSprite_setTexture(s_all->s_custom.hero,
+        s_all->s_custom.hero_tx, sfTrue);
+    sfSprite_setTextureRect(s_all->s_custom.hero, s_all->s_player.hero_rect);
+    sfSprite_setPosition(s_all->s_custom.hero, (sfVector2f){900, 450});
+    sfSprite_setScale(s_all->s_custom.hero, (sfVector2f){4, 4});
+}
+
 void init_custom(all_t *s_all)
 {
     s_all->s_custom.select_name = sfText_create();
@@ -40,6 +56,7 @@ void init_custom(all_t *s_all)
     s_all->s_custom.seconds = 0;
     s_all->s_custom.show = 1;
     init_cursor(s_all);
+    init_custom_hero(s_all);
 }
 
 void display_cursor(all_t *s_all)
@@ -63,10 +80,14 @@ void display_custom(all_t *s_all)
     if (s_all->s_game.scene == CUSTOM && s_all->s_effect.anim > 45) {
         sfRenderWindow_drawText(s_all->s_game.window,
             s_all->s_custom.select_name, NULL);
+        sfRenderWindow_drawText(s_all->s_game.window,
+            s_all->s_custom.title_hero, NULL);
         sfRenderWindow_drawRectangleShape(s_all->s_game.window,
             s_all->s_custom.input, NULL);
         display_cursor(s_all);
         sfRenderWindow_drawText(s_all->s_game.window,
             s_all->s_infos.p_name_txt, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_custom.hero, NULL);
     }
 }

@@ -58,6 +58,7 @@ SRC	=	src/main.c \
 		src/init/init_chests.c \
 		src/init/init_movement.c \
 		src/init/init_custom.c \
+		src/init/init_custom2.c \
 		src/init/init_all.c \
 		src/init/init_effect.c \
 		src/init/init_inventory.c \
