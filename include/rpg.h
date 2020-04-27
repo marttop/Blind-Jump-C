@@ -371,6 +371,8 @@ typedef struct all {
     struct chest *s_chest;
 } all_t;
 
+void roballs_shoot(mob_t *tmp, all_t *s_all);
+void display_mobs3(mob_t *temp, all_t *s_all);
 void roballs(mob_t *new, char type, sfVector2f pos, all_t *s_all);
 void display_minimap(all_t *s_all);
 void dispay_buttons(all_t *s_all);

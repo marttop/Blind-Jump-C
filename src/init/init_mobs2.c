@@ -52,7 +52,6 @@ void roballs_angle(mob_t *tmp, sfVector2f player_pos)
     angle_mob = angle_mob * 180 / MY_PI;
     angle_mob -= 90;
     if (angle_mob < 0) angle_mob = 360 + angle_mob;
-    printf("%f\n", angle_mob);
     sfSprite_setRotation(tmp->bullet, angle_mob);
 }
 
@@ -63,7 +62,8 @@ void roballs_shoot(mob_t *tmp, all_t *s_all)
     if (tmp->hit == 0) {
         sfVector2f bullet_pos = sfSprite_getPosition(tmp->bullet);
         if (tmp->check_shoot == 0) {
-            sfVector2f player_pos = sfSprite_getPosition(s_all->s_player.shadow);
+            sfVector2f player_pos =
+                sfSprite_getPosition(s_all->s_player.shadow);
             player_pos.x += 8, player_pos.y -= 10;
             roballs_angle(tmp, player_pos);
             tmp->vx = player_pos.x - bullet_pos.x;
@@ -75,8 +75,7 @@ void roballs_shoot(mob_t *tmp, all_t *s_all)
         bullet_pos.y = bullet_pos.y
             + (tmp->bullet_speed * (tmp->vy / tmp->normalize));
         sfSprite_setPosition(tmp->bullet, bullet_pos);
-        }
-        tmp->bullet_travel++;
+        } tmp->bullet_travel++;
     sfClock_restart(tmp->shoot_clock);
 }
 
@@ -89,16 +88,5 @@ void display_mobs2(mob_t *temp, all_t *s_all)
         {temp->mob_pos.x - 20, temp->mob_pos.y - 15});
     sfSprite_setPosition(temp->mob, temp->mob_pos);
     sfSprite_setPosition(temp->shadow, temp->shadow_pos);
-    if (temp->type == 'A' && s_all->s_game.pause == 0) {
-        if (temp->bullet_travel >= 100) {
-            sfSprite_setPosition(temp->bullet, (sfVector2f){temp->mob_pos.x - 4,
-            temp->mob_pos.y- 8}), temp->hit = 0;
-            temp->check_shoot = 0, temp->bullet_travel = 0;
-        } if (temp->aggro == 1
-        && calcul_mob_magnitude(temp, s_all->s_player.shadow) <= 220)
-            temp->shoot = 1;
-        else temp->shoot = 0;
-        roballs_shoot(temp, s_all);
-    } if (temp->check_shoot == 0 || temp->hit == 1) return;
-        sfRenderWindow_drawSprite(s_all->s_game.window, temp->bullet, NULL);
+    display_mobs3(temp, s_all);
 }
