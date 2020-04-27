@@ -36,6 +36,7 @@ void search_mob_path(mob_t *node, all_t *s_all)
 {
     int x = node->x, y = node->y;
     if (node->path == NULL) return;
+    if (s_all->s_game.pause == 1) return;
     if (node->y != 0 && node->path[y - 1][x] == ' ' && node->prev != 'D') {
         move_mob_up(node, s_all);
         return;

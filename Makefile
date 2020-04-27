@@ -45,6 +45,7 @@ SRC	=	src/main.c \
 		src/vectors.c \
 		src/chest_hitbox.c \
 		src/shoot.c \
+		src/shoot2.c \
 		src/mob_hitbox.c \
 		src/map_generator.c \
 		src/map_generator2.c \

@@ -9,6 +9,7 @@
 
 void get_movement(all_t *s_all)
 {
+    if (s_all->s_game.pause == 1) return;
     if (sfKeyboard_isKeyPressed(sfKeyUp) == 1)
         s_all->s_movement.up = 1;
     else
@@ -32,10 +33,9 @@ void get_movement(all_t *s_all)
 
 void up_down_left_right(all_t *s_all)
 {
+    if (s_all->s_game.pause == 1) return;
     reset_wall(s_all);
-
     int check = 0;
-
     check += loop_map_hitbox(s_all);
     check += check_borders(s_all);
     check += check_middle_wall(s_all);
