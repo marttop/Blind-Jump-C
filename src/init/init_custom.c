@@ -79,6 +79,7 @@ void display_cursor(all_t *s_all)
 void display_custom(all_t *s_all)
 {
     if (s_all->s_game.scene == CUSTOM && s_all->s_effect.anim > 45) {
+        sfRenderWindow_clear(s_all->s_game.window, sfBlack);
         sfRenderWindow_drawText(s_all->s_game.window,
             s_all->s_custom.select_name, NULL);
         sfRenderWindow_drawText(s_all->s_game.window,
