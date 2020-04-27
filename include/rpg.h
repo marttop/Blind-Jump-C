@@ -295,8 +295,9 @@ typedef struct effect {
 typedef struct minimap {
     sfSprite *sprite;
     sfRectangleShape *black;
-    sfSprite *cross1;
-    sfSprite *cross2;
+    sfCircleShape *player;
+    sfCircleShape *tp;
+    int dispay_tp;
 } minimap_t;
 
 typedef struct teleporter {
@@ -359,6 +360,7 @@ typedef struct all {
     struct chest *s_chest;
 } all_t;
 
+void display_minimap(all_t *s_all);
 void dispay_buttons(all_t *s_all);
 void init_buttons(all_t *s_all);
 void init_inventory(all_t *s_all);
