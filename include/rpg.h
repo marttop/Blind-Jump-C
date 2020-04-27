@@ -148,6 +148,9 @@ typedef struct mob {
     sfTime rect_time;
     float rect_seconds;
     sfIntRect rect;
+    sfClock *shoot_clock;
+    sfTime shoot_time;
+    float shoot_seconds;
     sfText *text;
     char *name, *strlvl;
     sfSprite *shadow;
@@ -159,6 +162,14 @@ typedef struct mob {
     char **path;
     struct mob *next;
     int aggro, hp, lvl;
+    sfSprite *bullet;
+    int shoot;
+    float bullet_speed;
+    int check_shoot;
+    float vx, vy;
+    float normalize;
+    int bullet_travel;
+    int hit;
 } mob_t;
 
 typedef struct p_infos {
@@ -379,6 +390,7 @@ typedef struct all {
     struct chest *s_chest;
 } all_t;
 
+void roballs(mob_t *new, char type, sfVector2f pos, all_t *s_all);
 void display_minimap(all_t *s_all);
 void dispay_buttons(all_t *s_all);
 void init_buttons(all_t *s_all);
