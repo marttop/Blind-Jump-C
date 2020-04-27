@@ -25,10 +25,10 @@ void init_custom_hero(all_t *s_all)
 {
     s_all->s_custom.hero = sfSprite_create();
     s_all->s_custom.title_hero = sfText_create();
-    sfText_setFont(s_all->s_custom.title_hero, s_all->s_game.font);
+    sfText_setFont(s_all->s_custom.title_hero, s_all->s_game.monospaced);
     sfText_setString(s_all->s_custom.title_hero,
-        "Select your character's skin");
-    sfText_setPosition(s_all->s_custom.title_hero, (sfVector2f){710, 380});
+        "Select your skin");
+    sfText_setPosition(s_all->s_custom.title_hero, (sfVector2f){745, 380});
     s_all->s_custom.hero_tx = s_all->s_player.hero_tx;
     sfSprite_setTexture(s_all->s_custom.hero,
         s_all->s_custom.hero_tx, sfTrue);
@@ -57,6 +57,7 @@ void init_custom(all_t *s_all)
     s_all->s_custom.show = 1;
     init_cursor(s_all);
     init_custom_hero(s_all);
+    init_rgb_selector(s_all);
 }
 
 void display_cursor(all_t *s_all)
