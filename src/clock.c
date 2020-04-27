@@ -46,6 +46,8 @@ void mob_clocks(all_t *s_all)
         temp->refresh_sec = temp->refresh_tm.microseconds / 1000000.0;
         temp->rect_time = sfClock_getElapsedTime(temp->rect_clock);
         temp->rect_seconds = temp->rect_time.microseconds / 1000000.0;
+        temp->shoot_time = sfClock_getElapsedTime(temp->shoot_clock);
+        temp->shoot_seconds = temp->shoot_time.microseconds / 1000000.0;
         temp = temp->next;
     }
 }
