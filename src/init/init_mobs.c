@@ -15,7 +15,7 @@ void fill_mob2(mob_t *new)
     sfSprite_setPosition(new->shadow, new->shadow_pos);
 }
 
-void mob_selector(mob_t *new, char type, sfVector2f pos)
+void mob_selector(mob_t *new, char type, sfVector2f pos, all_t *s_all)
 {
     sfSprite_setTextureRect(new->shadow, (sfIntRect){55, 69, 20, 6});
     sfSprite_setOrigin(new->shadow, (sfVector2f){10, 3});
@@ -26,23 +26,17 @@ void mob_selector(mob_t *new, char type, sfVector2f pos)
         sfSprite_setOrigin(new->mob, (sfVector2f){9, 9});
         new->xp = 10, new->hp = 150;
     }
-    if (type == 'A') {
-        sfSprite_setScale(new->shadow, (sfVector2f){0.80, 0.80});
-        new->mob_pos.x += 5, new->mob_pos.y += 5, new->speed = 1;
-        new->shadow_pos = (sfVector2f){pos.x + 6, pos.y + 14};
-        new->rect = (sfIntRect){88, 161, 12, 12};
-        sfSprite_setOrigin(new->mob, (sfVector2f){6, 6});
-        new->xp = 7, new->hp = 100;
-    }
+    roballs(new, type, pos, s_all);
 }
 
 mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
 {
     mob_t *new = malloc(sizeof(mob_t));
-    new->mob_pos = pos;
-    new->aggro = 0;
+    new->mob_pos = pos, new->check_shoot = 0, new->hit = 0;
+    new->aggro = 0, new->shoot = 0, new->bullet_speed = 4;
     new->x = s_all->s_mob_pos.x, new->y = s_all->s_mob_pos.y;
     new->clock = sfClock_create(), new->rect_clock = sfClock_create();
+    new->shoot_clock = sfClock_create(), new->bullet_travel = 0;
     new->mob = sfSprite_create(), new->shadow = sfSprite_create();
     new->mob_txt = s_all->s_player.hero_tx, new->seconds = 0;
     new->shadow_tx = s_all->s_player.hero_tx, new->prev = '@';
@@ -51,7 +45,7 @@ mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
     new->status = 0, new->rect_seconds = 0;
     sfSprite_setTexture(new->mob, new->mob_txt, sfTrue);
     sfSprite_setTexture(new->shadow, new->shadow_tx, sfTrue);
-    mob_selector(new, type, pos);
+    mob_selector(new, type, pos, s_all);
     new->type = type, new->next = old;
     fill_mob2(new), init_mob_interface(new, type, s_all);
     return (new);
