@@ -88,14 +88,31 @@ typedef struct menu_buttons {
     struct menu_buttons *next;
 } m_buttons_t;
 
+typedef struct rgb {
+    sfRectangleShape *rect;
+    int value;
+    char id;
+    sfSprite *right;
+    sfSprite *left;
+    sfSprite *cursor;
+    sfTexture *right_tx;
+    sfTexture *left_tx;
+    sfTexture *cursor_tx;
+} rgb_t;
+
 typedef struct custom {
     sfText *select_name;
+    sfText *title_hero;
     sfRectangleShape *input;
     sfSprite *sprite;
     sfTexture *texture;
+    sfSprite *hero;
+    sfTexture *hero_tx;
     sfVector2f pos;
     sfClock *clock;
     sfTime time;
+    sfColor p_color;
+    int r, g, b;
     float seconds;
     int show;
 } custom_t;
