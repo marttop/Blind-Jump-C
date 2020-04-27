@@ -17,11 +17,12 @@ void display_mobs3(mob_t *temp, all_t *s_all)
         } if (temp->aggro == 1
         && calcul_mob_magnitude(temp, s_all->s_player.shadow) <= 220) {
             temp->shoot = 1;
-        } else {
+        } else temp->shoot = 0;
+        if (calcul_mob_magnitude(temp, s_all->s_player.shadow) >= 220
+        && temp->check_shoot == 0)
             sfSprite_setPosition(temp->bullet, (sfVector2f)
-            {temp->mob_pos.x - 4, temp->mob_pos.y - 8}), temp->shoot = 0;
-        } roballs_shoot(temp, s_all);
-    } if (temp->check_shoot == 0 || temp->hit == 1
-    || calcul_mob_magnitude(temp, s_all->s_player.shadow) > 220) return;
+            {temp->mob_pos.x - 4, temp->mob_pos.y- 8});
+        roballs_shoot(temp, s_all);
+    } if (temp->check_shoot == 0 || temp->hit == 1) return;
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->bullet, NULL);
 }
