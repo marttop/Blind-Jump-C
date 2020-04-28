@@ -54,9 +54,10 @@ void display_hud_anim(all_t *s_all)
     sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     display_minimap(s_all);
-    if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM && s_all->s_game.scene != OPT) {
+    if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
+    && s_all->s_game.scene != OPT) {
         display_infos(s_all);
-        if(s_all->s_game.display_inv == 1)
+        if (s_all->s_game.display_inv == 1)
             display_inventory(s_all);
     }
 }
