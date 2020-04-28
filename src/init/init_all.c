@@ -12,6 +12,7 @@ void init_menu(all_t *s_all)
     create_sprite(&s_all->s_game.menu, &s_all->s_game.menu_tx,
         (sfVector2f){0, 0}, "sprites/menu.png");
     init_buttons(s_all);
+    init_options(s_all);
     s_all->s_game.black = sfSprite_create();
     s_all->s_game.black_tx =
         sfTexture_createFromFile("sprites/black.png", NULL);
@@ -30,6 +31,8 @@ void setup(all_t *s_all)
     s_all->s_game.debug_mode = 0;
     s_all->s_game.display_inv = 0;
     s_all->s_game.pause = 0;
+    s_all->s_game.fps = 60;
+    s_all->s_game.volume = 1.0;
     s_all->s_mob = NULL;
     s_all->s_chest = NULL;
     s_all->s_game.font = sfFont_createFromFile("font/Cornerstone.ttf");

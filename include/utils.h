@@ -38,5 +38,6 @@ char *my_strcpy(char *dest, char *src);
 char *my_revstr(char *str);
 void my_putstr(char *str);
 void write_file(char *filepath);
+char *my_itoa(int n);
 
 #endif /* !UTILS_H_ */

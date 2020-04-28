@@ -56,6 +56,40 @@
 #define CUSTOM (4)
 #endif
 
+#ifndef OPT
+#define OPT (5)
+#endif
+
+typedef struct check_box
+{
+    sfRectangleShape *box;
+    int checked;
+    int id;
+    sfFont *font;
+    sfText *text;
+    sfVector2f pos;
+} check_box_t;
+
+typedef struct volume
+{
+    sfRectangleShape *bar1;
+    sfRectangleShape *bar2;
+    int vol;
+    sfSprite *left;
+    sfSprite *right;
+    sfTexture *right_tx;
+    sfTexture *left_tx;
+} volume_t;
+
+typedef struct options
+{
+    sfSprite *bg;
+    sfTexture *bg_tx;
+    volume_t s_volume;
+    check_box_t fps[3];
+    struct menu_buttons *buttons;
+} options_t;
+
 typedef struct game {
     sfRenderWindow *window;
     sfFont *font;
@@ -78,6 +112,8 @@ typedef struct game {
     sfSprite *menu;
     sfTexture *arrow;
     sfTexture *menu_tx;
+    int fps;
+    float volume;
 } game_t;
 
 typedef struct menu_buttons {
@@ -402,6 +438,7 @@ typedef struct all {
     struct rgb *s_rgb;
     struct mob *s_mob;
     struct chest *s_chest;
+    options_t s_options;
 } all_t;
 
 void display_mobs4(all_t *s_all);
@@ -410,7 +447,7 @@ void roballs_shoot(mob_t *tmp, all_t *s_all);
 void display_mobs3(mob_t *temp, all_t *s_all);
 void roballs(mob_t *new, char type, sfVector2f pos, all_t *s_all);
 void display_minimap(all_t *s_all);
-void dispay_buttons(all_t *s_all);
+void dispay_buttons(all_t *s_all, m_buttons_t *buttons);
 void init_buttons(all_t *s_all);
 void init_inventory(all_t *s_all);
 void display_inventory(all_t *s_all);
@@ -538,6 +575,19 @@ void put_item_in_slot(all_t *s_all, int id);
 void slot_click(all_t *s_all, slots_t *tmp);
 void drag_item(all_t *s_all);
 void set_texture_items(slots_t *tmp, int id, all_t *s_all);
+void init_options(all_t *s_all);
+void draw_options(all_t *s_all);
+check_box_t create_check_box(int id, sfVector2f pos);
+void init_fps(all_t *s_all);
+void draw_fps(all_t *s_all);
+int click_box(all_t *s_all, check_box_t box);
+void change_check(all_t *s_all, check_box_t fps[], int i);
+void init_volume1(all_t *s_all);
+void init_volume2(all_t *s_all);
+int check_right(all_t *s_all);
+int check_left(all_t *s_all);
+void adjust_volume(all_t *s_all);
+void draw_volume(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 

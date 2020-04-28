@@ -54,7 +54,8 @@ void display_hud_anim(all_t *s_all)
     sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     display_minimap(s_all);
-    if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM) {
+    if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
+    && s_all->s_game.scene != OPT) {
         display_infos(s_all);
         if (s_all->s_game.display_inv == 1)
             display_inventory(s_all);
@@ -63,6 +64,8 @@ void display_hud_anim(all_t *s_all)
 
 void display(all_t *s_all)
 {
+    sfRenderWindow_clear(s_all->s_game.window, sfBlack);
+    sfRenderWindow_setFramerateLimit(s_all->s_game.window, s_all->s_game.fps);
     display_spawn(s_all);
     display_map(s_all);
     display_dead(s_all);
@@ -75,8 +78,10 @@ void display(all_t *s_all)
         if (s_all->s_game.scene == MENU) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_game.menu, NULL);
-        } dispay_buttons(s_all);
+        } dispay_buttons(s_all, s_all->s_buttons);
     } display_custom(s_all), display_rgb_selector(s_all);
+    if (s_all->s_game.scene == OPT || s_all->s_game.pause == 1)
+        draw_options(s_all);
     display_game_over(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }

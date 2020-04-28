@@ -42,8 +42,12 @@ void init_buttons(all_t *s_all)
 
 void buttons_event(all_t *s_all, m_buttons_t *tmp)
 {
+    if (tmp->id == 5)
+        s_all->s_game.scene = MENU;
     if (tmp->id == 0)
         sfRenderWindow_close(s_all->s_game.window);
+    if (tmp->id == 1)
+        s_all->s_game.scene = OPT;
 }
 
 void click_buttons(all_t *s_all, m_buttons_t *tmp, sfVector2i mouse)
@@ -56,7 +60,7 @@ void click_buttons(all_t *s_all, m_buttons_t *tmp, sfVector2i mouse)
     }
     if (s_all->s_game.event.mouseButton.type == sfEvtMouseButtonReleased) {
         s_all->s_game.event.mouseButton.type = 0;
-        m_buttons_t *temp = s_all->s_buttons;
+        m_buttons_t *temp = tmp;
         for (; temp != NULL; temp = temp->next) {
             rect = sfSprite_getGlobalBounds(temp->sprite);
             if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == 1)
@@ -66,9 +70,9 @@ void click_buttons(all_t *s_all, m_buttons_t *tmp, sfVector2i mouse)
     }
 }
 
-void dispay_buttons(all_t *s_all)
+void dispay_buttons(all_t *s_all, m_buttons_t *buttons)
 {
-    m_buttons_t *tmp = s_all->s_buttons;
+    m_buttons_t *tmp = buttons;
     sfVector2i mouse = sfMouse_getPositionRenderWindow(s_all->s_game.window);
     for (; tmp != NULL; tmp = tmp->next) {
         click_buttons(s_all, tmp, mouse);
