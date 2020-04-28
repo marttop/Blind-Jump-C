@@ -71,7 +71,6 @@ void init_infos(all_t *s_all)
     s_all->s_infos.xp_txt = sfText_create(), s_all->s_infos.is_hit = 0;
     sfText_setFont(s_all->s_infos.p_name_txt, s_all->s_game.monospaced);
     sfText_setPosition(s_all->s_infos.p_name_txt, (sfVector2f){725, 885});
-    sfText_setString(s_all->s_infos.p_name_txt, "Verge");
     sfText_setFont(s_all->s_infos.lvl_txt, s_all->s_game.font);
     sfText_setPosition(s_all->s_infos.lvl_txt, (sfVector2f){1060, 885});
     sfText_setString(s_all->s_infos.lvl_txt, "Level 1");
@@ -81,6 +80,7 @@ void init_infos(all_t *s_all)
     s_all->s_infos.str_xp[0] = '\0', s_all->s_infos.level = 1;
     my_strcat(s_all->s_infos.str_xp, strnbr(s_all->s_infos.current_xp));
     my_strcat(s_all->s_infos.str_xp, "/"), s_all->s_infos.p_name = malloc(15);
+    s_all->s_infos.p_name[0] = '\0';
     my_strcat(s_all->s_infos.str_xp, strnbr(s_all->s_infos.max_xp));
     sfText_setString(s_all->s_infos.xp_txt, s_all->s_infos.str_xp);
     sfText_setPosition(s_all->s_infos.xp_txt, (sfVector2f){1200, 928});
