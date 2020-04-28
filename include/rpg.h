@@ -70,8 +70,22 @@ typedef struct check_box
     sfVector2f pos;
 } check_box_t;
 
+typedef struct volume
+{
+    sfRectangleShape *bar1;
+    sfRectangleShape *bar2;
+    int vol;
+    sfSprite *left;
+    sfSprite *right;
+    sfTexture *right_tx;
+    sfTexture *left_tx;
+} volume_t;
+
 typedef struct options
 {
+    sfSprite *bg;
+    sfTexture *bg_tx;
+    volume_t s_volume;
     check_box_t fps[3];
     struct menu_buttons *buttons;
 } options_t;
@@ -568,6 +582,12 @@ void init_fps(all_t *s_all);
 void draw_fps(all_t *s_all);
 int click_box(all_t *s_all, check_box_t box);
 void change_check(all_t *s_all, check_box_t fps[], int i);
+void init_volume1(all_t *s_all);
+void init_volume2(all_t *s_all);
+int check_right(all_t *s_all);
+int check_left(all_t *s_all);
+void adjust_volume(all_t *s_all);
+void draw_volume(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 
