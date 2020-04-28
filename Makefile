@@ -90,6 +90,7 @@ SRC	=	src/main.c \
 		src/options_menu.c \
 		src/fps.c \
 		src/utils/my_itoa.c \
+		src/volume.c \
 
 OBJ	=	$(SRC:.c=.o)
 
