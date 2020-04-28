@@ -245,6 +245,17 @@ typedef struct spawn {
     float door_seconds;
 } spawn_t;
 
+typedef struct dead {
+    sfSprite *dead;
+    sfTexture *dead_tx;
+    sfVector2f pos;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int fuck;
+    sfIntRect rect;
+} dead_t;
+
 typedef struct explode {
     sfSprite *sprite;
     sfTexture *texture;
@@ -387,6 +398,7 @@ typedef struct all {
     minimap_t s_minimap;
     mob_pos_t s_mob_pos;
     inventory_t s_inventory;
+    dead_t s_dead;
     struct rgb *s_rgb;
     struct mob *s_mob;
     struct chest *s_chest;
@@ -428,6 +440,8 @@ void display_explosions(all_t *s_all);
 void init_mob_interface(mob_t *new, char type, all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
+void init_dead(all_t *s_all);
+void display_dead(all_t *s_all);
 void display_chests_over(all_t *s_all, int y);
 void display_mobs2(mob_t *temp, all_t *s_all);
 void loosing_hp(all_t *s_all);
