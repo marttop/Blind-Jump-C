@@ -87,6 +87,10 @@ SRC	=	src/main.c \
 		src/utils/randomize.c \
 		src/utils/write_file.c \
 		src/utils/render_pos_center.c \
+		src/options_menu.c \
+		src/fps.c \
+		src/utils/my_itoa.c \
+		src/volume.c \
 
 OBJ	=	$(SRC:.c=.o)
 
