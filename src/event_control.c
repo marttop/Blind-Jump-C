@@ -45,7 +45,7 @@ void events_control(all_t *s_all)
         sfRenderWindow_close(s_all->s_game.window);
     }
     if (s_all->s_game.scene == MENU || s_all->s_game.scene == GAME_OVER
-    || s_all->s_game.scene == CUSTOM) {
+    || s_all->s_game.scene == CUSTOM || s_all->s_game.scene == OPT) {
         if (is_key_released(&s_all->s_game.event, sfKeyZ)
         && s_all->s_game.scene == MENU)
             s_all->s_game.scene = CUSTOM;
