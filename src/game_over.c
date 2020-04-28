@@ -12,6 +12,7 @@ void game_over_check(all_t *s_all)
     if (s_all->s_infos.current_hp <= 0) {
         sfSprite_setPosition(s_all->s_dead.dead, s_all->s_player.hero_pos);
         s_all->s_game.scene = GAME_OVER;
+        sfSprite_setColor(s_all->s_dead.dead, s_all->s_custom.p_color);
     }
 }
 

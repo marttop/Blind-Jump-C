@@ -16,7 +16,6 @@ void init_dead(all_t *s_all)
     sfSprite_setTexture(s_all->s_dead.dead, s_all->s_dead.dead_tx, sfTrue);
     sfSprite_setTextureRect(s_all->s_dead.dead, s_all->s_dead.rect);
     sfSprite_setPosition(s_all->s_dead.dead, s_all->s_player.hero_pos);
-    sfSprite_setColor(s_all->s_dead.dead, s_all->s_custom.p_color);
     s_all->s_dead.seconds = 0;
     s_all->s_dead.fuck = 0;
 }
