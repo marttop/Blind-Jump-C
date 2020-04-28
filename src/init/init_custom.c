@@ -33,7 +33,7 @@ void init_custom_hero(all_t *s_all)
     sfText_setString(s_all->s_custom.enter,
         "Press enter to start");
     sfText_setPosition(s_all->s_custom.title_hero, (sfVector2f){745, 380});
-    sfText_setPosition(s_all->s_custom.enter, (sfVector2f){670, 950});
+    sfText_setPosition(s_all->s_custom.enter, (sfVector2f){690, 950});
     s_all->s_custom.hero_tx = s_all->s_player.hero_tx;
     sfSprite_setTexture(s_all->s_custom.hero,
         s_all->s_custom.hero_tx, sfTrue);

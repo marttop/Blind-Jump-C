@@ -69,8 +69,6 @@ void check_arrow_hitbox(rgb_t *temp, all_t *s_all)
         sfMouse_getPositionRenderWindow(s_all->s_game.window);
     sfFloatRect left = sfSprite_getGlobalBounds(temp->left);
     sfFloatRect right = sfSprite_getGlobalBounds(temp->right);
-    left.top += 20;
-    right.top += 20;
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
         if (sfFloatRect_contains(&left, mouse_pos.x, mouse_pos.y))
             moove_rgb_cursor_left(s_all, temp);

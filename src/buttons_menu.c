@@ -23,7 +23,7 @@ void init_buttons(all_t *s_all)
 {
     char **tab = tab_buttons();
     m_buttons_t *old = NULL;
-    sfVector2f pos = {100, 940};
+    sfVector2f pos = {100, 932};
     for (int i = 0, id = 0; id != 3; i += 2, pos.x += 140, id++) {
         m_buttons_t *tmp = malloc(sizeof(m_buttons_t));
         tmp->sprite = sfSprite_create();
@@ -80,7 +80,7 @@ void dispay_buttons(all_t *s_all)
         && tmp->position.y > 880) {
             tmp->position.y -= 10;
             sfSprite_setPosition(tmp->sprite, tmp->position);
-        } else if (tmp->position.y < 940
+        } else if (tmp->position.y < 932
         && sfFloatRect_contains(&rect, mouse.x, mouse.y) == 0) {
             tmp->position.y += 10;
             sfSprite_setPosition(tmp->sprite, tmp->position);
