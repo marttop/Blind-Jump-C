@@ -105,6 +105,7 @@ typedef struct rgb {
 typedef struct custom {
     sfText *select_name;
     sfText *title_hero;
+    sfText *enter;
     sfRectangleShape *input;
     sfSprite *sprite;
     sfTexture *texture;
