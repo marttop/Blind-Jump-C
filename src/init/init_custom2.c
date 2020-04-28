@@ -48,7 +48,7 @@ rgb_t *fill_rbg(all_t *s_all, char type, rgb_t *old, sfTexture *arrow_tx)
         sfSprite_setPosition(new->cursor, (sfVector2f){800 + 255, 750});
         sfSprite_setPosition(new->left, (sfVector2f){790, 750});
         sfSprite_setPosition(new->right, (sfVector2f){800 + 265, 750});
-    } new->value = 255;
+    } new->value = 255, new->id = type;
     new->next = old;
     return (new);
 }
@@ -69,13 +69,13 @@ void check_arrow_hitbox(rgb_t *temp, all_t *s_all)
         sfMouse_getPositionRenderWindow(s_all->s_game.window);
     sfFloatRect left = sfSprite_getGlobalBounds(temp->left);
     sfFloatRect right = sfSprite_getGlobalBounds(temp->right);
-    if (s_all->s_game.event.mouseButton.type == sfEvtMouseButtonPressed) {
-        if (sfFloatRect_contains(&left, mouse_pos.x, mouse_pos.y)) {
-            s_all->s_game.event.mouseButton.type = 0;
-        }
-        if (sfFloatRect_contains(&right, mouse_pos.x, mouse_pos.y)) {
-            s_all->s_game.event.mouseButton.type = 0;
-        }
+    left.top += 20;
+    right.top += 20;
+    if (sfMouse_isButtonPressed(sfMouseLeft)) {
+        if (sfFloatRect_contains(&left, mouse_pos.x, mouse_pos.y))
+            moove_rgb_cursor_left(s_all, temp);
+        if (sfFloatRect_contains(&right, mouse_pos.x, mouse_pos.y))
+            moove_rgb_cursor_right(s_all, temp);
     }
 }
 

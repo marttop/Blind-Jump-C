@@ -40,6 +40,7 @@ SRC	=	src/main.c \
 		src/map2.c \
 		src/mob_generator.c \
 		src/buttons_menu.c \
+		src/rgb_cursor.c \
 		src/inventory_items.c \
 		src/display_inventory.c \
 		src/vectors.c \
