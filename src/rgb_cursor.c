@@ -12,15 +12,15 @@ void moove_rgb_cursor_left(all_t *s_all, rgb_t *temp)
     sfVector2f pos;
     if (temp->value == 0) return;
     pos = sfSprite_getPosition(temp->cursor);
-    temp->value -= 1;
-    pos.x -= 1;
+    temp->value -= 3;
+    pos.x -= 3;
     sfSprite_setPosition(temp->cursor, pos);
     if (temp->id == 'R')
-        s_all->s_custom.p_color.r -= 1;
+        s_all->s_custom.p_color.r -= 3;
     else if (temp->id == 'G')
-        s_all->s_custom.p_color.g -= 1;
+        s_all->s_custom.p_color.g -= 3;
     else if (temp->id == 'B')
-        s_all->s_custom.p_color.b -= 1;
+        s_all->s_custom.p_color.b -= 3;
     sfSprite_setColor(s_all->s_custom.hero, s_all->s_custom.p_color);
 }
 
@@ -29,15 +29,15 @@ void moove_rgb_cursor_right(all_t *s_all, rgb_t *temp)
     sfVector2f pos;
     if (temp->value == 255) return;
     pos = sfSprite_getPosition(temp->cursor);
-    temp->value += 1;
-    pos.x += 1;
+    temp->value += 3;
+    pos.x += 3;
     sfSprite_setPosition(temp->cursor, pos);
     if (temp->id == 'R')
-        s_all->s_custom.p_color.r += 1;
+        s_all->s_custom.p_color.r += 3;
     else if (temp->id == 'G')
-        s_all->s_custom.p_color.g += 1;
+        s_all->s_custom.p_color.g += 3;
     else if (temp->id == 'B')
-        s_all->s_custom.p_color.b += 1;
+        s_all->s_custom.p_color.b += 3;
     sfSprite_setColor(s_all->s_custom.hero, s_all->s_custom.p_color);
 }
 
