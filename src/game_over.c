@@ -17,6 +17,8 @@ void game_over_check(all_t *s_all)
         s_all->s_movement.right = 0;
         s_all->s_movement.down = 0;
         s_all->s_movement.up = 0;
+        sfRectangleShape_setFillColor(s_all->s_tp.black,
+            (sfColor){150, 30, 30, 100});
         respawn(s_all);
     }
 }
@@ -36,7 +38,7 @@ void respawn(all_t *s_all)
         if (is_key_released(&s_all->s_game.event, sfKeyR)) {
             gaining_hp(s_all, 60), lose_xp(s_all);
             s_all->s_map.stage = 0;
-            s_all->s_tp.tp_pos = (sfVector2f){s_all->s_player.hero_pos.x,
+            s_all->s_tp.tp_pos = (sfVector2f){s_all->s_player.hero_pos.x - 6,
             s_all->s_player.hero_pos.y + 17};
             sfSprite_setPosition(s_all->s_tp.tp, s_all->s_tp.tp_pos);
             sfSprite_setPosition(s_all->s_tp.tp_shadow,
