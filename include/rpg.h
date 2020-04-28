@@ -441,6 +441,7 @@ typedef struct all {
     options_t s_options;
 } all_t;
 
+void only_display_mobs(all_t *s_all);
 void display_mobs4(all_t *s_all);
 void move_mobs_rect(mob_t *mob, int max, int offset, int reset);
 void roballs_shoot(mob_t *tmp, all_t *s_all);

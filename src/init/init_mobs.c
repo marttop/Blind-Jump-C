@@ -60,6 +60,20 @@ void move_mobs_rect(mob_t *mob, int max, int offset, int reset)
     sfClock_restart(mob->rect_clock);
 }
 
+void only_display_mobs(all_t *s_all)
+{
+    mob_t *temp = s_all->s_mob;
+    for (; temp != NULL; temp = temp->next) {
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            temp->shadow, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+            temp->mob, NULL);
+        if (temp->type == 'A' && temp->check_shoot == 1)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+            temp->bullet, NULL);
+    }
+}
+
 void display_mobs(all_t *s_all)
 {
     mob_t *temp = s_all->s_mob;
@@ -81,5 +95,4 @@ void display_mobs(all_t *s_all)
             move_mobs_rect(temp, 100, 12, 88);
         display_mobs2(temp, s_all);
     } check_mob_hitboxes(s_all);
-    destroy_mobs(s_all);
 }
