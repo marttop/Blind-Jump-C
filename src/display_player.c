@@ -77,5 +77,5 @@ void display_hero(all_t *s_all)
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_player.hero, NULL);
     } if (s_all->s_player.tp != 1) display_weapon_down(s_all);
-    shooting_control(s_all), tp_animation(s_all), player_immunity(s_all);
+    shooting_control(s_all), player_immunity(s_all);
 }

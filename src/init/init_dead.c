@@ -51,6 +51,5 @@ void display_dead(all_t *s_all)
         display_chests_over(s_all, y);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_effect.tp_glow, s_all->s_effect.light_state);
-        tp_animation(s_all);
     }
 }
