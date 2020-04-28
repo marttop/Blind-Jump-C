@@ -7,6 +7,14 @@
 
 #include "rpg.h"
 
+void dead_clock(all_t *s_all)
+{
+    s_all->s_dead.time =
+        sfClock_getElapsedTime(s_all->s_dead.clock);
+    s_all->s_dead.seconds =
+        s_all->s_dead.time.microseconds / 1000000.0;
+}
+
 void info_clocks(all_t *s_all)
 {
     s_all->s_infos.time =
@@ -25,4 +33,5 @@ void info_clocks(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_game.clock_button);
     s_all->s_game.seconds_button =
         s_all->s_game.time_button.microseconds / 1000000.0;
+    dead_clock(s_all);
 }

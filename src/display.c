@@ -65,7 +65,7 @@ void display(all_t *s_all)
 {
     display_spawn(s_all);
     display_map(s_all);
-    display_game_over(s_all);
+    display_dead(s_all);
     display_hud_anim(s_all);
     if (s_all->s_game.pause == 1) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
@@ -77,5 +77,6 @@ void display(all_t *s_all)
             s_all->s_game.menu, NULL);
         } dispay_buttons(s_all);
     } display_custom(s_all), display_rgb_selector(s_all);
+    display_game_over(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }
