@@ -56,7 +56,7 @@ void display_hud_anim(all_t *s_all)
     display_minimap(s_all);
     if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM) {
         display_infos(s_all);
-        if(s_all->s_game.display_inv == 1)
+        if (s_all->s_game.display_inv == 1)
             display_inventory(s_all);
     }
 }
