@@ -12,8 +12,8 @@ void init_options_button(all_t *s_all)
     m_buttons_t *old = NULL;
     m_buttons_t *tmp = malloc(sizeof(m_buttons_t));
     tmp->sprite = sfSprite_create();
-    tmp->button1 = sfTexture_createFromFile("sprites/buttons/quit1.png", NULL);
-    tmp->button2 = sfTexture_createFromFile("sprites/buttons/quit2.png", NULL);
+    tmp->button1 = sfTexture_createFromFile("sprites/buttons/menu1.png", NULL);
+    tmp->button2 = sfTexture_createFromFile("sprites/buttons/menu2.png", NULL);
     sfSprite_setTexture(tmp->sprite, tmp->button1, sfTrue);
     sfSprite_setPosition(tmp->sprite, (sfVector2f){100, 940});
     tmp->position = (sfVector2f){100, 940};
@@ -26,10 +26,9 @@ void init_options_button(all_t *s_all)
 void init_options(all_t *s_all)
 {
     s_all->s_options.bg_tx =
-        sfTexture_createFromFile("sprites/background.png", NULL);
+        sfTexture_createFromFile("sprites/settings.png", NULL);
     s_all->s_options.bg = sfSprite_create();
     sfSprite_setTexture(s_all->s_options.bg, s_all->s_options.bg_tx, sfTrue);
-    sfSprite_setScale(s_all->s_options.bg, (sfVector2f){10, 10});
     init_options_button(s_all);
     init_fps(s_all);
     init_volume1(s_all);
