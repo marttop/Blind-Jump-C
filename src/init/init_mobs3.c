@@ -47,6 +47,5 @@ void display_mobs4(all_t *s_all)
         && s_all->s_player.tp == 0 && s_all->s_game.pause != 1)
             move_mobs_rect(temp, 100, 12, 88);
         display_mobs2(temp, s_all);
-    } check_mob_hitboxes(s_all);
-    destroy_mobs(s_all);
+    }
 }

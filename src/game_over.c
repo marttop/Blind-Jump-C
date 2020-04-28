@@ -13,6 +13,10 @@ void game_over_check(all_t *s_all)
         sfSprite_setPosition(s_all->s_dead.dead, s_all->s_player.hero_pos);
         s_all->s_game.scene = GAME_OVER;
         sfSprite_setColor(s_all->s_dead.dead, s_all->s_custom.p_color);
+        s_all->s_movement.left = 0;
+        s_all->s_movement.right = 0;
+        s_all->s_movement.down = 0;
+        s_all->s_movement.up = 0;
         respawn(s_all);
     }
 }
@@ -28,9 +32,7 @@ void lose_xp(all_t *s_all)
 
 void respawn(all_t *s_all)
 {
-    static int i = 0;
-    if (s_all->s_game.scene == GAME_OVER) i = 0;
-    if (s_all->s_game.scene == GAME_OVER && i == 0) {
+    if (s_all->s_game.scene == GAME_OVER) {
         if (is_key_released(&s_all->s_game.event, sfKeyR)) {
             gaining_hp(s_all, 60), lose_xp(s_all);
             s_all->s_map.stage = 0;
@@ -45,7 +47,7 @@ void respawn(all_t *s_all)
             sfSprite_setPosition(s_all->s_effect.tp_glow,
             (sfVector2f){s_all->s_tp.tp_pos.x - 185,
             s_all->s_tp.tp_pos.y - 190});
-            destroy_mobs(s_all), i = 1;
+            destroy_mobs(s_all);
         }
     }
 }

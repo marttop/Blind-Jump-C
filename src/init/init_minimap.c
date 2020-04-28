@@ -56,12 +56,14 @@ void init_minimap2(all_t *s_all)
 void init_minimap(all_t *s_all)
 {
     static int i = 0;
-    s_all->s_minimap.sprite = sfSprite_create();
+    if (i == 0)
+        s_all->s_minimap.sprite = sfSprite_create();
     sfSprite_setTexture(s_all->s_minimap.sprite,
         s_all->s_map.map_texture, sfTrue);
     if (i == 0) {
         s_all->s_minimap.black = sfRectangleShape_create();
-        sfRectangleShape_setSize(s_all->s_minimap.black, (sfVector2f){530, 224});
+        sfRectangleShape_setSize(s_all->s_minimap.black,
+        (sfVector2f){530, 224});
         sfRectangleShape_setFillColor(s_all->s_minimap.black,
             (sfColor){0, 0, 0, 150});
     }
