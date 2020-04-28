@@ -59,13 +59,7 @@ void get_text_entered(all_t *s_all)
             my_popchar(s_all);
         }
         else if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
-            sfText_setPosition(s_all->s_infos.p_name_txt,
-                (sfVector2f){725, 885});
-            sfText_setFont(s_all->s_infos.p_name_txt,
-                s_all->s_game.font);
-            s_all->s_game.scene = SPAWN;
-            sfRectangleShape_setFillColor(s_all->s_tp.black,
-                (sfColor){0, 0, 0, 0});
+            enter_event(s_all);
         }
     }
 }

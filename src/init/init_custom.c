@@ -55,6 +55,7 @@ void init_custom(all_t *s_all)
     sfText_setString(s_all->s_infos.p_name_txt, "");
     s_all->s_custom.seconds = 0;
     s_all->s_custom.show = 1;
+    s_all->s_custom.p_color = (sfColor){255, 255, 255, 255};
     init_cursor(s_all);
     init_custom_hero(s_all);
     init_rgb_selector(s_all);
