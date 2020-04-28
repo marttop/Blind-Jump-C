@@ -21,7 +21,7 @@ check_box_t create_check_box(int id, sfVector2f pos)
     box.id = id, box.pos = pos, box.box = sfRectangleShape_create();
     sfRectangleShape_setPosition(box.box, box.pos);
     sfRectangleShape_setSize(box.box, (sfVector2f){20, 20});
-    sfRectangleShape_setOutlineThickness(box.box, 2.5);
+    sfRectangleShape_setOutlineThickness(box.box, 2);
     sfRectangleShape_setOutlineColor(box.box, sfWhite);
     box.font = sfFont_createFromFile("font/Cornerstone.ttf");
     box.text = sfText_create();
@@ -33,7 +33,7 @@ check_box_t create_check_box(int id, sfVector2f pos)
 
 void init_fps(all_t *s_all)
 {
-    sfVector2f pos = (sfVector2f){750, 300};
+    sfVector2f pos = (sfVector2f){750, 400};
     for (int i = 0; i < 3; i++) {
         s_all->s_options.fps[i] = create_check_box(i, pos);
         pos.x += 200;
@@ -77,7 +77,8 @@ void draw_fps(all_t *s_all)
         click_box(s_all, s_all->s_options.fps[i])) == 1)
             change_check(s_all, s_all->s_options.fps, i);
         if (s_all->s_options.fps[i].checked == 1)
-            sfRectangleShape_setFillColor(s_all->s_options.fps[i].box, sfBlue);
+            sfRectangleShape_setFillColor(s_all->s_options.fps[i].box,
+            (sfColor){172, 56, 36, 255});
         else if (s_all->s_options.fps[i].checked == 0)
             sfRectangleShape_setFillColor(s_all->s_options.fps[i].box,
             sfTransparent);
