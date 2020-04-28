@@ -63,7 +63,8 @@ void move_mobs_rect(mob_t *mob, int max, int offset, int reset)
 void display_mobs(all_t *s_all)
 {
     mob_t *temp = s_all->s_mob;
-    while (temp != NULL) {
+    for (; temp != NULL; temp = temp->next) {
+        if (s_all->s_player.hero_pos.y + 20 > temp->mob_pos.y) continue;
         float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
         if (magnitude <= 150 && s_all->s_player.tp == 0) {
             temp->aggro = 1;
@@ -79,7 +80,6 @@ void display_mobs(all_t *s_all)
         && s_all->s_player.tp == 0 && s_all->s_game.pause != 1)
             move_mobs_rect(temp, 100, 12, 88);
         display_mobs2(temp, s_all);
-        temp = temp->next;
     } check_mob_hitboxes(s_all);
     destroy_mobs(s_all);
 }
