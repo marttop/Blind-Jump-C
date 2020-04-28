@@ -267,6 +267,17 @@ typedef struct spawn {
     float door_seconds;
 } spawn_t;
 
+typedef struct dead {
+    sfSprite *dead;
+    sfTexture *dead_tx;
+    sfVector2f pos;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int fuck;
+    sfIntRect rect;
+} dead_t;
+
 typedef struct explode {
     sfSprite *sprite;
     sfTexture *texture;
@@ -409,12 +420,15 @@ typedef struct all {
     minimap_t s_minimap;
     mob_pos_t s_mob_pos;
     inventory_t s_inventory;
+    dead_t s_dead;
     struct rgb *s_rgb;
     struct mob *s_mob;
     struct chest *s_chest;
     options_t s_options;
 } all_t;
 
+void display_mobs4(all_t *s_all);
+void move_mobs_rect(mob_t *mob, int max, int offset, int reset);
 void roballs_shoot(mob_t *tmp, all_t *s_all);
 void display_mobs3(mob_t *temp, all_t *s_all);
 void roballs(mob_t *new, char type, sfVector2f pos, all_t *s_all);
@@ -451,6 +465,8 @@ void display_explosions(all_t *s_all);
 void init_mob_interface(mob_t *new, char type, all_t *s_all);
 void move_explosion(all_t *s_all);
 void movement_up_down(all_t *s_all);
+void init_dead(all_t *s_all);
+void display_dead(all_t *s_all);
 void display_chests_over(all_t *s_all, int y);
 void display_mobs2(mob_t *temp, all_t *s_all);
 void loosing_hp(all_t *s_all);
@@ -475,6 +491,7 @@ void init_direction(all_t *s_all);
 void get_text_entered(all_t *s_all);
 void get_aim_direction(all_t *s_all);
 int rect_down(all_t *s_all, int *check, int *i);
+void gaining_hp(all_t *s_all, int hp);
 int rect_up(all_t *s_all, int *check, int *i);
 int rect_left(all_t *s_all, int *check, int *i);
 int rect_right(all_t *s_all, int *check, int *i);
@@ -500,6 +517,7 @@ void init_view(all_t *s_all);
 void init_tp(all_t *s_all);
 void tp_animation(all_t *s_all);
 void init_custom(all_t *s_all);
+void respawn(all_t *s_all);
 void display_custom(all_t *s_all);
 void door_animation(all_t *s_all);
 void set_iddle_rect(all_t *s_all);

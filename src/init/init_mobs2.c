@@ -58,7 +58,7 @@ void roballs_angle(mob_t *tmp, sfVector2f player_pos)
 void roballs_shoot(mob_t *tmp, all_t *s_all)
 {
     if ((tmp->shoot == 0 && tmp->check_shoot == 0)
-    || tmp->shoot_seconds < 0.01) return;
+    || tmp->shoot_seconds < 0.01 || s_all->s_player.tp == 1) return;
     if (tmp->hit == 0) {
         sfVector2f bullet_pos = sfSprite_getPosition(tmp->bullet);
         if (tmp->check_shoot == 0) {

@@ -34,6 +34,7 @@ void display_map(all_t *s_all)
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);
         int y = display_chests_under(s_all);
+        display_mobs4(s_all);
         display_hero(s_all);
         display_chests_over(s_all, y);
         display_mobs(s_all);
@@ -66,7 +67,7 @@ void display(all_t *s_all)
     sfRenderWindow_setFramerateLimit(s_all->s_game.window, s_all->s_game.fps);
     display_spawn(s_all);
     display_map(s_all);
-    display_game_over(s_all);
+    display_dead(s_all);
     display_hud_anim(s_all);
     if (s_all->s_game.pause == 1) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
@@ -80,5 +81,6 @@ void display(all_t *s_all)
     } display_custom(s_all), display_rgb_selector(s_all);
     if (s_all->s_game.scene == OPT || s_all->s_game.pause == 1)
         draw_options(s_all);
+    display_game_over(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }

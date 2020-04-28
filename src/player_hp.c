@@ -43,6 +43,21 @@ void loosing_hp(all_t *s_all)
     (sfVector2f){250 / s_all->s_infos.max_hp * s_all->s_infos.current_hp, 20});
 }
 
+void gaining_hp(all_t *s_all, int hp)
+{
+    s_all->s_infos.current_hp += hp;
+    color_hp(s_all);
+    if (s_all->s_infos.str_hp != NULL) free(s_all->s_infos.str_hp);
+    s_all->s_infos.str_hp = malloc(20);
+    s_all->s_infos.str_hp[0] = '\0';
+    my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.current_hp));
+    my_strcat(s_all->s_infos.str_hp, "/");
+    my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.max_hp));
+    sfText_setString(s_all->s_infos.hp_txt, s_all->s_infos.str_hp);
+    sfRectangleShape_setSize(s_all->s_infos.hp,
+    (sfVector2f){250 / s_all->s_infos.max_hp * s_all->s_infos.current_hp, 20});
+}
+
 void player_immunity(all_t *s_all)
 {
     sfColor color = sfSprite_getColor(s_all->s_player.hero);
