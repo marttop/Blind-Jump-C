@@ -56,7 +56,8 @@ void up_down_left_right(all_t *s_all)
 
 void player_movement(all_t *s_all)
 {
-    if (s_all->s_game.scene == 0 || s_all->s_player.tp == 1)
+    if (s_all->s_game.scene == 0 || s_all->s_player.tp == 1
+    || s_all->s_game.pause == 1)
         return;
 
     up_down_left_right(s_all);

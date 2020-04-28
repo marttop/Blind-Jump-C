@@ -392,6 +392,8 @@ typedef struct all {
     struct chest *s_chest;
 } all_t;
 
+void display_mobs4(all_t *s_all);
+void move_mobs_rect(mob_t *mob, int max, int offset, int reset);
 void roballs_shoot(mob_t *tmp, all_t *s_all);
 void display_mobs3(mob_t *temp, all_t *s_all);
 void roballs(mob_t *new, char type, sfVector2f pos, all_t *s_all);
