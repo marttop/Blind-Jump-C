@@ -64,7 +64,6 @@ void display_hud_anim(all_t *s_all)
 
 void display(all_t *s_all)
 {
-    sfRenderWindow_clear(s_all->s_game.window, sfBlack);
     sfRenderWindow_setFramerateLimit(s_all->s_game.window, s_all->s_game.fps);
     display_spawn(s_all);
     display_map(s_all);

@@ -25,7 +25,8 @@ void init_options_button(all_t *s_all)
 
 void init_options(all_t *s_all)
 {
-    sfTexture_createFromFile("sprites/background.png", NULL);
+    s_all->s_options.bg_tx =
+        sfTexture_createFromFile("sprites/background.png", NULL);
     s_all->s_options.bg = sfSprite_create();
     sfSprite_setTexture(s_all->s_options.bg, s_all->s_options.bg_tx, sfTrue);
     sfSprite_setScale(s_all->s_options.bg, (sfVector2f){10, 10});
@@ -37,7 +38,8 @@ void init_options(all_t *s_all)
 
 void draw_options(all_t *s_all)
 {
-    sfRenderWindow_drawSprite(s_all->s_game.window, s_all->s_options.bg, NULL);
+    sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_options.bg, NULL);
     dispay_buttons(s_all, s_all->s_options.buttons);
     draw_fps(s_all);
     draw_volume(s_all);
