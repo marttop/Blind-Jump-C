@@ -35,7 +35,7 @@ void init_hp_texts(all_t *s_all)
     sfText_setString(s_all->s_infos.heath, "Health");
     s_all->s_infos.game_over = sfText_create();
     sfText_setFont(s_all->s_infos.game_over, s_all->s_game.font);
-    sfText_setPosition(s_all->s_infos.game_over, (sfVector2f){850, 450});
+    sfText_setPosition(s_all->s_infos.game_over, (sfVector2f){850, 300});
     sfText_setString(s_all->s_infos.game_over, " GAME OVER\nYOU ARE DEAD");
     sfText_setFont(s_all->s_infos.hp_txt, s_all->s_game.font);
     sfText_setPosition(s_all->s_infos.hp_txt, (sfVector2f){1662, 77});
