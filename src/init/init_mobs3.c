@@ -27,6 +27,32 @@ void display_mobs3(mob_t *temp, all_t *s_all)
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->bullet, NULL);
 }
 
+void display_mobs_death_under(all_t *s_all)
+{
+    mob_t *temp = s_all->s_mob;
+    for (; temp != NULL; temp = temp->next) {
+        if (s_all->s_player.hero_pos.y + 20 <= temp->mob_pos.y) continue;
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
+        if (temp->type == 'A' && temp->hit == 0 && temp->check_shoot == 1)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+            temp->bullet, NULL);
+    }
+}
+
+void display_mobs_death_over(all_t *s_all)
+{
+    mob_t *temp = s_all->s_mob;
+    for (; temp != NULL; temp = temp->next) {
+        if (s_all->s_player.hero_pos.y + 20 > temp->mob_pos.y) continue;
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
+        if (temp->type == 'A' && temp->hit == 0 && temp->check_shoot == 1)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+            temp->bullet, NULL);
+    }
+}
+
 void display_mobs4(all_t *s_all)
 {
     mob_t *temp = s_all->s_mob;
