@@ -30,16 +30,13 @@ void display_map(all_t *s_all)
             s_all->s_effect.vignette_pos);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_map.background, NULL);
-        display_stars(s_all);
-        display_tiles(s_all);
+        display_stars(s_all), display_tiles(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);
         int y = display_chests_under(s_all);
-        display_mobs4(s_all);
-        display_hero(s_all);
+        display_mobs4(s_all), display_hero(s_all);
         display_chests_over(s_all, y);
-        display_mobs(s_all);
-        destroy_mobs(s_all);
+        display_mobs(s_all), destroy_mobs(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_effect.tp_glow, s_all->s_effect.light_state);
         display_explosions(s_all);
