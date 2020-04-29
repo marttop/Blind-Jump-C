@@ -26,6 +26,7 @@ void mob_selector(mob_t *new, char type, sfVector2f pos, all_t *s_all)
         sfSprite_setOrigin(new->mob, (sfVector2f){9, 9});
         new->xp = 10, new->hp = 150;
     }
+    turret_init(new, type, s_all);
     roballs(new, type, pos, s_all);
 }
 
@@ -69,8 +70,7 @@ void display_mobs(all_t *s_all)
         if (magnitude <= 150 && s_all->s_player.tp == 0) {
             temp->aggro = 1;
             sfText_setColor(temp->text, (sfColor){255, 20, 20, 255});
-        }
-        if (temp->seconds > 0.01 && temp->aggro == 1
+        } if (temp->seconds > 0.01 && temp->aggro == 1
         && s_all->s_player.tp == 0)
             search_mob_path(temp, s_all);
         if (temp->rect_seconds > 0.1 && temp->type == 'B' && temp->aggro == 1
@@ -81,4 +81,5 @@ void display_mobs(all_t *s_all)
             move_mobs_rect(temp, 100, 12, 88);
         display_mobs2(temp, s_all);
     } check_mob_hitboxes(s_all);
+    turret(s_all);
 }
