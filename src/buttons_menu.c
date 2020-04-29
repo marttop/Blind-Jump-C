@@ -48,6 +48,10 @@ void buttons_event(all_t *s_all, m_buttons_t *tmp)
         sfRenderWindow_close(s_all->s_game.window);
     if (tmp->id == 1)
         s_all->s_game.scene = OPT;
+    if (tmp->id == 2) {
+        load(s_all, "saves/save1");
+        s_all->s_game.scene = SPAWN;
+    }
 }
 
 void click_buttons(all_t *s_all, m_buttons_t *tmp, sfVector2i mouse)

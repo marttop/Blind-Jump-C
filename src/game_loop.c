@@ -23,6 +23,6 @@ int game_loop(all_t *s_all)
         display(s_all);
         game_over_check(s_all);
     }
-    save(s_all);
+    save(s_all, "saves/save1");
     return (EXIT_SUCCESS);
 }
