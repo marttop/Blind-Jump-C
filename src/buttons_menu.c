@@ -49,8 +49,7 @@ void buttons_event(all_t *s_all, m_buttons_t *tmp)
     if (tmp->id == 1)
         s_all->s_game.scene = OPT;
     if (tmp->id == 2) {
-        load(s_all, "saves/save1");
-        s_all->s_game.scene = SPAWN;
+        s_all->s_game.scene = LOAD;
     }
 }
 
