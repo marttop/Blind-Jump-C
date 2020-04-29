@@ -23,18 +23,24 @@ int mob_is_hit(all_t *s_all, mob_t *temp)
 
 int player_is_hit(all_t *s_all, mob_t *temp)
 {
-    sfFloatRect mob_rect, shadow_rect, bullet_rect;
-    if (temp->type == 'A')
-        bullet_rect = sfSprite_getGlobalBounds(temp->bullet);
+    sfFloatRect mob_rect, shadow_rect, b_rect;
+    if (temp->type == 'A') b_rect = sfSprite_getGlobalBounds(temp->bullet);
     mob_rect = sfSprite_getGlobalBounds(temp->mob);
     shadow_rect = sfSprite_getGlobalBounds(s_all->s_player.shadow);
     shadow_rect.top -= 12, shadow_rect.height += 12;
-    if (sfFloatRect_intersects(&mob_rect, &shadow_rect, NULL)) return (1);
+    b_mob_t *turret = temp->l_bullets;
+    for (; temp->type == 'T' && turret != NULL; turret = turret->next) {
+        b_rect = sfSprite_getGlobalBounds(turret->bullet);
+        if (turret->hit != 1 &&
+        sfFloatRect_intersects(&b_rect, &shadow_rect, NULL)) {
+            turret->hit = 1;
+            return (1);
+        }
+    } if (sfFloatRect_intersects(&mob_rect, &shadow_rect, NULL)) return (1);
     if (temp->type == 'A'
-    && sfFloatRect_intersects(&bullet_rect, &shadow_rect, NULL)) {
-        temp->hit = 1;
-        sfSprite_setPosition(temp->bullet, (sfVector2f){temp->mob_pos.x - 4,
-        temp->mob_pos.y - 8});
+    && sfFloatRect_intersects(&b_rect, &shadow_rect, NULL)) {
+        temp->hit = 1, sfSprite_setPosition(temp->bullet, (sfVector2f){
+            temp->mob_pos.x - 4, temp->mob_pos.y - 8});
         return (1);
     } return (0);
 }

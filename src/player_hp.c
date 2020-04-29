@@ -65,17 +65,14 @@ void player_immunity(all_t *s_all)
         s_all->s_infos.is_hit = 0;
         color.a = 255;
         sfSprite_setColor(s_all->s_player.hero, color);
-        sfSprite_setColor(s_all->s_player.gun, color);
+        sfSprite_setColor(s_all->s_player.gun,
+            (sfColor){255, 255, 255, color.a});
     } else if (s_all->s_infos.is_hit == 1 && s_all->s_infos.hit_sec > 0.01) {
-        if (s_all->s_infos.is_color == 0) {
-            color.a -= 20;
-            sfSprite_setColor(s_all->s_player.hero, color);
-            sfSprite_setColor(s_all->s_player.gun, color);
-        } else if (s_all->s_infos.is_color == 1) {
-            color.a += 20;
-            sfSprite_setColor(s_all->s_player.hero, color);
-            sfSprite_setColor(s_all->s_player.gun, color);
-        }
+        if (s_all->s_infos.is_color == 0) color.a -= 20;
+        else if (s_all->s_infos.is_color == 1) color.a += 20;
+        sfSprite_setColor(s_all->s_player.hero, color);
+        sfSprite_setColor(s_all->s_player.gun,
+            (sfColor){255, 255, 255, color.a});
         if (color.a < 100) s_all->s_infos.is_color = 1;
         if (color.a >= 255) s_all->s_infos.is_color = 0;
         sfClock_restart(s_all->s_infos.hit_clk);

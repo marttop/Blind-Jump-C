@@ -27,6 +27,7 @@ void create_map_sprite2(all_t *s_all)
 void create_map_sprite(all_t *s_all)
 {
     static int i = 0;
+    for (int j = 0; j != 2; j++) {
     if (i != 0) sfRenderTexture_destroy(s_all->s_map.render);
     else s_all->s_map.map_sprite = sfSprite_create();
     i = 1;
@@ -40,4 +41,5 @@ void create_map_sprite(all_t *s_all)
     (sfVector2f){0, (26 * s_all->s_map.y)});
     sfSprite_setScale(s_all->s_map.map_sprite,
     (sfVector2f){1, -1});
+    }
 }
