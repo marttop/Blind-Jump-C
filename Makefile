@@ -94,6 +94,8 @@ SRC	=	src/main.c \
 		src/fps.c \
 		src/utils/my_itoa.c \
 		src/volume.c \
+		src/chatbox.c \
+		src/dialog_utils.c \
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -13,6 +13,7 @@ void init_menu(all_t *s_all)
         (sfVector2f){0, 0}, "sprites/menu.png");
     init_buttons(s_all);
     init_options(s_all);
+    init_chatbox(s_all);
     s_all->s_game.black = sfSprite_create();
     s_all->s_game.black_tx =
         sfTexture_createFromFile("sprites/black.png", NULL);
