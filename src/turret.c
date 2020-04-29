@@ -90,13 +90,15 @@ void turret(all_t *s_all)
     mob_t *temp = s_all->s_mob;
     for (; temp != NULL; temp = temp->next) {
         if (temp->type != 'T') continue;
-        float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
-        if (magnitude > 150) {
-            temp->aggro = 0;
-            sfText_setColor(temp->text, (sfColor){255, 255, 255, 255});
-        } turret_rect(temp);
-        if (temp->aggro == 1 && temp->rect.left >= 64
-        && temp->check_shoot == 0) temp->shoot = 1;
+        if (s_all->s_game.pause == 0) {
+            float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
+            if (magnitude > 150) {
+                temp->aggro = 0;
+                sfText_setColor(temp->text, (sfColor){255, 255, 255, 255});
+            } turret_rect(temp);
+            if (temp->aggro == 1 && temp->rect.left >= 64
+            && temp->check_shoot == 0) temp->shoot = 1;
+        }
         turret_loop(s_all, temp);
     }
 }

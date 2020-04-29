@@ -34,15 +34,13 @@ sfVector2f find_tp_spawn(all_t *s_all)
 void tp_animation4(all_t *s_all, int *alpha)
 {
     if (s_all->s_tp.anim == 3 && s_all->s_player.tp == 1) {
-        generate_random_map(s_all);
-        s_all->s_tp.anim = 4, s_all->s_game.scene = MAP;
+        generate_random_map(s_all), s_all->s_tp.anim = 4;
         sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
         s_all->s_player.shoot_pos = (sfVector2f)
         {s_all->s_player.hero_pos.x + 11, s_all->s_player.hero_pos.y + 20};
-        sfSprite_setPosition(s_all->s_player.ver_shoot,
-        s_all->s_player.shoot_pos);
-        sfSprite_setPosition(s_all->s_player.hor_shoot,
-        s_all->s_player.shoot_pos);
+        sfSprite_setPosition(s_all->s_player.ver_shoot, s_all->s_player.
+        shoot_pos), sfSprite_setPosition(s_all->s_player.hor_shoot,
+        s_all->s_player.shoot_pos), s_all->s_game.scene = MAP;
         generate_random_mobs(s_all), init_minimap(s_all);
     } if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
         *alpha -= 5;
@@ -70,10 +68,12 @@ void tp_animation3(all_t *s_all)
         alpha += 5;
         sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){0, 0, 0, alpha});
-        if (alpha >= 255)
+        if (alpha >= 255) {
             s_all->s_tp.anim = 3;
-    }
-    tp_animation4(s_all, &alpha);
+            s_all->s_stars.pos = (sfVector2f){-128 * 15, -128 * 15};
+            sfSprite_setPosition(s_all->s_stars.front, s_all->s_stars.pos);
+        }
+    } tp_animation4(s_all, &alpha);
     sfRectangleShape_setSize(s_all->s_tp.beam,
         (sfVector2f){s_all->s_tp.width, s_all->s_tp.height});
 }
