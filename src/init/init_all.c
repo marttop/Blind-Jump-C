@@ -56,4 +56,5 @@ void init_all(all_t *s_all)
     init_inventory(s_all);
     init_custom(s_all);
     init_dead(s_all);
+    init_stars(s_all);
 }

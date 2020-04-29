@@ -279,6 +279,16 @@ typedef struct player {
     int tp, x, y;
 } player_t;
 
+typedef struct stars {
+    sfRenderTexture *render1;
+    sfRenderTexture *render2;
+    sfSprite *front;
+    sfSprite *back;
+    sfTexture *front_tx;
+    sfTexture *back_tx;
+    sfVector2f pos;
+} stars_t;
+
 typedef struct spawn {
     sfSprite *ground;
     sfTexture *ground_tx;
@@ -456,9 +466,12 @@ typedef struct all {
     struct mob *s_mob;
     struct chest *s_chest;
     options_t s_options;
+    stars_t s_stars;
 } all_t;
 
+void display_stars(all_t *s_all);
 void turret_aim(int i, mob_t *temp, b_mob_t *bullet);
+void init_stars(all_t *s_all);
 void turret_loop(all_t *s_all, mob_t *temp);
 void turret_init(mob_t *new, char type, all_t *s_all);
 void turret(all_t *s_all);
