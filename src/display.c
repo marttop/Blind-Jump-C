@@ -30,6 +30,7 @@ void display_map(all_t *s_all)
             s_all->s_effect.vignette_pos);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_map.background, NULL);
+        display_stars(s_all);
         display_tiles(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);

@@ -33,8 +33,6 @@ SRC	=	src/main.c \
 		src/update_infos.c \
 		src/rect_hero2.c \
 		src/rect_hero3.c \
-		src/init/init_mobs.c \
-		src/init/init_mobs2.c \
 		src/map.c \
 		src/player_hp.c \
 		src/map2.c \
@@ -67,6 +65,9 @@ SRC	=	src/main.c \
 		src/init/init_effect.c \
 		src/init/init_inventory.c \
 		src/init/init_mobs3.c \
+		src/init/init_mobs.c \
+		src/init/init_mobs2.c \
+		src/init/init_stars.c \
 		src/init/init_minimap.c \
 		src/init/init_explosions.c \
 		src/init/init_dead.c \
