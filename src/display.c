@@ -54,7 +54,7 @@ void display_hud_anim(all_t *s_all)
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     display_minimap(s_all);
     if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
-    && s_all->s_game.scene != OPT) {
+    && s_all->s_game.scene != OPT && s_all->s_game.scene != LOAD) {
         display_infos(s_all);
         if (s_all->s_game.display_inv == 1)
             display_inventory(s_all);
@@ -82,5 +82,6 @@ void display(all_t *s_all)
     if (s_all->s_game.scene == OPT)
         draw_options(s_all);
     display_game_over(s_all);
+    display_load_slots(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }

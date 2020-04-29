@@ -27,7 +27,7 @@ void init_view(all_t *s_all)
 
 void move_camera2(all_t *s_all)
 {
-    if ((s_all->s_game.scene == CUSTOM)
+    if ((s_all->s_game.scene == CUSTOM || s_all->s_game.scene == LOAD)
     && s_all->s_effect.seconds > 0.01 && s_all->s_effect.anim < 50) {
         sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){0, 0, 0, 16});

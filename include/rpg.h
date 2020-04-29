@@ -60,8 +60,11 @@
 #define OPT (5)
 #endif
 
-typedef struct chatbox
-{
+#ifndef LOAD
+#define LOAD (6)
+#endif
+
+typedef struct chatbox {
     sfRectangleShape *box;
     sfText *text;
     sfFont *font;
@@ -70,8 +73,7 @@ typedef struct chatbox
     float sec;
 } chatbox_t;
 
-typedef struct check_box
-{
+typedef struct check_box {
     sfRectangleShape *box;
     int checked;
     int id;
@@ -80,8 +82,7 @@ typedef struct check_box
     sfVector2f pos;
 } check_box_t;
 
-typedef struct volume
-{
+typedef struct volume {
     sfRectangleShape *bar1;
     sfRectangleShape *bar2;
     int vol;
@@ -91,8 +92,7 @@ typedef struct volume
     sfTexture *left_tx;
 } volume_t;
 
-typedef struct options
-{
+typedef struct options {
     sfSprite *bg;
     sfTexture *bg_tx;
     volume_t s_volume;
@@ -299,6 +299,20 @@ typedef struct stars {
     sfVector2f pos;
 } stars_t;
 
+typedef struct load {
+    sfSprite *hero;
+    sfSprite *button;
+    sfTexture *hero_tx;
+    sfTexture *hover;
+    sfTexture *click;
+    sfColor color;
+    int id;
+    sfText *level_tx;
+    sfText *p_name_tx;
+    sfVector2f pos;
+    struct load *next;
+} load_t;
+
 typedef struct spawn {
     sfSprite *ground;
     sfTexture *ground_tx;
@@ -472,12 +486,13 @@ typedef struct all {
     mob_pos_t s_mob_pos;
     inventory_t s_inventory;
     dead_t s_dead;
-    struct rgb *s_rgb;
-    struct mob *s_mob;
-    struct chest *s_chest;
     options_t s_options;
     chatbox_t s_chatbox;
     stars_t s_stars;
+    struct rgb *s_rgb;
+    struct mob *s_mob;
+    struct chest *s_chest;
+    struct load *s_load; 
 } all_t;
 
 void display_stars(all_t *s_all);
@@ -508,6 +523,7 @@ void init_mobs(all_t *s_all);
 void display_mobs(all_t *s_all);
 int my_ptrlen(char **str);
 void events_control(all_t *s_all);
+char *read_field(char *field, int fd);
 void create_sprite(sfSprite **sprite, sfTexture **texture,
     sfVector2f pos, const char *path);
 void display_hero(all_t *s_all);
@@ -517,6 +533,8 @@ void init_explosions(all_t *s_all);
 void player_movement(all_t *s_all);
 void init_rgb_selector(all_t *s_all);
 void display_rgb_selector(all_t *s_all);
+void init_load_slots(all_t *s_all);
+void display_load_slots(all_t *s_all);
 void init_movement(all_t *s_all);
 void display_infos(all_t *s_all);
 void generate_random_mobs(all_t *s_all);
