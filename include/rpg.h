@@ -60,6 +60,16 @@
 #define OPT (5)
 #endif
 
+typedef struct chatbox
+{
+    sfRectangleShape *box;
+    sfText *text;
+    sfFont *font;
+    sfClock *clock;
+    sfTime time;
+    float sec;
+} chatbox_t;
+
 typedef struct check_box
 {
     sfRectangleShape *box;
@@ -456,6 +466,7 @@ typedef struct all {
     struct mob *s_mob;
     struct chest *s_chest;
     options_t s_options;
+    chatbox_t s_chatbox;
 } all_t;
 
 void turret_aim(int i, mob_t *temp, b_mob_t *bullet);
@@ -612,6 +623,12 @@ int check_right(all_t *s_all);
 int check_left(all_t *s_all);
 void adjust_volume(all_t *s_all);
 void draw_volume(all_t *s_all);
+void chatbox(all_t *s_all, char *filepath);
+int start_dialog(all_t *s_all, char *filepath);
+void init_chatbox(all_t *s_all);
+int add_letter(int fd, int idx, char *buf);
+void add_text(all_t *s_all, char *buf);
+void dialog_time(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 
