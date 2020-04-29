@@ -10,13 +10,6 @@
 void shoot(all_t *s_all)
 {
     if (s_all->s_game.pause == 1) return;
-    if (sfKeyboard_isKeyPressed(sfKeySpace) == 1) {
-        s_all->s_player.space = 1;
-        s_all->s_game.event.type = 0;
-    } else if (is_key_released(&s_all->s_game.event, sfKeySpace) == 1) {
-        s_all->s_player.space = 0;
-        s_all->s_game.event.type = 0;
-    }
     if (s_all->s_player.reload_sec >= 0.35 && s_all->s_player.shooting == 0
     && s_all->s_player.range == 120 && s_all->s_player.space == 1) {
         s_all->s_game.event.type = 0;
