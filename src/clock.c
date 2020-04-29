@@ -12,11 +12,14 @@ void init_clocks(all_t *s_all)
     s_all->s_game.clock = sfClock_create();
     s_all->s_game.clock_button = sfClock_create();
     s_all->s_effect.clock = sfClock_create();
+    s_all->s_player.reload_clk = sfClock_create();
 }
 
 void player_clocks(all_t *s_all)
 {
-    s_all->s_player.hero_time =
+    s_all->s_player.reload_tm = sfClock_getElapsedTime(s_all->s_player.
+    reload_clk), s_all->s_player.reload_sec = s_all->s_player.reload_tm.
+    microseconds / 1000000.0, s_all->s_player.hero_time =
         sfClock_getElapsedTime(s_all->s_player.hero_clock);
     s_all->s_player.hero_seconds =
         s_all->s_player.hero_time.microseconds / 1000000.0;

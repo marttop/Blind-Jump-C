@@ -24,12 +24,9 @@ load_t *fill_load_slot(all_t *s_all, load_t *old, sfVector2f pos, int id)
     sfSprite_setScale(new->hero, (sfVector2f){4, 4});
     sfText_setFont(new->level_tx, s_all->s_game.font);
     sfText_setFont(new->p_name_tx, s_all->s_game.font);
-    if (id == 1)
-        fd = open("saves/save1", O_RDWR);
-    if (id == 2)
-        fd = open("saves/save2", O_RDWR);
-    if (id == 3)
-        fd = open("saves/save3", O_RDWR);
+    if (id == 1) fd = open("saves/save1", O_RDWR);
+    if (id == 2) fd = open("saves/save2", O_RDWR);
+    if (id == 3) fd = open("saves/save3", O_RDWR);
     new->id = id;
     sfText_setString(new->p_name_tx, read_field("name", fd));
     sfSprite_setColor(new->hero, (sfColor){my_atoi(read_field("r", fd)),
@@ -58,6 +55,7 @@ void display_load_slots(all_t *s_all)
 {
     load_t *temp = s_all->s_load;
     if (s_all->s_game.scene == LOAD && s_all->s_effect.anim > 45) {
+        sfRenderWindow_clear(s_all->s_game.window, sfBlack);
         while (temp != NULL) {
             sfRenderWindow_drawSprite(s_all->s_game.window, temp->hero, NULL);
             sfRenderWindow_drawText(s_all->s_game.window,

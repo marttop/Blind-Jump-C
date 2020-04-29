@@ -57,21 +57,21 @@ void tp_animation4(all_t *s_all, int *alpha)
 void tp_animation3(all_t *s_all)
 {
     static int alpha = 0;
-    if (s_all->s_tp.width >= 20 && s_all->s_tp.anim == 1)
-        s_all->s_tp.anim = 2;
+    if (s_all->s_tp.width >= 20 && s_all->s_tp.anim == 1) s_all->s_tp.anim = 2;
     if (s_all->s_tp.anim == 2 && s_all->s_tp.width > 0) {
         s_all->s_tp.width -= 1;
         sfRectangleShape_setOrigin(s_all->s_tp.beam,
             (sfVector2f){s_all->s_tp.width / 2, s_all->s_tp.height});
-    }
-    if (s_all->s_tp.width <= 0 && s_all->s_tp.anim == 2) {
+    } if (s_all->s_tp.width <= 0 && s_all->s_tp.anim == 2) {
         alpha += 5;
         sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){0, 0, 0, alpha});
         if (alpha >= 255) {
             s_all->s_tp.anim = 3;
             s_all->s_stars.pos = (sfVector2f){-128 * 15, -128 * 15};
+            s_all->s_stars.pos2 = (sfVector2f){-128 * 15, -128 * 15};
             sfSprite_setPosition(s_all->s_stars.front, s_all->s_stars.pos);
+            sfSprite_setPosition(s_all->s_stars.back, s_all->s_stars.pos2);
         }
     } tp_animation4(s_all, &alpha);
     sfRectangleShape_setSize(s_all->s_tp.beam,
