@@ -27,6 +27,16 @@ void display_mobs3(mob_t *temp, all_t *s_all)
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->bullet, NULL);
 }
 
+void display_turret_bullet(all_t *s_all, mob_t *temp)
+{
+    b_mob_t *bullet = temp->l_bullets;
+    for (; bullet != NULL; bullet = bullet->next) {
+        if (temp->check_shoot == 1 && bullet->hit == 0)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+            bullet->bullet, NULL);
+    }
+}
+
 void display_mobs_death_under(all_t *s_all)
 {
     mob_t *temp = s_all->s_mob;
@@ -37,6 +47,8 @@ void display_mobs_death_under(all_t *s_all)
         if (temp->type == 'A' && temp->hit == 0 && temp->check_shoot == 1)
             sfRenderWindow_drawSprite(s_all->s_game.window,
             temp->bullet, NULL);
+        if (temp->type == 'T')
+            display_turret_bullet(s_all, temp);
     }
 }
 
@@ -50,6 +62,8 @@ void display_mobs_death_over(all_t *s_all)
         if (temp->type == 'A' && temp->hit == 0 && temp->check_shoot == 1)
             sfRenderWindow_drawSprite(s_all->s_game.window,
             temp->bullet, NULL);
+        if (temp->type == 'T')
+            display_turret_bullet(s_all, temp);
     }
 }
 

@@ -10,7 +10,7 @@
 void chatbox(all_t *s_all, char *filepath)
 {
     static int disp = 0;
-    if (sfKeyboard_isKeyPressed(sfKeyF) == sfTrue)
+    if (sfKeyboard_isKeyPressed(sfKeyT) == sfTrue)
         disp = 1;
     if (disp == 1) {
         if (start_dialog(s_all, filepath) == 1) {

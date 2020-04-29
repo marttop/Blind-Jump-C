@@ -64,16 +64,13 @@ void display_hud_anim(all_t *s_all)
 void display(all_t *s_all)
 {
     sfRenderWindow_setFramerateLimit(s_all->s_game.window, s_all->s_game.fps);
-    display_spawn(s_all);
-    display_map(s_all);
-    display_dead(s_all);
-    tp_animation(s_all);
+    display_spawn(s_all), display_map(s_all);
+    display_dead(s_all), tp_animation(s_all);
     display_hud_anim(s_all);
     if (s_all->s_game.pause == 1) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_game.black, NULL);
-    }
-    if (s_all->s_game.scene == MENU || s_all->s_game.pause == 1) {
+    } if (s_all->s_game.scene == MENU || s_all->s_game.pause == 1) {
         if (s_all->s_game.scene == MENU) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_game.menu, NULL);
@@ -81,7 +78,6 @@ void display(all_t *s_all)
     } display_custom(s_all), display_rgb_selector(s_all);
     if (s_all->s_game.scene == OPT)
         draw_options(s_all);
-    display_game_over(s_all);
-    display_load_slots(s_all);
+    display_game_over(s_all), display_load_slots(s_all);
     sfRenderWindow_display(s_all->s_game.window);
 }
