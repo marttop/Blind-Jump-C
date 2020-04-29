@@ -39,9 +39,8 @@ void init_spawn2(all_t *s_all)
     s_all->s_spawn.ship_pos = render_pos_center(s_all);
     s_all->s_spawn.ship = sfSprite_create();
     sfSprite_setTexture(s_all->s_spawn.ship, s_all->s_player.hero_tx, sfTrue);
-    sfSprite_setPosition(s_all->s_spawn.ship,
-        (sfVector2f){s_all->s_spawn.ship_pos.x -= 6,
-        s_all->s_spawn.ship_pos.y += 145});
+    sfSprite_setPosition(s_all->s_spawn.ship, (sfVector2f){s_all->s_spawn.
+    ship_pos.x -= 6, s_all->s_spawn.ship_pos.y += 145});
     sfSprite_setTextureRect(s_all->s_spawn.ship,
         (sfIntRect){165, 145, 45, 50});
     s_all->s_spawn.door_clock = sfClock_create();
