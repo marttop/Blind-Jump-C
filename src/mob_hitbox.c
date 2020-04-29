@@ -56,7 +56,7 @@ void check_mob_hitboxes(all_t *s_all)
             temp->hp -= s_all->s_infos.dmg;
         }
         if (player_is_hit(s_all, temp) && s_all->s_infos.is_hit == 0)
-            //loosing_hp(s_all);
+            loosing_hp(s_all);
         if (temp->hp <= 0) {
             s_all->s_infos.current_xp += temp->xp;
             temp->status = -1;

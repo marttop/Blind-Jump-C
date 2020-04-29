@@ -41,7 +41,7 @@ void init_hp_texts(all_t *s_all)
     sfText_setPosition(s_all->s_infos.hp_txt, (sfVector2f){1662, 77});
     sfText_setString(s_all->s_infos.hp_txt, "100/100");
     s_all->s_infos.current_hp = 100, s_all->s_infos.max_hp = 100;
-    s_all->s_infos.str_hp = NULL;
+    s_all->s_infos.str_hp = malloc(20);
     sfText_setCharacterSize(s_all->s_infos.game_over, 40);
     sfText_setCharacterSize(s_all->s_infos.hp_txt, 20);
 }
@@ -76,7 +76,7 @@ void init_infos(all_t *s_all)
     sfText_setString(s_all->s_infos.lvl_txt, "Level 1");
     sfText_setFont(s_all->s_infos.xp_txt, s_all->s_game.font);
     s_all->s_infos.current_xp = 0, s_all->s_infos.max_xp = 100;
-    s_all->s_infos.str_xp = malloc(25), s_all->s_infos.str_level = NULL;
+    s_all->s_infos.str_xp = malloc(25), s_all->s_infos.str_level = malloc(20);
     s_all->s_infos.str_xp[0] = '\0', s_all->s_infos.level = 1;
     my_strcat(s_all->s_infos.str_xp, strnbr(s_all->s_infos.current_xp));
     my_strcat(s_all->s_infos.str_xp, "/"), s_all->s_infos.p_name = malloc(15);
