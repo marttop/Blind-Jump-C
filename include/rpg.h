@@ -174,6 +174,22 @@ typedef struct movement {
     int wall_left;
 } movement_t;
 
+typedef struct bullet_mob {
+    sfSprite *bullet;
+    sfVector2f pos;
+    int shoot;
+    float bullet_speed;
+    int check_shoot;
+    float vx, vy;
+    float normalize;
+    int bullet_travel;
+    int hit;
+    sfClock *shoot_clock;
+    sfTime shoot_time;
+    float shoot_seconds;
+    struct bullet_mob *next;
+} b_mob_t;
+
 typedef struct mob {
     sfSprite *mob;
     sfTexture *mob_txt;
@@ -208,6 +224,7 @@ typedef struct mob {
     float normalize;
     int bullet_travel;
     int hit;
+    b_mob_t *l_bullets;
 } mob_t;
 
 typedef struct p_infos {
@@ -441,6 +458,13 @@ typedef struct all {
     options_t s_options;
 } all_t;
 
+void turret_aim(int i, mob_t *temp, b_mob_t *bullet);
+void turret_loop(all_t *s_all, mob_t *temp);
+void turret_init(mob_t *new, char type, all_t *s_all);
+void turret(all_t *s_all);
+void generate_random_mobs3(all_t *s_all);
+void display_mobs_death_under(all_t *s_all);
+void display_mobs_death_over(all_t *s_all);
 void display_mobs4(all_t *s_all);
 void move_mobs_rect(mob_t *mob, int max, int offset, int reset);
 void roballs_shoot(mob_t *tmp, all_t *s_all);

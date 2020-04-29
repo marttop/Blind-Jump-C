@@ -50,7 +50,8 @@ void tp_animation4(all_t *s_all, int *alpha)
             (sfColor){0, 0, 0, *alpha});
         if (*alpha <= 40) {
             s_all->s_tp.anim = 0, s_all->s_player.tp = 0;
-            s_all->s_minimap.dispay_tp = 0;
+            s_all->s_minimap.dispay_tp = 0, s_all->s_dead.rect.left = 209;
+            s_all->s_dead.fuck = 0;
         }
     }
 }

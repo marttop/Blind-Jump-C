@@ -23,8 +23,34 @@ void display_mobs3(mob_t *temp, all_t *s_all)
             sfSprite_setPosition(temp->bullet, (sfVector2f)
             {temp->mob_pos.x - 4, temp->mob_pos.y- 8});
         roballs_shoot(temp, s_all);
-    } if (temp->check_shoot == 0 || temp->hit == 1) return;
+    } if (temp->check_shoot == 0 || temp->hit == 1 || temp->type != 'A') return;
         sfRenderWindow_drawSprite(s_all->s_game.window, temp->bullet, NULL);
+}
+
+void display_mobs_death_under(all_t *s_all)
+{
+    mob_t *temp = s_all->s_mob;
+    for (; temp != NULL; temp = temp->next) {
+        if (s_all->s_player.hero_pos.y + 20 <= temp->mob_pos.y) continue;
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
+        if (temp->type == 'A' && temp->hit == 0 && temp->check_shoot == 1)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+            temp->bullet, NULL);
+    }
+}
+
+void display_mobs_death_over(all_t *s_all)
+{
+    mob_t *temp = s_all->s_mob;
+    for (; temp != NULL; temp = temp->next) {
+        if (s_all->s_player.hero_pos.y + 20 > temp->mob_pos.y) continue;
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
+        if (temp->type == 'A' && temp->hit == 0 && temp->check_shoot == 1)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+            temp->bullet, NULL);
+    }
 }
 
 void display_mobs4(all_t *s_all)
@@ -36,10 +62,8 @@ void display_mobs4(all_t *s_all)
         if (magnitude <= 150 && s_all->s_player.tp == 0) {
             temp->aggro = 1;
             sfText_setColor(temp->text, (sfColor){255, 20, 20, 255});
-        }
-        if (temp->seconds > 0.01 && temp->aggro == 1
-        && s_all->s_player.tp == 0)
-            search_mob_path(temp, s_all);
+        } if (temp->seconds > 0.01 && temp->aggro == 1
+        && s_all->s_player.tp == 0) search_mob_path(temp, s_all);
         if (temp->rect_seconds > 0.1 && temp->type == 'B' && temp->aggro == 1
         && s_all->s_player.tp == 0 && s_all->s_game.pause != 1)
             move_mobs_rect(temp, 36, 18, 0);

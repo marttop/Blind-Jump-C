@@ -73,7 +73,8 @@ void generate_random_mobs2(all_t *s_all)
             (sfVector2f){randx * 32 + 13, randy * 26}, s_all);
             i--;
         }
-    } generate_random_chests(s_all);
+    } generate_random_mobs3(s_all);
+    generate_random_chests(s_all);
 }
 
 void generate_random_mobs(all_t *s_all)

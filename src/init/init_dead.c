@@ -45,10 +45,12 @@ void display_dead(all_t *s_all)
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);
         int y = display_chests_under(s_all);
+        display_mobs_death_under(s_all);
         rect_dead(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_dead.dead, NULL);
         display_chests_over(s_all, y);
+        display_mobs_death_over(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_effect.tp_glow, s_all->s_effect.light_state);
     }

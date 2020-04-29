@@ -39,9 +39,12 @@ SRC	=	src/main.c \
 		src/player_hp.c \
 		src/map2.c \
 		src/mob_generator.c \
+		src/mob_generator2.c \
+		src/turret.c \
 		src/buttons_menu.c \
 		src/rgb_cursor.c \
 		src/inventory_items.c \
+		src/turret2.c \
 		src/display_inventory.c \
 		src/vectors.c \
 		src/chest_hitbox.c \

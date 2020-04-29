@@ -17,6 +17,8 @@ void game_over_check(all_t *s_all)
         s_all->s_movement.right = 0;
         s_all->s_movement.down = 0;
         s_all->s_movement.up = 0;
+        sfRectangleShape_setFillColor(s_all->s_tp.black,
+            (sfColor){150, 30, 30, 100});
         respawn(s_all);
     }
 }

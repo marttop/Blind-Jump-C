@@ -21,9 +21,9 @@ void init_volume2(all_t *s_all)
     s_all->s_options.s_volume.right_tx, sfTrue);
     sfSprite_setScale(s_all->s_options.s_volume.left, (sfVector2f){-1, 1});
     sfSprite_setPosition(s_all->s_options.s_volume.left,
-    (sfVector2f){620, 600});
+    (sfVector2f){620, 640});
     sfSprite_setPosition(s_all->s_options.s_volume.right,
-    (sfVector2f){1330, 600});
+    (sfVector2f){1330, 640});
 }
 
 void init_volume1(all_t *s_all)
@@ -31,15 +31,16 @@ void init_volume1(all_t *s_all)
     s_all->s_options.s_volume.bar1 = sfRectangleShape_create();
     s_all->s_options.s_volume.bar2 = sfRectangleShape_create();
     sfRectangleShape_setFillColor(s_all->s_options.s_volume.bar1, sfWhite);
-    sfRectangleShape_setFillColor(s_all->s_options.s_volume.bar2, sfBlue);
+    sfRectangleShape_setFillColor(s_all->s_options.s_volume.bar2,
+    (sfColor){172, 56, 36, 255});
     sfRectangleShape_setSize(s_all->s_options.s_volume.bar1,
     (sfVector2f){500, 50});
     sfRectangleShape_setSize(s_all->s_options.s_volume.bar2,
     (sfVector2f){400, 50});
     sfRectangleShape_setPosition(s_all->s_options.s_volume.bar1,
-    (sfVector2f){720, 610});
+    (sfVector2f){720, 647});
     sfRectangleShape_setPosition(s_all->s_options.s_volume.bar2,
-    (sfVector2f){720, 610});
+    (sfVector2f){720, 647});
     init_volume2(s_all);
     s_all->s_options.s_volume.vol = 80;
 }
