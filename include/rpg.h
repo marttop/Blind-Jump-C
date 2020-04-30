@@ -319,6 +319,15 @@ typedef struct load {
     struct load *next;
 } load_t;
 
+typedef struct save {
+    sfSprite *button;
+    sfTexture *normal;
+    sfTexture *hover;
+    sfTexture *clicked;
+    int id, fion;
+    char filepath[13];
+} save_t;
+
 typedef struct npc {
     sfSprite *computer;
     sfVector2f pos_pc;
