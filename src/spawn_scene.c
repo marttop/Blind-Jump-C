@@ -64,7 +64,7 @@ void init_spawn(all_t *s_all)
     sfSprite_setColor(s_all->s_spawn.mask, (sfColor){210, 210, 210, 255});
     init_spawn2(s_all);
     sfSprite_setColor(s_all->s_spawn.ship, (sfColor){190, 190, 190, 255});
-    init_spawn3(s_all);
+    init_spawn3(s_all), init_computer(s_all);
 }
 
 void display_spawn_under(all_t *s_all)
@@ -72,9 +72,11 @@ void display_spawn_under(all_t *s_all)
     door_animation(s_all);
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_spawn.ground, NULL);
-    if (s_all->s_player.hero_pos.y > 580)
+    if (s_all->s_player.hero_pos.y > 580) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_spawn.door, NULL);
+        display_computer(s_all);
+    }
     if (s_all->s_player.hero_pos.y > 655)
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_spawn.ship, NULL);
@@ -86,9 +88,11 @@ void display_spawn_under(all_t *s_all)
 
 void display_spawn_over(all_t *s_all)
 {
-    if (s_all->s_player.hero_pos.y <= 580)
+    if (s_all->s_player.hero_pos.y <= 580) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_spawn.door, NULL);
+        display_computer(s_all);
+    }
     if (s_all->s_player.hero_pos.y <= 655)
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_spawn.ship, NULL);
