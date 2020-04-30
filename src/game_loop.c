@@ -17,7 +17,7 @@ int game_loop(all_t *s_all)
         while (sfRenderWindow_pollEvent(s_all->s_game.window,
         &s_all->s_game.event))
             events_control(s_all);
-
+        shoot(s_all);
         game_clocks(s_all);
         player_movement(s_all);
         display(s_all);

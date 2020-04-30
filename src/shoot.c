@@ -10,38 +10,31 @@
 void shoot(all_t *s_all)
 {
     if (s_all->s_game.pause == 1) return;
-    if (s_all->s_game.event.type == sfEvtKeyPressed
-    && sfKeyboard_isKeyPressed(sfKeySpace) == 1 &&
-    s_all->s_player.shooting == 0 && s_all->s_player.range == 120) {
-        if (s_all->s_direction.left == 1) {
-            s_all->s_player.shooting = 1, s_all->s_player.left = 1;
-            s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
-            s_all->s_player.hor = 1;
-        } if (s_all->s_direction.right == 1) {
-            s_all->s_player.shooting = 1, s_all->s_player.right = 1;
-            s_all->s_player.hor_pos = s_all->s_player.shoot_pos;
-            s_all->s_player.hor = 1;
-        }
+    if (s_all->s_player.reload_sec >= 0.35 && s_all->s_player.shooting == 0
+    && s_all->s_player.range == 120 && s_all->s_player.space == 1) {
+        s_all->s_game.event.type = 0;
+        shoot3(s_all);
         shoot2(s_all);
+        sfClock_restart(s_all->s_player.reload_clk);
     }
 }
 
 void shoot_direction(all_t *s_all)
 {
     if (s_all->s_player.up == 1) {
-        s_all->s_player.ver_pos.y -= 6;
+        s_all->s_player.ver_pos.y -= s_all->s_player.shoot_speed;
         sfSprite_setPosition(s_all->s_player.ver_shoot,
         s_all->s_player.ver_pos);
     } if (s_all->s_player.down == 1) {
-        s_all->s_player.ver_pos.y += 6;
+        s_all->s_player.ver_pos.y += s_all->s_player.shoot_speed;
         sfSprite_setPosition(s_all->s_player.ver_shoot,
         s_all->s_player.ver_pos);
     } if (s_all->s_player.left == 1) {
-        s_all->s_player.hor_pos.x -= 6;
+        s_all->s_player.hor_pos.x -= s_all->s_player.shoot_speed;
         sfSprite_setPosition(s_all->s_player.hor_shoot,
         s_all->s_player.hor_pos);
     } if (s_all->s_player.right == 1) {
-        s_all->s_player.hor_pos.x += 6;
+        s_all->s_player.hor_pos.x += s_all->s_player.shoot_speed;
         sfSprite_setPosition(s_all->s_player.hor_shoot,
         s_all->s_player.hor_pos);
     }
@@ -92,7 +85,7 @@ void shooting_control(all_t *s_all)
     if (s_all->s_player.shoot_sec > 0.01) {
         if (s_all->s_player.shooting == 1 && s_all->s_player.range != 0) {
             shoot_direction(s_all);
-            s_all->s_player.range -= 6;
+            s_all->s_player.range -= s_all->s_player.shoot_speed;
         }
         if (s_all->s_player.range <= 0) {
             move_hit(s_all);

@@ -91,9 +91,11 @@ void init_hero(all_t *s_all)
     s_all->s_player.debug = init_hitbox_debug(s_all->s_player.debug,
         s_all->s_player.hero_pos, s_all->s_player.hero);
     sfSprite_setColor(s_all->s_player.hero, (sfColor){170, 170, 170, 255});
-    init_movement(s_all);
-    init_direction(s_all);
-    init_hero2(s_all);
-    init_hero3(s_all);
-    init_shooting(s_all);
+    init_movement(s_all), init_direction(s_all);
+    init_hero2(s_all), init_hero3(s_all);
+    init_shooting(s_all), s_all->s_player.space = 0;
+    s_all->s_player.shoot_speed = 6;
+    s_all->s_player.save_speed = s_all->s_player.shoot_speed;
+    s_all->s_player.fast_shoot =
+        s_all->s_player.shoot_speed + s_all->s_player.hero_speed;
 }
