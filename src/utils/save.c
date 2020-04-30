@@ -48,6 +48,8 @@ void save(all_t *s_all, char *filepath)
     write_field("xp", fd, strnbr(s_all->s_infos.current_xp));
     write_field("maxxp", fd, strnbr(s_all->s_infos.max_xp));
     write_field("hp", fd, strnbr(s_all->s_infos.current_hp));
+    if (s_all->s_infos.current_hp == 0)
+        write_field("hp", fd, strnbr(60));
     write_field("maxhp", fd, strnbr(s_all->s_infos.max_hp));
     write_field("stage", fd, strnbr(s_all->s_map.stage - 1));
     close(fd);
@@ -59,8 +61,6 @@ void load_next(all_t *s_all, int fd)
     s_all->s_infos.max_xp = my_atoi(read_field("maxxp", fd));
     s_all->s_infos.str_xp[0] = '\0';
     update_xp(s_all);
-    sfRectangleShape_setSize(s_all->s_infos.xp,
-    (sfVector2f){450 / s_all->s_infos.max_xp * s_all->s_infos.current_xp, 20});
     s_all->s_infos.current_hp = my_atoi(read_field("hp", fd));
     s_all->s_infos.max_hp = my_atoi(read_field("maxhp", fd));
     s_all->s_infos.str_hp[0] = '\0';
@@ -68,8 +68,8 @@ void load_next(all_t *s_all, int fd)
     my_strcat(s_all->s_infos.str_hp, "/");
     my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.max_hp));
     sfText_setString(s_all->s_infos.hp_txt, s_all->s_infos.str_hp);
-    sfRectangleShape_setSize(s_all->s_infos.hp,
-    (sfVector2f){250 / s_all->s_infos.max_hp * s_all->s_infos.current_hp, 20});
+    float size = 250.0 / s_all->s_infos.max_hp * s_all->s_infos.current_hp;
+    sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){size, 20});
 }
 
 void load(all_t *s_all, char *filepath)

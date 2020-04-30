@@ -56,7 +56,7 @@ rgb_t *fill_rbg(all_t *s_all, char type, rgb_t *old, sfTexture *arrow_tx)
 void init_rgb_selector(all_t *s_all)
 {
     s_all->s_game.arrow =
-    sfTexture_createFromFile("sprites/buttons/arrow.png", NULL);
+        sfTexture_createFromFile("sprites/buttons/arrow.png", NULL);
     s_all->s_rgb = NULL;
     s_all->s_rgb = fill_rbg(s_all, 'B', s_all->s_rgb, s_all->s_game.arrow);
     s_all->s_rgb = fill_rbg(s_all, 'G', s_all->s_rgb, s_all->s_game.arrow);

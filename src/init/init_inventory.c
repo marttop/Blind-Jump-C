@@ -9,10 +9,21 @@
 
 void set_texture_items(slots_t *tmp, int id, all_t *s_all)
 {
-    if (id == 1)
+    if (id == 0) {
         sfSprite_setTexture(tmp->item, s_all->s_inventory.pistol, sfTrue);
-    if (id == 2)
+        tmp->dmg = 10;
+    } if (id == 1) {
         sfSprite_setTexture(tmp->item, s_all->s_inventory.scorpion, sfTrue);
+        tmp->dmg = 20;
+    } if (id == 2) {
+        sfSprite_setTexture(tmp->item, s_all->s_inventory.scarh, sfTrue);
+        tmp->dmg = 30;
+    } if (id == 3) {
+        sfSprite_setTexture(tmp->item, s_all->s_inventory.sniper, sfTrue);
+        tmp->dmg = 40;
+    } if (id >= 4)
+        sfSprite_setTexture(tmp->item, s_all->s_inventory.armors_tx, sfTrue);
+    set_texture_items2(tmp, id);
 }
 
 void init_slots(all_t *s_all, sfVector2f pos)
@@ -26,15 +37,17 @@ void init_slots(all_t *s_all, sfVector2f pos)
         sfSprite_setTexture(tmp->slot, s_all->s_inventory.slot_tx, sfTrue);
         sfSprite_setPosition(tmp->slot, pos);
         tmp->item = sfSprite_create();
-        tmp->drag = 0;
+        tmp->drag = 0, tmp->health = 0, tmp->dmg = 0;
         pos.x += 62;
+        tmp->equip = 0;
+        tmp->slot_nb = 0;
         tmp->is_item = 0;
-        if (count == 3)
-            count = -1, pos.x = x, pos.y += 62;
+        tmp->under = NULL;
+        if (count == 3) count = -1, pos.x = x, pos.y += 62;
         tmp->next = old;
         old = tmp;
-    }
-    s_all->s_inventory.head = old;
+    } s_all->s_inventory.head = old;
+    init_equip_slots(s_all);
 }
 
 void init_items_texture(all_t *s_all)
@@ -45,11 +58,25 @@ void init_items_texture(all_t *s_all)
         sfTexture_createFromFile("sprites/weapons/scorpion.png", NULL);
     s_all->s_inventory.trash_tx =
         sfTexture_createFromFile("sprites/inv/trash.png", NULL);
+    s_all->s_inventory.scarh =
+        sfTexture_createFromFile("sprites/weapons/scarh.png", NULL);
+    s_all->s_inventory.sniper =
+        sfTexture_createFromFile("sprites/weapons/sniper.png", NULL);
+    s_all->s_inventory.armors_tx =
+        sfTexture_createFromFile("sprites/weapons/armors.png", NULL);
 }
 
 void init_inventory2(all_t *s_all)
 {
     sfSprite_setPosition(s_all->s_inventory.trash, (sfVector2f){1440, 610});
+    s_all->s_inventory.infos = sfRectangleShape_create();
+    sfRectangleShape_setSize(s_all->s_inventory.infos,
+        (sfVector2f) {250, 50});
+    sfRectangleShape_setFillColor(s_all->s_inventory.infos,
+        (sfColor){70, 103, 113, 255});
+    s_all->s_inventory.infos_text = sfText_create();
+    sfText_setFont(s_all->s_inventory.infos_text, s_all->s_game.monospaced);
+    sfText_setCharacterSize(s_all->s_inventory.infos_text, 18);
 }
 
 void init_inventory(all_t *s_all)
@@ -70,7 +97,7 @@ void init_inventory(all_t *s_all)
         s_all->s_inventory.selected_tx, sfTrue);
     s_all->s_inventory.drag = 0, s_all->s_inventory.swap = 0;
     s_all->s_inventory.trash = sfSprite_create();
-    init_slots(s_all, pos), init_items_texture(s_all);
+    init_items_texture(s_all), init_slots(s_all, pos);
     sfSprite_setTexture(s_all->s_inventory.trash,
         s_all->s_inventory.trash_tx, sfTrue);
     init_inventory2(s_all);

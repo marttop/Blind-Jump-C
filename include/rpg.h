@@ -507,7 +507,12 @@ typedef struct slots {
     int drag;
     int is_item;
     int id;
+    int health;
+    int dmg;
+    int equip;
+    int slot_nb;
     sfSprite *item;
+    sfSprite *under;
     struct slots *next;
 } slots_t;
 
@@ -517,11 +522,16 @@ typedef struct inventory {
     sfSprite *selected;
     sfSprite *trash;
     sfTexture *pistol;
+    sfTexture *scarh;
+    sfTexture *sniper;
     sfTexture *scorpion;
     sfTexture *trash_tx;
+    sfTexture *armors_tx;
     sfTexture *slot_tx;
     slots_t *dragged;
     slots_t *head;
+    sfText *infos_text;
+    sfRectangleShape *infos;
     int swap;
     int drag;
 } inventory_t;
@@ -564,6 +574,10 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
+void display_inventory_inf(all_t *s_all, int check);
+void init_equip_slots(all_t *s_all);
+void swap_items(all_t *s_all, slots_t *tmp);
+void set_texture_items2(slots_t *tmp, int id);
 void free_hearth(all_t *s_all);
 void heal_hp(all_t *s_all);
 void display_hearth2(all_t *s_all);

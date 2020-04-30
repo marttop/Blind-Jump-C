@@ -59,8 +59,8 @@ void display_hud_anim(all_t *s_all)
     && s_all->s_game.scene != OPT && s_all->s_game.scene != LOAD) {
         display_infos(s_all);
         if (s_all->s_game.display_inv == 1) {
-            display_inventory(s_all);
             draw_stats(s_all);
+            display_inventory(s_all);
         }
     }
 }

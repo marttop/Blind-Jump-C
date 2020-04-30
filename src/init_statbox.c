@@ -93,7 +93,7 @@ void stat_text2(all_t *s_all)
     sfText_setColor(s_all->s_statbox.sh_speed, sfWhite);
     sfText_setFont(s_all->s_statbox.sh_speed, s_all->s_statbox.font);
     sfText_setPosition(s_all->s_statbox.speed_tx, (sfVector2f){270, 650});
-    sfText_setPosition(s_all->s_statbox.speed, (sfVector2f){350, 650});
+    sfText_setPosition(s_all->s_statbox.speed, (sfVector2f){450, 650});
     sfText_setPosition(s_all->s_statbox.sh_speed_tx, (sfVector2f){270, 700});
     sfText_setPosition(s_all->s_statbox.sh_speed, (sfVector2f){450, 700});
 }
