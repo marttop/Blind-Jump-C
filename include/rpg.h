@@ -325,8 +325,10 @@ typedef struct save {
     sfTexture *normal;
     sfTexture *hover;
     sfTexture *clicked;
+    sfText *description;
     int id, fion;
-    char filepath[13];
+    char *filepath;
+    struct save *next;
 } save_t;
 
 typedef struct npc {
@@ -514,6 +516,7 @@ typedef struct all {
     options_t s_options;
     chatbox_t s_chatbox;
     stars_t s_stars;
+    struct save *s_save;
     struct rgb *s_rgb;
     struct mob *s_mob;
     struct chest *s_chest;
@@ -622,6 +625,8 @@ int check_middle_wall(all_t *s_all);
 void game_over_check(all_t *s_all);
 void save(all_t *s_all, char *filepath);
 void load(all_t *s_all, char *filepath);
+void init_save_screen(all_t *s_all);
+void display_save_slots(all_t *s_all);
 void display_debug(all_t *s_all);
 int check_ship(all_t *s_all);
 void init_effect(all_t *s_all);
