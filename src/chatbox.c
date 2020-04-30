@@ -52,10 +52,10 @@ int add_letter(int fd, int idx, char *buf)
 int quit_dialog(all_t *s_all, int idx)
 {
     while (idx == -1) {
-    sfRenderWindow_drawText(s_all->s_game.window,
-    s_all->s_chatbox.text, NULL);
-    if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue)
-        return 1;
+        sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_chatbox.text, NULL);
+        if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue)
+            return 1;
     }
     return 0;
 }
