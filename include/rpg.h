@@ -64,6 +64,32 @@
 #define LOAD (6)
 #endif
 
+typedef struct statbox
+{
+    sfRectangleShape *bg;
+    sfRectangleShape *bg1;
+    sfSprite *player;
+    sfFont *font;
+    sfText *p_name;
+    sfText *xp;
+    sfText *dmg;
+    sfText *hp;
+    sfText *lvl;
+    sfText *xp_tx;
+    sfText *dmg_tx;
+    sfText *hp_tx;
+    sfText *lvl_tx;
+    sfText *speed;
+    sfText *speed_tx;
+    sfText *sh_speed;
+    sfText *sh_speed_tx;
+    char *dmg_str;
+    char *speed_str;
+    char *sh_speed_str;
+    char *hp_str;
+    char *lvl_str;
+} statbox_t;
+
 typedef struct chatbox {
     sfRectangleShape *box;
     sfText *text;
@@ -534,7 +560,8 @@ typedef struct all {
     struct rgb *s_rgb;
     struct mob *s_mob;
     struct chest *s_chest;
-    struct load *s_load; 
+    struct load *s_load;
+    statbox_t s_statbox;
 } all_t;
 
 void free_hearth(all_t *s_all);
@@ -722,6 +749,15 @@ int quit_dialog(all_t *s_all);
 void open_file(all_t *s_all, char *filepath);
 int read_chat_file(all_t *s_all);
 int wait_close(all_t *s_all);
+void init_stat_box(all_t *s_all);
+void draw_stats(all_t *s_all);
+void update_statbox(all_t *s_all);
+void stat_create(all_t *s_all);
+void stat_text(all_t *s_all);
+void stat_text1(all_t *s_all);
+void stat_text2(all_t *s_all);
+void set_stat_text(all_t *s_all);
+void draw_stats1(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 
