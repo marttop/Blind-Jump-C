@@ -318,6 +318,12 @@ typedef struct load {
     struct load *next;
 } load_t;
 
+typedef struct npc {
+    sfSprite *computer;
+    sfVector2f pos_pc;
+    sfSprite *screen;
+} npc_t;
+
 typedef struct spawn {
     sfSprite *ground;
     sfTexture *ground_tx;
@@ -476,6 +482,7 @@ typedef struct inventory {
 
 typedef struct all {
     game_t s_game;
+    npc_t s_npc;
     m_buttons_t *s_buttons;
     tp_t s_tp;
     p_infos_t s_infos;
@@ -500,6 +507,8 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void init_computer(all_t *s_all);
+void display_computer(all_t *s_all);
 void shoot3(all_t *s_all);
 void display_stars(all_t *s_all);
 void turret_aim(int i, mob_t *temp, b_mob_t *bullet);
