@@ -10,8 +10,23 @@
 void display_hearth(all_t *s_all)
 {
     hearth_t *tmp = s_all->s_life;
-    for (; tmp != NULL; tmp = tmp->next)
+    sfVector2f pos;
+    for (; tmp != NULL; tmp = tmp->next) {
+        pos = sfSprite_getPosition(tmp->hearth);
+        if (s_all->s_player.hero_pos.y + 10 <= pos.y) continue;
         sfRenderWindow_drawSprite(s_all->s_game.window, tmp->hearth, NULL);
+    }
+}
+
+void display_hearth2(all_t *s_all)
+{
+    hearth_t *tmp = s_all->s_life;
+    sfVector2f pos;
+    for (; tmp != NULL; tmp = tmp->next) {
+        pos = sfSprite_getPosition(tmp->hearth);
+        if (s_all->s_player.hero_pos.y + 10 > pos.y) continue;
+        sfRenderWindow_drawSprite(s_all->s_game.window, tmp->hearth, NULL);
+    }
 }
 
 void push_front_hearth(all_t *s_all, mob_t *tmp)

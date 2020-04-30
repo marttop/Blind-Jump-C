@@ -536,6 +536,7 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void display_hearth2(all_t *s_all);
 void display_hearth(all_t *s_all);
 void push_front_hearth(all_t *s_all, mob_t *tmp);
 void init_chatbox2(all_t *s_all);
