@@ -15,4 +15,48 @@ void init_chatbox2(all_t *s_all)
     sfSprite_setTexture(s_all->s_chatbox.eric,
         s_all->s_chatbox.eric_tx, sfTrue);
     sfSprite_setPosition(s_all->s_chatbox.eric, (sfVector2f){1620, 790});
+    s_all->s_chatbox.buff = malloc(sizeof(char) * 2000);
+    s_all->s_chatbox.car = 0, s_all->s_chatbox.fd = 0,
+    s_all->s_chatbox.idx = 0, s_all->s_chatbox.op = 0;
+    s_all->s_chatbox.buff[0] = '\0';
+    s_all->s_chatbox.s = 0.05;
+}
+
+void open_file(all_t *s_all, char *filepath)
+{
+    if (s_all->s_chatbox.op == 0 && s_all->s_chatbox.idx == 0) {
+        s_all->s_chatbox.op = 1, s_all->s_chatbox.car = 0;
+        s_all->s_chatbox.fd = open(filepath, O_RDONLY);
+        s_all->s_chatbox.buff[0] = '\0';
+        s_all->s_chatbox.s = 0.05;
+    }
+}
+
+int read_chat_file(all_t *s_all)
+{
+    dialog_time(s_all);
+    if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue)
+        s_all->s_chatbox.s = 0.0;
+    if (s_all->s_chatbox.car == 130) {
+        s_all->s_chatbox.buff[s_all->s_chatbox.idx] = '\n';
+        s_all->s_chatbox.idx++, s_all->s_chatbox.car = 0;
+    }
+    if (s_all->s_chatbox.sec > s_all->s_chatbox.s) {
+        s_all->s_chatbox.idx = add_letter(s_all->s_chatbox.fd,
+        s_all->s_chatbox.idx, s_all->s_chatbox.buff);
+        s_all->s_chatbox.car++;
+        add_text(s_all, s_all->s_chatbox.buff);
+    }
+    return 0;
+}
+
+int wait_close(all_t *s_all)
+{
+    close(s_all->s_chatbox.fd);
+    s_all->s_chatbox.op = 0;
+    if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue) {
+        s_all->s_chatbox.idx = 0;
+        return 1;
+    }
+    return 0;
 }

@@ -72,7 +72,9 @@ typedef struct chatbox {
     sfTime time;
     sfSprite *eric;
     sfTexture *eric_tx;
-    float sec;
+    float sec, s;
+    int fd, idx, car, op;
+    char *buff;
 } chatbox_t;
 
 typedef struct check_box {
@@ -712,6 +714,10 @@ void init_chatbox(all_t *s_all);
 int add_letter(int fd, int idx, char *buf);
 void add_text(all_t *s_all, char *buf);
 void dialog_time(all_t *s_all);
+int quit_dialog(all_t *s_all);
+void open_file(all_t *s_all, char *filepath);
+int read_chat_file(all_t *s_all);
+int wait_close(all_t *s_all);
 
 /* ------------ !QUEUE ------------ */
 
