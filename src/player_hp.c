@@ -26,6 +26,20 @@ void color_hp(all_t *s_all)
         (sfColor){0, 190, 0, 255});
 }
 
+void heal_hp(all_t *s_all)
+{
+    color_hp(s_all);
+    if (s_all->s_infos.str_hp != NULL) free(s_all->s_infos.str_hp);
+    s_all->s_infos.str_hp = malloc(sizeof(char) * 20);
+    s_all->s_infos.str_hp[0] = '\0';
+    my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.current_hp));
+    my_strcat(s_all->s_infos.str_hp, "/");
+    my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.max_hp));
+    sfText_setString(s_all->s_infos.hp_txt, s_all->s_infos.str_hp);
+    float size = 250.0 / s_all->s_infos.max_hp * s_all->s_infos.current_hp;
+    sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){size, 20});
+}
+
 void loosing_hp(all_t *s_all)
 {
     s_all->s_infos.is_hit = 1;
@@ -33,14 +47,14 @@ void loosing_hp(all_t *s_all)
     s_all->s_infos.current_hp -= 20;
     color_hp(s_all);
     if (s_all->s_infos.str_hp != NULL) free(s_all->s_infos.str_hp);
-    s_all->s_infos.str_hp = malloc(20);
+    s_all->s_infos.str_hp = malloc(sizeof(char) * 20);
     s_all->s_infos.str_hp[0] = '\0';
     my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.current_hp));
     my_strcat(s_all->s_infos.str_hp, "/");
     my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.max_hp));
     sfText_setString(s_all->s_infos.hp_txt, s_all->s_infos.str_hp);
-    sfRectangleShape_setSize(s_all->s_infos.hp,
-    (sfVector2f){250 / s_all->s_infos.max_hp * s_all->s_infos.current_hp, 20});
+    float size = 250.0 / s_all->s_infos.max_hp * s_all->s_infos.current_hp;
+    sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){size, 20});
 }
 
 void gaining_hp(all_t *s_all, int hp)
@@ -48,14 +62,14 @@ void gaining_hp(all_t *s_all, int hp)
     s_all->s_infos.current_hp += hp;
     color_hp(s_all);
     if (s_all->s_infos.str_hp != NULL) free(s_all->s_infos.str_hp);
-    s_all->s_infos.str_hp = malloc(20);
+    s_all->s_infos.str_hp = malloc(sizeof(char) * 20);
     s_all->s_infos.str_hp[0] = '\0';
     my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.current_hp));
     my_strcat(s_all->s_infos.str_hp, "/");
     my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.max_hp));
     sfText_setString(s_all->s_infos.hp_txt, s_all->s_infos.str_hp);
-    sfRectangleShape_setSize(s_all->s_infos.hp,
-    (sfVector2f){250 / s_all->s_infos.max_hp * s_all->s_infos.current_hp, 20});
+    float size = 250.0 / s_all->s_infos.max_hp * s_all->s_infos.current_hp;
+    sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){size, 20});
 }
 
 void player_immunity(all_t *s_all)

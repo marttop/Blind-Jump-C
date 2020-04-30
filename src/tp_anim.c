@@ -42,6 +42,7 @@ void tp_animation4(all_t *s_all, int *alpha)
         shoot_pos), sfSprite_setPosition(s_all->s_player.hor_shoot,
         s_all->s_player.shoot_pos), s_all->s_game.scene = MAP;
         generate_random_mobs(s_all), init_minimap(s_all);
+        free_hearth(s_all);
     } if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
         *alpha -= 5;
         sfRectangleShape_setFillColor(s_all->s_tp.black,

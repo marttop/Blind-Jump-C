@@ -503,6 +503,7 @@ typedef struct inventory {
 typedef struct hearth
 {
     int life;
+    int show;
     sfSprite *hearth;
     struct hearth *next;
 } hearth_t;
@@ -536,6 +537,8 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void free_hearth(all_t *s_all);
+void heal_hp(all_t *s_all);
 void display_hearth2(all_t *s_all);
 void display_hearth(all_t *s_all);
 void push_front_hearth(all_t *s_all, mob_t *tmp);
