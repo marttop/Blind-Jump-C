@@ -96,6 +96,7 @@ SRC	=	src/main.c \
 		src/utils/render_pos_center.c \
 		src/options_menu.c \
 		src/fps.c \
+		src/load.c \
 		src/utils/my_itoa.c \
 		src/volume.c \
 		src/chatbox.c \

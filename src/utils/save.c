@@ -89,5 +89,6 @@ void load(all_t *s_all, char *filepath)
     load_next(s_all, fd);
     s_all->s_map.stage = my_atoi(read_field("stage", fd));
     enter_event(s_all);
+    s_all->s_infos.dmg = s_all->s_infos.level * 50;
     close(fd);
 }
