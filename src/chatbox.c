@@ -12,6 +12,7 @@ void chatbox(all_t *s_all, char *filepath)
     if (s_all->s_game.chat == 1) {
         if (start_dialog(s_all, filepath) == 1) {
             s_all->s_game.chat = 0;
+            s_all->s_npc.talk = 0;
             return;
         }
     }
