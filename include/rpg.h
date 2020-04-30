@@ -305,8 +305,9 @@ typedef struct load {
     sfTexture *hero_tx;
     sfTexture *hover;
     sfTexture *click;
+    sfTexture *normal;
     sfColor color;
-    int id;
+    int id, fion;
     sfText *level_tx;
     sfText *p_name_tx;
     sfVector2f pos;
