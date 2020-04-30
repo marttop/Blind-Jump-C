@@ -40,8 +40,13 @@ void init_computer(all_t *s_all)
 void computer_event(all_t *s_all)
 {
     if (s_all->s_game.scene == SPAWN
-    && is_key_released(&s_all->s_game.event, sfKeyE) == 1)
+    && is_key_released(&s_all->s_game.event, sfKeyE) == 1
+    && calcul_sprite_magnitude(s_all->s_npc.screen,
+    s_all->s_player.shadow) <= 25
+    && s_all->s_player.hero_pos.y + 10 >= s_all->s_npc.pos_pc.y) {
         s_all->s_npc.talk = !s_all->s_npc.talk;
+        s_all->s_game.chat = 1;
+    }
 }
 
 void display_computer(all_t *s_all)

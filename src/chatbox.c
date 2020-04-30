@@ -9,12 +9,10 @@
 
 void chatbox(all_t *s_all, char *filepath)
 {
-    static int disp = 0;
-    if (sfKeyboard_isKeyPressed(sfKeyT) == sfTrue)
-        disp = 1;
-    if (disp == 1) {
+    if (s_all->s_game.chat == 1) {
         if (start_dialog(s_all, filepath) == 1) {
-            disp = 0;
+            s_all->s_game.chat = 0;
+            s_all->s_npc.talk = 0;
             return;
         }
     }
@@ -36,7 +34,7 @@ void init_chatbox(all_t *s_all)
     sfText_setString(s_all->s_chatbox.text, "");
     sfText_setCharacterSize(s_all->s_chatbox.text, 20);
     sfText_setPosition(s_all->s_chatbox.text, (sfVector2f){80, 800});
-    s_all->s_chatbox.sec = 0;
+    s_all->s_chatbox.sec = 0, s_all->s_game.chat = 0;
 }
 
 int add_letter(int fd, int idx, char *buf)
