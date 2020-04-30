@@ -38,7 +38,7 @@ void pause_game(all_t *s_all)
     }
     else if (s_all->s_game.pause == 1 &&
     (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP)) {
-        if (is_key_released(&s_all->s_game.event, sfKeyF)) {
+        if (is_key_released(&s_all->s_game.event, sfKeyEscape)) {
             s_all->s_game.pause = 0;
         }
     }
