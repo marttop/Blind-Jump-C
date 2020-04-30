@@ -47,8 +47,7 @@ void click_button(load_t *temp, all_t *s_all)
             temp->fion = 1;
             sfSprite_setTexture(temp->button, temp->click, sfTrue);
         }
-        if (s_all->s_game.event.mouseButton.type ==
-        sfEvtMouseButtonReleased) {
+        if (s_all->s_game.event.mouseButton.type == sfEvtMouseButtonReleased) {
             temp->fion = 0;
             s_all->s_game.event.mouseButton.type = 0;
             check_id(temp, s_all);
@@ -57,9 +56,21 @@ void click_button(load_t *temp, all_t *s_all)
     }
 }
 
+void refresh_button(all_t *s_all)
+{
+    if (s_all->s_game.event.mouseButton.type == sfEvtMouseButtonReleased) {
+        load_t *temp = s_all->s_load;
+        while (temp != NULL) {
+            sfSprite_setTexture(temp->button, temp->normal, sfTrue);
+            temp = temp->next;
+        }
+    }
+}
+
 void display_load_slots(all_t *s_all)
 {
     load_t *temp = s_all->s_load;
+    refresh_button(s_all);
     if (s_all->s_game.scene == LOAD && s_all->s_effect.anim > 45) {
         while (temp != NULL) {
             click_button(temp, s_all);
