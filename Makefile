@@ -105,6 +105,8 @@ SRC	=	src/main.c \
 		src/volume.c \
 		src/chatbox.c \
 		src/dialog_utils.c \
+		src/stat_box.c \
+		src/init_statbox.c \
 
 OBJ	=	$(SRC:.c=.o)
 
