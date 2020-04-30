@@ -25,7 +25,7 @@ save_t *fill_save(save_t *old, int id, sfVector2f pos, all_t *s_all)
     }
     sfText_setPosition(new->description, (sfVector2f){pos.x + 15, pos.y});
     sfSprite_setPosition(new->button, (sfVector2f){pos.x, pos.y + 35});
-    new->next = old, new->id = id;
+    new->next = old, new->id = id, new->fion = 0;
     return (new);
 }
 
