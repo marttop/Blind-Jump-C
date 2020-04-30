@@ -21,8 +21,8 @@ void set_load(all_t *s_all, load_t *new, sfVector2f pos, char *level)
     my_strcat(level, read_field("level", fd));
     sfText_setString(new->level_tx, level);
     sfText_setPosition(new->p_name_tx, pos);
-    sfSprite_setPosition(new->hero, (sfVector2f){pos.x, pos.y + 150});
-    sfText_setPosition(new->level_tx, (sfVector2f){pos.x, pos.y + 350});
+    sfSprite_setPosition(new->hero, (sfVector2f){pos.x + 10, pos.y + 150});
+    sfText_setPosition(new->level_tx, (sfVector2f){pos.x - 5, pos.y + 350});
     sfSprite_setPosition(new->button, (sfVector2f){pos.x - 15, pos.y + 450});
     sfText_setFont(new->level_tx, s_all->s_game.font);
     sfText_setFont(new->p_name_tx, s_all->s_game.font);

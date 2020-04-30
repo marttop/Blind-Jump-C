@@ -7,6 +7,12 @@
 
 #include "rpg.h"
 
+void init_computer2(all_t *s_all)
+{
+    sfText_setCharacterSize(s_all->s_npc.talk_text, 8);
+    s_all->s_npc.talk = 0;
+}
+
 void init_computer(all_t *s_all)
 {
     s_all->s_npc.computer = sfSprite_create();
@@ -23,12 +29,32 @@ void init_computer(all_t *s_all)
     sfSprite_setPosition(s_all->s_npc.computer, s_all->s_npc.pos_pc);
     sfSprite_setPosition(s_all->s_npc.screen,
         (sfVector2f){s_all->s_npc.pos_pc.x + 1, s_all->s_npc.pos_pc.y + 2});
+    s_all->s_npc.talk_text = sfText_create();
+    sfText_setFont(s_all->s_npc.talk_text, s_all->s_game.font);
+    sfText_setPosition(s_all->s_npc.talk_text,
+        (sfVector2f){s_all->s_npc.pos_pc.x - 20, s_all->s_npc.pos_pc.y - 33});
+    sfText_setString(s_all->s_npc.talk_text, "Press \"E\" to talk");
+    init_computer2(s_all);
+}
+
+void computer_event(all_t *s_all)
+{
+    if (s_all->s_game.scene == SPAWN
+    && is_key_released(&s_all->s_game.event, sfKeyE) == 1)
+        s_all->s_npc.talk = !s_all->s_npc.talk;
 }
 
 void display_computer(all_t *s_all)
 {
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_npc.computer, NULL);
-    sfRenderWindow_drawSprite(s_all->s_game.window,
+    if (s_all->s_npc.talk == 1)
+        sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_npc.screen, NULL);
+    if (calcul_sprite_magnitude(s_all->s_npc.screen,
+    s_all->s_player.shadow) <= 25
+    && s_all->s_player.hero_pos.y + 10 >= s_all->s_npc.pos_pc.y) {
+        sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_npc.talk_text, NULL);
+    } else s_all->s_npc.talk = 0;
 }
