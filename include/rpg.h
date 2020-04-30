@@ -124,6 +124,7 @@ typedef struct game {
     sfTexture *menu_tx;
     int fps;
     float volume;
+    int chat;
 } game_t;
 
 typedef struct menu_buttons {
