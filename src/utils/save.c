@@ -49,7 +49,7 @@ void save(all_t *s_all, char *filepath)
     write_field("maxxp", fd, strnbr(s_all->s_infos.max_xp));
     write_field("hp", fd, strnbr(s_all->s_infos.current_hp));
     write_field("maxhp", fd, strnbr(s_all->s_infos.max_hp));
-    write_field("stage", fd, strnbr(s_all->s_map.stage));
+    write_field("stage", fd, strnbr(s_all->s_map.stage - 1));
     close(fd);
 }
 
