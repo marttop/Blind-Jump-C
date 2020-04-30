@@ -70,6 +70,8 @@ typedef struct chatbox {
     sfFont *font;
     sfClock *clock;
     sfTime time;
+    sfSprite *eric;
+    sfTexture *eric_tx;
     float sec;
 } chatbox_t;
 
@@ -520,6 +522,7 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void init_chatbox2(all_t *s_all);
 void computer_event(all_t *s_all);
 float calcul_sprite_magnitude(sfSprite *sprite1, sfSprite *sprite2);
 void slide_hover(m_buttons_t *tmp, sfVector2i mouse);

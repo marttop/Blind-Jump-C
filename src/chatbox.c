@@ -35,6 +35,7 @@ void init_chatbox(all_t *s_all)
     sfText_setCharacterSize(s_all->s_chatbox.text, 20);
     sfText_setPosition(s_all->s_chatbox.text, (sfVector2f){80, 800});
     s_all->s_chatbox.sec = 0, s_all->s_game.chat = 0;
+    init_chatbox2(s_all);
 }
 
 int add_letter(int fd, int idx, char *buf)
@@ -70,16 +71,15 @@ int start_dialog(all_t *s_all, char *filepath)
     s_all->s_chatbox.box, NULL);
     while (idx != -1) {
         dialog_time(s_all);
-        if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue)
-            sec = 0.0;
-        if (i == 160)
-            buf[idx] = '\n', idx++, i = 0;
+        if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue) sec = 0.0;
+        else sec = 0.05;
+        if (i == 130) buf[idx] = '\n', idx++, i = 0;
         if (s_all->s_chatbox.sec > sec)
             idx = add_letter(fd, idx, buf), i++, add_text(s_all, buf);
         sfRenderWindow_drawText(s_all->s_game.window,
-        s_all->s_chatbox.text, NULL);
+        s_all->s_chatbox.text, NULL), sfRenderWindow_drawSprite(s_all->s_game.
+        window, s_all->s_chatbox.eric, NULL);
         sfRenderWindow_display(s_all->s_game.window);
-    }
-    close(fd);
+    } close(fd), free(buf);
     return quit_dialog(s_all, idx);
 }
