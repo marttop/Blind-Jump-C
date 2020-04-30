@@ -42,8 +42,11 @@ void init_buttons(all_t *s_all)
 
 void buttons_event(all_t *s_all, m_buttons_t *tmp)
 {
-    if (tmp->id == 5)
+    if (tmp->id == 5) {
         s_all->s_game.scene = MENU;
+        tmp->position.y = 942;
+        sfSprite_setPosition(tmp->sprite, tmp->position);
+    }
     if (tmp->id == 0)
         sfRenderWindow_close(s_all->s_game.window);
     if (tmp->id == 1)
@@ -66,8 +69,10 @@ void click_buttons(all_t *s_all, m_buttons_t *tmp, sfVector2i mouse)
         m_buttons_t *temp = tmp;
         for (; temp != NULL; temp = temp->next) {
             rect = sfSprite_getGlobalBounds(temp->sprite);
-            if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == 1)
+            if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == 1) {
                 buttons_event(s_all, temp);
+                s_all->s_effect.anim = 0;
+            }
             sfSprite_setTexture(temp->sprite, temp->button1, sfTrue);
         }
     }
