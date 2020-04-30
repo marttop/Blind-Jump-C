@@ -54,10 +54,12 @@ void destroy_mobs(all_t *s_all)
     while (temp != NULL) {
         prev = get_prev(s_all, temp);
         if (prev != NULL && temp->status == -1) {
+            push_front_hearth(s_all, temp);
             temp = destroy_mob_node(prev, temp);
             continue;
         }
         else if (temp->status == -1 && prev == NULL){
+            push_front_hearth(s_all, temp);
             temp = destroy_mob_head(temp, s_all);
             continue;
         } temp = temp->next;
