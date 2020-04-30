@@ -40,11 +40,11 @@ void init_computer(all_t *s_all)
 void computer_event(all_t *s_all)
 {
     if (s_all->s_game.scene == SPAWN
-    && is_key_released(&s_all->s_game.event, sfKeyE) == 1
+    && sfKeyboard_isKeyPressed(sfKeyE) == 1
     && calcul_sprite_magnitude(s_all->s_npc.screen,
     s_all->s_player.shadow) <= 25
     && s_all->s_player.hero_pos.y + 10 >= s_all->s_npc.pos_pc.y) {
-        s_all->s_npc.talk = !s_all->s_npc.talk;
+        s_all->s_npc.talk = 1;
         s_all->s_game.chat = 1;
     }
 }
@@ -57,9 +57,9 @@ void display_computer(all_t *s_all)
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_npc.screen, NULL);
     if (calcul_sprite_magnitude(s_all->s_npc.screen,
-    s_all->s_player.shadow) <= 25
+    s_all->s_player.shadow) <= 25 && s_all->s_game.chat == 0
     && s_all->s_player.hero_pos.y + 10 >= s_all->s_npc.pos_pc.y) {
         sfRenderWindow_drawText(s_all->s_game.window,
         s_all->s_npc.talk_text, NULL);
-    } else s_all->s_npc.talk = 0;
+    }
 }
