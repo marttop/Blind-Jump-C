@@ -323,6 +323,8 @@ typedef struct npc {
     sfSprite *computer;
     sfVector2f pos_pc;
     sfSprite *screen;
+    sfText *talk_text;
+    int talk;
 } npc_t;
 
 typedef struct spawn {
@@ -508,6 +510,8 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void computer_event(all_t *s_all);
+float calcul_sprite_magnitude(sfSprite *sprite1, sfSprite *sprite2);
 void slide_hover(m_buttons_t *tmp, sfVector2i mouse);
 void init_computer(all_t *s_all);
 void display_computer(all_t *s_all);

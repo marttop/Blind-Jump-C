@@ -14,8 +14,8 @@ char **tab_buttons(void)
     tab[1] = "sprites/buttons/quit2.png";
     tab[2] = "sprites/buttons/opts1.png";
     tab[3] = "sprites/buttons/opts2.png";
-    tab[4] = "sprites/buttons/save1.png";
-    tab[5] = "sprites/buttons/save2.png";
+    tab[4] = "sprites/buttons/mload1.png";
+    tab[5] = "sprites/buttons/mload2.png";
     return (tab);
 }
 
@@ -83,8 +83,9 @@ void dispay_buttons(all_t *s_all, m_buttons_t *buttons)
     m_buttons_t *tmp = buttons;
     sfVector2i mouse = sfMouse_getPositionRenderWindow(s_all->s_game.window);
     for (; tmp != NULL; tmp = tmp->next) {
-        if ((s_all->s_game.scene == MENU && tmp->id > 2) || ((s_all->s_game.
-        scene == OPT || s_all->s_game.scene == CUSTOM) && tmp->id != 5))
+        if (s_all->s_game.pause == 1 || (s_all->s_game.scene == MENU
+        && tmp->id > 2) || ((s_all->s_game.scene == OPT
+        || s_all->s_game.scene == CUSTOM) && tmp->id != 5))
             continue;
         click_buttons(s_all, tmp, mouse);
         if (s_all->s_game.seconds_button < 0.01)

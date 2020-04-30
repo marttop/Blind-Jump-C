@@ -25,7 +25,7 @@ void events_keyboard(all_t *s_all)
     } else if (is_key_released(&s_all->s_game.event, sfKeySpace) == 1) {
         s_all->s_player.space = 0;
         s_all->s_game.event.type = 0;
-    }
+    } computer_event(s_all);
 }
 
 void pause_game(all_t *s_all)

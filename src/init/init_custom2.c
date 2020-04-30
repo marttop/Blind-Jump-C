@@ -14,18 +14,18 @@ void fill_rgb2(rgb_t *new, char type)
     if (type == 'R') {
         sfRectangleShape_setSize(new->rect, (sfVector2f){255, 22});
         sfRectangleShape_setFillColor(new->rect, (sfColor){255, 0, 0, 255});
-        sfRectangleShape_setPosition(new->rect, (sfVector2f){800, 650});
-        sfSprite_setPosition(new->cursor, (sfVector2f){800 + 255, 650});
-        sfSprite_setPosition(new->left, (sfVector2f){790, 646});
-        sfSprite_setPosition(new->right, (sfVector2f){800 + 265, 646});
+        sfRectangleShape_setPosition(new->rect, (sfVector2f){820, 600});
+        sfSprite_setPosition(new->cursor, (sfVector2f){1075, 600});
+        sfSprite_setPosition(new->left, (sfVector2f){810, 598});
+        sfSprite_setPosition(new->right, (sfVector2f){1085, 598});
     }
     if (type == 'G') {
         sfRectangleShape_setSize(new->rect, (sfVector2f){255, 22});
         sfRectangleShape_setFillColor(new->rect, (sfColor){0, 255, 0, 255});
-        sfRectangleShape_setPosition(new->rect, (sfVector2f){800, 700});
-        sfSprite_setPosition(new->cursor, (sfVector2f){800 + 255, 700});
-        sfSprite_setPosition(new->left, (sfVector2f){790, 698});
-        sfSprite_setPosition(new->right, (sfVector2f){800 + 265, 698});
+        sfRectangleShape_setPosition(new->rect, (sfVector2f){820, 650});
+        sfSprite_setPosition(new->cursor, (sfVector2f){1075, 650});
+        sfSprite_setPosition(new->left, (sfVector2f){810, 648});
+        sfSprite_setPosition(new->right, (sfVector2f){1085, 648});
     }
 }
 
@@ -44,10 +44,10 @@ rgb_t *fill_rbg(all_t *s_all, char type, rgb_t *old, sfTexture *arrow_tx)
     if (type == 'B') {
         sfRectangleShape_setSize(new->rect, (sfVector2f){255, 22});
         sfRectangleShape_setFillColor(new->rect, (sfColor){0, 0, 255, 255});
-        sfRectangleShape_setPosition(new->rect, (sfVector2f){800, 750});
-        sfSprite_setPosition(new->cursor, (sfVector2f){800 + 255, 750});
-        sfSprite_setPosition(new->left, (sfVector2f){790, 750});
-        sfSprite_setPosition(new->right, (sfVector2f){800 + 265, 750});
+        sfRectangleShape_setPosition(new->rect, (sfVector2f){820, 700});
+        sfSprite_setPosition(new->cursor, (sfVector2f){1075, 700});
+        sfSprite_setPosition(new->left, (sfVector2f){810, 698});
+        sfSprite_setPosition(new->right, (sfVector2f){1085, 698});
     } new->value = 255, new->id = type;
     new->next = old;
     return (new);

@@ -16,7 +16,7 @@ void init_cursor(all_t *s_all)
         s_all->s_custom.texture, sfTrue);
     sfSprite_setTextureRect(s_all->s_custom.sprite,
         (sfIntRect){67, 76, 5, 16});
-    s_all->s_custom.pos = (sfVector2f){777, 264};
+    s_all->s_custom.pos = (sfVector2f){777, 184};
     sfSprite_setPosition(s_all->s_custom.sprite, s_all->s_custom.pos);
     sfSprite_setScale(s_all->s_custom.sprite, (sfVector2f){1, 2.5});
 }
@@ -32,13 +32,13 @@ void init_custom_hero(all_t *s_all)
     sfText_setFont(s_all->s_custom.enter, s_all->s_game.monospaced);
     sfText_setString(s_all->s_custom.enter,
         "Press enter to start");
-    sfText_setPosition(s_all->s_custom.title_hero, (sfVector2f){745, 380});
-    sfText_setPosition(s_all->s_custom.enter, (sfVector2f){690, 950});
+    sfText_setPosition(s_all->s_custom.title_hero, (sfVector2f){745, 300});
+    sfText_setPosition(s_all->s_custom.enter, (sfVector2f){705, 870});
     s_all->s_custom.hero_tx = s_all->s_player.hero_tx;
     sfSprite_setTexture(s_all->s_custom.hero,
         s_all->s_custom.hero_tx, sfTrue);
     sfSprite_setTextureRect(s_all->s_custom.hero, s_all->s_player.hero_rect);
-    sfSprite_setPosition(s_all->s_custom.hero, (sfVector2f){900, 450});
+    sfSprite_setPosition(s_all->s_custom.hero, (sfVector2f){900, 400});
     sfSprite_setScale(s_all->s_custom.hero, (sfVector2f){4, 4});
 }
 
@@ -50,13 +50,13 @@ void init_custom(all_t *s_all)
     sfText_setFont(s_all->s_custom.select_name, s_all->s_game.monospaced);
     sfText_setString(s_all->s_custom.select_name,
         "Select your character's name");
-    sfText_setPosition(s_all->s_custom.select_name, (sfVector2f){600, 210});
+    sfText_setPosition(s_all->s_custom.select_name, (sfVector2f){590, 120});
     sfRectangleShape_setFillColor(s_all->s_custom.input,
         (sfColor){19, 59, 65, 150});
     sfRectangleShape_setPosition(s_all->s_custom.input,
-        (sfVector2f){770, 260});
+        (sfVector2f){770, 180});
     sfRectangleShape_setSize(s_all->s_custom.input, (sfVector2f){350, 40});
-    sfText_setPosition(s_all->s_infos.p_name_txt, (sfVector2f){775, 262});
+    sfText_setPosition(s_all->s_infos.p_name_txt, (sfVector2f){775, 182});
     sfText_setString(s_all->s_infos.p_name_txt, "");
     s_all->s_custom.seconds = 0;
     s_all->s_custom.show = 1;

@@ -54,4 +54,8 @@ void get_aim_direction(all_t *s_all)
     if (s_all->s_game.pause == 1) return;
     get_aim_direction_up_down(s_all);
     get_aim_direction_left_right(s_all);
+
+    if (s_all->s_direction.up == 0 && s_all->s_direction.down == 0
+    && s_all->s_direction.left == 0 && s_all->s_direction.right)
+        s_all->s_player.space = 0;
 }
