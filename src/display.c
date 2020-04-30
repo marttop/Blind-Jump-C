@@ -18,6 +18,8 @@ void display_spawn(all_t *s_all)
         move_camera(s_all);
         sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
+        if (s_all->s_npc.talk == 1)
+            chatbox(s_all, "pnj/computer1");
     }
 }
 
