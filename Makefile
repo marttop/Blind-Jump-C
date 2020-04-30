@@ -46,6 +46,7 @@ SRC	=	src/main.c \
 		src/display_inventory.c \
 		src/vectors.c \
 		src/chest_hitbox.c \
+		src/pause_save.c \
 		src/shoot.c \
 		src/shoot2.c \
 		src/mob_hitbox.c \
@@ -68,6 +69,7 @@ SRC	=	src/main.c \
 		src/init/init_inventory.c \
 		src/init/init_mobs3.c \
 		src/init/init_load.c \
+		src/init/init_save.c \
 		src/init/init_mobs.c \
 		src/init/init_mobs2.c \
 		src/init/init_stars.c \

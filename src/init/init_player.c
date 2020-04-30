@@ -66,7 +66,7 @@ void init_shooting(all_t *s_all)
     sfSprite_setTexture(s_all->s_player.ver_shoot,
     s_all->s_player.ver_shoot_txt, sfTrue);
     sfSprite_setTextureRect(s_all->s_player.hor_shoot,
-    (sfIntRect){45, 82, 16, 5});
+    (sfIntRect){45, 82, 16, 5}), s_all->s_player.reload_sec = 0;
     sfSprite_setOrigin(s_all->s_player.hor_shoot, (sfVector2f){8, 2.5});
     sfSprite_setScale(s_all->s_player.hor_shoot, (sfVector2f){0.70, 0.70});
     sfSprite_setPosition(s_all->s_player.hor_shoot, s_all->s_player.shoot_pos);

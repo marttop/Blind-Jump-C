@@ -59,4 +59,5 @@ void init_all(all_t *s_all)
     init_dead(s_all);
     init_stars(s_all);
     init_load_slots(s_all);
+    init_save_screen(s_all);
 }
