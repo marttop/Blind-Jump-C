@@ -7,6 +7,21 @@
 
 #include "rpg.h"
 
+void slide_hover(m_buttons_t *tmp, sfVector2i mouse)
+{
+    sfFloatRect rect = sfSprite_getGlobalBounds(tmp->sprite);
+    if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == 1
+    && tmp->position.y > 880) {
+        tmp->position.y -= 10;
+        sfSprite_setPosition(tmp->sprite, tmp->position);
+    } else if (tmp->position.y < 932
+    && sfFloatRect_contains(&rect, mouse.x, mouse.y) == 0) {
+        tmp->position.y += 10;
+        sfSprite_setPosition(tmp->sprite, tmp->position);
+        sfSprite_setTexture(tmp->sprite, tmp->button1, sfTrue);
+    }
+}
+
 void init_options_button(all_t *s_all)
 {
     m_buttons_t *old = NULL;

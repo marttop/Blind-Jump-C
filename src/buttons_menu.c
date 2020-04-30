@@ -44,6 +44,7 @@ void buttons_event(all_t *s_all, m_buttons_t *tmp)
 {
     if (tmp->id == 5) {
         s_all->s_game.scene = MENU;
+        s_all->s_effect.anim = 0;
         tmp->position.y = 942;
         sfSprite_setPosition(tmp->sprite, tmp->position);
     }
@@ -69,13 +70,12 @@ void click_buttons(all_t *s_all, m_buttons_t *tmp, sfVector2i mouse)
         m_buttons_t *temp = tmp;
         for (; temp != NULL; temp = temp->next) {
             rect = sfSprite_getGlobalBounds(temp->sprite);
-            if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == 1) {
+            if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == 1)
                 buttons_event(s_all, temp);
-                s_all->s_effect.anim = 0;
-            }
             sfSprite_setTexture(temp->sprite, temp->button1, sfTrue);
         }
     }
+    sfRenderWindow_drawSprite(s_all->s_game.window, tmp->sprite, NULL);
 }
 
 void dispay_buttons(all_t *s_all, m_buttons_t *buttons)
@@ -83,21 +83,13 @@ void dispay_buttons(all_t *s_all, m_buttons_t *buttons)
     m_buttons_t *tmp = buttons;
     sfVector2i mouse = sfMouse_getPositionRenderWindow(s_all->s_game.window);
     for (; tmp != NULL; tmp = tmp->next) {
+        if ((s_all->s_game.scene == MENU && tmp->id > 2) || ((s_all->s_game.
+        scene == OPT || s_all->s_game.scene == CUSTOM) && tmp->id != 5))
+            continue;
         click_buttons(s_all, tmp, mouse);
-        sfRenderWindow_drawSprite(s_all->s_game.window, tmp->sprite, NULL);
         if (s_all->s_game.seconds_button < 0.01)
             continue;
-        sfFloatRect rect = sfSprite_getGlobalBounds(tmp->sprite);
-        if (sfFloatRect_contains(&rect, mouse.x, mouse.y) == 1
-        && tmp->position.y > 880) {
-            tmp->position.y -= 10;
-            sfSprite_setPosition(tmp->sprite, tmp->position);
-        } else if (tmp->position.y < 932
-        && sfFloatRect_contains(&rect, mouse.x, mouse.y) == 0) {
-            tmp->position.y += 10;
-            sfSprite_setPosition(tmp->sprite, tmp->position);
-            sfSprite_setTexture(tmp->sprite, tmp->button1, sfTrue);
-        }
+        slide_hover(tmp, mouse);
     } if (s_all->s_game.seconds_button > 0.01)
         sfClock_restart(s_all->s_game.clock_button);
 }
