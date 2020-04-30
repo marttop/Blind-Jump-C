@@ -16,9 +16,7 @@ void events_keyboard(all_t *s_all)
     if (sfKeyboard_isKeyPressed(sfKeyE) == 1)
         s_all->s_game.key_press = 'E';
     if (is_key_released(&s_all->s_game.event, sfKeyO))
-        put_item_in_slot(s_all, 1);
-    if (is_key_released(&s_all->s_game.event, sfKeyP))
-        put_item_in_slot(s_all, 2);
+        put_item_in_slot(s_all, rand() % 20);
     if (sfKeyboard_isKeyPressed(sfKeySpace) == 1) {
         s_all->s_player.space = 1;
         s_all->s_game.event.type = 0;

@@ -10,9 +10,9 @@
 void set_stat_text(all_t *s_all)
 {
     sfText_setString(s_all->s_statbox.speed, s_all->s_statbox.speed_str);
-    sfText_setString(s_all->s_statbox.speed_tx, "SPEED: ");
+    sfText_setString(s_all->s_statbox.speed_tx, "MOVE SPEED: ");
     sfText_setString(s_all->s_statbox.sh_speed, s_all->s_statbox.sh_speed_str);
-    sfText_setString(s_all->s_statbox.sh_speed_tx, "BULLET SPEED: ");
+    sfText_setString(s_all->s_statbox.sh_speed_tx, "RELOAD SPEED: ");
 }
 
 void update_statbox(all_t *s_all)

@@ -20,15 +20,36 @@ int drop_item2(all_t *s_all, slots_t *tmp)
         s_all->s_inventory.dragged->item = sfSprite_create();
         s_all->s_inventory.dragged->is_item = 0;
         s_all->s_inventory.drag = 0;
+        tmp->health = s_all->s_inventory.dragged->health;
+        tmp->dmg = s_all->s_inventory.dragged->dmg;
         s_all->s_inventory.dragged = NULL;
         return (1);
     }
     return (0);
 }
 
+int drop_check(all_t *s_all, slots_t *tmp)
+{
+    if (tmp->slot_nb == 4 && (s_all->s_inventory.dragged->id != 7 && s_all->
+    s_inventory.dragged->id != 11 && s_all->s_inventory.dragged->id != 15
+    && s_all->s_inventory.dragged->id != 19)) return (1);
+    if (tmp->slot_nb == 3 && (s_all->s_inventory.dragged->id != 6 && s_all->
+    s_inventory.dragged->id != 10 && s_all->s_inventory.dragged->id != 14
+    && s_all->s_inventory.dragged->id != 18)) return (1);
+    if (tmp->slot_nb == 2 && (s_all->s_inventory.dragged->id != 5 && s_all->
+    s_inventory.dragged->id != 9 && s_all->s_inventory.dragged->id != 13
+    && s_all->s_inventory.dragged->id != 17)) return (1);
+    if (tmp->slot_nb == 1 && (s_all->s_inventory.dragged->id != 4 && s_all->
+    s_inventory.dragged->id != 8 && s_all->s_inventory.dragged->id != 12
+    && s_all->s_inventory.dragged->id != 16)) return (1);
+    if (tmp->slot_nb == 5 && (s_all->s_inventory.dragged->id > 3)) return (1);
+    return (0);
+}
+
 void drop_item(all_t *s_all, slots_t *tmp)
 {
     s_all->s_game.event.mouseButton.type = 0;
+    if (drop_check(s_all, tmp) == 1) return;
     if (tmp == s_all->s_inventory.dragged) {
         sfSprite_setPosition(tmp->item, sfSprite_getPosition(tmp->slot));
         s_all->s_inventory.drag = 0;
@@ -41,9 +62,7 @@ void drop_item(all_t *s_all, slots_t *tmp)
     if (tmp->is_item == 1) {
         set_texture_items(tmp, s_all->s_inventory.dragged->id, s_all);
         set_texture_items(s_all->s_inventory.dragged, tmp->id, s_all);
-        int id = tmp->id;
-        tmp->id = s_all->s_inventory.dragged->id;
-        s_all->s_inventory.dragged->id = id;
+        swap_items(s_all, tmp);
     }
 }
 
@@ -72,7 +91,8 @@ void drag_item(all_t *s_all)
         slots_t *tmp = s_all->s_inventory.head;
         for (; tmp != NULL; tmp = tmp->next)
             if (tmp->drag == 1) break;
-        sfSprite_setPosition(tmp->item,
+        if (s_all->s_game.pause != 1)
+            sfSprite_setPosition(tmp->item,
             (sfVector2f){mouse.x - 36, mouse.y - 32});
         sfRenderWindow_drawSprite(s_all->s_game.window, tmp->item, NULL);
     }
@@ -82,7 +102,7 @@ void put_item_in_slot(all_t *s_all, int id)
 {
     slots_t *tmp = s_all->s_inventory.head;
     for (; tmp != NULL; tmp = tmp->next)
-        if (tmp->is_item == 0) {
+        if (tmp->is_item == 0 && tmp->equip == 0) {
             tmp->is_item = 1;
             break;
         }
