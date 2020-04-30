@@ -127,6 +127,7 @@ typedef struct game {
     int fps;
     float volume;
     int chat;
+    sfTexture *hearth_tx;
 } game_t;
 
 typedef struct menu_buttons {
@@ -497,11 +498,19 @@ typedef struct inventory {
     int drag;
 } inventory_t;
 
+typedef struct hearth
+{
+    int life;
+    sfSprite *hearth;
+    struct hearth *next;
+} hearth_t;
+
 typedef struct all {
     game_t s_game;
     npc_t s_npc;
     m_buttons_t *s_buttons;
     tp_t s_tp;
+    hearth_t *s_life;
     p_infos_t s_infos;
     explode_t s_explode;
     map_t s_map;
@@ -525,6 +534,8 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void display_hearth(all_t *s_all);
+void push_front_hearth(all_t *s_all, mob_t *tmp);
 void init_chatbox2(all_t *s_all);
 void computer_event(all_t *s_all);
 float calcul_sprite_magnitude(sfSprite *sprite1, sfSprite *sprite2);

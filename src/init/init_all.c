@@ -38,6 +38,9 @@ void setup(all_t *s_all)
     s_all->s_chest = NULL;
     s_all->s_game.font = sfFont_createFromFile("font/Cornerstone.ttf");
     s_all->s_game.monospaced = sfFont_createFromFile("font/joystix.ttf");
+    s_all->s_game.hearth_tx =
+        sfTexture_createFromFile("sprites/powerup.png", NULL);
+    s_all->s_life = NULL;
     init_view(s_all);
     randomize();
 }

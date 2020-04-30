@@ -57,6 +57,7 @@ SRC	=	src/main.c \
 		src/tp_anim.c \
 		src/chatbox2.c \
 		src/destroy_mobs.c \
+		src/init/init_health_drop.c \
 		src/init/init_player.c \
 		src/init/init_npc.c \
 		src/init/init_infos.c \
