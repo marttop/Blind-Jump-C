@@ -72,6 +72,7 @@ void display_load_slots(all_t *s_all)
     load_t *temp = s_all->s_load;
     refresh_button(s_all);
     if (s_all->s_game.scene == LOAD && s_all->s_effect.anim > 45) {
+        sfRenderWindow_clear(s_all->s_game.window, sfBlack);
         while (temp != NULL) {
             click_button(temp, s_all);
             check_button(temp, s_all);

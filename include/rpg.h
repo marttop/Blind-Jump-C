@@ -508,6 +508,7 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void slide_hover(m_buttons_t *tmp, sfVector2i mouse);
 void init_computer(all_t *s_all);
 void display_computer(all_t *s_all);
 void shoot3(all_t *s_all);
