@@ -274,10 +274,14 @@ typedef struct player {
     sfTexture *hor_shoot_txt;
     sfTexture *hero_tx;
     sfVector2f hero_pos, shoot_pos, hor_pos, ver_pos, hit_pos;
+    int shoot_speed;
+    int save_speed;
+    int space;
+    int fast_shoot;
     int hero_speed, ver, hor, shooting;
-    sfClock *hero_clock, *hit_clk;
-    sfTime hero_time, hit_tm;
-    float hero_seconds, refresh_sec, shoot_sec, hit_sec;
+    sfClock *hero_clock, *hit_clk, *reload_clk;
+    sfTime hero_time, hit_tm, reload_tm;
+    float hero_seconds, refresh_sec, shoot_sec, hit_sec, reload_sec;
     sfClock *rect_clock, *refresh_clk, *shoot_clk;
     sfTime rect_time, refresh_tm, shoot_tm;
     float rect_seconds;
@@ -297,6 +301,7 @@ typedef struct stars {
     sfTexture *front_tx;
     sfTexture *back_tx;
     sfVector2f pos;
+    sfVector2f pos2;
 } stars_t;
 
 typedef struct load {
@@ -496,6 +501,7 @@ typedef struct all {
     struct load *s_load; 
 } all_t;
 
+void shoot3(all_t *s_all);
 void display_stars(all_t *s_all);
 void turret_aim(int i, mob_t *temp, b_mob_t *bullet);
 void init_stars(all_t *s_all);
