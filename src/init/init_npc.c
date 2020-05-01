@@ -39,13 +39,14 @@ void init_computer(all_t *s_all)
 
 void computer_event(all_t *s_all)
 {
-    if (s_all->s_game.scene == SPAWN
+    if (s_all->s_game.scene == SPAWN && s_all->s_cine.script >= 5
     && sfKeyboard_isKeyPressed(sfKeyE) == 1
     && calcul_sprite_magnitude(s_all->s_npc.screen,
     s_all->s_player.shadow) <= 25
     && s_all->s_player.hero_pos.y + 10 >= s_all->s_npc.pos_pc.y) {
         s_all->s_npc.talk = 1;
         s_all->s_game.chat = 1;
+        s_all->s_cine.move = 1;
     }
 }
 

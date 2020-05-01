@@ -67,7 +67,7 @@ int start_dialog(all_t *s_all, char *filepath)
     } if (s_all->s_game.scene == SPAWN && i == 1) {
         if (s_all->s_cine.script < 2)
             s_all->s_chest->status = 1;
-        s_all->s_cine.tuto = 0;
+        s_all->s_cine.tuto = 0, s_all->s_cine.move = 0;
         if (s_all->s_cine.script == 6) s_all->s_cine.door = 1;
         s_all->s_cine.script = 5;
     } return i;
