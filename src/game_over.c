@@ -59,5 +59,7 @@ void display_game_over(all_t *s_all)
     if (s_all->s_game.scene == GAME_OVER) {
         sfRenderWindow_drawText(s_all->s_game.window,
             s_all->s_infos.game_over, NULL);
+        sfRenderWindow_drawText(s_all->s_game.window,
+            s_all->s_dead.respawn, NULL);
     }
 }

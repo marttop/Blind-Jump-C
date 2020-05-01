@@ -7,7 +7,7 @@
 
 #include "utils.h"
 
-int my_strlen(char *str)
+int my_strlen(const char *str)
 {
     int i = 0;
 

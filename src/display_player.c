@@ -9,6 +9,7 @@
 
 void display_weapon_down(all_t *s_all)
 {
+    if (s_all->s_inventory.head->is_item == 0) return;
     if (s_all->s_direction.down == 1 && s_all->s_player.tp != 1) {
         sfSprite_setPosition(s_all->s_player.gun,
             (sfVector2f){s_all->s_player.hero_pos.x + 6,
@@ -23,6 +24,7 @@ void display_weapon_down(all_t *s_all)
 
 void display_weapon_left_right(all_t *s_all)
 {
+    if (s_all->s_inventory.head->is_item == 0) return;
     if (s_all->s_direction.right == 1 && s_all->s_player.tp != 1) {
         sfSprite_setPosition(s_all->s_player.gun,
             (sfVector2f){s_all->s_player.hero_pos.x + 4,
@@ -32,8 +34,7 @@ void display_weapon_left_right(all_t *s_all)
             (sfIntRect){687, 107, 23, 10});
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_player.gun, NULL);
-    }
-    if (s_all->s_direction.left == 1 && s_all->s_player.tp != 1) {
+    } if (s_all->s_direction.left == 1 && s_all->s_player.tp != 1) {
         sfSprite_setPosition(s_all->s_player.gun,
             (sfVector2f){s_all->s_player.hero_pos.x + 16,
             s_all->s_player.hero_pos.y + 17});
