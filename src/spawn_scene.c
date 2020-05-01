@@ -21,7 +21,7 @@ void init_spawn3(all_t *s_all)
     sfRectangleShape_setOutlineThickness(s_all->s_spawn.background, 300.0);
     s_all->s_spawn.open = 0;
     s_all->s_chest = fill_chests(NULL, s_all, (sfVector2f){s_all->s_player.
-    shadow_pos.x + 65, s_all->s_player.shadow_pos.y - 121});
+    shadow_pos.x + 65, s_all->s_player.shadow_pos.y - 117});
 }
 
 void init_spawn2(all_t *s_all)

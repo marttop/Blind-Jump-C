@@ -77,6 +77,7 @@ void load_next(all_t *s_all, int fd)
     s_all->s_map.stage = my_atoi(read_field("stage", fd));
     s_all->s_cine.tuto = my_atoi(read_field("tuto", fd));
     s_all->s_cine.script = my_atoi(read_field("script", fd));
+    if (s_all->s_cine.script > 5) s_all->s_cine.door = 1;
 }
 
 void load(all_t *s_all, char *filepath)
