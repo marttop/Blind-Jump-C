@@ -52,6 +52,7 @@ void save(all_t *s_all, char *filepath)
         write_field("hp", fd, strnbr(60));
     write_field("maxhp", fd, strnbr(s_all->s_infos.max_hp));
     write_field("stage", fd, strnbr(s_all->s_map.stage - 1));
+    save_inventory(fd, s_all);
     close(fd);
 }
 
@@ -89,6 +90,7 @@ void load(all_t *s_all, char *filepath)
     load_next(s_all, fd);
     s_all->s_map.stage = my_atoi(read_field("stage", fd));
     enter_event(s_all);
+    load_inventory(fd, s_all);
     s_all->s_infos.dmg = s_all->s_infos.level * 50;
     close(fd);
 }
