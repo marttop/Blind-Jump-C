@@ -7,6 +7,29 @@
 
 #include "rpg.h"
 
+void slow_heal_player(all_t *s_all)
+{
+    if (s_all->s_game.pause == 0 && s_all->s_game.scene != GAME_OVER
+    && s_all->s_player.heal_sec > 1.0
+    && s_all->s_infos.current_hp < s_all->s_infos.max_hp) {
+        s_all->s_infos.current_hp += 1, s_all->s_player.heal[0] = '\0';
+        my_strcat(s_all->s_player.heal, strnbr(s_all->s_infos.current_hp));
+        my_strcat(s_all->s_player.heal, "/");
+        my_strcat(s_all->s_player.heal, strnbr(s_all->s_infos.max_hp));
+        sfText_setString(s_all->s_infos.hp_txt, s_all->s_player.heal);
+        float size = 250.0 / s_all->s_infos.max_hp * s_all->s_infos.current_hp;
+        sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){size, 20});
+        sfClock_restart(s_all->s_player.heal_clk), color_hp(s_all);
+    } if (s_all->s_infos.current_hp > s_all->s_infos.max_hp) {
+        s_all->s_infos.current_hp = s_all->s_infos.max_hp;
+        s_all->s_player.heal[0] = '\0';
+        my_strcat(s_all->s_player.heal, strnbr(s_all->s_infos.current_hp));
+        my_strcat(s_all->s_player.heal, "/");
+        my_strcat(s_all->s_player.heal, strnbr(s_all->s_infos.max_hp));
+        sfText_setString(s_all->s_infos.hp_txt, s_all->s_player.heal);
+    }
+}
+
 void display_inventory_inf(all_t *s_all, int check)
 {
     if (check == 1) {
@@ -33,6 +56,27 @@ void init_under(all_t *s_all, sfVector2f pos, int id, slots_t *tmp)
         sfSprite_setTextureRect(tmp->under, (sfIntRect){196, 128, 64, 64});
     } sfSprite_setColor(tmp->under, (sfColor){0, 0, 0, 50});
     sfSprite_setPosition(tmp->under, pos);
+}
+
+void set_equip_stats(all_t *s_all)
+{
+    int life = s_all->s_infos.max_hp_save;
+    int dmg = s_all->s_infos.save_dmg * s_all->s_infos.level;
+    slots_t *tmp = s_all->s_inventory.head;
+    for (; tmp != NULL; tmp = tmp->next) {
+        if (tmp->slot_nb == 1 || tmp->slot_nb == 2
+        || tmp->slot_nb == 3 || tmp->slot_nb == 4) life += tmp->health;
+        if (tmp->slot_nb == 5) dmg += tmp->dmg;
+    } s_all->s_infos.max_hp = life;
+    s_all->s_infos.dmg = dmg;
+    s_all->s_infos.str_hp = malloc(sizeof(char) * 20);
+    s_all->s_infos.str_hp[0] = '\0';
+    my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.current_hp));
+    my_strcat(s_all->s_infos.str_hp, "/");
+    my_strcat(s_all->s_infos.str_hp, strnbr(s_all->s_infos.max_hp));
+    sfText_setString(s_all->s_infos.hp_txt, s_all->s_infos.str_hp);
+    float size = 250.0 / s_all->s_infos.max_hp * s_all->s_infos.current_hp;
+    sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){size, 20});
 }
 
 void init_equip_slots(all_t *s_all)

@@ -63,6 +63,7 @@ SRC	=	src/main.c \
 		src/init/init_npc.c \
 		src/init/init_infos.c \
 		src/init/init_chests.c \
+		src/init/init_statbox.c \
 		src/init/init_movement.c \
 		src/init/init_custom.c \
 		src/init/init_custom2.c \
@@ -109,7 +110,6 @@ SRC	=	src/main.c \
 		src/chatbox.c \
 		src/dialog_utils.c \
 		src/stat_box.c \
-		src/init_statbox.c \
 
 OBJ	=	$(SRC:.c=.o)
 

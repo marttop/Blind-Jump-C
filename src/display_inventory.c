@@ -91,3 +91,21 @@ void display_inventory(all_t *s_all)
     display_items_and_select(s_all, &check);
     display_inventory_inf(s_all, check);
 }
+
+int drop_check(all_t *s_all, slots_t *tmp)
+{
+    if (tmp->slot_nb == 4 && (s_all->s_inventory.dragged->id != 7 && s_all->
+    s_inventory.dragged->id != 11 && s_all->s_inventory.dragged->id != 15
+    && s_all->s_inventory.dragged->id != 19)) return (1);
+    if (tmp->slot_nb == 3 && (s_all->s_inventory.dragged->id != 6 && s_all->
+    s_inventory.dragged->id != 10 && s_all->s_inventory.dragged->id != 14
+    && s_all->s_inventory.dragged->id != 18)) return (1);
+    if (tmp->slot_nb == 2 && (s_all->s_inventory.dragged->id != 5 && s_all->
+    s_inventory.dragged->id != 9 && s_all->s_inventory.dragged->id != 13
+    && s_all->s_inventory.dragged->id != 17)) return (1);
+    if (tmp->slot_nb == 1 && (s_all->s_inventory.dragged->id != 4 && s_all->
+    s_inventory.dragged->id != 8 && s_all->s_inventory.dragged->id != 12
+    && s_all->s_inventory.dragged->id != 16)) return (1);
+    if (tmp->slot_nb == 5 && (s_all->s_inventory.dragged->id > 3)) return (1);
+    return (0);
+}

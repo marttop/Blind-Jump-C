@@ -18,8 +18,6 @@ void display_spawn(all_t *s_all)
         move_camera(s_all);
         sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
-        if (s_all->s_npc.talk == 1)
-            chatbox(s_all, "pnj/computer1");
     }
 }
 
@@ -58,6 +56,7 @@ void display_hud_anim(all_t *s_all)
     if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
     && s_all->s_game.scene != OPT && s_all->s_game.scene != LOAD) {
         display_infos(s_all);
+        if (s_all->s_npc.talk == 1) chatbox(s_all, "pnj/computer1");
         if (s_all->s_game.display_inv == 1) {
             draw_stats(s_all);
             display_inventory(s_all);
@@ -79,8 +78,7 @@ void display(all_t *s_all)
             s_all->s_game.menu, NULL);
         } dispay_buttons(s_all, s_all->s_buttons);
     } display_custom(s_all), display_rgb_selector(s_all);
-    if (s_all->s_game.scene == OPT)
-        draw_options(s_all);
+    if (s_all->s_game.scene == OPT) draw_options(s_all);
     display_game_over(s_all), display_load_slots(s_all);
     display_save_slots(s_all);
     if ((s_all->s_game.scene == CUSTOM || s_all->s_game.scene == LOAD)

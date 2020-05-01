@@ -41,7 +41,7 @@ void init_chatbox(all_t *s_all)
 int add_letter(int fd, int idx, char *buf)
 {
     char c;
-    if(read(fd, &c, 1) < 1)
+    if (read(fd, &c, 1) < 1)
         return -1;
     buf[idx] = c;
     buf[idx + 1] = '\0';

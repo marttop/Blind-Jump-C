@@ -285,7 +285,9 @@ typedef struct p_infos {
     char *str_max_xp;
     char *str_hp;
     int current_xp, max_xp, level, dmg, max_hp, current_hp;
+    int max_hp_save, save_dmg;
     char *str_level;
+    float atk_speed;
     sfText *xp_txt;
     sfText *hp_txt;
     sfText *heath;
@@ -304,8 +306,12 @@ typedef struct player {
     sfTexture *hit_txt;
     sfTexture *ver_shoot_txt;
     sfTexture *hor_shoot_txt;
+    char *heal;
     sfTexture *hero_tx;
     sfVector2f hero_pos, shoot_pos, hor_pos, ver_pos, hit_pos;
+    sfClock *heal_clk;
+    sfTime heal_tim;
+    float heal_sec;
     int shoot_speed;
     int save_speed;
     int space;
@@ -574,6 +580,10 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
+void color_hp(all_t *s_all);
+void slow_heal_player(all_t *s_all);
+int drop_check(all_t *s_all, slots_t *tmp);
+void set_equip_stats(all_t *s_all);
 int move_stars3(all_t *s_all, sfSprite *sprite, float speed, sfVector2f *pos);
 int move_stars2(all_t *s_all, sfSprite *sprite, float speed, sfVector2f *pos);
 void display_inventory_inf(all_t *s_all, int check);

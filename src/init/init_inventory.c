@@ -17,10 +17,10 @@ void set_texture_items(slots_t *tmp, int id, all_t *s_all)
         tmp->dmg = 20;
     } if (id == 2) {
         sfSprite_setTexture(tmp->item, s_all->s_inventory.scarh, sfTrue);
-        tmp->dmg = 30;
+        tmp->dmg = 35;
     } if (id == 3) {
         sfSprite_setTexture(tmp->item, s_all->s_inventory.sniper, sfTrue);
-        tmp->dmg = 40;
+        tmp->dmg = 50;
     } if (id >= 4)
         sfSprite_setTexture(tmp->item, s_all->s_inventory.armors_tx, sfTrue);
     set_texture_items2(tmp, id);
@@ -68,7 +68,7 @@ void init_items_texture(all_t *s_all)
 
 void init_inventory2(all_t *s_all)
 {
-    sfSprite_setPosition(s_all->s_inventory.trash, (sfVector2f){1440, 610});
+    sfSprite_setPosition(s_all->s_inventory.trash, (sfVector2f){1440, 640});
     s_all->s_inventory.infos = sfRectangleShape_create();
     sfRectangleShape_setSize(s_all->s_inventory.infos,
         (sfVector2f) {250, 50});

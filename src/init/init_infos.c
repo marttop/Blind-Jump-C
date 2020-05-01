@@ -29,7 +29,8 @@ void init_hp_texts(all_t *s_all)
     s_all->s_infos.hp_txt = sfText_create();
     s_all->s_infos.heath = sfText_create();
     s_all->s_infos.hit_clk = sfClock_create();
-    s_all->s_infos.hit_sec = 0;
+    s_all->s_infos.hit_sec = 0, s_all->s_infos.max_hp_save = 100;
+    s_all->s_infos.save_dmg = 50, s_all->s_infos.atk_speed = 0.35;
     sfText_setFont(s_all->s_infos.heath, s_all->s_game.font);
     sfText_setPosition(s_all->s_infos.heath, (sfVector2f){1650, 35});
     sfText_setString(s_all->s_infos.heath, "Health");
