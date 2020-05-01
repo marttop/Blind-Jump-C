@@ -59,8 +59,9 @@ void check_mob_hitboxes(all_t *s_all)
             loosing_hp(s_all);
         if (temp->hp <= 0) {
             s_all->s_infos.current_xp += temp->xp;
-            temp->status = -1;
-            update_xp(s_all);
+            temp->status = -1, update_xp(s_all);
+            if (temp->type != 'B') sfSound_play(s_all->s_sounds.blast);
+            else sfSound_play(s_all->s_sounds.hit);
         }
         temp = temp->next;
     }

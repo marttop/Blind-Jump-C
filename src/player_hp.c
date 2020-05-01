@@ -29,6 +29,7 @@ void color_hp(all_t *s_all)
 void heal_hp(all_t *s_all)
 {
     color_hp(s_all);
+    sfSound_play(s_all->s_sounds.heart);
     if (s_all->s_infos.str_hp != NULL) free(s_all->s_infos.str_hp);
     s_all->s_infos.str_hp = malloc(sizeof(char) * 20);
     s_all->s_infos.str_hp[0] = '\0';
@@ -42,6 +43,7 @@ void heal_hp(all_t *s_all)
 
 void loosing_hp(all_t *s_all)
 {
+    sfSound_play(s_all->s_sounds.player);
     s_all->s_infos.is_hit = 1;
     sfClock_restart(s_all->s_infos.clock);
     s_all->s_infos.current_hp -= 20;

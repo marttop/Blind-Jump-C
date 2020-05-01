@@ -108,6 +108,7 @@ void tp_animation(all_t *s_all)
     if (hitbox_tp(s_all) == 1 && s_all->s_player.tp == 0
     && (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP
     || s_all->s_game.scene == GAME_OVER)) {
+        sfSound_play(s_all->s_sounds.tp);
         s_all->s_player.tp = 1;
         s_all->s_map.stage += 1;
         if (s_all->s_game.scene != GAME_OVER) {
@@ -122,6 +123,5 @@ void tp_animation(all_t *s_all)
         sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
         sfRectangleShape_setPosition(s_all->s_player.debug,
             s_all->s_player.hero_pos);
-    }
-    tp_animation2(s_all);
+    } tp_animation2(s_all);
 }

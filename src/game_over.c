@@ -10,6 +10,7 @@
 void game_over_check(all_t *s_all)
 {
     if (s_all->s_infos.current_hp <= 0) {
+        sfSound_play(s_all->s_sounds.dead);
         sfSprite_setPosition(s_all->s_dead.dead, s_all->s_player.hero_pos);
         s_all->s_game.scene = GAME_OVER;
         sfSprite_setColor(s_all->s_dead.dead, s_all->s_custom.p_color);
@@ -17,10 +18,11 @@ void game_over_check(all_t *s_all)
         s_all->s_movement.right = 0;
         s_all->s_movement.down = 0;
         s_all->s_movement.up = 0;
+        s_all->s_infos.current_hp = 1;
         sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){150, 30, 30, 100});
-        respawn(s_all);
     }
+    respawn(s_all);
 }
 
 void lose_xp(all_t *s_all)
