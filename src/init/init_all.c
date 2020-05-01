@@ -21,6 +21,20 @@ void init_menu(all_t *s_all)
     sfSprite_setColor(s_all->s_game.black, (sfColor){0, 0, 0, 150});
 }
 
+void init_shader(all_t *s_all)
+{
+    s_all->s_game.shader =
+        sfShader_createFromFile("shaders/storm.vert", NULL, NULL);
+    s_all->s_game.state.shader = s_all->s_game.shader;
+    s_all->s_game.state.blendMode = sfBlendAlpha;
+    s_all->s_game.state.transform = sfTransform_Identity;
+    s_all->s_game.state.texture = NULL;
+    sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
+        (sfVector2f){0, 0});
+    sfShader_setFloatUniform( s_all->s_game.shader, "storm_total_radius", 20);
+    sfShader_setFloatUniform( s_all->s_game.shader, "storm_inner_radius", 10);
+}
+
 void setup(all_t *s_all)
 {
     sfVideoMode mode = {1920, 1080, 32};
@@ -77,4 +91,5 @@ void init_all(all_t *s_all)
     init_save_screen(s_all);
     init_stat_box(s_all);
     init_sounds(s_all);
+    init_shader(s_all);
 }

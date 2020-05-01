@@ -70,9 +70,9 @@ void display_chests_over(all_t *s_all, int y)
             open_chest(temp, s_all);
         if (temp->pos.y + 14 >= y) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->sprite, NULL);
+                temp->sprite, &s_all->s_game.state);
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->shadow, NULL);
+                temp->shadow, &s_all->s_game.state);
         }
         temp = temp->next;
     }
@@ -85,9 +85,9 @@ int display_chests_under(all_t *s_all)
     while (temp != NULL) {
         if (temp->pos.y + 14 < y) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->sprite, NULL);
+                temp->sprite, &s_all->s_game.state);
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->shadow, NULL);
+                temp->shadow, &s_all->s_game.state);
         }
         temp = temp->next;
     }
