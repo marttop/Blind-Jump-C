@@ -52,6 +52,9 @@ void save(all_t *s_all, char *filepath)
         write_field("hp", fd, strnbr(60));
     write_field("maxhp", fd, strnbr(s_all->s_infos.max_hp));
     write_field("stage", fd, strnbr(s_all->s_map.stage - 1));
+    write_field("tuto", fd, strnbr(s_all->s_cine.tuto));
+    write_field("script", fd, strnbr(s_all->s_cine.script));
+    write_field("chat", fd, strnbr(s_all->s_npc.talk));
     save_inventory(fd, s_all);
     close(fd);
 }
@@ -71,6 +74,9 @@ void load_next(all_t *s_all, int fd)
     sfText_setString(s_all->s_infos.hp_txt, s_all->s_infos.str_hp);
     float size = 250.0 / s_all->s_infos.max_hp * s_all->s_infos.current_hp;
     sfRectangleShape_setSize(s_all->s_infos.hp, (sfVector2f){size, 20});
+    s_all->s_map.stage = my_atoi(read_field("stage", fd));
+    s_all->s_cine.tuto = my_atoi(read_field("tuto", fd));
+    s_all->s_cine.script = my_atoi(read_field("script", fd));
 }
 
 void load(all_t *s_all, char *filepath)
@@ -88,9 +94,8 @@ void load(all_t *s_all, char *filepath)
     my_strcat(s_all->s_infos.str_level, strnbr(s_all->s_infos.level));
     sfText_setString(s_all->s_infos.lvl_txt, s_all->s_infos.str_level);
     load_next(s_all, fd);
-    s_all->s_map.stage = my_atoi(read_field("stage", fd));
-    enter_event(s_all);
-    load_inventory(fd, s_all);
+    s_all->s_npc.talk = my_atoi(read_field("chat", fd));
+    enter_event(s_all), load_inventory(fd, s_all);
     s_all->s_infos.dmg = (s_all->s_infos.level * 50);
     if (s_all->s_inventory.head->is_item == 1)
         s_all->s_infos.dmg += s_all->s_inventory.head->dmg;
