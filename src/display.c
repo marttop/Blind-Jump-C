@@ -46,6 +46,8 @@ void display_chatbox(all_t *s_all)
 {
     if (s_all->s_npc.talk == 1 && s_all->s_cine.script == 0)
         chatbox(s_all, "pnj/tuto1");
+    if (s_all->s_npc.talk == 1 && s_all->s_cine.script == 1)
+        chatbox(s_all, "pnj/tuto2");
 }
 
 void display_hud_anim(all_t *s_all)

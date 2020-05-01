@@ -54,7 +54,7 @@ int quit_dialog(all_t *s_all)
 {
     sfRenderWindow_drawText(s_all->s_game.window,
     s_all->s_chatbox.text, NULL);
-    if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue){
+    if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue) {
         s_all->s_chatbox.buff[0] = '\0';
         s_all->s_chatbox.op = 0;
         s_all->s_chatbox.idx = 0;

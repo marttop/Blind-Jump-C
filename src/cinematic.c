@@ -21,7 +21,12 @@ void cinematic1(all_t *s_all)
             check3 = 1, s_all->s_cine.count += 1;
         if (s_all->s_movement.right == 1 && check4 == 0)
             check4 = 1, s_all->s_cine.count += 1;
-        if (s_all->s_cine.count == 4)
+        if (s_all->s_cine.count == 4) {
             s_all->s_cine.script = 1;
+        s_all->s_chatbox.buff[0] = '\0';
+        s_all->s_chatbox.op = 0;
+        s_all->s_chatbox.idx = 0;
+        s_all->s_chatbox.car = 0;
+        }
     } sfClock_restart(s_all->s_cine.clock);
 }
