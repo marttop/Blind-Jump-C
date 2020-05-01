@@ -58,7 +58,7 @@ int chest_hitbox(all_t *s_all, sfFloatRect shadow_bounds)
 
 int loop_chest_hitbox(all_t *s_all)
 {
-    if (s_all->s_game.scene != MAP)
+    if (s_all->s_game.scene != MAP && s_all->s_game.scene != SPAWN)
         return (0);
 
     sfFloatRect shadow_bounds =
@@ -71,6 +71,7 @@ int loop_chest_hitbox(all_t *s_all)
 
 void chest_message(all_t *s_all)
 {
+    if (s_all->s_game.scene == SPAWN && s_all->s_cine.script != 1) return;
     chest_t *temp = s_all->s_chest;
     while (temp != NULL) {
         if (s_all->s_game.key_press != 'E' && temp->status == 0

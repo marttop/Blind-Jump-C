@@ -50,21 +50,6 @@ int add_letter(int fd, int idx, char *buf, all_t *s_all)
     return idx;
 }
 
-int quit_dialog(all_t *s_all)
-{
-    sfRenderWindow_drawText(s_all->s_game.window,
-    s_all->s_chatbox.text, NULL);
-    if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue) {
-        s_all->s_chatbox.buff[0] = '\0';
-        s_all->s_chatbox.op = 0;
-        s_all->s_chatbox.idx = 0;
-        s_all->s_chatbox.car = 0;
-        return 1;
-    }
-    else
-        return 0;
-}
-
 int start_dialog(all_t *s_all, char *filepath)
 {
     int i = 0;
@@ -79,7 +64,11 @@ int start_dialog(all_t *s_all, char *filepath)
     if (s_all->s_cine.tuto == 0) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_chatbox.eric, NULL);
-    }
-    return i;
-
+    } if (s_all->s_game.scene == SPAWN && i == 1) {
+        if (s_all->s_cine.script < 2)
+            s_all->s_chest->status = 1;
+        s_all->s_cine.tuto = 0;
+        if (s_all->s_cine.script == 6) s_all->s_cine.door = 1;
+        s_all->s_cine.script = 5;
+    } return i;
 }

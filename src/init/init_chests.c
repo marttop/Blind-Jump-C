@@ -50,12 +50,15 @@ void open_chest(chest_t *temp, all_t *s_all)
             sfVector2f scale = sfSprite_getScale(temp->shadow);
             sfSprite_setScale(temp->shadow,
                 (sfVector2f){scale.x, scale.y += 0.2});
-        }
-        else {
+        } else {
             temp->status = -1;
-            put_item_in_slot(s_all, rand() % 20);
-        }
-        sfClock_restart(temp->clock);
+            if (s_all->s_game.scene == SPAWN) {
+                s_all->s_chatbox.buff[0] = '\0', s_all->s_chatbox.op = 0;
+                s_all->s_chatbox.idx = 0, s_all->s_chatbox.car = 0;
+                put_item_in_slot(s_all, 0);
+            } else put_item_in_slot(s_all, rand() % 20);
+            if (s_all->s_cine.script == 1) s_all->s_cine.script = 2;
+        } sfClock_restart(temp->clock);
     }
 }
 

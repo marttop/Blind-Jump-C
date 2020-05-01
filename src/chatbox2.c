@@ -19,7 +19,7 @@ void init_chatbox2(all_t *s_all)
     s_all->s_chatbox.car = 0, s_all->s_chatbox.fd = 0,
     s_all->s_chatbox.idx = 0, s_all->s_chatbox.op = 0;
     s_all->s_chatbox.buff[0] = '\0';
-    s_all->s_chatbox.s = 0.05;
+    s_all->s_chatbox.s = 0.00;
 }
 
 void open_file(all_t *s_all, char *filepath)
@@ -28,15 +28,12 @@ void open_file(all_t *s_all, char *filepath)
         s_all->s_chatbox.op = 1, s_all->s_chatbox.car = 0;
         s_all->s_chatbox.fd = open(filepath, O_RDONLY);
         s_all->s_chatbox.buff[0] = '\0';
-        s_all->s_chatbox.s = 0.05;
     }
 }
 
 int read_chat_file(all_t *s_all)
 {
     dialog_time(s_all);
-    if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue)
-        s_all->s_chatbox.s = 0.0;
     if (s_all->s_chatbox.car == 140) {
         s_all->s_chatbox.buff[s_all->s_chatbox.idx] = '\n';
         s_all->s_chatbox.idx++, s_all->s_chatbox.car = 0;
@@ -55,8 +52,6 @@ int wait_close(all_t *s_all)
     close(s_all->s_chatbox.fd);
     s_all->s_chatbox.op = 0;
     if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue) {
-        if (s_all->s_game.scene == SPAWN)
-            s_all->s_cine.tuto = 0;
         s_all->s_chatbox.idx = 0;
         return 1;
     }
