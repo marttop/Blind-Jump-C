@@ -13,6 +13,10 @@ void dead_clock(all_t *s_all)
         sfClock_getElapsedTime(s_all->s_dead.clock);
     s_all->s_dead.seconds =
         s_all->s_dead.time.microseconds / 1000000.0;
+    s_all->s_cine.time =
+        sfClock_getElapsedTime(s_all->s_cine.clock);
+    s_all->s_cine.seconds =
+        s_all->s_cine.time.microseconds / 1000000.0;
 }
 
 void info_clocks(all_t *s_all)
