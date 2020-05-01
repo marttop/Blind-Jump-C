@@ -55,7 +55,8 @@ void open_chest(chest_t *temp, all_t *s_all)
             if (s_all->s_game.scene == SPAWN) {
                 s_all->s_chatbox.buff[0] = '\0', s_all->s_chatbox.op = 0;
                 s_all->s_chatbox.idx = 0, s_all->s_chatbox.car = 0;
-                put_item_in_slot(s_all, 0);
+                if (s_all->s_cine.script < 2 || s_all->s_cine.script == 5)
+                    put_item_in_slot(s_all, 0);
             } else put_item_in_slot(s_all, rand() % 20);
             if (s_all->s_cine.script == 1) s_all->s_cine.script = 2;
         } sfClock_restart(temp->clock);
@@ -70,9 +71,9 @@ void display_chests_over(all_t *s_all, int y)
             open_chest(temp, s_all);
         if (temp->pos.y + 14 >= y) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->sprite, &s_all->s_game.state);
+                temp->sprite, NULL);
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->shadow, &s_all->s_game.state);
+                temp->shadow, NULL);
         }
         temp = temp->next;
     }
@@ -85,9 +86,9 @@ int display_chests_under(all_t *s_all)
     while (temp != NULL) {
         if (temp->pos.y + 14 < y) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->sprite, &s_all->s_game.state);
+                temp->sprite, NULL);
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                temp->shadow, &s_all->s_game.state);
+                temp->shadow, NULL);
         }
         temp = temp->next;
     }

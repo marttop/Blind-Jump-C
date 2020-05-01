@@ -24,8 +24,7 @@ void display_mobs3(mob_t *temp, all_t *s_all)
             {temp->mob_pos.x - 4, temp->mob_pos.y- 8});
         roballs_shoot(temp, s_all);
     } if (temp->check_shoot == 0 || temp->hit == 1 || temp->type != 'A') return;
-        sfRenderWindow_drawSprite(s_all->s_game.window, temp->bullet,
-        &s_all->s_game.state);
+        sfRenderWindow_drawSprite(s_all->s_game.window, temp->bullet, NULL);
 }
 
 void display_turret_bullet(all_t *s_all, mob_t *temp)
@@ -34,7 +33,7 @@ void display_turret_bullet(all_t *s_all, mob_t *temp)
     for (; bullet != NULL; bullet = bullet->next) {
         if (temp->check_shoot == 1 && bullet->hit == 0)
             sfRenderWindow_drawSprite(s_all->s_game.window,
-            bullet->bullet, &s_all->s_game.state);
+            bullet->bullet, NULL);
     }
 }
 

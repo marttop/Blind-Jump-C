@@ -79,7 +79,7 @@ void display_hit(all_t *s_all)
         } sfClock_restart(s_all->s_player.hit_clk);
     }
     sfRenderWindow_drawSprite(s_all->s_game.window,
-    s_all->s_player.hit_sprite, &s_all->s_game.state);
+    s_all->s_player.hit_sprite, NULL);
 }
 
 void shooting_control(all_t *s_all)
