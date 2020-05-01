@@ -31,6 +31,7 @@ void write_field(char *field, int fd, char *data);
 char *read_field(char *field, int fd);
 
 char *my_strdup(char *str);
+int my_strcmp(char const *s1, char const *s2);
 int my_strlen(char *str);
 char *my_strcat(char *dest, char const *src);
 char *strnbr(int n);
