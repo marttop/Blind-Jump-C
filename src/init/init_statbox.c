@@ -61,8 +61,8 @@ void stat_text1(all_t *s_all)
     sfText_setFont(s_all->s_statbox.lvl_tx, s_all->s_statbox.font);
     sfText_setCharacterSize(s_all->s_statbox.lvl_tx, 20);
     sfText_setColor(s_all->s_statbox.p_name, sfWhite);
-    sfText_setFont(s_all->s_statbox.p_name, s_all->s_statbox.font);
-    sfText_setCharacterSize(s_all->s_statbox.p_name, 40);
+    sfText_setFont(s_all->s_statbox.p_name, s_all->s_game.monospaced);
+    sfText_setCharacterSize(s_all->s_statbox.p_name, 15);
     sfText_setString(s_all->s_statbox.dmg, s_all->s_statbox.dmg_str);
     sfText_setString(s_all->s_statbox.dmg_tx, "DMG: ");
     sfText_setString(s_all->s_statbox.hp, s_all->s_infos.str_hp);
@@ -102,7 +102,7 @@ void init_stat_box(all_t *s_all)
 {
     stat_create(s_all);
     sfRectangleShape_setFillColor(s_all->s_statbox.bg,
-    (sfColor){56, 79, 88, 160});
+    (sfColor){56, 79, 88, 220});
     sfRectangleShape_setSize(s_all->s_statbox.bg, (sfVector2f) {269, 400});
     sfRectangleShape_setPosition(s_all->s_statbox.bg, (sfVector2f){250, 350});
     sfRectangleShape_setOutlineColor(s_all->s_statbox.bg1,

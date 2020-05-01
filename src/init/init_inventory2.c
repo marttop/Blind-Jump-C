@@ -27,16 +27,16 @@ void set_texture_items5(slots_t *tmp, int id)
 void set_texture_items4(slots_t *tmp, int id)
 {
     if (id == 16) {
-        tmp->health = 20;
+        tmp->health = 25;
         sfSprite_setTextureRect(tmp->item, (sfIntRect){0, 320, 64, 64});
     } if (id == 17) {
-        tmp->health = 20;
+        tmp->health = 25;
         sfSprite_setTextureRect(tmp->item, (sfIntRect){64, 320, 64, 64});
     } if (id == 18) {
-        tmp->health = 20;
+        tmp->health = 25;
         sfSprite_setTextureRect(tmp->item, (sfIntRect){128, 320, 64, 64});
     } if (id == 19) {
-        tmp->health = 20;
+        tmp->health = 25;
         sfSprite_setTextureRect(tmp->item, (sfIntRect){196, 320, 64, 64});
     } set_texture_items5(tmp, id);
 }
@@ -80,10 +80,4 @@ void swap_items(all_t *s_all, slots_t *tmp)
     int id = tmp->id;
     tmp->id = s_all->s_inventory.dragged->id;
     s_all->s_inventory.dragged->id = id;
-    int dmg = tmp->dmg;
-    tmp->dmg = s_all->s_inventory.dragged->dmg;
-    s_all->s_inventory.dragged->dmg = dmg;
-    int health = tmp->health;
-    tmp->health = s_all->s_inventory.dragged->health;
-    s_all->s_inventory.dragged->health = health;
 }

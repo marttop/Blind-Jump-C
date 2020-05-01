@@ -22,27 +22,12 @@ int drop_item2(all_t *s_all, slots_t *tmp)
         s_all->s_inventory.drag = 0;
         tmp->health = s_all->s_inventory.dragged->health;
         tmp->dmg = s_all->s_inventory.dragged->dmg;
+        s_all->s_inventory.dragged->health = 0;
+        s_all->s_inventory.dragged->dmg = 0;
         s_all->s_inventory.dragged = NULL;
+        set_equip_stats(s_all);
         return (1);
     }
-    return (0);
-}
-
-int drop_check(all_t *s_all, slots_t *tmp)
-{
-    if (tmp->slot_nb == 4 && (s_all->s_inventory.dragged->id != 7 && s_all->
-    s_inventory.dragged->id != 11 && s_all->s_inventory.dragged->id != 15
-    && s_all->s_inventory.dragged->id != 19)) return (1);
-    if (tmp->slot_nb == 3 && (s_all->s_inventory.dragged->id != 6 && s_all->
-    s_inventory.dragged->id != 10 && s_all->s_inventory.dragged->id != 14
-    && s_all->s_inventory.dragged->id != 18)) return (1);
-    if (tmp->slot_nb == 2 && (s_all->s_inventory.dragged->id != 5 && s_all->
-    s_inventory.dragged->id != 9 && s_all->s_inventory.dragged->id != 13
-    && s_all->s_inventory.dragged->id != 17)) return (1);
-    if (tmp->slot_nb == 1 && (s_all->s_inventory.dragged->id != 4 && s_all->
-    s_inventory.dragged->id != 8 && s_all->s_inventory.dragged->id != 12
-    && s_all->s_inventory.dragged->id != 16)) return (1);
-    if (tmp->slot_nb == 5 && (s_all->s_inventory.dragged->id > 3)) return (1);
     return (0);
 }
 
@@ -55,6 +40,7 @@ void drop_item(all_t *s_all, slots_t *tmp)
         s_all->s_inventory.drag = 0;
         tmp->drag = 0;
         s_all->s_inventory.dragged = NULL;
+        set_equip_stats(s_all);
         return;
     }
     if (drop_item2(s_all, tmp) == 1)
@@ -63,6 +49,7 @@ void drop_item(all_t *s_all, slots_t *tmp)
         set_texture_items(tmp, s_all->s_inventory.dragged->id, s_all);
         set_texture_items(s_all->s_inventory.dragged, tmp->id, s_all);
         swap_items(s_all, tmp);
+        set_equip_stats(s_all);
     }
 }
 

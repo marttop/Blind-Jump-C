@@ -45,6 +45,7 @@ void loosing_hp(all_t *s_all)
     s_all->s_infos.is_hit = 1;
     sfClock_restart(s_all->s_infos.clock);
     s_all->s_infos.current_hp -= 20;
+    if (s_all->s_infos.current_hp < 0) s_all->s_infos.current_hp = 0;
     color_hp(s_all);
     if (s_all->s_infos.str_hp != NULL) free(s_all->s_infos.str_hp);
     s_all->s_infos.str_hp = malloc(sizeof(char) * 20);

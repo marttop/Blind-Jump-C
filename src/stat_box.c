@@ -24,7 +24,7 @@ void update_statbox(all_t *s_all)
     free(s_all->s_statbox.speed_str), s_all->s_statbox.speed_str =
     strnbr(s_all->s_player.hero_speed);
     free(s_all->s_statbox.sh_speed_str), s_all->s_statbox.sh_speed_str =
-    strnbr(s_all->s_player.shoot_speed), free(s_all->s_statbox.hp_str);
+    strnbr_float(s_all->s_infos.atk_speed), free(s_all->s_statbox.hp_str);
     s_all->s_statbox.hp_str = malloc(25), s_all->s_statbox.hp_str[0] = '\0';
     my_strcat(s_all->s_statbox.hp_str, strnbr(s_all->s_infos.current_hp));
     my_strcat(s_all->s_statbox.hp_str, "/");

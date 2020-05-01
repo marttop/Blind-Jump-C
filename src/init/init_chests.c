@@ -41,7 +41,7 @@ chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos)
     return (new);
 }
 
-void open_chest(chest_t *temp)
+void open_chest(chest_t *temp, all_t *s_all)
 {
     if (temp->seconds > 0.1) {
         if (temp->rect.left < 736) {
@@ -53,6 +53,7 @@ void open_chest(chest_t *temp)
         }
         else {
             temp->status = -1;
+            put_item_in_slot(s_all, rand() % 20);
         }
         sfClock_restart(temp->clock);
     }
@@ -63,7 +64,7 @@ void display_chests_over(all_t *s_all, int y)
     chest_t *temp = s_all->s_chest;
     while (temp != NULL) {
         if (temp->status == 1)
-            open_chest(temp);
+            open_chest(temp, s_all);
         if (temp->pos.y + 14 >= y) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
                 temp->sprite, NULL);
@@ -79,8 +80,6 @@ int display_chests_under(all_t *s_all)
     chest_t *temp = s_all->s_chest;
     int y = sfSprite_getPosition(s_all->s_player.shadow).y;
     while (temp != NULL) {
-        if (temp->status == 1)
-            open_chest(temp);
         if (temp->pos.y + 14 < y) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
                 temp->sprite, NULL);

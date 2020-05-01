@@ -27,6 +27,8 @@ void init_hero3(all_t *s_all)
     s_all->s_player.hit = 0, s_all->s_player.right = 0;
     s_all->s_player.down = 0, s_all->s_player.up = 0, s_all->s_player.left = 0;
     s_all->s_player.range = 120, s_all->s_player.shooting = 0;
+    s_all->s_player.heal = malloc(sizeof(char) * 20);
+    s_all->s_player.heal[0] = '\0';
 }
 
 void init_hero2(all_t *s_all)

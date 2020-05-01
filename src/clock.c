@@ -13,6 +13,7 @@ void init_clocks(all_t *s_all)
     s_all->s_game.clock_button = sfClock_create();
     s_all->s_effect.clock = sfClock_create();
     s_all->s_player.reload_clk = sfClock_create();
+    s_all->s_player.heal_clk = sfClock_create();
 }
 
 void player_clocks(all_t *s_all)
@@ -53,6 +54,10 @@ void mob_clocks(all_t *s_all)
         temp->shoot_seconds = temp->shoot_time.microseconds / 1000000.0;
         temp = temp->next;
     }
+    s_all->s_player.heal_tim =
+        sfClock_getElapsedTime(s_all->s_player.heal_clk);
+    s_all->s_player.heal_sec =
+        s_all->s_player.heal_tim.microseconds / 1000000.0;
 }
 
 void chest_clocks(all_t *s_all)
