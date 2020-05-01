@@ -45,9 +45,21 @@ void setup(all_t *s_all)
     randomize();
 }
 
+void init_cinematic(all_t *s_all)
+{
+    s_all->s_cine.script = 0;
+    s_all->s_cine.cinematic = 0;
+    s_all->s_cine.clock = sfClock_create();
+    s_all->s_cine.door = 0;
+    s_all->s_cine.move = 0;
+    s_all->s_cine.count = 0;
+    s_all->s_cine.tuto = 1;
+}
+
 void init_all(all_t *s_all)
 {
     setup(s_all);
+    init_cinematic(s_all);
     init_menu(s_all);
     init_clocks(s_all);
     init_hero(s_all);

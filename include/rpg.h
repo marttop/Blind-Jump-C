@@ -550,6 +550,18 @@ typedef struct hearth
     struct hearth *next;
 } hearth_t;
 
+typedef struct cinematic {
+    int script;
+    int cinematic;
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    int door;
+    int tuto;
+    int move;
+    int count;
+} cinematic_t;
+
 typedef struct all {
     game_t s_game;
     npc_t s_npc;
@@ -563,6 +575,7 @@ typedef struct all {
     movement_t s_movement;
     player_t s_player;
     custom_t s_custom;
+    cinematic_t s_cine;
     direction_t s_direction;
     spawn_t s_spawn;
     minimap_t s_minimap;
@@ -580,6 +593,7 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
+void cinematic1(all_t *s_all);
 void color_hp(all_t *s_all);
 void slow_heal_player(all_t *s_all);
 int drop_check(all_t *s_all, slots_t *tmp);

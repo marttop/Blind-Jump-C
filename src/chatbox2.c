@@ -37,7 +37,7 @@ int read_chat_file(all_t *s_all)
     dialog_time(s_all);
     if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue)
         s_all->s_chatbox.s = 0.0;
-    if (s_all->s_chatbox.car == 130) {
+    if (s_all->s_chatbox.car == 85) {
         s_all->s_chatbox.buff[s_all->s_chatbox.idx] = '\n';
         s_all->s_chatbox.idx++, s_all->s_chatbox.car = 0;
     }

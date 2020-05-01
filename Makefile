@@ -52,6 +52,7 @@ SRC	=	src/main.c \
 		src/mob_hitbox.c \
 		src/map_generator.c \
 		src/map_generator2.c \
+		src/cinematic.c \
 		src/map_design.c \
 		src/map_grass.c \
 		src/tp_anim.c \

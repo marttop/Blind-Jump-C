@@ -9,7 +9,7 @@
 
 void events_keyboard(all_t *s_all)
 {
-    if (s_all->s_game.pause == 1) return;
+    if (s_all->s_game.pause == 1 || s_all->s_cine.move == 1) return;
     if (is_key_released(&s_all->s_game.event, sfKeyI))
         s_all->s_game.display_inv = !s_all->s_game.display_inv;
     s_all->s_game.key_press = 0;
