@@ -12,10 +12,10 @@ void display_spawn(all_t *s_all)
     if (s_all->s_game.scene == SPAWN) {
         sfRenderWindow_clear(s_all->s_game.window, (sfColor){12, 37, 41, 255});
         sfRenderWindow_setView(s_all->s_game.window, s_all->s_game.camera);
+        move_camera(s_all);
         display_spawn_under(s_all);
         display_hero(s_all);
         display_spawn_over(s_all);
-        move_camera(s_all);
         sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     }
@@ -25,9 +25,9 @@ void display_map(all_t *s_all)
 {
     if (s_all->s_game.scene == MAP) {
         sfRenderWindow_clear(s_all->s_game.window, sfBlack);
-        sfRenderWindow_setView(s_all->s_game.window, s_all->s_game.camera);
         sfSprite_setPosition(s_all->s_map.background,
             s_all->s_effect.vignette_pos);
+        move_camera(s_all);
         sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_map.background, NULL);
         display_stars(s_all), display_tiles(s_all);
