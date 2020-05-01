@@ -68,6 +68,8 @@ void init_cinematic(all_t *s_all)
     s_all->s_cine.move = 0;
     s_all->s_cine.count = 0;
     s_all->s_cine.tuto = 1;
+    s_all->s_sounds.seconds = 0;
+    s_all->s_sounds.clock = sfClock_create();
 }
 
 void init_all(all_t *s_all)

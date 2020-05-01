@@ -80,7 +80,7 @@ void chest_message(all_t *s_all)
             temp->open_txt, NULL);
         else if (s_all->s_game.key_press == 'E' && temp->status == 0
         && calcul_chest_magnitude(temp, s_all->s_player.shadow) <= 20)
-            temp->status = 1;
+            temp->status = 1, sfSound_play(s_all->s_sounds.creak);
         temp = temp->next;
     }
 }
