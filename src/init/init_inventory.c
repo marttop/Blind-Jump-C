@@ -74,9 +74,13 @@ void init_inventory2(all_t *s_all)
         (sfVector2f) {250, 50});
     sfRectangleShape_setFillColor(s_all->s_inventory.infos,
         (sfColor){70, 103, 113, 255});
+    sfRectangleShape_setPosition(s_all->s_inventory.infos,
+        (sfVector2f){-500, -500});
     s_all->s_inventory.infos_text = sfText_create();
     sfText_setFont(s_all->s_inventory.infos_text, s_all->s_game.monospaced);
     sfText_setCharacterSize(s_all->s_inventory.infos_text, 18);
+    sfText_setPosition(s_all->s_inventory.infos_text,
+        (sfVector2f){-500, -500});
 }
 
 void init_inventory(all_t *s_all)

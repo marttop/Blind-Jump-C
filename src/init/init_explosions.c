@@ -50,6 +50,6 @@ void display_explosions(all_t *s_all)
             sfClock_restart(s_all->s_explode.clock);
         }
         sfRenderWindow_drawSprite(s_all->s_game.window,
-        s_all->s_explode.sprite, &s_all->s_game.state);
+        s_all->s_explode.sprite, NULL);
     }
 }

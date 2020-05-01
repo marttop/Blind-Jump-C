@@ -81,11 +81,11 @@ void display_spawn_under(all_t *s_all)
     }
     if (s_all->s_player.hero_pos.y > 655)
         sfRenderWindow_drawSprite(s_all->s_game.window,
-            s_all->s_spawn.ship, &s_all->s_game.state);
+            s_all->s_spawn.ship, NULL);
     sfRenderWindow_drawSprite(s_all->s_game.window,
-        s_all->s_tp.tp_shadow, &s_all->s_game.state);
+        s_all->s_tp.tp_shadow, NULL);
     sfRenderWindow_drawSprite(s_all->s_game.window,
-        s_all->s_tp.tp, &s_all->s_game.state);
+        s_all->s_tp.tp, NULL);
 }
 
 void display_spawn_over(all_t *s_all)

@@ -29,8 +29,7 @@ void display_hearth(all_t *s_all)
         if (s_all->s_player.hero_pos.y + 10 <= pos.y || tmp->show == 1)
             continue;
         check_hearth_hitbox(s_all, tmp);
-        sfRenderWindow_drawSprite(s_all->s_game.window, tmp->hearth,
-        &s_all->s_game.state);
+        sfRenderWindow_drawSprite(s_all->s_game.window, tmp->hearth, NULL);
     }
 }
 
@@ -43,8 +42,7 @@ void display_hearth2(all_t *s_all)
         if (s_all->s_player.hero_pos.y + 10 > pos.y || tmp->show == 1)
             continue;
         check_hearth_hitbox(s_all, tmp);
-        sfRenderWindow_drawSprite(s_all->s_game.window, tmp->hearth,
-        &s_all->s_game.state);
+        sfRenderWindow_drawSprite(s_all->s_game.window, tmp->hearth, NULL);
     }
 }
 
