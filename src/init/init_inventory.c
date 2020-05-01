@@ -81,7 +81,7 @@ void init_inventory2(all_t *s_all)
 
 void init_inventory(all_t *s_all)
 {
-    sfVector2f pos = {1500, 350};
+    sfVector2f pos = {1500, 375};
     s_all->s_inventory.inv_back = sfRectangleShape_create();
     sfRectangleShape_setSize(s_all->s_inventory.inv_back,
         (sfVector2f) {269, 330});
