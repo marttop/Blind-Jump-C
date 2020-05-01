@@ -101,6 +101,7 @@ SRC	=	src/main.c \
 		src/utils/my_strnbr.c \
 		src/utils/randomize.c \
 		src/utils/save.c \
+		src/utils/save_inventory.c \
 		src/utils/write_file.c \
 		src/utils/render_pos_center.c \
 		src/options_menu.c \

@@ -27,6 +27,8 @@ char *get_next_line(int fd);
 
 int randomizer(FILE *file);
 int randomize(void);
+void write_field(char *field, int fd, char *data);
+char *read_field(char *field, int fd);
 
 char *my_strdup(char *str);
 int my_strlen(char *str);
