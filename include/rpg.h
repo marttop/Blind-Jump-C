@@ -630,7 +630,6 @@ void init_mobs(all_t *s_all);
 void display_mobs(all_t *s_all);
 int my_ptrlen(char **str);
 void events_control(all_t *s_all);
-char *read_field(char *field, int fd);
 void create_sprite(sfSprite **sprite, sfTexture **texture,
     sfVector2f pos, const char *path);
 void display_hero(all_t *s_all);
@@ -659,6 +658,8 @@ void display_mobs2(mob_t *temp, all_t *s_all);
 void loosing_hp(all_t *s_all);
 int display_chests_under(all_t *s_all);
 void movement_left_right(all_t *s_all);
+void save_inventory(int fd, all_t *s_all);
+void load_inventory(int fd, all_t *s_all);
 void update_xp(all_t *s_all);
 void movement_diagonal_left_up(all_t *s_all);
 void movement_diagonal_left_down(all_t *s_all);
