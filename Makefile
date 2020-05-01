@@ -59,6 +59,7 @@ SRC	=	src/main.c \
 		src/destroy_mobs.c \
 		src/init/init_health_drop.c \
 		src/init/init_player.c \
+		src/init/init_stars2.c \
 		src/init/init_npc.c \
 		src/init/init_infos.c \
 		src/init/init_chests.c \

@@ -40,6 +40,27 @@ void init_stars(all_t *s_all)
     s_all->s_stars.pos2 = (sfVector2f){-128 * 15, -128 * 15};
 }
 
+int check_hitbox_stars(all_t *s_all)
+{
+    if (s_all->s_movement.up == 1 && s_all->s_movement.down == 1
+    && s_all->s_movement.left == 1 && s_all->s_movement.right == 0
+    && s_all->s_movement.wall_down == 1 && s_all->s_movement.wall_left == 0
+    && s_all->s_movement.wall_right == 0) return (1);
+    if (s_all->s_movement.up == 1 && s_all->s_movement.down == 1
+    && s_all->s_movement.left == 0 && s_all->s_movement.right == 1
+    && s_all->s_movement.wall_down == 1 && s_all->s_movement.wall_left == 0
+    && s_all->s_movement.wall_right == 0) return (1);
+    if (s_all->s_movement.up == 0 && s_all->s_movement.down == 1
+    && s_all->s_movement.left == 1 && s_all->s_movement.right == 1
+    && s_all->s_movement.wall_down == 0 && s_all->s_movement.wall_left == 1
+    && s_all->s_movement.wall_up == 0) return (1);
+    if (s_all->s_movement.up == 1 && s_all->s_movement.down == 1
+    && s_all->s_movement.left == 1 && s_all->s_movement.right == 0
+    && s_all->s_movement.wall_right == 0 && s_all->s_movement.wall_left == 0
+    && s_all->s_movement.wall_up == 1) return (1);
+    return (0);
+}
+
 void move_stars(all_t *s_all, sfSprite *sprite, float speed, sfVector2f *pos)
 {
     if (s_all->s_player.hero_seconds < 0.01 || s_all->s_player.tp == 1
@@ -65,8 +86,17 @@ void move_stars(all_t *s_all, sfSprite *sprite, float speed, sfVector2f *pos)
 
 void display_stars(all_t *s_all)
 {
-    move_stars(s_all, s_all->s_stars.front, 1.5, &s_all->s_stars.pos);
-    move_stars(s_all, s_all->s_stars.back, 1, &s_all->s_stars.pos2);
+    int check = 0;
+    if (check_hitbox_stars(s_all) == 0) {
+        check = move_stars2(s_all, s_all->s_stars.front,
+            1.5, &s_all->s_stars.pos);
+        check = move_stars2(s_all, s_all->s_stars.back,
+            1, &s_all->s_stars.pos2);
+        if (check == 0) {
+            move_stars(s_all, s_all->s_stars.front, 1.5, &s_all->s_stars.pos);
+            move_stars(s_all, s_all->s_stars.back, 1, &s_all->s_stars.pos2);
+        }
+    }
     sfRenderWindow_drawSprite(s_all->s_game.window, s_all->s_stars.back, NULL);
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_stars.front, NULL);

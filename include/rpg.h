@@ -574,6 +574,8 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
+int move_stars3(all_t *s_all, sfSprite *sprite, float speed, sfVector2f *pos);
+int move_stars2(all_t *s_all, sfSprite *sprite, float speed, sfVector2f *pos);
 void display_inventory_inf(all_t *s_all, int check);
 void init_equip_slots(all_t *s_all);
 void swap_items(all_t *s_all, slots_t *tmp);
