@@ -91,6 +91,8 @@ void load(all_t *s_all, char *filepath)
     s_all->s_map.stage = my_atoi(read_field("stage", fd));
     enter_event(s_all);
     load_inventory(fd, s_all);
-    s_all->s_infos.dmg = s_all->s_infos.level * 50;
+    s_all->s_infos.dmg = (s_all->s_infos.level * 50);
+    if (s_all->s_inventory.head->is_item == 1)
+        s_all->s_infos.dmg += s_all->s_inventory.head->dmg;
     close(fd);
 }
