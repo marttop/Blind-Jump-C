@@ -10,6 +10,7 @@
 
 void level_up(all_t *s_all)
 {
+    sfSound_play(s_all->s_sounds.lvl);
     s_all->s_infos.current_xp -= s_all->s_infos.max_xp;
     s_all->s_infos.max_xp *= 2;
     if (s_all->s_infos.str_xp != NULL) free(s_all->s_infos.str_xp);

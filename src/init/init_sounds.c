@@ -7,6 +7,20 @@
 
 #include "rpg.h"
 
+void init_soundbuffers2(all_t *s_all)
+{
+    s_all->s_sounds.dead_b =
+    sfSoundBuffer_createFromFile("sounds/dead.wav");
+    s_all->s_sounds.lvl_b =
+    sfSoundBuffer_createFromFile("sounds/level.ogg");
+    s_all->s_sounds.player_b =
+    sfSoundBuffer_createFromFile("sounds/player.wav");
+    s_all->s_sounds.tp_b =
+    sfSoundBuffer_createFromFile("sounds/tp.ogg");
+    s_all->s_sounds.item_b =
+    sfSoundBuffer_createFromFile("sounds/gotitem.ogg");
+}
+
 void init_soundbuffers(all_t *s_all)
 {
     s_all->s_sounds.blast_b =
@@ -27,20 +41,11 @@ void init_soundbuffers(all_t *s_all)
     sfSoundBuffer_createFromFile("sounds/footstepDirt4.ogg");
     s_all->s_sounds.step5_b =
     sfSoundBuffer_createFromFile("sounds/footstepDirt5.ogg");
+    init_soundbuffers2(s_all);
 }
 
-void init_sounds(all_t *s_all)
+void apply_sounds(all_t *s_all)
 {
-    s_all->s_sounds.blast = sfSound_create();
-    s_all->s_sounds.creak = sfSound_create();
-    s_all->s_sounds.hit = sfSound_create();
-    s_all->s_sounds.laser = sfSound_create();
-    s_all->s_sounds.step1 = sfSound_create();
-    s_all->s_sounds.step2 = sfSound_create();
-    s_all->s_sounds.step3 = sfSound_create();
-    s_all->s_sounds.step4 = sfSound_create();
-    s_all->s_sounds.step5 = sfSound_create();
-    init_soundbuffers(s_all);
     sfSound_setBuffer(s_all->s_sounds.blast, s_all->s_sounds.blast_b);
     sfSound_setBuffer(s_all->s_sounds.creak, s_all->s_sounds.creak_b);
     sfSound_setBuffer(s_all->s_sounds.hit, s_all->s_sounds.hit_b);
@@ -50,4 +55,29 @@ void init_sounds(all_t *s_all)
     sfSound_setBuffer(s_all->s_sounds.step3, s_all->s_sounds.step3_b);
     sfSound_setBuffer(s_all->s_sounds.step4, s_all->s_sounds.step4_b);
     sfSound_setBuffer(s_all->s_sounds.step5, s_all->s_sounds.step5_b);
+    sfSound_setBuffer(s_all->s_sounds.lvl, s_all->s_sounds.lvl_b);
+    sfSound_setBuffer(s_all->s_sounds.dead, s_all->s_sounds.dead_b);
+    sfSound_setBuffer(s_all->s_sounds.player, s_all->s_sounds.player_b);
+    sfSound_setBuffer(s_all->s_sounds.tp, s_all->s_sounds.tp_b);
+    sfSound_setBuffer(s_all->s_sounds.item, s_all->s_sounds.item_b);
+}
+
+void init_sounds(all_t *s_all)
+{
+    s_all->s_sounds.blast = sfSound_create();
+    s_all->s_sounds.creak = sfSound_create();
+    s_all->s_sounds.hit = sfSound_create();
+    s_all->s_sounds.laser = sfSound_create();
+    s_all->s_sounds.lvl = sfSound_create();
+    s_all->s_sounds.dead = sfSound_create();
+    s_all->s_sounds.step1 = sfSound_create();
+    s_all->s_sounds.step2 = sfSound_create();
+    s_all->s_sounds.step3 = sfSound_create();
+    s_all->s_sounds.step4 = sfSound_create();
+    s_all->s_sounds.step5 = sfSound_create();
+    s_all->s_sounds.player = sfSound_create();
+    s_all->s_sounds.tp = sfSound_create();
+    s_all->s_sounds.item = sfSound_create();
+    init_soundbuffers(s_all);
+    apply_sounds(s_all);
 }
