@@ -19,6 +19,8 @@ void init_soundbuffers2(all_t *s_all)
     sfSoundBuffer_createFromFile("sounds/tp.ogg");
     s_all->s_sounds.item_b =
     sfSoundBuffer_createFromFile("sounds/gotitem.ogg");
+    s_all->s_sounds.heart_b =
+    sfSoundBuffer_createFromFile("sounds/life.ogg");
 }
 
 void init_soundbuffers(all_t *s_all)
@@ -60,6 +62,27 @@ void apply_sounds(all_t *s_all)
     sfSound_setBuffer(s_all->s_sounds.player, s_all->s_sounds.player_b);
     sfSound_setBuffer(s_all->s_sounds.tp, s_all->s_sounds.tp_b);
     sfSound_setBuffer(s_all->s_sounds.item, s_all->s_sounds.item_b);
+    sfSound_setBuffer(s_all->s_sounds.heart, s_all->s_sounds.heart_b);
+}
+
+void play_random_sound(all_t *s_all)
+{
+    int i = rand() % 5;
+    if (i == 0) {
+        sfSound_play(s_all->s_sounds.step1);
+    }
+    if (i == 1) {
+        sfSound_play(s_all->s_sounds.step2);
+    }
+    if (i == 2) {
+        sfSound_play(s_all->s_sounds.step3);
+    }
+    if (i == 3) {
+        sfSound_play(s_all->s_sounds.step4);
+    }
+    if (i == 4) {
+        sfSound_play(s_all->s_sounds.step5);
+    }
 }
 
 void init_sounds(all_t *s_all)
@@ -76,8 +99,12 @@ void init_sounds(all_t *s_all)
     s_all->s_sounds.step4 = sfSound_create();
     s_all->s_sounds.step5 = sfSound_create();
     s_all->s_sounds.player = sfSound_create();
+    s_all->s_sounds.heart = sfSound_create();
     s_all->s_sounds.tp = sfSound_create();
     s_all->s_sounds.item = sfSound_create();
+    s_all->s_sounds.music = sfMusic_createFromFile("music/Frostellar.ogg");
+    sfMusic_setVolume(s_all->s_sounds.music, 60);
+    sfMusic_setLoop(s_all->s_sounds.music, sfTrue);
     init_soundbuffers(s_all);
     apply_sounds(s_all);
 }

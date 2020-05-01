@@ -13,10 +13,15 @@ void destroy_sounds2(all_t *s_all)
     sfSound_destroy(s_all->s_sounds.dead);
     sfSound_destroy(s_all->s_sounds.player);
     sfSoundBuffer_destroy(s_all->s_sounds.dead_b);
+    sfSound_destroy(s_all->s_sounds.item);
+    sfSoundBuffer_destroy(s_all->s_sounds.item_b);
     sfSound_destroy(s_all->s_sounds.tp);
+    sfSoundBuffer_destroy(s_all->s_sounds.heart_b);
+    sfSound_destroy(s_all->s_sounds.heart);
     sfSoundBuffer_destroy(s_all->s_sounds.tp_b);
     sfSoundBuffer_destroy(s_all->s_sounds.lvl_b); 
     sfSoundBuffer_destroy(s_all->s_sounds.player_b); 
+    sfMusic_destroy(s_all->s_sounds.music);
 }
 
 void destroy_sounds(all_t *s_all)
