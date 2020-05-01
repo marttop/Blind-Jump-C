@@ -11,7 +11,7 @@ int game_loop(all_t *s_all)
 {
     if (!s_all->s_game.window)
         return (EXIT_FAILURE);
-
+    sfMusic_play(s_all->s_sounds.music);
     while (sfRenderWindow_isOpen(s_all->s_game.window)) {
 
         while (sfRenderWindow_pollEvent(s_all->s_game.window,

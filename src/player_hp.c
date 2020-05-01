@@ -29,6 +29,7 @@ void color_hp(all_t *s_all)
 void heal_hp(all_t *s_all)
 {
     color_hp(s_all);
+    sfSound_play(s_all->s_sounds.heart);
     if (s_all->s_infos.str_hp != NULL) free(s_all->s_infos.str_hp);
     s_all->s_infos.str_hp = malloc(sizeof(char) * 20);
     s_all->s_infos.str_hp[0] = '\0';
