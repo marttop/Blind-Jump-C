@@ -53,7 +53,7 @@ void display_computer(all_t *s_all)
 {
     sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_npc.computer, NULL);
-    if (s_all->s_npc.talk == 1 && s_all->s_cine.tuto == 1)
+    if (s_all->s_npc.talk == 1 && s_all->s_cine.tuto == 0)
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_npc.screen, NULL);
     if (calcul_sprite_magnitude(s_all->s_npc.screen,

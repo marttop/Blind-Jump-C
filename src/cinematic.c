@@ -7,6 +7,23 @@
 
 #include "rpg.h"
 
+void cinematic2(all_t *s_all)
+{
+    static int i = 0;
+    if (s_all->s_cine.script == 2 && s_all->s_inventory.head->is_item == 1) {
+        s_all->s_cine.script = 3, s_all->s_chatbox.buff[0] = '\0';
+        s_all->s_chatbox.op = 0, s_all->s_chatbox.idx = 0;
+        s_all->s_chatbox.car = 0;
+    }
+    if (s_all->s_cine.script == 5 && i == 0) {
+        i++;
+        s_all->s_chatbox.buff[0] = '\0';
+        s_all->s_chatbox.op = 0;
+        s_all->s_chatbox.idx = 0;
+        s_all->s_chatbox.car = 0;
+    }
+}
+
 void cinematic1(all_t *s_all)
 {
     static int check1 = 0, check2 = 0, check3 = 0, check4 = 0;
@@ -22,11 +39,10 @@ void cinematic1(all_t *s_all)
         if (s_all->s_movement.right == 1 && check4 == 0)
             check4 = 1, s_all->s_cine.count += 1;
         if (s_all->s_cine.count == 4) {
-            s_all->s_cine.script = 1;
-        s_all->s_chatbox.buff[0] = '\0';
-        s_all->s_chatbox.op = 0;
-        s_all->s_chatbox.idx = 0;
-        s_all->s_chatbox.car = 0;
+            s_all->s_cine.script = 1, s_all->s_chatbox.buff[0] = '\0';
+            s_all->s_chatbox.op = 0, s_all->s_chatbox.idx = 0;
+            s_all->s_chatbox.car = 0;
         }
-    } sfClock_restart(s_all->s_cine.clock);
+    } cinematic2(s_all);
+    sfClock_restart(s_all->s_cine.clock);
 }

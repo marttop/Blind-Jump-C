@@ -13,8 +13,10 @@ void display_spawn(all_t *s_all)
         move_camera(s_all);
         sfRenderWindow_clear(s_all->s_game.window, (sfColor){12, 37, 41, 255});
         display_spawn_under(s_all);
+        int y = display_chests_under(s_all);
         display_hero(s_all);
         display_spawn_over(s_all);
+        display_chests_over(s_all, y);
         sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     }
@@ -48,6 +50,17 @@ void display_chatbox(all_t *s_all)
         chatbox(s_all, "pnj/tuto1");
     if (s_all->s_npc.talk == 1 && s_all->s_cine.script == 1)
         chatbox(s_all, "pnj/tuto2");
+    if (s_all->s_npc.talk == 1 && s_all->s_cine.script == 2)
+        chatbox(s_all, "pnj/tuto3");
+    if (s_all->s_npc.talk == 1 && s_all->s_cine.script == 3)
+        chatbox(s_all, "pnj/tuto4");
+    if (s_all->s_npc.talk == 1 && s_all->s_cine.script == 4)
+        chatbox(s_all, "pnj/tuto5");
+    if (s_all->s_npc.talk == 1
+    && (s_all->s_cine.script == 5 || s_all->s_cine.script == 6)) {
+        chatbox(s_all, "pnj/computer1");
+        s_all->s_cine.script = 6;
+    }
 }
 
 void display_hud_anim(all_t *s_all)
