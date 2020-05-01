@@ -162,6 +162,8 @@ typedef struct game {
     sfView *camera;
     sfClock *clock;
     sfTime time;
+    sfShader *shader;
+    sfRenderStates state;
     sfSprite *black;
     sfTexture *black_tx;
     float seconds;

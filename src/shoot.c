@@ -9,7 +9,7 @@
 
 void shoot(all_t *s_all)
 {
-    if (s_all->s_game.pause == 1) return;
+    if (s_all->s_game.pause == 1 || s_all->s_player.tp == 1) return;
     if (s_all->s_inventory.head->is_item == 0) return;
     if (s_all->s_player.reload_sec >= s_all->s_infos.atk_speed
     && s_all->s_player.shooting == 0
@@ -79,7 +79,7 @@ void display_hit(all_t *s_all)
         } sfClock_restart(s_all->s_player.hit_clk);
     }
     sfRenderWindow_drawSprite(s_all->s_game.window,
-    s_all->s_player.hit_sprite, NULL);
+    s_all->s_player.hit_sprite, &s_all->s_game.state);
 }
 
 void shooting_control(all_t *s_all)

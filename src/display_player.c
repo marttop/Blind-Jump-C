@@ -18,7 +18,7 @@ void display_weapon_down(all_t *s_all)
         sfSprite_setTextureRect(s_all->s_player.gun,
             (sfIntRect){742, 107, 23, 10});
         sfRenderWindow_drawSprite(s_all->s_game.window,
-            s_all->s_player.gun, NULL);
+            s_all->s_player.gun, &s_all->s_game.state);
     }
 }
 
@@ -33,7 +33,7 @@ void display_weapon_left_right(all_t *s_all)
         sfSprite_setTextureRect(s_all->s_player.gun,
             (sfIntRect){687, 107, 23, 10});
         sfRenderWindow_drawSprite(s_all->s_game.window,
-            s_all->s_player.gun, NULL);
+            s_all->s_player.gun, &s_all->s_game.state);
     } if (s_all->s_direction.left == 1 && s_all->s_player.tp != 1) {
         sfSprite_setPosition(s_all->s_player.gun,
             (sfVector2f){s_all->s_player.hero_pos.x + 16,
@@ -42,7 +42,7 @@ void display_weapon_left_right(all_t *s_all)
         sfSprite_setTextureRect(s_all->s_player.gun,
             (sfIntRect){687, 107, 23, 10});
         sfRenderWindow_drawSprite(s_all->s_game.window,
-            s_all->s_player.gun, NULL);
+            s_all->s_player.gun, &s_all->s_game.state);
     }
 }
 
@@ -50,13 +50,20 @@ void display_shooting_elements(all_t *s_all)
 {
     if (s_all->s_player.tp != 1) {
         if (s_all->s_player.hor == 1) {
+            sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
+                s_all->s_player.hor_pos);
             sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_player.hor_shoot, NULL);
         }
-        if (s_all->s_player.ver == 1) {
+        else if (s_all->s_player.ver == 1) {
             sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_player.ver_shoot, NULL);
+            sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
+                s_all->s_player.ver_pos);
         }
+        else 
+            sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
+            (sfVector2f){-1000, -1000});
         display_weapon_left_right(s_all);
         if (s_all->s_player.hit == 1) display_hit(s_all);
     }
@@ -74,9 +81,9 @@ void display_hero(all_t *s_all)
     display_shooting_elements(s_all);
     if (s_all->s_tp.anim != 2) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
-            s_all->s_player.shadow, NULL);
+            s_all->s_player.shadow, &s_all->s_game.state);
         sfRenderWindow_drawSprite(s_all->s_game.window,
-            s_all->s_player.hero, NULL);
+            s_all->s_player.hero, &s_all->s_game.state);
     } if (s_all->s_player.tp != 1) display_weapon_down(s_all);
     shooting_control(s_all), player_immunity(s_all);
 }

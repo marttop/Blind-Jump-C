@@ -31,6 +31,6 @@ void turret_loop(all_t *s_all, mob_t *temp)
         }
         if (temp->shoot == 1 && bullet->hit != 1)
             sfRenderWindow_drawSprite(s_all->s_game.window,
-                bullet->bullet, NULL);
+                bullet->bullet, &s_all->s_game.state);
     }
 }
