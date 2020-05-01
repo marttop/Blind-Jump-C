@@ -130,6 +130,30 @@ typedef struct options {
     struct menu_buttons *buttons;
 } options_t;
 
+typedef struct sounds {
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    sfSound *laser;
+    sfSoundBuffer *laser_b;
+    sfSound *blast;
+    sfSoundBuffer *blast_b;
+    sfSound *creak;
+    sfSoundBuffer *creak_b;
+    sfSound *hit;
+    sfSoundBuffer *hit_b;
+    sfSound *step1;
+    sfSoundBuffer *step1_b;
+    sfSound *step2;
+    sfSoundBuffer *step2_b;
+    sfSound *step3;
+    sfSoundBuffer *step3_b;
+    sfSound *step4;
+    sfSoundBuffer *step4_b;
+    sfSound *step5;
+    sfSoundBuffer *step5_b;
+} sound_t;
+
 typedef struct game {
     sfRenderWindow *window;
     sfFont *font;
@@ -586,6 +610,7 @@ typedef struct all {
     options_t s_options;
     chatbox_t s_chatbox;
     stars_t s_stars;
+    sound_t s_sounds;
     struct save *s_save;
     struct rgb *s_rgb;
     struct mob *s_mob;
@@ -605,9 +630,11 @@ void display_inventory_inf(all_t *s_all, int check);
 void init_equip_slots(all_t *s_all);
 void swap_items(all_t *s_all, slots_t *tmp);
 void set_texture_items2(slots_t *tmp, int id);
+void init_sounds(all_t *s_all);
 void free_hearth(all_t *s_all);
 void heal_hp(all_t *s_all);
 void display_hearth2(all_t *s_all);
+void destroy_sounds(all_t *s_all);
 void display_hearth(all_t *s_all);
 void push_front_hearth(all_t *s_all, mob_t *tmp);
 void init_chatbox2(all_t *s_all);

@@ -25,5 +25,6 @@ int game_loop(all_t *s_all)
         display(s_all);
         game_over_check(s_all);
     }
+    destroy_sounds(s_all);
     return (EXIT_SUCCESS);
 }

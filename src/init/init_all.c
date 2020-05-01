@@ -76,4 +76,5 @@ void init_all(all_t *s_all)
     init_load_slots(s_all);
     init_save_screen(s_all);
     init_stat_box(s_all);
+    init_sounds(s_all);
 }
