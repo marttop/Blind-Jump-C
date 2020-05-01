@@ -10,16 +10,21 @@
 
 void check_id(load_t *temp, all_t *s_all)
 {
-    if (temp->id == 1) {
+    if (temp->id == 1 &&
+    my_strcmp(sfText_getString(temp->p_name_tx), "LOAD") != 0) {
         load(s_all, "saves/save1");
+        s_all->s_game.scene = SPAWN;
     }
-    if (temp->id == 2) {
+    if (temp->id == 2 &&
+    my_strcmp(sfText_getString(temp->p_name_tx), "LOAD") != 0) {
         load(s_all, "saves/save2");
+        s_all->s_game.scene = SPAWN;
     }
-    if (temp->id == 3) {
+    if (temp->id == 3 &&
+    my_strcmp(sfText_getString(temp->p_name_tx), "LOAD") != 0) {
         load(s_all, "saves/save3");
+        s_all->s_game.scene = SPAWN;
     }
-    s_all->s_game.scene = SPAWN;
 }
 
 void check_button(load_t *temp, all_t *s_all)

@@ -11,8 +11,12 @@ void init_dead(all_t *s_all)
 {
     s_all->s_dead.dead = sfSprite_create();
     s_all->s_dead.clock = sfClock_create();
+    s_all->s_dead.respawn = sfText_create();
     s_all->s_dead.dead_tx = s_all->s_player.hero_tx;
     s_all->s_dead.rect = (sfIntRect){209, 39, 40, 37};
+    sfText_setFont(s_all->s_dead.respawn, s_all->s_game.font);
+    sfText_setString(s_all->s_dead.respawn, "Press R to respawn");
+    sfText_setPosition(s_all->s_dead.respawn, (sfVector2f){835, 900});
     sfSprite_setTexture(s_all->s_dead.dead, s_all->s_dead.dead_tx, sfTrue);
     sfSprite_setTextureRect(s_all->s_dead.dead, s_all->s_dead.rect);
     sfSprite_setPosition(s_all->s_dead.dead, s_all->s_player.hero_pos);
