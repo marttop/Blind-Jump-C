@@ -783,7 +783,7 @@ void draw_volume(all_t *s_all);
 void chatbox(all_t *s_all, char *filepath);
 int start_dialog(all_t *s_all, char *filepath);
 void init_chatbox(all_t *s_all);
-int add_letter(int fd, int idx, char *buf);
+int add_letter(int fd, int idx, char *buf, all_t *s_all);
 void add_text(all_t *s_all, char *buf);
 void dialog_time(all_t *s_all);
 int quit_dialog(all_t *s_all);

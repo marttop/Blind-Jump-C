@@ -37,13 +37,13 @@ int read_chat_file(all_t *s_all)
     dialog_time(s_all);
     if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue)
         s_all->s_chatbox.s = 0.0;
-    if (s_all->s_chatbox.car == 85) {
+    if (s_all->s_chatbox.car == 140) {
         s_all->s_chatbox.buff[s_all->s_chatbox.idx] = '\n';
         s_all->s_chatbox.idx++, s_all->s_chatbox.car = 0;
     }
     if (s_all->s_chatbox.sec > s_all->s_chatbox.s) {
         s_all->s_chatbox.idx = add_letter(s_all->s_chatbox.fd,
-        s_all->s_chatbox.idx, s_all->s_chatbox.buff);
+        s_all->s_chatbox.idx, s_all->s_chatbox.buff, s_all);
         s_all->s_chatbox.car++;
         add_text(s_all, s_all->s_chatbox.buff);
     }
@@ -55,6 +55,8 @@ int wait_close(all_t *s_all)
     close(s_all->s_chatbox.fd);
     s_all->s_chatbox.op = 0;
     if (sfKeyboard_isKeyPressed(sfKeyEnter) == sfTrue) {
+        if (s_all->s_game.scene == SPAWN)
+            s_all->s_cine.tuto = 0;
         s_all->s_chatbox.idx = 0;
         return 1;
     }
