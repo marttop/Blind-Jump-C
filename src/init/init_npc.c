@@ -53,10 +53,10 @@ void computer_event(all_t *s_all)
 void display_computer(all_t *s_all)
 {
     sfRenderWindow_drawSprite(s_all->s_game.window,
-        s_all->s_npc.computer, NULL);
+        s_all->s_npc.computer, &s_all->s_game.state);
     if (s_all->s_npc.talk == 1 && s_all->s_cine.tuto == 0)
         sfRenderWindow_drawSprite(s_all->s_game.window,
-        s_all->s_npc.screen, NULL);
+        s_all->s_npc.screen, &s_all->s_game.state);
     if (calcul_sprite_magnitude(s_all->s_npc.screen,
     s_all->s_player.shadow) <= 25 && s_all->s_game.chat == 0
     && s_all->s_player.hero_pos.y + 10 >= s_all->s_npc.pos_pc.y) {

@@ -81,8 +81,10 @@ void roballs_shoot(mob_t *tmp, all_t *s_all)
 
 void display_mobs2(mob_t *temp, all_t *s_all)
 {
-    sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow, NULL);
-    sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob, NULL);
+    sfRenderWindow_drawSprite(s_all->s_game.window, temp->shadow,
+        &s_all->s_game.state);
+    sfRenderWindow_drawSprite(s_all->s_game.window, temp->mob,
+        &s_all->s_game.state);
     sfRenderWindow_drawText(s_all->s_game.window, temp->text, NULL);
     sfText_setPosition(temp->text, (sfVector2f)
         {temp->mob_pos.x - 20, temp->mob_pos.y - 15});
