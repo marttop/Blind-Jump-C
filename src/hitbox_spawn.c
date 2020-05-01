@@ -56,6 +56,10 @@ int check_middle_wall(all_t *s_all)
     if (s_all->s_game.scene == SPAWN)
         check_middle_wall2(s_all, &i);
     
+    if (s_all->s_game.scene == SPAWN && s_all->s_cine.door == 0)
+        if (s_all->s_player.hero_pos.y <= 587 && s_all->s_movement.up == 1)
+            s_all->s_movement.wall_up = 1, i = 1;
+
     if (i == 1)
         return (1);
     return (0);

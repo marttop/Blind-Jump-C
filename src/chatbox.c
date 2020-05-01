@@ -38,12 +38,13 @@ void init_chatbox(all_t *s_all)
     init_chatbox2(s_all);
 }
 
-int add_letter(int fd, int idx, char *buf)
+int add_letter(int fd, int idx, char *buf, all_t *s_all)
 {
     char c;
     if (read(fd, &c, 1) < 1)
         return -1;
     buf[idx] = c;
+    if (c == '\n') s_all->s_chatbox.car = 0;
     buf[idx + 1] = '\0';
     idx++;
     return idx;
