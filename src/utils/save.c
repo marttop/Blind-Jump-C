@@ -78,6 +78,9 @@ void load_next(all_t *s_all, int fd)
     s_all->s_cine.tuto = my_atoi(read_field("tuto", fd));
     s_all->s_cine.script = my_atoi(read_field("script", fd));
     if (s_all->s_cine.script > 5) s_all->s_cine.door = 1;
+    s_all->s_chatbox.car = 0, s_all->s_chatbox.fd = 0,
+    s_all->s_chatbox.idx = 0, s_all->s_chatbox.op = 0;
+    s_all->s_chatbox.buff[0] = '\0';
 }
 
 void load(all_t *s_all, char *filepath)
