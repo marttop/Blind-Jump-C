@@ -42,6 +42,7 @@ void heal_hp(all_t *s_all)
 
 void loosing_hp(all_t *s_all)
 {
+    sfSound_play(s_all->s_sounds.player);
     s_all->s_infos.is_hit = 1;
     sfClock_restart(s_all->s_infos.clock);
     s_all->s_infos.current_hp -= 20;

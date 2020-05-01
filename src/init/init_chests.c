@@ -44,7 +44,7 @@ chest_t *fill_chests(chest_t *old, all_t *s_all, sfVector2f pos)
 void open_chest(chest_t *temp, all_t *s_all)
 {
     if (temp->seconds > 0.1) {
-        if (temp->rect.left < 736) {
+        if (temp->rect.left < 736 && temp->status != -1) {
             temp->rect.left += 16;
             sfSprite_setTextureRect(temp->sprite, temp->rect);
             sfVector2f scale = sfSprite_getScale(temp->shadow);
@@ -52,6 +52,7 @@ void open_chest(chest_t *temp, all_t *s_all)
                 (sfVector2f){scale.x, scale.y += 0.2});
         } else {
             temp->status = -1;
+            sfSound_play(s_all->s_sounds.item);
             if (s_all->s_game.scene == SPAWN) {
                 s_all->s_chatbox.buff[0] = '\0', s_all->s_chatbox.op = 0;
                 s_all->s_chatbox.idx = 0, s_all->s_chatbox.car = 0;
