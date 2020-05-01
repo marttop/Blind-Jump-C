@@ -398,6 +398,7 @@ typedef struct spawn {
 typedef struct dead {
     sfSprite *dead;
     sfTexture *dead_tx;
+    sfText *respawn;
     sfVector2f pos;
     sfClock *clock;
     sfTime time;
