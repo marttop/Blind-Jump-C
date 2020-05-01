@@ -107,7 +107,7 @@ void rect_hero(all_t *s_all)
 {
     static int i = 1;
     static int check = 0;
-    if (s_all->s_game.pause == 1) return;
+    if (s_all->s_game.pause == 1 || s_all->s_cine.move == 1) return;
     if ((s_all->s_movement.left == 1 && s_all->s_movement.right == 1
     && s_all->s_movement.up == 1 && s_all->s_movement.down == 1)
     || s_all->s_player.tp == 1)

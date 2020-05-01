@@ -9,6 +9,7 @@
 
 void door_animation(all_t *s_all)
 {
+    if (s_all->s_cine.door == 0) return;
     static int rect = 0;
     if (s_all->s_spawn.open == 0 && s_all->s_spawn.door_seconds >= 0.01
     && s_all->s_player.hero_pos.y <= 610 && s_all->s_player.hero_pos.x >= 900

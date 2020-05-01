@@ -27,7 +27,7 @@ void init_chatbox(all_t *s_all)
     sfRectangleShape_setOutlineColor(s_all->s_chatbox.box, sfWhite);
     sfRectangleShape_setOutlineThickness(s_all->s_chatbox.box, 1.5);
     sfRectangleShape_setPosition(s_all->s_chatbox.box, (sfVector2f){60, 780});
-    s_all->s_chatbox.font = sfFont_createFromFile("font/Cornerstone.ttf");
+    s_all->s_chatbox.font = sfFont_createFromFile("font/joystix.ttf");
     s_all->s_chatbox.text = sfText_create();
     sfText_setColor(s_all->s_chatbox.text, sfWhite);
     sfText_setFont(s_all->s_chatbox.text, s_all->s_chatbox.font);
@@ -75,8 +75,10 @@ int start_dialog(all_t *s_all, char *filepath)
     else if (s_all->s_chatbox.idx == -1)
         i = wait_close(s_all);
     sfRenderWindow_drawText(s_all->s_game.window, s_all->s_chatbox.text, NULL);
-    sfRenderWindow_drawSprite(s_all->s_game.window,
-    s_all->s_chatbox.eric, NULL);
+    if (s_all->s_cine.tuto == 0) {
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_chatbox.eric, NULL);
+    }
     return i;
 
 }

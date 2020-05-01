@@ -10,9 +10,8 @@
 void display_spawn(all_t *s_all)
 {
     if (s_all->s_game.scene == SPAWN) {
-        sfRenderWindow_clear(s_all->s_game.window, (sfColor){12, 37, 41, 255});
-        sfRenderWindow_setView(s_all->s_game.window, s_all->s_game.camera);
         move_camera(s_all);
+        sfRenderWindow_clear(s_all->s_game.window, (sfColor){12, 37, 41, 255});
         display_spawn_under(s_all);
         display_hero(s_all);
         display_spawn_over(s_all);
@@ -43,6 +42,11 @@ void display_map(all_t *s_all)
     }
 }
 
+void display_chatbox(all_t *s_all)
+{
+    if (s_all->s_npc.talk == 1) chatbox(s_all, "pnj/tuto1");
+}
+
 void display_hud_anim(all_t *s_all)
 {
     display_debug(s_all);
@@ -56,7 +60,7 @@ void display_hud_anim(all_t *s_all)
     if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
     && s_all->s_game.scene != OPT && s_all->s_game.scene != LOAD) {
         display_infos(s_all);
-        if (s_all->s_npc.talk == 1) chatbox(s_all, "pnj/computer1");
+        display_chatbox(s_all);
         if (s_all->s_game.display_inv == 1) {
             draw_stats(s_all);
             display_inventory(s_all);
