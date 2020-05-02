@@ -15,6 +15,7 @@ void load4(all_t *s_all)
         (sfVector2f){s_all->s_tp.tp_pos.x + 16, s_all->s_tp.tp_pos.y + 19});
     sfSprite_setPosition(s_all->s_effect.tp_glow,
         (sfVector2f){s_all->s_tp.tp_pos.x - 190, s_all->s_tp.tp_pos.y - 195});
+    color_hp(s_all);
 }
 
 void load3(all_t *s_all)
