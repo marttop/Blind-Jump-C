@@ -65,9 +65,10 @@ int start_dialog(all_t *s_all, char *filepath)
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_chatbox.eric, NULL);
     } if (s_all->s_game.scene == SPAWN && i == 1) {
-        if (s_all->s_cine.script < 2)
+        if (s_all->s_cine.script < 2) {
             s_all->s_chest->status = 1;
-        s_all->s_cine.tuto = 0, s_all->s_cine.move = 0;
+            put_item_in_slot(s_all, 0);
+        } s_all->s_cine.tuto = 0, s_all->s_cine.move = 0;
         if (s_all->s_cine.script == 6) s_all->s_cine.door = 1;
         s_all->s_cine.script = 5;
     } return i;

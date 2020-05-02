@@ -38,6 +38,22 @@ void free_inventory(all_t *s_all)
     s_all->s_inventory.dragged = NULL;
 }
 
+void clean_game3(all_t *s_all)
+{
+    rgb_t *tmp = s_all->s_rgb;
+    for (int i = 0; tmp != NULL; tmp = tmp->next, i++) {
+        if (i == 0) sfSprite_setPosition(tmp->cursor, (sfVector2f){1075, 600});
+        if (i == 1) sfSprite_setPosition(tmp->cursor, (sfVector2f){1075, 650});
+        if (i == 2) sfSprite_setPosition(tmp->cursor, (sfVector2f){1075, 700});
+        tmp->value = 255;
+    } s_all->s_custom.p_color = (sfColor){255, 255, 255, 255};
+    sfSprite_setColor(s_all->s_custom.hero, s_all->s_custom.p_color);
+    s_all->s_chatbox.buff[0] = '\0';
+    s_all->s_chatbox.op = 0, s_all->s_chatbox.idx = 0;
+    s_all->s_chatbox.car = 0;
+    s_all->s_sounds.fat_bool = 0;
+}
+
 void clean_game2(all_t *s_all)
 {
     s_all->s_infos.level = 1, s_all->s_game.key_press = 0;
@@ -52,14 +68,7 @@ void clean_game2(all_t *s_all)
     my_strcat(s_all->s_infos.str_xp, "0/100"), s_all->s_spawn.open = 0;
     sfSprite_setTextureRect(s_all->s_spawn.door, (sfIntRect){0, 0, 200, 100});
     load3(s_all), s_all->s_game.display_inv = 0, color_hp(s_all);
-    rgb_t *tmp = s_all->s_rgb;
-    for (int i = 0; tmp != NULL; tmp = tmp->next, i++) {
-        if (i == 0) sfSprite_setPosition(tmp->cursor, (sfVector2f){1075, 600});
-        if (i == 1) sfSprite_setPosition(tmp->cursor, (sfVector2f){1075, 650});
-        if (i == 2) sfSprite_setPosition(tmp->cursor, (sfVector2f){1075, 700});
-        tmp->value = 255;
-    } s_all->s_custom.p_color = (sfColor){255, 255, 255, 255};
-    sfSprite_setColor(s_all->s_custom.hero, s_all->s_custom.p_color);
+    clean_game3(s_all);
 }
 
 void clean_game(all_t *s_all)

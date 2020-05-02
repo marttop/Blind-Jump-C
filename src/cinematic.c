@@ -47,5 +47,7 @@ void cinematic1(all_t *s_all)
             s_all->s_chatbox.car = 0;
         }
     } cinematic2(s_all);
+    if (s_all->s_game.scene == MENU || s_all->s_game.scene == LOAD)
+        check1 = 0, check2 = 0, check3 = 0, check4 = 0;
     sfClock_restart(s_all->s_cine.clock);
 }

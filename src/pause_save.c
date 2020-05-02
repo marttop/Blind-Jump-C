@@ -19,6 +19,8 @@ void check_id2(save_t *temp, all_t *s_all)
         save(s_all, "saves/save3");
     }
     s_all->s_game.pause = 0;
+    free_load_slots(s_all);
+    init_load_slots(s_all);
 }
 
 void check_button2(save_t *temp, all_t *s_all)

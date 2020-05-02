@@ -46,6 +46,21 @@ load_t *fill_load_slot(all_t *s_all, load_t *old, sfVector2f pos, int id)
     return (new);
 }
 
+void free_load_slots(all_t *s_all)
+{
+    load_t *tmp = s_all->s_load;
+    load_t *old = NULL;
+    while (tmp != NULL) {
+        sfSprite_destroy(tmp->button);
+        sfSprite_destroy(tmp->hero);
+        sfText_destroy(tmp->level_tx);
+        sfText_destroy(tmp->p_name_tx);
+        old = tmp;
+        tmp = tmp->next;
+        free(old);
+    } s_all->s_load = NULL;
+}
+
 void init_load_slots(all_t *s_all)
 {
     int i = 1;

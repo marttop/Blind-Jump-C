@@ -54,7 +54,7 @@ void save(all_t *s_all, char *filepath)
     write_field("stage", fd, strnbr(s_all->s_map.stage - 1));
     write_field("tuto", fd, strnbr(s_all->s_cine.tuto));
     write_field("script", fd, strnbr(s_all->s_cine.script));
-    write_field("chat", fd, strnbr(s_all->s_npc.talk));
+    write_field("chat", fd, strnbr(s_all->s_game.chat));
     save_inventory(fd, s_all);
     close(fd);
 }
@@ -85,6 +85,7 @@ void load_next(all_t *s_all, int fd)
 
 void load(all_t *s_all, char *filepath)
 {
+    free_inventory(s_all);
     int fd = open(filepath, O_RDWR);
     s_all->s_infos.p_name = read_field("name", fd);
     sfText_setString(s_all->s_infos.p_name_txt, s_all->s_infos.p_name);
@@ -97,7 +98,7 @@ void load(all_t *s_all, char *filepath)
     my_strcat(s_all->s_infos.str_level, "Level ");
     my_strcat(s_all->s_infos.str_level, strnbr(s_all->s_infos.level));
     sfText_setString(s_all->s_infos.lvl_txt, s_all->s_infos.str_level);
-    load_next(s_all, fd), s_all->s_npc.talk = my_atoi(read_field("chat", fd));
+    load_next(s_all, fd), s_all->s_game.chat = my_atoi(read_field("chat", fd));
     enter_event(s_all), load_inventory(fd, s_all);
     s_all->s_infos.dmg = (s_all->s_infos.level * 50);
     if (s_all->s_inventory.head->is_item == 1)

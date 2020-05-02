@@ -638,7 +638,7 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
-
+void free_load_slots(all_t *s_all);
 void free_chest(all_t *s_all);
 void free_inventory(all_t *s_all);
 void clean_game2(all_t *s_all);
