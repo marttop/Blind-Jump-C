@@ -23,7 +23,7 @@ void cinematic2(all_t *s_all)
         s_all->s_chatbox.car = 0;
     }
     if (s_all->s_cine.script > 1 && s_all->s_game.scene == SPAWN
-    && s_all->s_chest->status == 0)
+    && s_all->s_chest != NULL && s_all->s_chest->status == 0)
         s_all->s_chest->status = 1;
 }
 

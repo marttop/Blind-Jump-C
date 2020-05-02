@@ -72,6 +72,8 @@ void display_save_slots(all_t *s_all)
     refresh_button2(s_all);
     if ((s_all->s_game.scene == MAP || s_all->s_game.scene == SPAWN)
     && s_all->s_game.pause == 1) {
+        sfRenderWindow_drawSprite(s_all->s_game.window,
+        s_all->s_game.black, NULL);
         while (temp != NULL) {
             click_button2(temp, s_all);
             check_button2(temp, s_all);
@@ -82,4 +84,5 @@ void display_save_slots(all_t *s_all)
             temp = temp->next;
         }
     }
+    dispay_buttons_pause(s_all, s_all->s_pause);
 }

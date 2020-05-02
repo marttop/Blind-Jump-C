@@ -83,6 +83,7 @@ void init_hero(all_t *s_all)
 {
     s_all->s_player.hero_pos = (sfVector2f){render_pos_center(s_all).x - 24,
         render_pos_center(s_all).y + 180};
+    s_all->s_player.save_pos = s_all->s_player.hero_pos;
     create_sprite(&s_all->s_player.hero, &s_all->s_player.hero_tx,
         s_all->s_player.hero_pos, "sprites/game_objects.png");
     s_all->s_player.hero_speed = 4;

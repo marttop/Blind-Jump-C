@@ -70,6 +70,8 @@ void init_cinematic(all_t *s_all)
     s_all->s_cine.tuto = 1;
     s_all->s_sounds.seconds = 0;
     s_all->s_sounds.clock = sfClock_create();
+    s_all->s_cine.seconds = 0.0;
+    s_all->s_player.heal_sec = 0.0;
 }
 
 void init_all(all_t *s_all)

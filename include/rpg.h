@@ -338,6 +338,7 @@ typedef struct p_infos {
 } p_infos_t;
 
 typedef struct player {
+    sfVector2f save_pos;
     sfRectangleShape *debug;
     sfRectangleShape *debug_shadow;
     sfSprite *hero, *hit_sprite;
@@ -608,6 +609,7 @@ typedef struct all {
     game_t s_game;
     npc_t s_npc;
     m_buttons_t *s_buttons;
+    m_buttons_t *s_pause;
     tp_t s_tp;
     hearth_t *s_life;
     p_infos_t s_infos;
@@ -636,6 +638,14 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
+
+void free_chest(all_t *s_all);
+void free_inventory(all_t *s_all);
+void clean_game2(all_t *s_all);
+void clean_game(all_t *s_all);
+void load3(all_t *s_all);
+void init_buttons_pause(all_t *s_all);
+void dispay_buttons_pause(all_t *s_all, m_buttons_t *buttons);
 void cinematic1(all_t *s_all);
 void color_hp(all_t *s_all);
 void slow_heal_player(all_t *s_all);
