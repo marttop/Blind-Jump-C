@@ -80,7 +80,7 @@ void load_next(all_t *s_all, int fd)
     if (s_all->s_cine.script > 5) s_all->s_cine.door = 1;
     s_all->s_chatbox.car = 0, s_all->s_chatbox.fd = 0,
     s_all->s_chatbox.idx = 0, s_all->s_chatbox.op = 0;
-    s_all->s_chatbox.buff[0] = '\0';
+    s_all->s_chatbox.buff[0] = '\0', s_all->s_game.chat = 0;
 }
 
 void load(all_t *s_all, char *filepath)
@@ -104,5 +104,5 @@ void load(all_t *s_all, char *filepath)
         s_all->s_infos.dmg += s_all->s_inventory.head->dmg;
     if (s_all->s_cine.script >= 2) s_all->s_sounds.fat_bool = 1;
     else s_all->s_sounds.fat_bool = 0;
-    close(fd);
+    load3(s_all), close(fd);
 }

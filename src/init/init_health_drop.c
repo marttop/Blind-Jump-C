@@ -55,6 +55,7 @@ void free_hearth(all_t *s_all)
         free(s_all->s_life);
         s_all->s_life = tmp;
     }
+    s_all->s_life = NULL;
 }
 
 void push_front_hearth(all_t *s_all, mob_t *tmp)

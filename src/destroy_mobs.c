@@ -37,7 +37,16 @@ mob_t *destroy_mob_head(mob_t *s_tuto, all_t *s_all)
     mob_t *temp = s_tuto->next;
     sfSprite_destroy(s_tuto->mob);
     sfSprite_destroy(s_tuto->shadow);
-    sfClock_destroy(s_tuto->rect_clock);
+    if (s_tuto->bullet != NULL) sfSprite_destroy(s_tuto->bullet);
+    b_mob_t *bullet = s_tuto->l_bullets;
+    b_mob_t *old = NULL;
+    while (bullet != NULL) {
+        sfSprite_destroy(bullet->bullet);
+        sfClock_destroy(bullet->shoot_clock);
+        old = bullet;
+        bullet = bullet->next;
+        free(old);
+    } sfClock_destroy(s_tuto->rect_clock);
     sfClock_destroy(s_tuto->clock);
     sfClock_destroy(s_tuto->refresh_clk);
     if (s_tuto->path != NULL)

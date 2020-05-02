@@ -9,19 +9,18 @@
 
 void color_hp(all_t *s_all)
 {
+    sfRectangleShape_setFillColor(s_all->s_infos.hp,
+        (sfColor){255, 20, 0, 255});
     if (s_all->s_infos.current_hp >= s_all->s_infos.max_hp / 5 * 1)
         sfRectangleShape_setFillColor(s_all->s_infos.hp,
-        (sfColor){255, 20, 0, 255});
+        (sfColor){255, 100, 0, 255});
     if (s_all->s_infos.current_hp >= s_all->s_infos.max_hp / 5 * 2)
         sfRectangleShape_setFillColor(s_all->s_infos.hp,
-        (sfColor){255, 100, 0, 255});
+        (sfColor){230, 190, 0, 255});
     if (s_all->s_infos.current_hp >= s_all->s_infos.max_hp / 5 * 3)
         sfRectangleShape_setFillColor(s_all->s_infos.hp,
-        (sfColor){230, 190, 0, 255});
-    if (s_all->s_infos.current_hp >= s_all->s_infos.max_hp / 5 * 4)
-        sfRectangleShape_setFillColor(s_all->s_infos.hp,
         (sfColor){120, 190, 0, 255});
-    if (s_all->s_infos.current_hp >= s_all->s_infos.max_hp)
+    if (s_all->s_infos.current_hp >= s_all->s_infos.max_hp / 5 * 4)
         sfRectangleShape_setFillColor(s_all->s_infos.hp,
         (sfColor){0, 190, 0, 255});
 }

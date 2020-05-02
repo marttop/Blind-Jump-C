@@ -53,8 +53,10 @@ SRC	=	src/main.c \
 		src/map_generator.c \
 		src/map_generator2.c \
 		src/cinematic.c \
+		src/buttons_pause.c \
 		src/map_design.c \
 		src/destroy_sounds.c \
+		src/clean_game.c \
 		src/map_grass.c \
 		src/tp_anim.c \
 		src/chatbox2.c \
@@ -100,6 +102,7 @@ SRC	=	src/main.c \
 		src/utils/my_strcpy.c \
 		src/utils/my_strdup.c \
 		src/utils/my_strlen.c \
+		src/utils/save2.c \
 		src/utils/my_strnbr.c \
 		src/utils/randomize.c \
 		src/utils/save.c \

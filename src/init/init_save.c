@@ -45,4 +45,5 @@ void init_save_screen(all_t *s_all)
         s_all->s_save->hover = hover;
         s_all->s_save->clicked = clicked;
     }
+    init_buttons_pause(s_all);
 }
