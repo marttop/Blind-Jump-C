@@ -48,6 +48,7 @@ void init_soundbuffers(all_t *s_all)
 
 void apply_sounds(all_t *s_all)
 {
+    s_all->s_sounds.fat_bool = 0;
     sfSound_setBuffer(s_all->s_sounds.blast, s_all->s_sounds.blast_b);
     sfSound_setBuffer(s_all->s_sounds.creak, s_all->s_sounds.creak_b);
     sfSound_setBuffer(s_all->s_sounds.hit, s_all->s_sounds.hit_b);

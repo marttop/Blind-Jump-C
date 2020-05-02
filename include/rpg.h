@@ -135,6 +135,7 @@ typedef struct sounds {
     sfTime time;
     float seconds;
     int d;
+    int fat_bool;
     sfMusic *music;
     sfSound *laser;
     sfSoundBuffer *laser_b;

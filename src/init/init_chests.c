@@ -52,7 +52,8 @@ void open_chest(chest_t *temp, all_t *s_all)
                 (sfVector2f){scale.x, scale.y += 0.2});
         } else {
             temp->status = -1;
-            sfSound_play(s_all->s_sounds.item);
+            if (s_all->s_sounds.fat_bool == 0)
+                sfSound_play(s_all->s_sounds.item);
             if (s_all->s_game.scene == SPAWN) {
                 s_all->s_chatbox.buff[0] = '\0', s_all->s_chatbox.op = 0;
                 s_all->s_chatbox.idx = 0, s_all->s_chatbox.car = 0;
