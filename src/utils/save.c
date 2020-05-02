@@ -97,11 +97,12 @@ void load(all_t *s_all, char *filepath)
     my_strcat(s_all->s_infos.str_level, "Level ");
     my_strcat(s_all->s_infos.str_level, strnbr(s_all->s_infos.level));
     sfText_setString(s_all->s_infos.lvl_txt, s_all->s_infos.str_level);
-    load_next(s_all, fd);
-    s_all->s_npc.talk = my_atoi(read_field("chat", fd));
+    load_next(s_all, fd), s_all->s_npc.talk = my_atoi(read_field("chat", fd));
     enter_event(s_all), load_inventory(fd, s_all);
     s_all->s_infos.dmg = (s_all->s_infos.level * 50);
     if (s_all->s_inventory.head->is_item == 1)
         s_all->s_infos.dmg += s_all->s_inventory.head->dmg;
+    if (s_all->s_cine.script >= 2) s_all->s_sounds.fat_bool = 1;
+    else s_all->s_sounds.fat_bool = 0;
     close(fd);
 }

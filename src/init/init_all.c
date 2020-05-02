@@ -31,8 +31,8 @@ void init_shader(all_t *s_all)
     s_all->s_game.state.texture = NULL;
     sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
         (sfVector2f){0, 0});
-    sfShader_setFloatUniform( s_all->s_game.shader, "storm_total_radius", 20);
-    sfShader_setFloatUniform( s_all->s_game.shader, "storm_inner_radius", 10);
+    sfShader_setFloatUniform(s_all->s_game.shader, "storm_total_radius", 28);
+    sfShader_setFloatUniform(s_all->s_game.shader, "storm_inner_radius", 10);
 }
 
 void setup(all_t *s_all)

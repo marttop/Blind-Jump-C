@@ -97,6 +97,8 @@ void init_inventory(all_t *s_all)
     s_all->s_inventory.selected_tx =
         sfTexture_createFromFile("sprites/inv/selector.png", NULL);
     s_all->s_inventory.selected = sfSprite_create();
+    sfSprite_setPosition(s_all->s_inventory.selected,
+        (sfVector2f){-100, -100});
     sfSprite_setTexture(s_all->s_inventory.selected,
         s_all->s_inventory.selected_tx, sfTrue);
     s_all->s_inventory.drag = 0, s_all->s_inventory.swap = 0;
