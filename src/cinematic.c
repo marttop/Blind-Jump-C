@@ -10,11 +10,11 @@
 void nb_text(all_t *s_all)
 {
     if (s_all->s_player.tp == 1) {
-        if (s_all->s_game.stage_script == 1) s_all->s_game.nb = 30;
-        if (s_all->s_game.stage_script == 2) s_all->s_game.nb = 30;
-        if (s_all->s_game.stage_script == 3) s_all->s_game.nb = 30;
-        if (s_all->s_game.stage_script == 4) s_all->s_game.nb = 35;
-        if (s_all->s_game.stage_script == 5) s_all->s_game.nb = 40;
+        if (s_all->s_map.stage == 1) s_all->s_game.nb = 30;
+        if (s_all->s_map.stage == 2) s_all->s_game.nb = 30;
+        if (s_all->s_map.stage == 3) s_all->s_game.nb = 30;
+        if (s_all->s_map.stage == 4) s_all->s_game.nb = 35;
+        if (s_all->s_map.stage >= 5) s_all->s_game.nb = 40;
     } char *str = malloc(sizeof(char) * 20);
     str[0] = '\0';
     str = my_strcat(str, strnbr(s_all->s_game.nb));
@@ -40,6 +40,9 @@ void stage_cinematic(all_t *s_all)
     } if (s_all->s_game.tp_chat == 1 && s_all->s_game.stage_script == 5) {
         s_all->s_game.chat = 1;
         chatbox(s_all, "pnj/stage5");
+    } if (s_all->s_game.tp_chat == 1 && s_all->s_game.stage_script == 6
+    && s_all->s_game.nb == 0 && s_all->s_game.scene == MAP) {
+        s_all->s_game.chat = 1, chatbox(s_all, "pnj/finish");
     } nb_text(s_all);
 }
 
@@ -60,6 +63,9 @@ void cinematic2(all_t *s_all)
     && s_all->s_chest != NULL && s_all->s_chest->status == 0)
         s_all->s_chest->status = 1;
     if (s_all->s_game.chat == 0) s_all->s_npc.talk = 0;
+    if (s_all->s_game.nb == 0 && s_all->s_map.stage == 5
+    && s_all->s_game.scene == MAP && s_all->s_cine.script != 7)
+        s_all->s_cine.script = 7, s_all->s_game.tp_chat = 1;
 }
 
 void cinematic1(all_t *s_all)

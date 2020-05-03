@@ -55,6 +55,7 @@ int wait_close(all_t *s_all)
     (s_all->s_game.scene == GAME_OVER && s_all->s_player.tp == 0)) {
         s_all->s_chatbox.idx = 0;
         s_all->s_chatbox.op = 0;
+        s_all->s_game.tp_chat = 0;
         close(s_all->s_chatbox.fd);
         return 1;
     }

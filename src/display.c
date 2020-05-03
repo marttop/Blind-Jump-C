@@ -60,7 +60,17 @@ void display_chatbox(all_t *s_all)
     && (s_all->s_cine.script == 5 || s_all->s_cine.script == 6)) {
         chatbox(s_all, "pnj/computer1");
         s_all->s_cine.script = 6;
-    }
+    } if (s_all->s_npc.talk == 1 && s_all->s_cine.script == 7)
+        chatbox(s_all, "pnj/finish");
+}
+
+void quest_display(all_t *s_all)
+{
+    if (s_all->s_map.stage == 5 && s_all->s_cine.script < 7)
+        sfText_setString(s_all->s_game.quest, "KILL EVERY THREATS");
+    else if (s_all->s_map.stage < 5 && s_all->s_cine.script < 7)
+        sfText_setString(s_all->s_game.quest, "REACH THE STAGE 5");
+    else sfText_setString(s_all->s_game.quest, "INFINITE MOD");
 }
 
 void display_hud_anim(all_t *s_all)
@@ -70,20 +80,17 @@ void display_hud_anim(all_t *s_all)
         s_all->s_tp.beam, NULL);
     chest_message(s_all), sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
-    display_minimap(s_all);
+    display_minimap(s_all), quest_display(s_all);
     if (s_all->s_game.scene == MAP) {
-        sfRenderWindow_drawText(s_all->s_game.window,
-        s_all->s_game.the_stage, NULL);
-        sfRenderWindow_drawText(s_all->s_game.window,
-        s_all->s_game.mob_left, NULL);
+        sfRenderWindow_drawText(s_all->s_game.window, s_all->s_game.the_stage,
+        NULL), sfRenderWindow_drawText(s_all->s_game.window, s_all->s_game.
+        mob_left, NULL), sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_game.quest, NULL);
     } if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
     && s_all->s_game.scene != OPT && s_all->s_game.scene != LOAD) {
-        display_infos(s_all);
-        display_chatbox(s_all);
-        if (s_all->s_game.display_inv == 1) {
-            draw_stats(s_all);
-            display_inventory(s_all);
-        }
+        display_infos(s_all), display_chatbox(s_all);
+        if (s_all->s_game.display_inv == 1)
+            draw_stats(s_all), display_inventory(s_all);
     }
 }
 
