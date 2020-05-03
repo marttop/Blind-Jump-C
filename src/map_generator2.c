@@ -81,7 +81,6 @@ void generate_random_map2(all_t *s_all, int i, int j, int *x)
 void generate_random_map(all_t *s_all)
 {
     static int i = 0;
-    free_all_mobs(s_all);
     for (int j = 0; i != 0 && s_all->s_map.tileset[j] != NULL; j++)
         free(s_all->s_map.tileset[j]);
     s_all->s_map.tileset_pos.x = 0, s_all->s_map.tileset_pos.y = 0;
