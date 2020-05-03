@@ -89,12 +89,14 @@ void display_stars(all_t *s_all)
     int check = 0;
     if (check_hitbox_stars(s_all) == 0) {
         check = move_stars2(s_all, s_all->s_stars.front,
-            1.5, &s_all->s_stars.pos);
+            s_all->s_player.hero_speed - 1.5, &s_all->s_stars.pos);
         check = move_stars2(s_all, s_all->s_stars.back,
-            1, &s_all->s_stars.pos2);
+            s_all->s_player.hero_speed - 2, &s_all->s_stars.pos2);
         if (check == 0) {
-            move_stars(s_all, s_all->s_stars.front, 1.5, &s_all->s_stars.pos);
-            move_stars(s_all, s_all->s_stars.back, 1, &s_all->s_stars.pos2);
+            move_stars(s_all, s_all->s_stars.front,
+                s_all->s_player.hero_speed - 1.5, &s_all->s_stars.pos);
+            move_stars(s_all, s_all->s_stars.back,
+                s_all->s_player.hero_speed - 2, &s_all->s_stars.pos2);
         }
     }
     sfRenderWindow_drawSprite(s_all->s_game.window, s_all->s_stars.back, NULL);

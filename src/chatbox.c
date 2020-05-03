@@ -9,12 +9,13 @@
 
 void chatbox(all_t *s_all, char *filepath)
 {
-    if (s_all->s_game.chat == 1) {
-        if (start_dialog(s_all, filepath) == 1) {
-            s_all->s_game.chat = 0;
-            s_all->s_npc.talk = 0;
-            return;
-        }
+    if (s_all->s_game.chat == 1 && start_dialog(s_all, filepath) == 1) {
+        s_all->s_game.chat = 0;
+        s_all->s_npc.talk = 0;
+        s_all->s_game.tp_chat = 0;
+        if (s_all->s_game.scene == MAP)
+            s_all->s_game.stage_script++;
+        return;
     }
 }
 
@@ -56,10 +57,10 @@ int start_dialog(all_t *s_all, char *filepath)
     sfRenderWindow_drawRectangleShape(s_all->s_game.window,
     s_all->s_chatbox.box, NULL);
     open_file(s_all, filepath);
-    if (s_all->s_chatbox.op == 1 && s_all->s_chatbox.idx != -1)
+    if (s_all->s_chatbox.op == 1) {
         i = read_chat_file(s_all);
-    else if (s_all->s_chatbox.idx == -1)
         i = wait_close(s_all);
+    }
     sfRenderWindow_drawText(s_all->s_game.window, s_all->s_chatbox.text, NULL);
     if (s_all->s_cine.tuto == 0) {
         sfRenderWindow_drawSprite(s_all->s_game.window,

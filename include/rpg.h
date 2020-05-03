@@ -83,6 +83,7 @@ typedef struct statbox
     sfText *speed_tx;
     sfText *sh_speed;
     sfText *sh_speed_tx;
+    sfText *lvl_up;
     char *dmg_str;
     char *speed_str;
     char *sh_speed_str;
@@ -183,18 +184,27 @@ typedef struct game {
     sfTexture *black_tx;
     float seconds;
     sfClock *clock_button;
+    sfText *the_stage;
+    sfText *mob_left;
     sfTime time_button;
     float seconds_button;
     int scene;
     int debug_mode;
+    int nb;
     int display_inv;
     int pause;
+    int level_up;
+    sfClock *lvl_clk;
+    sfTime lvl_time;
+    float lvl_seconds;
     char key_press;
     sfSprite *menu;
     sfTexture *arrow;
     sfTexture *menu_tx;
     int fps;
+    int stage_script;
     float volume;
+    int tp_chat;
     int chat;
     sfTexture *hearth_tx;
 } game_t;
@@ -638,6 +648,11 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
+void free_all_mobs(all_t *s_all);
+void stage_cinematic(all_t *s_all);
+int check_if_full(all_t *s_all);
+int check_chest_turret_overlap(all_t *s_all);
+void pop_front_chest(all_t *s_all);
 void free_load_slots(all_t *s_all);
 void free_chest(all_t *s_all);
 void free_inventory(all_t *s_all);

@@ -34,7 +34,8 @@ sfVector2f find_tp_spawn(all_t *s_all)
 void tp_animation4(all_t *s_all, int *alpha)
 {
     if (s_all->s_tp.anim == 3 && s_all->s_player.tp == 1) {
-        generate_random_map(s_all), s_all->s_tp.anim = 4;
+        free_hearth(s_all), generate_random_map(s_all), s_all->s_tp.anim = 4;
+        s_all->s_sounds.fat_bool = 0;
         sfSprite_setPosition(s_all->s_player.hero, s_all->s_player.hero_pos);
         s_all->s_player.shoot_pos = (sfVector2f)
         {s_all->s_player.hero_pos.x + 11, s_all->s_player.hero_pos.y + 20};
@@ -42,7 +43,6 @@ void tp_animation4(all_t *s_all, int *alpha)
         shoot_pos), sfSprite_setPosition(s_all->s_player.hor_shoot,
         s_all->s_player.shoot_pos), s_all->s_game.scene = MAP;
         generate_random_mobs(s_all), init_minimap(s_all);
-        free_hearth(s_all);
     } if (s_all->s_tp.anim == 4 && s_all->s_player.tp == 1) {
         *alpha -= 5;
         sfRectangleShape_setFillColor(s_all->s_tp.black,
@@ -68,7 +68,7 @@ void tp_animation3(all_t *s_all)
         sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){0, 0, 0, alpha});
         if (alpha >= 255) {
-            s_all->s_tp.anim = 3;
+            s_all->s_tp.anim = 3, s_all->s_game.tp_chat = 1;
             s_all->s_stars.pos = (sfVector2f){-128 * 15, -128 * 15};
             s_all->s_stars.pos2 = (sfVector2f){-128 * 15, -128 * 15};
             sfSprite_setPosition(s_all->s_stars.front, s_all->s_stars.pos);
@@ -105,18 +105,19 @@ void tp_animation2(all_t *s_all)
 
 void tp_animation(all_t *s_all)
 {
-    if (hitbox_tp(s_all) == 1 && s_all->s_player.tp == 0
+    if (s_all->s_game.stage_script == 5 && s_all->s_game.scene == MAP
+    && s_all->s_player.tp == 0) return;
+    if (s_all->s_game.tp_chat == 0 &&
+    hitbox_tp(s_all) == 1 && s_all->s_player.tp == 0
     && (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP
     || s_all->s_game.scene == GAME_OVER)) {
         sfSound_play(s_all->s_sounds.tp);
-        s_all->s_player.tp = 1;
-        s_all->s_map.stage += 1;
+        s_all->s_player.tp = 1, s_all->s_map.stage += 1;
         if (s_all->s_game.scene != GAME_OVER) {
             s_all->s_player.hero_rect.left = 406;
             s_all->s_player.hero_rect.top = 109;
             s_all->s_player.hero_rect.height = 31;
-        }
-        sfSprite_setTextureRect(s_all->s_player.hero,
+        } sfSprite_setTextureRect(s_all->s_player.hero,
         s_all->s_player.hero_rect);
         s_all->s_player.hero_pos = (sfVector2f){s_all->s_tp.tp_pos.x + 6,
             s_all->s_tp.tp_pos.y - 17};

@@ -58,7 +58,7 @@ void get_text_entered(all_t *s_all)
         my_strlen(s_all->s_infos.p_name) >= 0) {
             my_popchar(s_all);
         }
-        else if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
+        else if (is_key_released(&s_all->s_game.event, sfKeyEnter)) {
             enter_event(s_all);
         }
     }

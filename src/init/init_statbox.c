@@ -24,10 +24,11 @@ void stat_create(all_t *s_all)
     s_all->s_statbox.dmg_str = strnbr(s_all->s_infos.dmg);
     s_all->s_statbox.lvl_str = strnbr(s_all->s_infos.level);
     s_all->s_statbox.hp_str = malloc(25), s_all->s_statbox.hp_str[0] = '\0';
-    s_all->s_statbox.speed_str = malloc(25), s_all->s_statbox.speed_str[0] =
-    '\0';
+    s_all->s_statbox.speed_str = malloc(25);
+    s_all->s_statbox.speed_str[0] = '\0';
     s_all->s_statbox.sh_speed_str = malloc(25),
     s_all->s_statbox.sh_speed_str[0] = '\0';
+    s_all->s_statbox.lvl_up = sfText_create();
 }
 
 void stat_text(all_t *s_all)
@@ -96,6 +97,10 @@ void stat_text2(all_t *s_all)
     sfText_setPosition(s_all->s_statbox.speed, (sfVector2f){450, 650});
     sfText_setPosition(s_all->s_statbox.sh_speed_tx, (sfVector2f){270, 700});
     sfText_setPosition(s_all->s_statbox.sh_speed, (sfVector2f){450, 700});
+    sfText_setCharacterSize(s_all->s_statbox.lvl_up, 40);
+    sfText_setFont(s_all->s_statbox.lvl_up, s_all->s_statbox.font);
+    sfText_setString(s_all->s_statbox.lvl_up, "LEVEL UP!");
+    sfText_setPosition(s_all->s_statbox.lvl_up, (sfVector2f){850, 200});
 }
 
 void init_stat_box(all_t *s_all)

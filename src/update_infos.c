@@ -34,11 +34,12 @@ void level_up(all_t *s_all)
 
 void update_xp(all_t *s_all)
 {
-    if (s_all->s_infos.current_xp > s_all->s_infos.max_xp) {
+    if (s_all->s_infos.current_xp >= s_all->s_infos.max_xp) {
         level_up(s_all);
+        s_all->s_game.level_up = 1;
+        sfClock_restart(s_all->s_game.lvl_clk);
         return;
-    }
-    if (s_all->s_infos.str_xp != NULL)
+    } if (s_all->s_infos.str_xp != NULL)
         free(s_all->s_infos.str_xp);
     s_all->s_infos.str_xp = malloc(25);
     s_all->s_infos.str_xp[0] = '\0';

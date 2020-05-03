@@ -7,6 +7,42 @@
 
 #include "rpg.h"
 
+void nb_text(all_t *s_all)
+{
+    if (s_all->s_player.tp == 1) {
+        if (s_all->s_game.stage_script == 1) s_all->s_game.nb = 30;
+        if (s_all->s_game.stage_script == 2) s_all->s_game.nb = 30;
+        if (s_all->s_game.stage_script == 3) s_all->s_game.nb = 30;
+        if (s_all->s_game.stage_script == 4) s_all->s_game.nb = 35;
+        if (s_all->s_game.stage_script == 5) s_all->s_game.nb = 40;
+    } char *str = malloc(sizeof(char) * 20);
+    str[0] = '\0';
+    str = my_strcat(str, strnbr(s_all->s_game.nb));
+    str = my_strcat(str, " MONSTERS LEFT");
+    sfText_setString(s_all->s_game.mob_left, str);
+    free(str);
+}
+
+void stage_cinematic(all_t *s_all)
+{
+    if (s_all->s_game.tp_chat == 1 && s_all->s_game.stage_script == 1) {
+        s_all->s_game.chat = 1;
+        chatbox(s_all, "pnj/stage1");
+    } if (s_all->s_game.tp_chat == 1 && s_all->s_game.stage_script == 2) {
+        s_all->s_game.chat = 1;
+        chatbox(s_all, "pnj/stage2");
+    } if (s_all->s_game.tp_chat == 1 && s_all->s_game.stage_script == 3) {
+        s_all->s_game.chat = 1;
+        chatbox(s_all, "pnj/stage3");
+    } if (s_all->s_game.tp_chat == 1 && s_all->s_game.stage_script == 4) {
+        s_all->s_game.chat = 1;
+        chatbox(s_all, "pnj/stage4");
+    } if (s_all->s_game.tp_chat == 1 && s_all->s_game.stage_script == 5) {
+        s_all->s_game.chat = 1;
+        chatbox(s_all, "pnj/stage5");
+    } nb_text(s_all);
+}
+
 void cinematic2(all_t *s_all)
 {
     static int i = 0;
@@ -14,17 +50,16 @@ void cinematic2(all_t *s_all)
         s_all->s_cine.script = 3, s_all->s_chatbox.buff[0] = '\0';
         s_all->s_chatbox.op = 0, s_all->s_chatbox.idx = 0;
         s_all->s_chatbox.car = 0;
-    }
-    if (s_all->s_cine.script == 5 && i == 0) {
+    } if (s_all->s_cine.script == 5 && i == 0) {
         i++;
         s_all->s_chatbox.buff[0] = '\0';
         s_all->s_chatbox.op = 0;
         s_all->s_chatbox.idx = 0;
         s_all->s_chatbox.car = 0;
-    }
-    if (s_all->s_cine.script > 1 && s_all->s_game.scene == SPAWN
+    } if (s_all->s_cine.script > 1 && s_all->s_game.scene == SPAWN
     && s_all->s_chest != NULL && s_all->s_chest->status == 0)
         s_all->s_chest->status = 1;
+    if (s_all->s_game.chat == 0) s_all->s_npc.talk = 0;
 }
 
 void cinematic1(all_t *s_all)

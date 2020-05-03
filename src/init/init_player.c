@@ -86,7 +86,7 @@ void init_hero(all_t *s_all)
     s_all->s_player.save_pos = s_all->s_player.hero_pos;
     create_sprite(&s_all->s_player.hero, &s_all->s_player.hero_tx,
         s_all->s_player.hero_pos, "sprites/game_objects.png");
-    s_all->s_player.hero_speed = 4;
+    s_all->s_player.hero_speed = 3;
     s_all->s_player.hero_clock = sfClock_create();
     s_all->s_player.rect_clock = sfClock_create();
     s_all->s_player.hero_rect = (sfIntRect){406, 109, 20, 31};

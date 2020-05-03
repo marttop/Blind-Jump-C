@@ -72,15 +72,21 @@ int loop_chest_hitbox(all_t *s_all)
 void chest_message(all_t *s_all)
 {
     if (s_all->s_cine.script < 1) return;
+    int check = check = check_if_full(s_all);
     chest_t *temp = s_all->s_chest;
     while (temp != NULL) {
+        if (check == 1)
+            sfText_setString(temp->open_txt, "THE INVENTORY IS FULL");
+        else sfText_setString(temp->open_txt, "PRESS \"E\" TO OPEN");
         if (s_all->s_game.key_press != 'E' && temp->status == 0
-        && calcul_chest_magnitude(temp, s_all->s_player.shadow) <= 20)
+        && calcul_chest_magnitude(temp, s_all->s_player.shadow) <= 20) {
             sfRenderWindow_drawText(s_all->s_game.window,
             temp->open_txt, NULL);
-        else if (s_all->s_game.key_press == 'E' && temp->status == 0
-        && calcul_chest_magnitude(temp, s_all->s_player.shadow) <= 20)
-            temp->status = 1, sfSound_play(s_all->s_sounds.creak);
-        temp = temp->next;
+        } else if (s_all->s_game.key_press == 'E' && temp->status == 0
+        && calcul_chest_magnitude(temp, s_all->s_player.shadow) <= 20) {
+            if (check == 1) sfRenderWindow_drawText(s_all->s_game.window,
+                temp->open_txt, NULL);
+            else temp->status = 1, sfSound_play(s_all->s_sounds.creak);
+        } temp = temp->next;
     }
 }
