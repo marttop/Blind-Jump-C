@@ -32,9 +32,7 @@ void display_map(all_t *s_all)
         move_camera(s_all), sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_map.background, NULL);
         display_stars(s_all), display_tiles(s_all);
-        if (s_all->s_game.stage_script != 5
-        || s_all->s_game.scene == GAME_OVER)
-            sfRenderWindow_drawSprite(s_all->s_game.window,
+        sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_tp.tp, NULL);
         int y = display_chests_under(s_all);
         display_mobs4(s_all), display_hearth(s_all), display_hero(s_all);
@@ -92,8 +90,9 @@ void display_hud_anim(all_t *s_all)
 void display(all_t *s_all)
 {
     sfRenderWindow_setFramerateLimit(s_all->s_game.window, s_all->s_game.fps);
+    tp_animation(s_all);
     display_spawn(s_all), display_map(s_all);
-    display_dead(s_all), tp_animation(s_all), display_hud_anim(s_all);
+    display_dead(s_all), display_hud_anim(s_all);
     if (s_all->s_game.scene == MENU) {
         sfRenderWindow_drawSprite(s_all->s_game.window,
         s_all->s_game.menu, NULL);
