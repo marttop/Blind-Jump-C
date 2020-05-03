@@ -54,7 +54,7 @@ void display_items_and_select(all_t *s_all, int *check)
 {
     slots_t *tmp = s_all->s_inventory.head;
     sfVector2i mouse = sfMouse_getPositionRenderWindow(s_all->s_game.window);
-    for (; s_all->s_game.pause != 1 && tmp != NULL; tmp = tmp->next) { 
+    for (; s_all->s_game.pause != 1 && tmp != NULL; tmp = tmp->next) {
         sfFloatRect rect = sfSprite_getGlobalBounds(tmp->slot);
         rect.width -= 2, rect.left += 1;
         rect.height -= 2, rect.top += 1;

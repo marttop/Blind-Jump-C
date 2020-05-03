@@ -15,7 +15,7 @@ void init_mob_interface(mob_t *new, char type, all_t *s_all)
     sfText_setFont(new->text, s_all->s_game.font);
     sfText_setPosition(new->text, (sfVector2f)
         {new->mob_pos.x - 10, new->mob_pos.y - 10});
-    new->name = malloc(25), new->name[0] = '\0'; new->lvl = lvl;
+    new->name = malloc(25), new->name[0] = '\0', new->lvl = lvl;
     if (type == 'B') {
         my_strcat(new->name, "Blob lvl "), new->hp = (150 * lvl) / 2;
     } if (type == 'A') {

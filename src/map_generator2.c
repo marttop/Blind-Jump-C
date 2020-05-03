@@ -13,7 +13,6 @@ char **create_map(int x, int y)
     int cols = x;
     char **map = malloc(sizeof(char *) * (lines + 1));
     int i = 0;
-    
     for (; i != lines; i++) {
         map[i] = malloc(sizeof(char) * (cols + 1));
         for (int j = 0; j != cols; j++)
@@ -40,7 +39,7 @@ char **init_new_random_map(all_t *s_all)
     else {
         free(s_all->s_map.map);
         s_all->s_map.map = create_map(s_all->s_map.x, s_all->s_map.y);
-    }  
+    }
     char **new_map = copy_map(s_all->s_map.map);
     i = 1;
 

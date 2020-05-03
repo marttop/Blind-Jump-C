@@ -12,7 +12,7 @@ int move_stars3(all_t *s_all, sfSprite *sprite, float speed, sfVector2f *pos)
     int check = 0;
     if (s_all->s_movement.left == 1 && s_all->s_movement.right == 0
     && s_all->s_movement.down == 1 && s_all->s_movement.up == 1 && s_all->
-    s_movement.wall_left == 0 && s_all->s_movement.wall_up == 0 
+    s_movement.wall_left == 0 && s_all->s_movement.wall_up == 0
     && s_all->s_movement.wall_down == 0) {
         (*pos).x -= speed, sfSprite_setPosition(sprite, *pos);
         check = 1;

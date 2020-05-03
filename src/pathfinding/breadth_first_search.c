@@ -9,7 +9,7 @@
 
 queue_t *check_direction(char **maze, queue_t *s_queue, int x, int y)
 {
-    if (maze[y][x + 1] == '0' || maze[y][x + 1] == 'T' 
+    if (maze[y][x + 1] == '0' || maze[y][x + 1] == 'T'
     || maze[y][x + 1] == 'P') {
         s_queue = push_back_queue(s_queue, s_queue->first, x + 1, y);
         if (maze[y][x + 1] != '1') maze[y][x + 1] = 'W';

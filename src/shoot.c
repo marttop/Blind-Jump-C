@@ -69,7 +69,7 @@ void display_hit(all_t *s_all)
         if (s_all->s_player.hit_rect.left < 136) {
             s_all->s_player.hit_rect.left += 16;
             sfSprite_setTextureRect(s_all->s_player.hit_sprite,
-                s_all->s_player.hit_rect);            
+                s_all->s_player.hit_rect);
         }
         else {
             s_all->s_player.hit_rect.left = 88;

@@ -48,10 +48,8 @@ void setup(all_t *s_all)
     sfRenderWindow_setPosition(s_all->s_game.window, (sfVector2i){0, 0});
     s_all->s_game.scene = MENU;
     s_all->s_game.debug_mode = 0;
-    s_all->s_game.display_inv = 0;
-    s_all->s_game.pause = 0;
-    s_all->s_game.fps = 60;
-    s_all->s_game.volume = 1.0;
+    s_all->s_game.display_inv = 0, s_all->s_game.pause = 0;
+    s_all->s_game.fps = 60, s_all->s_game.volume = 1.0;
     s_all->s_mob = NULL;
     s_all->s_chest = NULL;
     s_all->s_game.font = sfFont_createFromFile("font/Cornerstone.ttf");
@@ -103,7 +101,5 @@ void init_all(all_t *s_all)
     init_stars(s_all);
     init_load_slots(s_all);
     init_save_screen(s_all);
-    init_stat_box(s_all);
-    init_sounds(s_all);
-    init_shader(s_all);
+    init_stat_box(s_all), init_sounds(s_all), init_shader(s_all);
 }

@@ -36,7 +36,6 @@ void my_getchar(sfUint32 c, all_t *s_all)
     sfText_setString(s_all->s_infos.p_name_txt, s_all->s_infos.p_name);
 }
 
-
 void my_popchar(all_t *s_all)
 {
     int i = my_strlen(s_all->s_infos.p_name) - 1;
