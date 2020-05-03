@@ -191,6 +191,7 @@ typedef struct game {
     int scene;
     int debug_mode;
     int nb;
+    sfText *quest;
     int display_inv;
     int pause;
     int level_up;

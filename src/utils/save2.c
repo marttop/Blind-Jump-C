@@ -20,6 +20,7 @@ void load4(all_t *s_all)
     s_all->s_game.stage_script = s_all->s_map.stage + 1;
     if (s_all->s_cine.script >= 2) s_all->s_sounds.fat_bool = 1;
     else s_all->s_sounds.fat_bool = 0;
+    s_all->s_npc.talk = 0;
 }
 
 void load3(all_t *s_all)

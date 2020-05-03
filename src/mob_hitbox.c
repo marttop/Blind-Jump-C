@@ -47,7 +47,7 @@ int player_is_hit(all_t *s_all, mob_t *temp)
 
 void check_mob_hitboxes(all_t *s_all)
 {
-    if (s_all->s_game.pause == 1) return;
+    if (s_all->s_game.pause == 1 || s_all->s_player.tp == 1) return;
     mob_t *temp = s_all->s_mob;
     while (temp != NULL) {
         if (mob_is_hit(s_all, temp)) {

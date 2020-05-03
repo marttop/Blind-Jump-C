@@ -28,7 +28,7 @@ void init_shader(all_t *s_all)
     s_all->s_game.state.shader = s_all->s_game.shader;
     s_all->s_game.state.blendMode = sfBlendAlpha;
     s_all->s_game.state.transform = sfTransform_Identity;
-    s_all->s_game.state.texture = NULL, s_all->s_game.nb = 0;
+    s_all->s_game.state.texture = NULL, s_all->s_game.nb = -1;
     sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
         (sfVector2f){0, 0});
     sfShader_setFloatUniform(s_all->s_game.shader, "storm_total_radius", 28);
@@ -36,7 +36,7 @@ void init_shader(all_t *s_all)
     s_all->s_game.mob_left = sfText_create();
     sfText_setCharacterSize(s_all->s_game.mob_left, 25);
     sfText_setFont(s_all->s_game.mob_left, s_all->s_game.font);
-    sfText_setPosition(s_all->s_game.mob_left, (sfVector2f){540, 5});
+    sfText_setPosition(s_all->s_game.mob_left, (sfVector2f){540, 50});
     s_all->s_map.map_sprite = sfSprite_create();
     s_all->s_map.render = sfRenderTexture_create(32 * s_all->s_map.x,
         26 * s_all->s_map.y, 0);
@@ -67,22 +67,22 @@ void setup(all_t *s_all)
 
 void init_cinematic(all_t *s_all)
 {
-    s_all->s_cine.script = 0;
-    s_all->s_cine.cinematic = 0;
+    s_all->s_cine.script = 0, s_all->s_cine.cinematic = 0;
     s_all->s_cine.clock = sfClock_create();
-    s_all->s_cine.door = 0;
-    s_all->s_cine.move = 0;
-    s_all->s_cine.count = 0;
-    s_all->s_cine.tuto = 1;
+    s_all->s_cine.door = 0, s_all->s_cine.move = 0;
+    s_all->s_cine.count = 0, s_all->s_cine.tuto = 1;
     s_all->s_sounds.seconds = 0;
     s_all->s_sounds.clock = sfClock_create();
-    s_all->s_cine.seconds = 0.0;
-    s_all->s_player.heal_sec = 0.0;
+    s_all->s_cine.seconds = 0.0, s_all->s_player.heal_sec = 0.0;
     s_all->s_game.level_up = 0;
     s_all->s_game.the_stage = sfText_create();
     sfText_setCharacterSize(s_all->s_game.the_stage, 40);
     sfText_setFont(s_all->s_game.the_stage, s_all->s_game.font);
     sfText_setPosition(s_all->s_game.the_stage, (sfVector2f){10, 225});
+    s_all->s_game.quest = sfText_create();
+    sfText_setCharacterSize(s_all->s_game.quest, 30);
+    sfText_setFont(s_all->s_game.quest, s_all->s_game.font);
+    sfText_setPosition(s_all->s_game.quest, (sfVector2f){540, 5});
 }
 
 void init_all(all_t *s_all)

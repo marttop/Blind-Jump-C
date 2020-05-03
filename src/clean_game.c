@@ -92,5 +92,5 @@ void clean_game(all_t *s_all)
     s_all->s_infos.dmg = 50, s_all->s_infos.max_hp = 100;
     s_all->s_infos.max_hp_save = 100, s_all->s_infos.save_dmg = 50;
     s_all->s_infos.current_xp = 0, s_all->s_infos.max_xp = 100;
-    clean_game2(s_all);
+    clean_game2(s_all), s_all->s_npc.talk = 0;
 }

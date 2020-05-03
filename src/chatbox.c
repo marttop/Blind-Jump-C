@@ -11,10 +11,10 @@ void chatbox(all_t *s_all, char *filepath)
 {
     if (s_all->s_game.chat == 1 && start_dialog(s_all, filepath) == 1) {
         s_all->s_game.chat = 0;
-        s_all->s_npc.talk = 0;
         s_all->s_game.tp_chat = 0;
-        if (s_all->s_game.scene == MAP)
+        if (s_all->s_npc.talk == 0)
             s_all->s_game.stage_script++;
+        s_all->s_npc.talk = 0;
         return;
     }
 }
@@ -71,6 +71,6 @@ int start_dialog(all_t *s_all, char *filepath)
             put_item_in_slot(s_all, 0);
         } s_all->s_cine.tuto = 0, s_all->s_cine.move = 0;
         if (s_all->s_cine.script == 6) s_all->s_cine.door = 1;
-        s_all->s_cine.script = 5;
+        if (s_all->s_cine.script <= 4) s_all->s_cine.script = 5;
     } return i;
 }

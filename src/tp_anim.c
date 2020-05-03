@@ -64,18 +64,18 @@ void tp_animation3(all_t *s_all)
         sfRectangleShape_setOrigin(s_all->s_tp.beam,
             (sfVector2f){s_all->s_tp.width / 2, s_all->s_tp.height});
     } if (s_all->s_tp.width <= 0 && s_all->s_tp.anim == 2) {
-        alpha += 5;
-        sfRectangleShape_setFillColor(s_all->s_tp.black,
+        alpha += 5, sfRectangleShape_setFillColor(s_all->s_tp.black,
             (sfColor){0, 0, 0, alpha});
         if (alpha >= 255) {
-            s_all->s_tp.anim = 3, s_all->s_game.tp_chat = 1;
+            s_all->s_tp.anim = 3;
+            if (s_all->s_cine.script < 7 && s_all->s_map.stage != 5)
+                s_all->s_game.tp_chat = 1;
             s_all->s_stars.pos = (sfVector2f){-128 * 15, -128 * 15};
             s_all->s_stars.pos2 = (sfVector2f){-128 * 15, -128 * 15};
             sfSprite_setPosition(s_all->s_stars.front, s_all->s_stars.pos);
             sfSprite_setPosition(s_all->s_stars.back, s_all->s_stars.pos2);
         }
-    } tp_animation4(s_all, &alpha);
-    sfRectangleShape_setSize(s_all->s_tp.beam,
+    } tp_animation4(s_all, &alpha), sfRectangleShape_setSize(s_all->s_tp.beam,
         (sfVector2f){s_all->s_tp.width, s_all->s_tp.height});
 }
 
@@ -109,6 +109,8 @@ void tp_animation(all_t *s_all)
     hitbox_tp(s_all) == 1 && s_all->s_player.tp == 0
     && (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP
     || s_all->s_game.scene == GAME_OVER)) {
+        if (s_all->s_map.stage == 5 && s_all->s_cine.script == 6
+        && s_all->s_game.nb != 0) return;
         sfSound_play(s_all->s_sounds.tp);
         s_all->s_player.tp = 1, s_all->s_map.stage += 1;
         if (s_all->s_game.scene != GAME_OVER) {
