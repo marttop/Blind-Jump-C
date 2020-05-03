@@ -74,7 +74,7 @@ void display_shooting_elements(all_t *s_all)
             sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
                 s_all->s_player.ver_pos);
         }
-        else 
+        else
             sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
             (sfVector2f){-1000, -1000});
         display_weapon_left_right(s_all);

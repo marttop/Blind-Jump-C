@@ -44,7 +44,7 @@ void drop_item(all_t *s_all, slots_t *tmp)
         return;
     }
     if (drop_item2(s_all, tmp) == 1)
-        return; 
+        return;
     if (tmp->is_item == 1) {
         set_texture_items(tmp, s_all->s_inventory.dragged->id, s_all);
         set_texture_items(s_all->s_inventory.dragged, tmp->id, s_all);

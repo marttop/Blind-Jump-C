@@ -32,7 +32,7 @@ void set_iddle_rect2(all_t *s_all)
     && s_all->s_movement.left == 0 && s_all->s_direction.right == 0
     && s_all->s_direction.left == 0 && s_all->s_direction.up == 0
     && s_all->s_direction.down == 0) {
-       s_all->s_player.hero_rect.left = 438;
+        s_all->s_player.hero_rect.left = 438;
         s_all->s_player.hero_rect.top = 76;
         s_all->s_player.hero_rect.height = 32;
     }

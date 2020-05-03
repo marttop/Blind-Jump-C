@@ -17,7 +17,7 @@ void turret_init(mob_t *new, char type, all_t *s_all)
             new->mob_pos.y + 7};
         sfSprite_setTextureRect(new->shadow, (sfIntRect){0, 32, 16, 24});
         b_mob_t *old = NULL;
-        for (int i = 0; i != 8; i ++) {
+        for (int i = 0; i != 8; i++) {
             b_mob_t *tmp = malloc(sizeof(b_mob_t));
             tmp->bullet = sfSprite_create();
             sfSprite_setTexture(tmp->bullet, s_all->s_player.hero_tx, sfTrue);
@@ -91,7 +91,8 @@ void turret(all_t *s_all)
     for (; temp != NULL; temp = temp->next) {
         if (temp->type != 'T') continue;
         if (s_all->s_game.pause == 0 && s_all->s_game.scene != GAME_OVER) {
-            float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
+            float magnitude = calcul_mob_magnitude(temp,
+            s_all->s_player.shadow);
             if (magnitude > 150) {
                 temp->aggro = 0;
                 sfText_setColor(temp->text, (sfColor){255, 255, 255, 255});

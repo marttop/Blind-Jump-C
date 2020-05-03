@@ -76,10 +76,8 @@ void put_tp(char **map)
         for (int j = 0; map[i][j] != '\0'; j++)
             if (map[i][j] == '0')
                 count++;
-    
     int random = rand() % count;
     count = 0;
-       
     for (int i = 0; map[i] != NULL; i++)
         for (int j = 0; map[i][j] != '\0'; j++) {
             if (count == random && map[i][j] == '0') {
