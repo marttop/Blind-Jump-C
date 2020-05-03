@@ -64,15 +64,6 @@ void display_chatbox(all_t *s_all)
         chatbox(s_all, "pnj/finish");
 }
 
-void quest_display(all_t *s_all)
-{
-    if (s_all->s_map.stage == 5 && s_all->s_cine.script < 7)
-        sfText_setString(s_all->s_game.quest, "KILL EVERY THREATS");
-    else if (s_all->s_map.stage < 5 && s_all->s_cine.script < 7)
-        sfText_setString(s_all->s_game.quest, "REACH THE STAGE 5");
-    else sfText_setString(s_all->s_game.quest, "INFINITE MOD");
-}
-
 void display_hud_anim(all_t *s_all)
 {
     display_debug(s_all), move_camera(s_all);

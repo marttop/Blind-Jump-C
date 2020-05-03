@@ -77,5 +77,6 @@ void adjust_volume(all_t *s_all)
     }
     sfRectangleShape_setSize(s_all->s_options.s_volume.bar2,
     (sfVector2f){s_all->s_options.s_volume.vol * 5, 50});
-    s_all->s_game.volume = s_all->s_options.s_volume.vol / 100;
+    s_all->s_game.volume = (float)s_all->s_options.s_volume.vol;
+    set_volume(s_all);
 }

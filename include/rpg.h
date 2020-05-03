@@ -649,6 +649,8 @@ typedef struct all {
     statbox_t s_statbox;
 } all_t;
 
+void set_volume(all_t *s_all);
+void quest_display(all_t *s_all);
 void free_all_mobs(all_t *s_all);
 void stage_cinematic(all_t *s_all);
 int check_if_full(all_t *s_all);
