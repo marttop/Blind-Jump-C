@@ -100,11 +100,9 @@ void init_inventory(all_t *s_all)
     sfSprite_setPosition(s_all->s_inventory.selected,
         (sfVector2f){-100, -100});
     sfSprite_setTexture(s_all->s_inventory.selected,
-        s_all->s_inventory.selected_tx, sfTrue);
-    s_all->s_inventory.drag = 0, s_all->s_inventory.swap = 0;
-    s_all->s_inventory.trash = sfSprite_create();
+    s_all->s_inventory.selected_tx, sfTrue), s_all->s_inventory.drag = 0;
+    s_all->s_inventory.swap = 0, s_all->s_inventory.trash = sfSprite_create();
     init_items_texture(s_all), init_slots(s_all, pos);
     sfSprite_setTexture(s_all->s_inventory.trash,
-        s_all->s_inventory.trash_tx, sfTrue);
-    init_inventory2(s_all);
+    s_all->s_inventory.trash_tx, sfTrue), init_inventory2(s_all);
 }
