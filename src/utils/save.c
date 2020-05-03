@@ -54,7 +54,9 @@ void save(all_t *s_all, char *filepath)
     write_field("stage", fd, strnbr(s_all->s_map.stage - 1));
     write_field("tuto", fd, strnbr(s_all->s_cine.tuto));
     write_field("script", fd, strnbr(s_all->s_cine.script));
-    write_field("chat", fd, strnbr(s_all->s_game.chat));
+    if (s_all->s_game.scene != MAP)
+        write_field("chat", fd, strnbr(s_all->s_game.chat));
+    else write_field("chat", fd, strnbr(0));
     save_inventory(fd, s_all);
     close(fd);
 }
@@ -103,7 +105,5 @@ void load(all_t *s_all, char *filepath)
     s_all->s_infos.dmg = (s_all->s_infos.level * 50);
     if (s_all->s_inventory.head->is_item == 1)
         s_all->s_infos.dmg += s_all->s_inventory.head->dmg;
-    if (s_all->s_cine.script >= 2) s_all->s_sounds.fat_bool = 1;
-    else s_all->s_sounds.fat_bool = 0;
     load3(s_all), close(fd);
 }

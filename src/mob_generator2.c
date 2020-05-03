@@ -7,10 +7,38 @@
 
 #include "rpg.h"
 
+int check_chest_turret_overlap(all_t *s_all)
+{
+    mob_t *tmp = s_all->s_mob;
+    sfFloatRect mob, chest = sfSprite_getGlobalBounds(s_all->s_chest->sprite);
+    while (tmp != NULL) {
+        mob = sfSprite_getGlobalBounds(tmp->mob);
+        if (sfFloatRect_intersects(&mob, &chest, NULL) == 1)
+            return (1);
+        tmp = tmp->next;
+    }
+    return (0);
+}
+
+void pop_front_chest(all_t *s_all)
+{
+    if (s_all->s_chest == NULL) return;
+    chest_t *tmp = s_all->s_chest;
+    s_all->s_chest = s_all->s_chest->next;
+    sfSprite_destroy(tmp->sprite);
+    sfSprite_destroy(tmp->shadow);
+    sfClock_destroy(tmp->clock);
+    sfText_destroy(tmp->open_txt);
+    free(tmp);
+}
+
 void generate_random_mobs3(all_t *s_all)
 {
-    int x = s_all->s_map.x;
-    int y = s_all->s_map.y - 1, randx = 0, randy = 0, i = 20;
+    int x = s_all->s_map.x, select = s_all->s_map.stage;
+    int y = s_all->s_map.y - 1, randx = 0, randy = 0;
+    int tab[10] = {0, 0, 0, 10, 10, 10};
+    if (select > 5) select = 5;
+    int i = tab[select];
     while (i != 0) {
         randx = (rand() % x);
         randy = (rand() % y);

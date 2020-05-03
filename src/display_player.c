@@ -7,6 +7,19 @@
 
 #include "rpg.h"
 
+int check_if_full(all_t *s_all)
+{
+    slots_t *tmp = s_all->s_inventory.head;
+    int count = 0;
+    while (tmp != NULL) {
+        if (tmp->slot_nb == 0 && tmp->is_item == 1)
+            count++;
+        tmp = tmp->next;
+    }
+    if (count == 20) return (1);
+    return (0);
+}
+
 void display_weapon_down(all_t *s_all)
 {
     if (s_all->s_inventory.head->is_item == 0) return;

@@ -11,7 +11,7 @@ void turret_init(mob_t *new, char type, all_t *s_all)
 {
     if (type == 'T') {
         new->speed = 0, new->rect = (sfIntRect){0, 0, 16, 32};
-        new->xp = 30, new->hp = 400, new->path = NULL;
+        new->xp = 20, new->hp = 400, new->path = NULL;
         sfSprite_setOrigin(new->mob, (sfVector2f){8, 15});
         new->shadow_pos = (sfVector2f){new->mob_pos.x + 2,
             new->mob_pos.y + 7};
@@ -90,7 +90,7 @@ void turret(all_t *s_all)
     mob_t *temp = s_all->s_mob;
     for (; temp != NULL; temp = temp->next) {
         if (temp->type != 'T') continue;
-        if (s_all->s_game.pause == 0) {
+        if (s_all->s_game.pause == 0 && s_all->s_game.scene != GAME_OVER) {
             float magnitude = calcul_mob_magnitude(temp, s_all->s_player.shadow);
             if (magnitude > 150) {
                 temp->aggro = 0;

@@ -28,11 +28,15 @@ void init_shader(all_t *s_all)
     s_all->s_game.state.shader = s_all->s_game.shader;
     s_all->s_game.state.blendMode = sfBlendAlpha;
     s_all->s_game.state.transform = sfTransform_Identity;
-    s_all->s_game.state.texture = NULL;
+    s_all->s_game.state.texture = NULL, s_all->s_game.nb = 0;
     sfShader_setVec2Uniform(s_all->s_game.shader, "storm_position",
         (sfVector2f){0, 0});
     sfShader_setFloatUniform(s_all->s_game.shader, "storm_total_radius", 28);
     sfShader_setFloatUniform(s_all->s_game.shader, "storm_inner_radius", 10);
+    s_all->s_game.mob_left = sfText_create();
+    sfText_setCharacterSize(s_all->s_game.mob_left, 25);
+    sfText_setFont(s_all->s_game.mob_left, s_all->s_game.font);
+    sfText_setPosition(s_all->s_game.mob_left, (sfVector2f){540, 5});
 }
 
 void setup(all_t *s_all)
@@ -54,7 +58,8 @@ void setup(all_t *s_all)
     s_all->s_game.monospaced = sfFont_createFromFile("font/joystix.ttf");
     s_all->s_game.hearth_tx =
         sfTexture_createFromFile("sprites/powerup.png", NULL);
-    s_all->s_life = NULL;
+    s_all->s_life = NULL, s_all->s_game.tp_chat = 0;
+    s_all->s_game.stage_script = 1;
     init_view(s_all);
     randomize();
 }
@@ -72,6 +77,11 @@ void init_cinematic(all_t *s_all)
     s_all->s_sounds.clock = sfClock_create();
     s_all->s_cine.seconds = 0.0;
     s_all->s_player.heal_sec = 0.0;
+    s_all->s_game.level_up = 0;
+    s_all->s_game.the_stage = sfText_create();
+    sfText_setCharacterSize(s_all->s_game.the_stage, 40);
+    sfText_setFont(s_all->s_game.the_stage, s_all->s_game.font);
+    sfText_setPosition(s_all->s_game.the_stage, (sfVector2f){10, 225});
 }
 
 void init_all(all_t *s_all)

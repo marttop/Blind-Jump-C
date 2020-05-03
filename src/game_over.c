@@ -27,8 +27,8 @@ void game_over_check(all_t *s_all)
 
 void lose_xp(all_t *s_all)
 {
-    if (s_all->s_infos.current_xp >= 30)
-        s_all->s_infos.current_xp -= 30;
+    if (s_all->s_infos.current_xp >= 60)
+        s_all->s_infos.current_xp -= 60;
     else
         s_all->s_infos.current_xp = 0;
     update_xp(s_all);
@@ -38,8 +38,10 @@ void respawn(all_t *s_all)
 {
     if (s_all->s_game.scene == GAME_OVER) {
         if (is_key_released(&s_all->s_game.event, sfKeyR)) {
+            destroy_mobs(s_all);
             gaining_hp(s_all, 60), lose_xp(s_all);
-            s_all->s_map.stage = 0;
+            s_all->s_map.stage = 0, s_all->s_game.tp_chat = 0;
+            s_all->s_game.stage_script = 1;
             s_all->s_tp.tp_pos = (sfVector2f){s_all->s_player.hero_pos.x,
             s_all->s_player.hero_pos.y + 17};
             sfSprite_setPosition(s_all->s_tp.tp, s_all->s_tp.tp_pos);
@@ -51,7 +53,6 @@ void respawn(all_t *s_all)
             sfSprite_setPosition(s_all->s_effect.tp_glow,
             (sfVector2f){s_all->s_tp.tp_pos.x - 185,
             s_all->s_tp.tp_pos.y - 190});
-            destroy_mobs(s_all);
         }
     }
 }

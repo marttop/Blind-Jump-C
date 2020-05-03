@@ -35,22 +35,11 @@ mob_t *destroy_mob_node(mob_t *prev, mob_t *temp)
 mob_t *destroy_mob_head(mob_t *s_tuto, all_t *s_all)
 {
     mob_t *temp = s_tuto->next;
-    sfSprite_destroy(s_tuto->mob);
-    sfSprite_destroy(s_tuto->shadow);
-    if (s_tuto->bullet != NULL) sfSprite_destroy(s_tuto->bullet);
-    b_mob_t *bullet = s_tuto->l_bullets;
-    b_mob_t *old = NULL;
-    while (bullet != NULL) {
-        sfSprite_destroy(bullet->bullet);
-        sfClock_destroy(bullet->shoot_clock);
-        old = bullet;
-        bullet = bullet->next;
-        free(old);
-    } sfClock_destroy(s_tuto->rect_clock);
+    sfSprite_destroy(s_tuto->mob), sfSprite_destroy(s_tuto->shadow);
+    sfClock_destroy(s_tuto->rect_clock);
     sfClock_destroy(s_tuto->clock);
     sfClock_destroy(s_tuto->refresh_clk);
-    if (s_tuto->path != NULL)
-        free_map(s_tuto->path);
+    if (s_tuto->path != NULL) free_map(s_tuto->path);
     free(s_tuto);
     s_all->s_mob = temp;
     return (temp);
@@ -63,11 +52,13 @@ void destroy_mobs(all_t *s_all)
     while (temp != NULL) {
         prev = get_prev(s_all, temp);
         if (prev != NULL && temp->status == -1) {
+            s_all->s_game.nb -= 1;
             push_front_hearth(s_all, temp);
             temp = destroy_mob_node(prev, temp);
             continue;
         }
         else if (temp->status == -1 && prev == NULL){
+            s_all->s_game.nb -= 1;
             push_front_hearth(s_all, temp);
             temp = destroy_mob_head(temp, s_all);
             continue;

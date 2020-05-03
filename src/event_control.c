@@ -31,13 +31,15 @@ void events_keyboard(all_t *s_all)
 void pause_game(all_t *s_all)
 {
     if (s_all->s_game.pause == 0 &&
-    (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP)) {
+    (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP
+    || s_all->s_game.scene == GAME_OVER)) {
         if (is_key_released(&s_all->s_game.event, sfKeyEscape)) {
             s_all->s_game.pause = 1;
         }
     }
     else if (s_all->s_game.pause == 1 &&
-    (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP)) {
+    (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP
+    || s_all->s_game.scene == GAME_OVER)) {
         if (is_key_released(&s_all->s_game.event, sfKeyEscape)) {
             s_all->s_game.pause = 0;
         }
@@ -60,6 +62,5 @@ void events_control(all_t *s_all)
         return;
     }
     get_movement(s_all), get_aim_direction(s_all),
-    activate_debug_mode(s_all), events_keyboard(s_all);
-    set_iddle_rect(s_all);
+    events_keyboard(s_all), set_iddle_rect(s_all);
 }

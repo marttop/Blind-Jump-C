@@ -24,7 +24,7 @@ void turret_loop(all_t *s_all, mob_t *temp)
 {
     b_mob_t *bullet = temp->l_bullets;
     for (int i = 0; bullet != NULL; bullet = bullet->next, i++) {
-        if (s_all->s_game.pause == 0) {
+        if (s_all->s_game.pause == 0 && s_all->s_game.scene != GAME_OVER) {
         turret_inside_loop(temp, bullet, i);
         if (temp->bullet_travel >= 650)
             temp->bullet_travel = 0, temp->shoot = 0, temp->check_shoot = 0;

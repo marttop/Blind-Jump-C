@@ -82,10 +82,10 @@ void generate_random_map2(all_t *s_all, int i, int j, int *x)
 void generate_random_map(all_t *s_all)
 {
     static int i = 0;
+    free_all_mobs(s_all);
     for (int j = 0; i != 0 && s_all->s_map.tileset[j] != NULL; j++)
         free(s_all->s_map.tileset[j]);
-    s_all->s_map.tileset_pos.x = 0;
-    s_all->s_map.tileset_pos.y = 0;
+    s_all->s_map.tileset_pos.x = 0, s_all->s_map.tileset_pos.y = 0;
     while (1) {
         s_all->s_map.map = init_new_random_map(s_all);
         s_all->s_player.hero_pos = find_tp_spawn(s_all);
@@ -98,7 +98,6 @@ void generate_random_map(all_t *s_all)
             generate_random_map2(s_all, i, j, &x);
             s_all->s_map.tileset_pos.x += 32;
         }
-    s_all->s_map.tileset[x] = NULL;
-    i = 1;
+    s_all->s_map.tileset[x] = NULL, i = 1;
     create_map_sprite(s_all);
 }

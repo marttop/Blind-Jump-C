@@ -27,12 +27,15 @@ void display_map(all_t *s_all)
     if (s_all->s_game.scene == MAP) {
         sfRenderWindow_clear(s_all->s_game.window, sfBlack);
         sfSprite_setPosition(s_all->s_map.background,
-            s_all->s_effect.vignette_pos);
-        move_camera(s_all);
-        sfRenderWindow_drawSprite(s_all->s_game.window,
+            (sfVector2f){s_all->s_effect.vignette_pos.x - 10,
+            s_all->s_effect.vignette_pos.y - 10});
+        move_camera(s_all), sfRenderWindow_drawSprite(s_all->s_game.window,
             s_all->s_map.background, NULL);
         display_stars(s_all), display_tiles(s_all);
-        sfRenderWindow_drawSprite(s_all->s_game.window, s_all->s_tp.tp, NULL);
+        if (s_all->s_game.stage_script != 5
+        || s_all->s_game.scene == GAME_OVER)
+            sfRenderWindow_drawSprite(s_all->s_game.window,
+            s_all->s_tp.tp, NULL);
         int y = display_chests_under(s_all);
         display_mobs4(s_all), display_hearth(s_all), display_hero(s_all);
         display_chests_over(s_all, y);
@@ -64,15 +67,18 @@ void display_chatbox(all_t *s_all)
 
 void display_hud_anim(all_t *s_all)
 {
-    display_debug(s_all);
-    move_camera(s_all);
+    display_debug(s_all), move_camera(s_all);
     sfRenderWindow_drawRectangleShape(s_all->s_game.window,
         s_all->s_tp.beam, NULL);
-    chest_message(s_all);
-    sfRenderWindow_setView(s_all->s_game.window,
+    chest_message(s_all), sfRenderWindow_setView(s_all->s_game.window,
         sfRenderWindow_getDefaultView(s_all->s_game.window));
     display_minimap(s_all);
-    if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
+    if (s_all->s_game.scene == MAP) {
+        sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_game.the_stage, NULL);
+        sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_game.mob_left, NULL);
+    } if (s_all->s_game.scene != GAME_OVER && s_all->s_game.scene != CUSTOM
     && s_all->s_game.scene != OPT && s_all->s_game.scene != LOAD) {
         display_infos(s_all);
         display_chatbox(s_all);
@@ -94,10 +100,13 @@ void display(all_t *s_all)
         dispay_buttons(s_all, s_all->s_buttons);
     } display_custom(s_all), display_rgb_selector(s_all);
     if (s_all->s_game.scene == OPT) draw_options(s_all);
-    display_game_over(s_all), display_load_slots(s_all);
-    display_save_slots(s_all);
+    display_game_over(s_all), stage_cinematic(s_all);
+    display_load_slots(s_all), display_save_slots(s_all);
     if ((s_all->s_game.scene == CUSTOM || s_all->s_game.scene == LOAD)
     && s_all->s_effect.anim > 45)
         dispay_buttons(s_all, s_all->s_options.buttons);
+    if (s_all->s_game.level_up == 1 && s_all->s_game.lvl_seconds < 2.0)
+        sfRenderWindow_drawText(s_all->s_game.window,
+        s_all->s_statbox.lvl_up, NULL);
     sfRenderWindow_display(s_all->s_game.window);
 }

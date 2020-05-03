@@ -13,7 +13,6 @@ int game_loop(all_t *s_all)
         return (EXIT_FAILURE);
     sfMusic_play(s_all->s_sounds.music);
     while (sfRenderWindow_isOpen(s_all->s_game.window)) {
-
         while (sfRenderWindow_pollEvent(s_all->s_game.window,
         &s_all->s_game.event))
             events_control(s_all);
