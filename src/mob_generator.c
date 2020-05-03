@@ -74,6 +74,7 @@ void generate_random_mobs2(all_t *s_all)
 
 void generate_random_mobs(all_t *s_all)
 {
+    free_all_mobs(s_all);
     int x = s_all->s_map.x, select = s_all->s_map.stage;
     int y = s_all->s_map.y - 1, randx = 0, randy = 0;
     int tab[10] = {0, 30, 15, 10, 15, 15};

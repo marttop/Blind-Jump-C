@@ -37,6 +37,9 @@ void init_shader(all_t *s_all)
     sfText_setCharacterSize(s_all->s_game.mob_left, 25);
     sfText_setFont(s_all->s_game.mob_left, s_all->s_game.font);
     sfText_setPosition(s_all->s_game.mob_left, (sfVector2f){540, 5});
+    s_all->s_map.map_sprite = sfSprite_create();
+    s_all->s_map.render = sfRenderTexture_create(32 * s_all->s_map.x,
+        26 * s_all->s_map.y, 0);
 }
 
 void setup(all_t *s_all)

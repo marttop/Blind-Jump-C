@@ -26,14 +26,14 @@ void create_map_sprite2(all_t *s_all)
 
 void create_map_sprite(all_t *s_all)
 {
-    static int i = 0;
     for (int j = 0; j != 2; j++) {
-    if (i != 0) sfRenderTexture_destroy(s_all->s_map.render);
-    else s_all->s_map.map_sprite = sfSprite_create();
-    i = 1;
+    sfRenderTexture_destroy(s_all->s_map.render);
     s_all->s_map.render = sfRenderTexture_create(32 * s_all->s_map.x,
         26 * s_all->s_map.y, 0);
+    sfSprite_destroy(s_all->s_map.map_sprite);
+    s_all->s_map.map_sprite = sfSprite_create();
     create_map_sprite2(s_all);
+    s_all->s_map.map_texture = NULL;
     s_all->s_map.map_texture = sfRenderTexture_getTexture(s_all->s_map.render);
     sfSprite_setTexture(s_all->s_map.map_sprite,
         s_all->s_map.map_texture, sfTrue);
