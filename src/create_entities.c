@@ -22,7 +22,7 @@ void quest_display(all_t *s_all)
         sfText_setString(s_all->s_game.quest, "KILL EVERY THREATS");
     else if (s_all->s_map.stage < 5 && s_all->s_cine.script < 7)
         sfText_setString(s_all->s_game.quest, "REACH THE STAGE 5");
-    else sfText_setString(s_all->s_game.quest, "INFINITE MOD");
+    else sfText_setString(s_all->s_game.quest, "INFINITE MODE");
 }
 
 void set_volume(all_t *s_all)
