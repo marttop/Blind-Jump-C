@@ -99,8 +99,8 @@ void stat_text2(all_t *s_all)
     sfText_setPosition(s_all->s_statbox.sh_speed, (sfVector2f){450, 700});
     sfText_setCharacterSize(s_all->s_statbox.lvl_up, 40);
     sfText_setFont(s_all->s_statbox.lvl_up, s_all->s_statbox.font);
-    sfText_setString(s_all->s_statbox.lvl_up, "LEVEL UP!");
-    sfText_setPosition(s_all->s_statbox.lvl_up, (sfVector2f){850, 200});
+    sfText_setString(s_all->s_statbox.lvl_up, "  LEVEL UP\n+50 DAMAGE");
+    sfText_setPosition(s_all->s_statbox.lvl_up, (sfVector2f){840, 200});
 }
 
 void init_stat_box(all_t *s_all)
