@@ -96,8 +96,9 @@ void display(all_t *s_all)
         s_all->s_game.menu, NULL);
         dispay_buttons(s_all, s_all->s_buttons);
     } display_custom(s_all), display_rgb_selector(s_all);
+    stage_cinematic(s_all);
     if (s_all->s_game.scene == OPT) draw_options(s_all);
-    display_game_over(s_all), stage_cinematic(s_all);
+    display_game_over(s_all);
     display_load_slots(s_all), display_save_slots(s_all);
     if ((s_all->s_game.scene == CUSTOM || s_all->s_game.scene == LOAD)
     && s_all->s_effect.anim > 45)

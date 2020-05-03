@@ -49,6 +49,7 @@ mob_t *fill_mob(mob_t *old, char type, sfVector2f pos, all_t *s_all)
     mob_selector(new, type, pos, s_all);
     new->type = type, new->next = old;
     fill_mob2(new), init_mob_interface(new, type, s_all);
+    new->shoot_seconds = 0.0;
     return (new);
 }
 

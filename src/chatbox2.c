@@ -37,7 +37,7 @@ int read_chat_file(all_t *s_all)
     if (s_all->s_game.scene == CUSTOM || s_all->s_game.scene == MENU
     || s_all->s_game.scene == OPT || s_all->s_game.pause == 1) return 0;
     if (s_all->s_chatbox.car == 140) {
-        s_all->s_chatbox.buff[s_all->s_chatbox.idx] = '\n';
+        s_all->s_chatbox.buff[s_all->s_chatbox.idx + 1] = '\n';
         s_all->s_chatbox.idx++, s_all->s_chatbox.car = 0;
     }
     if (s_all->s_chatbox.sec > s_all->s_chatbox.s) {
