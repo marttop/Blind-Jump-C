@@ -38,7 +38,6 @@ void respawn(all_t *s_all)
 {
     if (s_all->s_game.scene == GAME_OVER) {
         if (is_key_released(&s_all->s_game.event, sfKeyR)) {
-            destroy_mobs(s_all);
             gaining_hp(s_all, 60), lose_xp(s_all);
             s_all->s_map.stage = 0, s_all->s_game.tp_chat = 0;
             s_all->s_game.stage_script = 1;

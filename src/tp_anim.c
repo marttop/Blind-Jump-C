@@ -105,8 +105,6 @@ void tp_animation2(all_t *s_all)
 
 void tp_animation(all_t *s_all)
 {
-    if (s_all->s_game.stage_script == 5 && s_all->s_game.scene == MAP
-    && s_all->s_player.tp == 0) return;
     if (s_all->s_game.tp_chat == 0 &&
     hitbox_tp(s_all) == 1 && s_all->s_player.tp == 0
     && (s_all->s_game.scene == SPAWN || s_all->s_game.scene == MAP
