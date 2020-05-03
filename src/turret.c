@@ -64,7 +64,8 @@ sfVector2f turret_if_forest(int i, sfVector2f aim_pos)
 
 void turret_aim(int i, mob_t *temp, b_mob_t *bullet)
 {
-    if (temp->shoot_seconds < 0.01) return;
+    if (temp->type == 'T' && temp->shoot_seconds < 0.01) return;
+    if (temp->type != 'T') return;
     if (temp->shoot == 1) {
         temp->check_shoot = 1;
         sfVector2f bullet_pos = sfSprite_getPosition(bullet->bullet);
