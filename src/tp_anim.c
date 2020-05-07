@@ -68,8 +68,7 @@ void tp_animation3(all_t *s_all)
             (sfColor){0, 0, 0, alpha});
         if (alpha >= 255) {
             s_all->s_tp.anim = 3;
-            if (s_all->s_cine.script < 7 && s_all->s_map.stage != 5)
-                s_all->s_game.tp_chat = 1;
+            if (s_all->s_cine.script < 7) s_all->s_game.tp_chat = 1;
             s_all->s_stars.pos = (sfVector2f){-128 * 15, -128 * 15};
             s_all->s_stars.pos2 = (sfVector2f){-128 * 15, -128 * 15};
             sfSprite_setPosition(s_all->s_stars.front, s_all->s_stars.pos);
