@@ -9,6 +9,8 @@
 
 void events_keyboard(all_t *s_all)
 {
+    if (is_key_released(&s_all->s_game.event, sfKeyO) == 1)
+        s_all->s_player.tp = 1;
     if (s_all->s_game.pause == 1 || s_all->s_cine.move == 1) return;
     if (s_all->s_cine.script >= 2
     && is_key_released(&s_all->s_game.event, sfKeyI))
