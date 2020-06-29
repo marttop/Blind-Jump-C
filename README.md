@@ -5,6 +5,9 @@ Game made with :
 - Lionel Da Rocha Da Silva
 - Adlan Sadou
 
+Here is the presentational video of this project :
+https://youtu.be/xPYve8_049M
+
 # My RPG - It's your turn to create you final fantaisy
 
 - **Binary name:** my_rpg
