@@ -1,5 +1,5 @@
 # Blind-Jump-C
-This game is a "C version" of the Blind jump game originaly made in c++ (but in 6 weeks)
+This game is a "C version" of the Blind jump game originaly made in c++ (but in 6 weeks). 
 Game made with : Lorentz Romeo, Lionel Da Rocha Da Silva, Adlan Sadou
 
 # My RPG - It's your turn to create you final fantaisy
