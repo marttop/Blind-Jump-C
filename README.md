@@ -6,7 +6,8 @@ Game made with :
 - Adlan Sadou
 
 Here is the presentational video of this project :
-https://youtu.be/xPYve8_049M
+
+[![](http://img.youtube.com/vi/xPYve8_049M/0.jpg)](http://www.youtube.com/watch?v=xPYve8_049M "Blind Jump")
 
 # My RPG - It's your turn to create you final fantaisy
 
