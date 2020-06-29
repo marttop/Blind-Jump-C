@@ -1,9 +1,11 @@
 # Blind-Jump-C
-This game is a "C version" of the Blind jump game originaly made in c++ (but in 6 weeks).
+This game is a "C version" of the Blind jump game originaly made by Evan Bowman in c++.
 Game made with :
 - Lorentz Romeo
 - Lionel Da Rocha Da Silva
 - Adlan Sadou
+
+We made Blind Jump in 6 weeks.
 
 Here is the presentational video of this project :
 
